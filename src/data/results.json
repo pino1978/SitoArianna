@@ -1,0 +1,27 @@
+{
+  "note": "Dati indicativi — da verificare e aggiornare con risultati ufficiali",
+  "mainResults": [
+    {
+      "id": "woc-2026",
+      "name": "WORLD OPEN CHAMPIONSHIP",
+      "location": "PERUGIA 2026",
+      "participations": 4,
+      "wins": 4,
+      "image": "/assets/result-woc-2026.jpg"
+    },
+    {
+      "id": "champion-cup-2026",
+      "name": "CHAMPION CUP",
+      "location": "SORA 2026",
+      "participations": 2,
+      "wins": 2,
+      "image": "/assets/result-champion-cup.jpg"
+    }
+  ],
+  "summaryStats": [
+    { "label": "PRIMI POSTI", "value": "98%", "icon": "medal" },
+    { "label": "GARE DISPUTATE", "value": "28", "icon": "trophy" },
+    { "label": "PODI", "value": "26", "icon": "podium" },
+    { "label": "MEDAGLIE D'ORO", "value": "26", "icon": "gold-medal" }
+  ]
+}

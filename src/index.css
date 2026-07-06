@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 14% 4%;
+    --foreground: 40 18% 93%;
+    --card: 240 14% 7%;
+    --card-foreground: 40 18% 93%;
+    --popover: 240 14% 7%;
+    --popover-foreground: 40 18% 93%;
+    --primary: 42 42% 59%;
+    --primary-foreground: 240 14% 4%;
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 40 18% 93%;
+    --muted: 240 10% 12%;
+    --muted-foreground: 240 4% 56%;
+    --accent: 240 10% 12%;
+    --accent-foreground: 40 18% 93%;
+    --destructive: 0 66% 33%;
+    --destructive-foreground: 40 18% 93%;
+    --border: 240 10% 14%;
+    --input: 240 10% 14%;
+    --ring: 42 42% 59%;
+    --radius: 0.25rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink text-warm-ivory font-body antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: rgba(201, 169, 98, 0.3);
+    color: #F0EDE6;
+  }
+
+  :focus-visible {
+    outline: 2px solid #C9A962;
+    outline-offset: 2px;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0A0A0C;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #1E1E26;
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #C9A962;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

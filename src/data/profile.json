@@ -10,13 +10,13 @@
   "traits": ["determinata", "competitiva", "coraggiosa", "tenace", "concentrata", "tecnica", "solare", "estroversa", "empatica"],
   "bio": "Sono Arianna, ho 12 anni e pratico Sanda. Determinata, curiosa e sempre pronta a mettermi alla prova. Ogni giorno scelgo di migliorare e superare i miei limiti.",
   "ying": {
-    "name": "Yīng",
-    "ideogram": "鹰",
+    "name": "Ying",
+    "ideogram": "鷹",
     "meaning": "Aquila",
-    "description": "Ho scelto Ying perché l'aquila vola in alto, vede lontano e non smette mai di allenarsi. Rappresenta la libertà, la forza interiore e la capacità di superare ogni limite."
+    "description": "Ho scelto Ying perche l'aquila vola in alto, vede lontano e non smette mai di allenarsi. Rappresenta la liberta, la forza interiore e la capacita di superare ogni limite."
   },
   "stats": {
-    "note": "Dati indicativi — da verificare e aggiornare",
+    "note": "Dati indicativi - da verificare e aggiornare",
     "years": 3,
     "competitions": 28,
     "podiums": 26,

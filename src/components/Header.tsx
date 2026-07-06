@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Menu, X } from 'lucide-react';
-import { BirdMarkIcon } from '@/assets/svg/StatIcons';
+import { BirdMarkIcon, RedSealIcon } from '@/assets/svg/StatIcons';
 
 const navLinks = [
   { label: 'HOME', href: '#top' },
@@ -17,21 +17,19 @@ export default function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > window.innerHeight * 0.7);
+      setScrolled(window.scrollY > 220);
+      const sections = ['top', 'profilo', 'risultati', 'media', 'contatti'];
 
-      const sections = ['top', 'profilo', 'ying', 'risultati', 'media', 'contatti'];
-      for (let i = sections.length - 1; i >= 0; i--) {
+      for (let i = sections.length - 1; i >= 0; i -= 1) {
         const el = document.getElementById(sections[i]);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(sections[i]);
-            break;
-          }
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActiveSection(sections[i]);
+          break;
         }
       }
     };
 
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -39,107 +37,67 @@ export default function Header() {
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, []);
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
-          scrolled
-            ? 'bg-ink/95 backdrop-blur-md border-b border-charcoal/50'
-            : 'bg-transparent border-b border-transparent'
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled ? 'bg-ink/94 border-b border-satin-gold/20 backdrop-blur-md' : 'bg-transparent'
         }`}
-        style={{ height: '72px' }}
       >
-        <div className="mx-auto h-full flex items-center justify-between" style={{ maxWidth: '1280px', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
-          {/* Logo */}
-          <a
-            href="#top"
-            onClick={(e) => handleNavClick(e, '#top')}
-            className="flex flex-col gap-0.5 shrink-0"
-          >
-            <span className="text-warm-ivory font-body font-bold text-[0.6875rem] tracking-[0.25em] leading-tight">
-              ARIANNA
-            </span>
-            <span className="text-warm-ivory font-body font-bold text-[0.6875rem] tracking-[0.25em] leading-tight">
-              MILANO
-            </span>
-            <span className="text-slate font-body font-medium text-[0.5625rem] tracking-[0.15em] leading-tight">
-              SANDA ATHLETE
-            </span>
+        <div className="site-container flex h-[84px] items-center justify-between">
+          <a href="#top" onClick={(e) => handleNavClick(e, '#top')} className="shrink-0 leading-none">
+            <span className="block text-[1rem] font-black tracking-[0.34em] text-warm-ivory">ARIANNA</span>
+            <span className="block pt-1 text-[0.95rem] font-black tracking-[0.58em] text-satin-gold">MILANO</span>
+            <span className="block pt-1 text-[0.68rem] font-bold tracking-[0.22em] text-warm-ivory">SANDA ATHLETE</span>
           </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8" role="navigation" aria-label="Navigazione principale">
+          <nav className="hidden items-center gap-10 md:flex" aria-label="Navigazione principale">
             {navLinks.map((link) => {
-              const isActive =
-                (link.href === '#top' && activeSection === 'top') ||
-                link.href === `#${activeSection}`;
+              const isActive = link.href === `#${activeSection}` || (link.href === '#top' && activeSection === 'top');
               return (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative font-body font-medium text-[0.8125rem] tracking-[0.08em] transition-colors duration-300 ${
-                    isActive ? 'text-satin-gold' : 'text-slate hover:text-satin-gold'
+                  className={`relative text-[0.72rem] font-black tracking-[0.13em] transition-colors ${
+                    isActive ? 'text-warm-ivory' : 'text-warm-ivory/78 hover:text-satin-gold'
                   }`}
                 >
                   {link.label}
-                  {isActive && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-px bg-satin-gold" />
-                  )}
+                  {isActive && <span className="absolute -bottom-3 left-0 h-[2px] w-full bg-satin-gold" />}
                 </a>
               );
             })}
           </nav>
 
-          {/* Right — Signature + Lang */}
-          <div className="hidden md:flex items-center gap-4 shrink-0">
-            <div className="flex flex-col items-end gap-0.5">
-              <span className="text-warm-ivory font-body font-medium text-[0.8125rem] tracking-wide">
-                Ying · 鹰
-              </span>
-              <BirdMarkIcon className="w-4 h-4 text-satin-gold" />
-            </div>
-            <div className="flex items-center gap-1 text-slate font-body font-medium text-[0.75rem]">
-              <span>IT</span>
-              <span className="text-[0.5rem]">▼</span>
-            </div>
+          <div className="hidden shrink-0 items-center gap-4 md:flex">
+            <span className="font-serif text-[1.05rem] tracking-wide text-satin-gold">Ying &middot; 鷹</span>
+            <BirdMarkIcon className="h-8 w-8 text-satin-gold" />
+            <RedSealIcon className="h-5 w-5" />
+            <span className="text-[0.72rem] font-black tracking-[0.12em] text-satin-gold">IT v</span>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden text-warm-ivory p-2"
-            onClick={() => setMobileOpen(true)}
-            aria-expanded={mobileOpen}
-            aria-label="Apri menu"
-          >
+          <button className="p-2 text-warm-ivory md:hidden" onClick={() => setMobileOpen(true)} aria-label="Apri menu">
             <Menu size={24} />
           </button>
         </div>
       </header>
 
-      {/* Mobile menu overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-[60] bg-ink/98 backdrop-blur-xl flex flex-col items-center justify-center md:hidden">
-          <button
-            className="absolute top-5 right-5 text-warm-ivory p-2"
-            onClick={() => setMobileOpen(false)}
-            aria-label="Chiudi menu"
-          >
+        <div className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-ink/98 backdrop-blur-xl md:hidden">
+          <button className="absolute right-5 top-5 p-2 text-warm-ivory" onClick={() => setMobileOpen(false)} aria-label="Chiudi menu">
             <X size={28} />
           </button>
-          <nav className="flex flex-col items-center gap-8" role="navigation" aria-label="Menu mobile">
+          <nav className="flex flex-col items-center gap-8" aria-label="Menu mobile">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="font-body font-medium text-[1.5rem] tracking-[0.08em] text-slate hover:text-satin-gold transition-colors"
+                className="text-[1.5rem] font-black tracking-[0.1em] text-warm-ivory transition-colors hover:text-satin-gold"
               >
                 {link.label}
               </a>

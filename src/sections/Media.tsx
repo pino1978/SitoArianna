@@ -4,62 +4,29 @@ import mediaData from '@/data/media.json';
 
 export default function Media() {
   return (
-    <section id="media" className="bg-graphite" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem)' }}>
-      <div className="mx-auto" style={{ maxWidth: '1280px' }}>
-        <SectionLabel
-          number="04"
-          title="MEDIA"
-          linkText="VAI ALLA GALLERY COMPLETA"
-          linkHref="#media"
-        />
+    <section id="media" className="paper-panel py-8 md:py-9">
+      <div className="site-container">
+        <SectionLabel number="04" title="MEDIA" linkText="VAI ALLA GALLERY COMPLETA" linkHref="#media" dark />
 
-        {/* Media grid */}
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {mediaData.gallery.map((item, index) => (
-            <div
-              key={item.id}
-              className={`group relative cursor-pointer overflow-hidden rounded ${
-                index === 4 ? 'col-span-2 md:col-span-1' : ''
-              }`}
-            >
-              <div className="relative aspect-[4/3] overflow-hidden bg-charcoal">
-                <img
-                  src={item.image}
-                  alt={item.category}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                  loading="lazy"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-ink/0 group-hover:bg-ink/50 transition-all duration-300 flex items-center justify-center">
-                  {item.type === 'video' && (
-                    <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
-                      <Play size={20} fill="white" className="text-white ml-0.5" />
-                    </div>
-                  )}
-                  {item.type === 'photo' && (
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 scale-75 group-hover:scale-100">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-white">
-                        <path d="M4 4h8v8H4z" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M6 4V2h4v2" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    </div>
-                  )}
-                </div>
-                {/* Category badge */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-ink/90 to-transparent p-3">
-                  <div className="flex items-center justify-between">
-                    <span className="font-body font-medium text-warm-ivory text-[0.6875rem] tracking-wide">
-                      {item.category}
+        <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          {mediaData.gallery.map((item) => (
+            <article key={item.id} className="group overflow-hidden rounded-[6px] bg-ink shadow-card">
+              <div className="relative aspect-[1.48] overflow-hidden">
+                <img src={item.image} alt={item.category} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/18 to-transparent" />
+                {item.type === 'video' && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/80 bg-ink/35 text-white">
+                      <Play size={20} fill="currentColor" className="ml-1" />
                     </span>
-                    {item.count && (
-                      <span className="font-body text-slate text-[0.625rem]">
-                        {item.count}
-                      </span>
-                    )}
                   </div>
+                )}
+                <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
+                  <span className="max-w-[95px] text-[0.76rem] font-black uppercase leading-tight tracking-[0.08em] text-warm-ivory">{item.category}</span>
+                  {item.count && <span className="text-[0.68rem] font-bold uppercase text-muted-ivory">{item.count}</span>}
                 </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

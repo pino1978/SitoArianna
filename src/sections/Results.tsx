@@ -5,86 +5,47 @@ import resultsData from '@/data/results.json';
 
 export default function Results() {
   return (
-    <section id="risultati" className="bg-ink" style={{ padding: 'clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem)' }}>
-      <div className="mx-auto" style={{ maxWidth: '1280px' }}>
-        <SectionLabel
-          number="03"
-          title="I RISULTATI PRINCIPALI"
-          linkText="VEDI TUTTI I RISULTATI"
-          linkHref="#risultati"
-        />
+    <section id="risultati" className="border-b border-satin-gold/20 bg-ink py-9 md:py-10">
+      <div className="site-container">
+        <SectionLabel number="03" title="I RISULTATI PRINCIPALI" linkText="VEDI TUTTI I RISULTATI" linkHref="#risultati" />
 
-        {/* Result cards */}
-        <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {resultsData.mainResults.map((result) => (
-            <div
-              key={result.id}
-              className="group bg-graphite border border-charcoal rounded overflow-hidden hover:border-satin-gold/30 transition-all duration-300 hover:-translate-y-1 hover:shadow-gold"
-            >
-              <div className="flex">
-                {/* Content side */}
-                <div className="flex-1 p-6">
-                  <span className="font-body font-medium text-warm-ivory text-[0.75rem] tracking-wide uppercase">
-                    {result.name}
-                  </span>
-                  <span className="block font-body font-medium text-slate text-[0.6875rem] tracking-wide mt-1">
-                    {result.location}
-                  </span>
-
-                  {/* Stats */}
-                  <div className="flex gap-8 mt-6">
-                    <div>
-                      <span className="block font-display text-satin-gold text-[2.5rem] md:text-[3rem] leading-none">
-                        {result.participations}
-                      </span>
-                      <span className="block font-body font-medium text-slate text-[0.6875rem] tracking-[0.08em] mt-2 uppercase">
-                        PARTECIPAZIONI
-                      </span>
-                    </div>
-                    <div>
-                      <span className="block font-display text-satin-gold text-[2.5rem] md:text-[3rem] leading-none">
-                        {result.wins}
-                      </span>
-                      <span className="block font-body font-medium text-slate text-[0.6875rem] tracking-[0.08em] mt-2 uppercase">
-                        VITTORIE
-                      </span>
+        <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_1px_0.88fr] lg:items-center">
+          <div className="grid gap-4 md:grid-cols-2">
+            {resultsData.mainResults.map((result) => (
+              <article key={result.id} className="group overflow-hidden rounded-[4px] border border-satin-gold/65 bg-graphite">
+                <div className="grid min-h-[156px] grid-cols-[1fr_42%]">
+                  <div className="p-5">
+                    <h3 className="max-w-[150px] text-[1rem] font-black uppercase leading-[1.05] text-warm-ivory">{result.name}</h3>
+                    <p className="mt-1 text-[0.74rem] font-bold uppercase tracking-[0.08em] text-muted-ivory">{result.location}</p>
+                    <div className="mt-6 flex gap-8">
+                      <div>
+                        <span className="block text-[2.85rem] font-black leading-none text-satin-gold">{result.participations}</span>
+                        <span className="text-[0.58rem] font-black uppercase text-muted-ivory">Partecipazioni</span>
+                      </div>
+                      <div>
+                        <span className="block text-[2.85rem] font-black leading-none text-satin-gold">{result.wins}</span>
+                        <span className="text-[0.58rem] font-black uppercase text-muted-ivory">Vittorie</span>
+                      </div>
                     </div>
                   </div>
+                  <img src={result.image} alt={`${result.name} ${result.location}`} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                 </div>
-
-                {/* Image side */}
-                <div className="w-[120px] md:w-[140px] shrink-0">
-                  <img
-                    src={result.image}
-                    alt={`${result.name} - ${result.location}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Summary stats */}
-        <div className="mt-12 pt-8 border-t border-charcoal">
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            {resultsData.summaryStats.map((stat, index) => (
-              <StatBlock
-                key={index}
-                icon={stat.icon as 'medal' | 'trophy' | 'podium' | 'gold-medal'}
-                value={stat.value}
-                label={stat.label}
-              />
+              </article>
             ))}
           </div>
-        </div>
 
-        {/* CTA */}
-        <div className="mt-10 text-center">
-          <OutlineButton href="#risultati">
-            SCOPRI TUTTI I RISULTATI
-          </OutlineButton>
+          <div className="hidden h-full bg-satin-gold/45 lg:block" />
+
+          <div>
+            <div className="grid grid-cols-2 gap-x-8 gap-y-7 md:grid-cols-4 lg:grid-cols-4">
+              {resultsData.summaryStats.map((stat) => (
+                <StatBlock key={stat.label} icon={stat.icon as 'medal' | 'trophy' | 'podium' | 'gold-medal'} value={stat.value} label={stat.label} />
+              ))}
+            </div>
+            <div className="mt-8 max-w-[360px]">
+              <OutlineButton href="#risultati">SCOPRI TUTTI I RISULTATI</OutlineButton>
+            </div>
+          </div>
         </div>
       </div>
     </section>

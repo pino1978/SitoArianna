@@ -19,13 +19,13 @@ export default function StatBlock({ icon, value, label, className = '' }: StatBl
   const IconComponent = iconMap[icon];
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
-      <IconComponent className="w-6 h-6 text-satin-gold shrink-0" />
-      <div className="flex flex-col">
-        <span className="font-display text-warm-ivory text-[clamp(1.25rem,2vw,1.75rem)] leading-tight">
+    <div className={`flex min-w-0 items-center gap-2 md:gap-3 ${className}`}>
+      <IconComponent className="h-5 w-5 shrink-0 text-satin-gold md:h-6 md:w-6" />
+      <div className="flex min-w-0 flex-col">
+        <span className="font-display text-[1.25rem] leading-tight text-warm-ivory md:text-[1.75rem]">
           {value}
         </span>
-        <span className="font-body font-medium text-slate text-[0.6875rem] tracking-[0.08em] uppercase">
+        <span className="max-w-[8rem] text-[0.62rem] font-bold uppercase leading-tight tracking-[0.06em] text-slate md:text-[0.6875rem]">
           {label}
         </span>
       </div>

@@ -28,12 +28,33 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-ink text-warm-ivory font-body antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    font-family: Inter, Arial, sans-serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: "Arial Narrow", "Roboto Condensed", Impact, sans-serif;
+    font-stretch: condensed;
+    letter-spacing: 0;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
   }
 
   ::selection {
@@ -66,6 +87,22 @@
 }
 
 @layer utilities {
+  .site-container {
+    width: min(100% - 96px, 1440px);
+    margin-inline: auto;
+  }
+
+  .paper-panel {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(201, 169, 98, 0.13), transparent 24%),
+      linear-gradient(135deg, #f3eee6 0%, #e9dfd2 100%);
+    color: #101014;
+  }
+
+  .hairline-gold {
+    border-color: rgba(201, 169, 98, 0.62);
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -77,6 +114,12 @@
 
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-container {
+    width: min(100% - 32px, 1440px);
   }
 }
 

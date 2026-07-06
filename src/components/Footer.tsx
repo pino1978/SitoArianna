@@ -1,4 +1,5 @@
-import { Instagram, Youtube, Facebook } from 'lucide-react';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
+import { BirdMarkIcon, RedSealIcon } from '@/assets/svg/StatIcons';
 
 const footerLinks = [
   { label: 'HOME', href: '#top' },
@@ -11,75 +12,47 @@ const footerLinks = [
 export default function Footer() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
-    <footer id="contatti" className="bg-ink border-t border-charcoal">
-      {/* Main content */}
-      <div
-        className="mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-8"
-        style={{ maxWidth: '1280px', padding: '3rem clamp(1.5rem, 5vw, 4rem)' }}
-      >
-        {/* Left — Signature */}
-        <div className="flex flex-col items-center md:items-start gap-2">
-          <div className="flex items-center gap-2">
-            <span className="text-satin-gold font-body font-medium text-lg tracking-wide">Ying · 鹰</span>
-          </div>
-          <span className="text-slate font-body font-medium text-[0.6875rem] tracking-[0.2em]">AQUILA</span>
-          <div className="mt-3 flex flex-col">
-            <span className="text-warm-ivory font-body font-bold text-[0.6875rem] tracking-[0.25em]">ARIANNA MILANO</span>
-            <span className="text-slate font-body font-medium text-[0.5625rem] tracking-[0.15em]">SANDA ATHLETE</span>
-          </div>
+    <footer id="contatti" className="border-t border-satin-gold/25 bg-ink">
+      <div className="site-container grid gap-8 py-7 md:grid-cols-[1fr_auto_1fr] md:items-center">
+        <div className="flex items-center gap-3">
+          <span className="font-serif text-[1.45rem] text-satin-gold">Ying &middot; 鷹</span>
+          <BirdMarkIcon className="h-9 w-12 text-satin-gold" />
+          <RedSealIcon className="h-5 w-5" />
         </div>
 
-        {/* Center — Navigation */}
-        <nav className="flex flex-wrap justify-center gap-6" role="navigation" aria-label="Footer navigation">
-          {footerLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="font-body font-medium text-[0.75rem] tracking-[0.08em] text-slate hover:text-satin-gold transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <div className="text-center">
+          <nav className="flex flex-wrap justify-center gap-7" aria-label="Footer navigation">
+            {footerLinks.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                className="text-[0.72rem] font-bold uppercase tracking-[0.12em] text-warm-ivory/78 transition-colors hover:text-satin-gold"
+              >
+                {link.label}
+              </a>
+            ))}
+          </nav>
+          <p className="mt-6 text-[0.72rem] text-muted-ivory">© 2026 Arianna Milano - Tutti i diritti riservati.</p>
+        </div>
 
-        {/* Right — Contact */}
-        <div className="flex flex-col items-center md:items-end gap-3">
-          <p className="text-muted-ivory font-body text-sm text-center md:text-right">
-            Per richieste di collaborazione<br />e partnership:
+        <div className="flex flex-col gap-3 md:items-end">
+          <p className="text-[0.8rem] leading-5 text-muted-ivory md:text-right">
+            Per richieste di collaborazione
+            <br />e partnership:
+            <br />
+            <a href="mailto:info@ariannamilano.it" className="text-satin-gold hover:underline">info@ariannamilano.it</a>
           </p>
-          <a
-            href="mailto:info@ariannamilano.it"
-            className="text-satin-gold font-body font-medium text-sm hover:underline transition-all"
-          >
-            info@ariannamilano.it
-          </a>
-          <div className="flex items-center gap-4 mt-1">
-            <a href="#" className="text-slate hover:text-satin-gold transition-colors" aria-label="Instagram">
-              <Instagram size={18} />
-            </a>
-            <a href="#" className="text-slate hover:text-satin-gold transition-colors" aria-label="YouTube">
-              <Youtube size={18} />
-            </a>
-            <a href="#" className="text-slate hover:text-satin-gold transition-colors" aria-label="Facebook">
-              <Facebook size={18} />
-            </a>
+          <div className="flex items-center gap-4 text-satin-gold">
+            <a href="#" aria-label="Instagram" className="transition-colors hover:text-warm-ivory"><Instagram size={20} /></a>
+            <a href="#" aria-label="YouTube" className="transition-colors hover:text-warm-ivory"><Youtube size={20} /></a>
+            <a href="#" aria-label="Facebook" className="transition-colors hover:text-warm-ivory"><Facebook size={20} /></a>
           </div>
         </div>
-      </div>
-
-      {/* Copyright */}
-      <div className="border-t border-charcoal text-center py-6">
-        <p className="text-slate font-body text-[0.75rem]">
-          © 2024 Arianna Milano — Tutti i diritti riservati.
-        </p>
       </div>
     </footer>
   );

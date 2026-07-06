@@ -5,27 +5,39 @@ interface SectionLabelProps {
   title: string;
   linkText?: string;
   linkHref?: string;
+  dark?: boolean;
+  underline?: boolean;
   className?: string;
 }
 
-export default function SectionLabel({ number, title, linkText, linkHref, className = '' }: SectionLabelProps) {
+export default function SectionLabel({
+  number,
+  title,
+  linkText,
+  linkHref,
+  dark = false,
+  underline = false,
+  className = '',
+}: SectionLabelProps) {
   return (
-    <div className={`flex flex-col sm:flex-row sm:items-end sm:justify-between gap-2 ${className}`}>
-      <div className="flex flex-col gap-1">
-        <span className="font-body font-medium text-satin-gold text-[0.75rem] tracking-[0.08em]">
-          {number}
-        </span>
-        <h2 className="font-display text-warm-ivory text-[clamp(1.5rem,2.5vw,2.25rem)] leading-tight">
+    <div className={`flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between ${className}`}>
+      <div>
+        <span className="block text-[0.78rem] font-black tracking-[0.13em] text-satin-gold">{number}</span>
+        <h2 className={`mt-1 max-w-full break-words text-[1.55rem] font-black uppercase leading-[1] sm:text-[1.85rem] md:text-[2.05rem] ${dark ? 'text-ink' : 'text-warm-ivory'}`}>
           {title}
         </h2>
+        {underline && <span className="mt-4 block h-[2px] w-10 bg-lacquer-red" />}
       </div>
+
       {linkText && linkHref && (
         <a
           href={linkHref}
-          className="group inline-flex items-center gap-1.5 font-body font-medium text-satin-gold text-[0.75rem] tracking-[0.08em] hover:underline transition-all shrink-0"
+          className={`group inline-flex items-center gap-3 text-[0.72rem] font-black uppercase tracking-[0.13em] transition-colors ${
+            dark ? 'text-ink hover:text-lacquer-red' : 'text-warm-ivory hover:text-satin-gold'
+          }`}
         >
           {linkText}
-          <ArrowRight size={14} className="transition-transform group-hover:translate-x-1" />
+          <ArrowRight size={18} className="text-satin-gold transition-transform group-hover:translate-x-1" />
         </a>
       )}
     </div>

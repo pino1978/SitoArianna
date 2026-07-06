@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# Sito Arianna Milano
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda.
 
-Currently, two official plugins are available:
+Il progetto nasce come portfolio sportivo e archivio documentale: deve raccontare un percorso di crescita serio, costante e verificabile, senza presentare Arianna come fenomeno, promessa annunciata o futura campionessa.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Direzione
 
-## React Compiler
+- Brand principale: Arianna Milano.
+- Firma personale secondaria: Ying / ideogramma dell'aquila.
+- Target prioritario: selezionatori, federazioni, allenatori, direttori tecnici, organizzatori e societa sportive.
+- Tono: determinazione, talento, crescita, disciplina e maturita sportiva.
+- Contatti: solo email famiglia/partnership nel footer.
+- CMS tradizionale: non previsto.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Aggiornamento contenuti
 
-## Expanding the ESLint configuration
+I contenuti modificabili sono in file statici versionabili:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- `src/data/profile.json`: profilo, bio, dati atleta, stats principali.
+- `src/data/results.json`: risultati, partecipazioni, vittorie, statistiche riepilogative.
+- `src/data/media.json`: video, gallery e note sulla provenienza delle immagini.
+- `public/assets`: immagini usate dal sito.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Per aggiungere una nuova parola in stile brush, creare un componente in `src/assets/svg` usando `BrushWordmark` da `src/assets/svg/BrushLettering.tsx`.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Immagini
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Fase iniziale:
+
+- hero, ritratti, combattimenti e gallery possono usare immagini generate.
+- risultati ufficiali, foto podio e contenuti federali dovranno essere sostituiti da materiale reale appena disponibile.
+- non usare AI per documenti ufficiali, loghi federali, attestati, classifiche, badge o prove di risultato.
+
+## Sviluppo
+
+```bash
+npm install
+npm run dev
+npm run lint
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Docker
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+docker build -t sito-arianna:latest .
+docker run --rm -p 8080:80 sito-arianna:latest
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Oppure:
+
+```bash
+docker compose up --build
 ```

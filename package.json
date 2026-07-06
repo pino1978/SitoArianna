@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "sito-arianna",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "docker:build": "docker build -t sito-arianna:latest ."
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,5 +1,10 @@
 {
-  "note": "Placeholder — video e immagini da sostituire con contenuti reali",
+  "note": "Placeholder iniziale - sostituire progressivamente con foto e video reali.",
+  "sourcePolicy": {
+    "canBeAi": ["hero", "ritratti editoriali iniziali", "immagini atmosfera", "mockup gallery"],
+    "shouldBeReal": ["combattimenti", "allenamenti", "podi", "eventi", "video"],
+    "mustNeverBeAi": ["documenti ufficiali", "classifiche", "attestati", "loghi federali", "prove di risultato"]
+  },
   "videos": [
     {
       "id": "vid-1",

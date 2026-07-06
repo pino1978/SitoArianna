@@ -73,10 +73,10 @@ export default function Header() {
             })}
           </nav>
 
-          <div className="hidden shrink-0 items-center gap-4 md:flex">
-            <span className="font-serif text-[1.05rem] tracking-wide text-satin-gold">Ying &middot; 鷹</span>
-            <BirdMarkIcon className="h-8 w-8 text-satin-gold" />
-            <RedSealIcon className="h-5 w-5" />
+          <div className="hidden shrink-0 items-center gap-3 md:flex" aria-label="Firma personale Ying">
+            <span className="font-serif text-[0.95rem] tracking-wide text-satin-gold/90">Ying &middot; 鷹</span>
+            <BirdMarkIcon className="h-6 w-8 text-satin-gold" />
+            <RedSealIcon className="h-4 w-4" />
             <span className="text-[0.72rem] font-black tracking-[0.12em] text-satin-gold">IT v</span>
           </div>
 

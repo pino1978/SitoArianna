@@ -19,9 +19,9 @@ export default function Footer() {
     <footer id="contatti" className="border-t border-satin-gold/25 bg-ink">
       <div className="site-container grid gap-8 py-7 md:grid-cols-[1fr_auto_1fr] md:items-center">
         <div className="flex items-center gap-3">
-          <span className="font-serif text-[1.45rem] text-satin-gold">Ying &middot; 鷹</span>
-          <BirdMarkIcon className="h-9 w-12 text-satin-gold" />
-          <RedSealIcon className="h-5 w-5" />
+          <span className="font-serif text-[1.18rem] text-satin-gold">Ying &middot; 鷹</span>
+          <BirdMarkIcon className="h-7 w-10 text-satin-gold" />
+          <RedSealIcon className="h-4 w-4" />
         </div>
 
         <div className="text-center">

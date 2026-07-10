@@ -14,9 +14,9 @@ export default function Hero() {
   return (
     <section id="top" className="relative min-h-[820px] overflow-hidden border-b border-satin-gold/45 bg-ink md:min-h-[680px] lg:h-[740px]">
       <img
-        src="/assets/hero.png"
+        src="/assets/hero-ary13-shift-left-medium.png"
         alt="Arianna Milano in posizione di combattimento Sanda"
-        className="absolute inset-0 h-full w-full object-cover object-[58%_50%] md:object-center"
+        className="absolute inset-y-0 left-1/2 h-full w-auto max-w-none -translate-x-1/2"
       />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_28%,rgba(240,237,230,0.18),transparent_16%),linear-gradient(90deg,rgba(0,0,0,0.88)_0%,rgba(0,0,0,0.62)_24%,rgba(0,0,0,0.10)_55%,rgba(0,0,0,0.72)_100%)]" />
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ink via-ink/55 to-transparent" />

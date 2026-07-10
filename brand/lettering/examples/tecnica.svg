@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 210" role="img" aria-labelledby="title desc">
+  <title id="title">Tecnica lettering example</title>
+  <desc id="desc">Esempio lettering del sistema Arianna Milano per la parola Tecnica.</desc>
+  <defs>
+    <linearGradient id="g" x1="30" y1="20" x2="590" y2="180" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d99b"/>
+      <stop offset="0.48" stop-color="#c79a50"/>
+      <stop offset="1" stop-color="#8e632f"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M54 72 C111 70 164 62 212 46 C177 88 152 134 144 168 C181 158 221 128 246 100 C229 131 224 158 247 164 C276 171 306 129 323 101 C310 132 305 160 329 164 C358 169 385 130 403 103 C392 130 388 156 408 164 C434 174 470 137 491 105 C475 120 452 121 441 112 C455 92 488 87 506 104 C527 123 499 157 472 161 C510 178 560 145 589 105" stroke-width="17"/>
+    <path d="M78 184 C174 191 289 184 393 178 C482 173 552 176 600 187" stroke-width="6" opacity="0.55"/>
+  </g>
+</svg>

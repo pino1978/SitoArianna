@@ -1,79 +1,30 @@
-{
-  "note": "Placeholder iniziale - sostituire progressivamente con foto e video reali.",
-  "sourcePolicy": {
-    "canBeAi": ["hero", "ritratti editoriali iniziali", "immagini atmosfera", "mockup gallery"],
-    "shouldBeReal": ["combattimenti", "allenamenti", "podi", "eventi", "video"],
-    "mustNeverBeAi": ["documenti ufficiali", "classifiche", "attestati", "loghi federali", "prove di risultato"]
+[
+  {
+    "title": "Allenamenti",
+    "type": "foto",
+    "image": "media-training-placeholder.png",
+    "alt": "Placeholder editoriale per allenamento tecnico di Sanda",
+    "isPlaceholder": true
   },
-  "videos": [
-    {
-      "id": "vid-1",
-      "title": "WORLD OPEN CHAMPIONSHIP 2026",
-      "subtitle": "Finale - Perugia",
-      "duration": "03:12",
-      "thumbnail": "/assets/media-highlights.jpg"
-    },
-    {
-      "id": "vid-2",
-      "title": "CHAMPION CUP 2026",
-      "subtitle": "Semifinale - Sora",
-      "duration": "02:45",
-      "thumbnail": "/assets/media-incontri.jpg"
-    },
-    {
-      "id": "vid-3",
-      "title": "WORLD OPEN CHAMPIONSHIP 2025",
-      "subtitle": "Finale - Perugia",
-      "duration": "04:06",
-      "thumbnail": "/assets/result-woc-2026.jpg"
-    },
-    {
-      "id": "vid-4",
-      "title": "CHAMPION CUP 2025",
-      "subtitle": "Finale - Sora",
-      "duration": "02:31",
-      "thumbnail": "/assets/result-champion-cup.jpg"
-    },
-    {
-      "id": "vid-5",
-      "title": "WORLD OPEN CHAMPIONSHIP 2024",
-      "subtitle": "Semifinale - Perugia",
-      "duration": "03:05",
-      "thumbnail": "/assets/media-gare.jpg"
-    }
-  ],
-  "gallery": [
-    {
-      "id": "gal-1",
-      "category": "ALLENAMENTI FOTO",
-      "image": "/assets/media-allenamenti.jpg",
-      "type": "photo"
-    },
-    {
-      "id": "gal-2",
-      "category": "GARE FOTO",
-      "image": "/assets/media-gare.jpg",
-      "type": "photo"
-    },
-    {
-      "id": "gal-3",
-      "category": "PODI FOTO",
-      "image": "/assets/media-podi.jpg",
-      "type": "photo"
-    },
-    {
-      "id": "gal-4",
-      "category": "INCONTRI VIDEO",
-      "image": "/assets/media-incontri.jpg",
-      "type": "video",
-      "count": "12 VIDEO"
-    },
-    {
-      "id": "gal-5",
-      "category": "HIGHLIGHTS VIDEO",
-      "image": "/assets/media-highlights.jpg",
-      "type": "video",
-      "count": "8 VIDEO"
-    }
-  ]
-}
+  {
+    "title": "Gare",
+    "type": "foto",
+    "image": "media-action-placeholder.png",
+    "alt": "Placeholder editoriale per incontro agonistico di Sanda",
+    "isPlaceholder": true
+  },
+  {
+    "title": "Profilo",
+    "type": "foto",
+    "image": "media-portrait-placeholder.png",
+    "alt": "Placeholder editoriale per ritratto sportivo di Arianna Milano",
+    "isPlaceholder": true
+  },
+  {
+    "title": "Ying",
+    "type": "identità",
+    "image": "ying-placeholder.png",
+    "alt": "Placeholder visuale dedicato al significato Yīng",
+    "isPlaceholder": true
+  }
+]

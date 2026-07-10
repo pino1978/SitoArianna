@@ -1,0 +1,34 @@
+---
+import profile from "../data/profile.json";
+import profileImage from "../assets/images/profile-placeholder.png";
+import signature from "../assets/svg/signature-ying.svg";
+import ideogram from "../assets/svg/ideogram-ying.svg";
+---
+<section class="profile-feature" id="profilo" aria-labelledby="profile-title">
+  <article class="profile-panel profile-panel-arianna">
+    <div class="profile-visual">
+      <img src={profileImage.src} alt="Placeholder editoriale per ritratto sportivo di Arianna Milano" loading="lazy" width={profileImage.width} height={profileImage.height} />
+    </div>
+    <div class="profile-copy-block">
+      <p class="section-kicker"><span>01</span> Chi e Arianna</p>
+      <h2 id="profile-title">Prima di tutto, Arianna.</h2>
+      <p>{profile.summary}</p>
+      <p>{profile.origin}</p>
+      <a class="text-arrow" href="#risultati">Scopri il mio profilo <span aria-hidden="true">-&gt;</span></a>
+    </div>
+  </article>
+
+  <article class="profile-panel profile-panel-ying" id="ying">
+    <div class="profile-copy-block">
+      <p class="section-kicker"><span>02</span> Ying</p>
+      <h2>Visione, precisione, coraggio.</h2>
+      <p>Ying resta una firma secondaria: accompagna il percorso sportivo senza sostituire Arianna Milano come identita principale.</p>
+      <p>Il segno richiama concentrazione, controllo e capacita di guardare avanti, con un linguaggio sobrio e non folkloristico.</p>
+      <a class="text-arrow" href="#media">Scopri i media <span aria-hidden="true">-&gt;</span></a>
+    </div>
+    <div class="ying-mark-panel" aria-label="Firma identitaria secondaria Ying">
+      <img class="ying-mark-symbol" src={ideogram.src} alt="Ying" loading="lazy" width="180" height="180" />
+      <img class="ying-mark-signature" src={signature.src} alt="Ying" loading="lazy" width="180" height="48" />
+    </div>
+  </article>
+</section>

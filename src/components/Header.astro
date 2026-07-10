@@ -1,0 +1,49 @@
+---
+import navigation from "../data/navigation.json";
+import logo from "../assets/svg/logo-arianna-milano.svg";
+import yingHeaderMark from "../assets/images/ying-header-mark.png";
+---
+<header class="site-header" data-header>
+  <a class="brand-mark" href="#top" aria-label="Arianna Milano, torna alla hero">
+    <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
+  </a>
+
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+    <span class="sr-only">Apri menu</span>
+    <span aria-hidden="true"></span>
+    <span aria-hidden="true"></span>
+  </button>
+
+  <nav class="primary-nav" id="primary-navigation" aria-label="Navigazione principale">
+    {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+
+  <img class="ying-header-mark" src={yingHeaderMark.src} alt="" aria-hidden="true" width={yingHeaderMark.width} height={yingHeaderMark.height} />
+
+  <label class="language-select">
+    <span class="sr-only">Lingua</span>
+    <select aria-label="Seleziona lingua">
+      <option value="it" selected>IT</option>
+      <option value="en">EN</option>
+    </select>
+  </label>
+</header>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  const toggle = header?.querySelector(".nav-toggle");
+  const nav = header?.querySelector(".primary-nav");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    nav?.toggleAttribute("data-open", !isOpen);
+  });
+
+  nav?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle?.setAttribute("aria-expanded", "false");
+      nav?.removeAttribute("data-open");
+    });
+  });
+</script>

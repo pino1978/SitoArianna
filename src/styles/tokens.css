@@ -1,0 +1,18 @@
+:root {
+  --ink: #080706;
+  --ink-soft: #10100f;
+  --graphite: #171717;
+  --anthracite: #252320;
+  --ivory: #f1eadf;
+  --ivory-soft: #d9d0c4;
+  --gold: #b98632;
+  --gold-bright: #d9a441;
+  --gold-muted: #8e682b;
+  --lacquer: #9b1713;
+  --line: rgba(185, 134, 50, 0.45);
+  --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+  --font-display: "Arial Narrow", "Roboto Condensed", "Helvetica Neue Condensed", Arial, sans-serif;
+  --font-body: Georgia, "Times New Roman", serif;
+  --font-ui: Arial, Helvetica, sans-serif;
+  --container: min(1160px, calc(100vw - 64px));
+}

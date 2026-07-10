@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 215" role="img" aria-labelledby="title desc">
+  <title id="title">Coraggio lettering example</title>
+  <desc id="desc">Esempio lettering del sistema Arianna Milano per la parola Coraggio.</desc>
+  <defs>
+    <linearGradient id="g" x1="30" y1="20" x2="670" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d99b"/>
+      <stop offset="0.48" stop-color="#c79a50"/>
+      <stop offset="1" stop-color="#8e632f"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M174 63 C130 42 72 72 57 119 C43 164 82 184 129 161 C161 145 182 117 193 94 C180 128 175 160 199 166 C228 172 259 132 276 104 C262 137 256 166 280 169 C307 173 337 131 354 103 C340 136 335 162 357 168 C382 176 414 143 434 113 C418 126 394 124 384 114 C399 94 430 89 447 104 C468 122 439 156 413 161 C450 177 496 146 520 105 C506 140 502 169 528 171 C553 173 580 139 596 113 C584 146 579 175 551 190 C523 205 486 197 474 178 C517 188 566 171 598 139 C613 124 627 107 637 89 C627 125 622 160 646 166 C670 172 694 145 706 124" stroke-width="17"/>
+    <path d="M80 188 C194 197 310 189 421 182 C540 175 624 178 685 190" stroke-width="6" opacity="0.55"/>
+  </g>
+</svg>

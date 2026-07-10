@@ -1,29 +1,30 @@
 {
-  "note": "Dati indicativi - da verificare e aggiornare con risultati ufficiali.",
-  "positioning": "Documentare il percorso sportivo senza presentare Arianna come fenomeno o promessa annunciata.",
-  "currentGoal": "Campionati Italiani FIWuK",
-  "mainResults": [
+  "statsArePlaceholders": true,
+  "statsNote": "I numeri della hero sono placeholder editoriali e vanno verificati prima della pubblicazione ufficiale.",
+  "heroStats": [
+    { "id": "years", "value": "3", "label": "anni di pratica", "icon": "stat-years.svg", "isPlaceholder": true },
+    { "id": "matches", "value": "28", "label": "gare disputate", "icon": "stat-trophy.svg", "isPlaceholder": true },
+    { "id": "podiums", "value": "26", "label": "podi", "icon": "stat-podium.svg", "isPlaceholder": true },
+    { "id": "gold", "value": "26", "label": "medaglie d'oro", "icon": "stat-medal.svg", "isPlaceholder": true }
+  ],
+  "highlights": [
     {
-      "id": "woc-2026",
-      "name": "WORLD OPEN CHAMPIONSHIP",
-      "location": "PERUGIA 2026",
-      "participations": 4,
-      "wins": 4,
-      "image": "/assets/result-woc-2026.jpg"
+      "event": "World Open Championship",
+      "place": "Perugia",
+      "scope": "Internazionale",
+      "note": "Evento da documentare con risultati ufficiali e materiali verificati."
     },
     {
-      "id": "champion-cup-2026",
-      "name": "CHAMPION CUP",
-      "location": "SORA 2026",
-      "participations": 2,
-      "wins": 2,
-      "image": "/assets/result-champion-cup.jpg"
+      "event": "Champion Cup",
+      "place": "Sora",
+      "scope": "Nazionale",
+      "note": "Risultato da consolidare nel futuro archivio sportivo."
+    },
+    {
+      "event": "Campionati Italiani FIWuK",
+      "place": "Obiettivo attuale",
+      "scope": "Federale",
+      "note": "Focus sportivo attuale del percorso agonistico."
     }
-  ],
-  "summaryStats": [
-    { "label": "PRIMI POSTI", "value": "98%", "icon": "medal" },
-    { "label": "GARE DISPUTATE", "value": "28", "icon": "trophy" },
-    { "label": "PODI", "value": "26", "icon": "podium" },
-    { "label": "MEDAGLIE D'ORO", "value": "26", "icon": "gold-medal" }
   ]
 }

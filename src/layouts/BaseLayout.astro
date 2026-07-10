@@ -1,0 +1,23 @@
+---
+import "../styles/tokens.css";
+import "../styles/global.css";
+
+const {
+  title = "Arianna Milano | Sanda Athlete",
+  description = "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda."
+} = Astro.props;
+---
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#080706" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Vai al contenuto principale</a>
+    <slot />
+  </body>
+</html>

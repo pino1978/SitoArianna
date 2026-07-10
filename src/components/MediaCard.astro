@@ -1,0 +1,13 @@
+---
+const { item } = Astro.props;
+const images = import.meta.glob("../assets/images/*", { eager: true });
+const image = images[`../assets/images/${item.image}`]?.default;
+---
+<article class="media-card">
+  <img src={image.src} alt={item.alt} loading="lazy" width={image.width} height={image.height} />
+  <div>
+    <p>{item.type}</p>
+    <h3>{item.title}</h3>
+    {item.isPlaceholder && <span>Placeholder</span>}
+  </div>
+</article>

@@ -1,9 +1,22 @@
 services:
-  sito-arianna:
+  web:
     build:
       context: .
-      dockerfile: Dockerfile
-    image: sito-arianna:latest
+      target: dev
+    ports:
+      - "4321:4321"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    command: npm run dev:docker
+
+  prod:
+    build:
+      context: .
+      target: prod
     ports:
       - "8080:80"
-    restart: unless-stopped
+    profiles:
+      - prod

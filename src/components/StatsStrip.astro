@@ -1,0 +1,18 @@
+---
+const { stats } = Astro.props;
+const iconModules = import.meta.glob("../assets/svg/stat-*.svg", { eager: true });
+
+function iconFor(fileName) {
+  const key = `../assets/svg/${fileName}`;
+  return iconModules[key]?.default?.src ?? "";
+}
+---
+<ul class="stats-strip" aria-label="Statistiche sportive sintetiche">
+  {stats.map((stat) => (
+    <li>
+      <img src={iconFor(stat.icon)} alt="" aria-hidden="true" width="32" height="32" />
+      <strong>{stat.value}</strong>
+      <span>{stat.label}</span>
+    </li>
+  ))}
+</ul>

@@ -1,25 +1,24 @@
 {
   "name": "Arianna Milano",
-  "birthDate": "29 luglio 2014",
+  "birthDate": "2014-07-29",
   "city": "Napoli",
-  "team": "ASD Kasoria Kombat & Fly",
+  "club": "ASD Kasoria Kombat & Fly",
   "coach": "Eduardo Mazzara",
   "discipline": "Sanda",
   "category": "-40kg",
-  "startYear": 2022,
-  "traits": ["determinata", "competitiva", "coraggiosa", "tenace", "concentrata", "tecnica", "solare", "estroversa", "empatica"],
-  "bio": "Sono Arianna, ho 12 anni e pratico Sanda. Determinata, curiosa e sempre pronta a mettermi alla prova. Ogni giorno scelgo di migliorare e superare i miei limiti.",
-  "ying": {
-    "name": "Ying",
-    "ideogram": "鷹",
-    "meaning": "Aquila",
-    "description": "Ho scelto Ying perche l'aquila vola in alto, vede lontano e non smette mai di allenarsi. Rappresenta la liberta, la forza interiore e la capacita di superare ogni limite."
-  },
-  "stats": {
-    "note": "Dati indicativi - da verificare e aggiornare",
-    "years": 3,
-    "competitions": 28,
-    "podiums": 26,
-    "goldMedals": 26
-  }
+  "startedIn": 2022,
+  "contactEmail": "info@ariannamilano.it",
+  "traits": [
+    "determinata",
+    "competitiva",
+    "coraggiosa",
+    "tenace",
+    "concentrata",
+    "tecnica",
+    "solare",
+    "estroversa",
+    "empatica"
+  ],
+  "summary": "Arianna Milano è una giovane atleta agonista di Sanda. Vive il percorso sportivo con costanza, disciplina e attenzione tecnica, costruendo esperienza attraverso allenamenti, gare regionali, nazionali e internazionali.",
+  "origin": "La passione per il Kung Fu nasce da un riferimento semplice e autentico: un immaginario scoperto da bambina e trasformato, con il tempo, in pratica sportiva, allenamento e impegno agonistico."
 }

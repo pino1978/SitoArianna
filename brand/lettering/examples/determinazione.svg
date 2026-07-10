@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 220" role="img" aria-labelledby="title desc">
+  <title id="title">Determinazione lettering example</title>
+  <desc id="desc">Esempio lettering del sistema Arianna Milano per la parola Determinazione.</desc>
+  <defs>
+    <linearGradient id="g" x1="40" y1="20" x2="930" y2="190" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2d99b"/>
+      <stop offset="0.48" stop-color="#c79a50"/>
+      <stop offset="1" stop-color="#8e632f"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M54 164 C87 121 99 70 105 36 C142 42 181 62 177 98 C171 151 107 169 69 161 C143 177 207 145 252 105 C236 136 231 164 255 168 C284 173 313 132 330 104 C319 133 314 159 333 166 C356 174 388 143 410 112 C390 124 367 123 356 115 C370 94 401 88 418 103 C439 122 408 155 383 160 C421 179 467 145 493 104 C481 136 477 164 501 168 C530 173 559 132 576 104 C564 136 560 164 584 168 C612 173 641 132 658 104 C646 136 642 164 666 168 C694 173 723 132 740 104 C729 133 724 159 744 166 C768 174 800 143 821 112 C804 125 782 123 770 114 C786 94 819 88 836 105 C856 126 827 158 801 162 C840 179 889 146 917 104 C907 132 905 156 921 166 C939 178 964 151 978 127" stroke-width="17"/>
+    <path d="M74 188 C210 198 360 190 500 182 C650 174 820 177 946 191" stroke-width="6" opacity="0.55"/>
+  </g>
+</svg>

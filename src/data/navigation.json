@@ -1,0 +1,7 @@
+[
+  { "label": "Home", "href": "#top" },
+  { "label": "Profilo", "href": "#profilo" },
+  { "label": "Risultati", "href": "#risultati" },
+  { "label": "Media", "href": "#media" },
+  { "label": "Contatti", "href": "#footer" }
+]

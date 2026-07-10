@@ -1,0 +1,26 @@
+---
+import Header from "./Header.astro";
+import StatsStrip from "./StatsStrip.astro";
+import results from "../data/results.json";
+import heroImage from "../assets/images/hero-ary13-shift-left-medium.png";
+import heroTitleImage from "../assets/images/hero-title-liberta.png";
+import heroIdeogramImage from "../assets/images/ying-hero-emblem-cutout.png";
+---
+<section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
+  <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
+  <div class="hero-overlay hero-overlay-right" aria-hidden="true"></div>
+  <div class="hero-overlay hero-overlay-bottom" aria-hidden="true"></div>
+  <div class="hero-overlay hero-overlay-top" aria-hidden="true"></div>
+
+  <Header />
+
+  <div class="hero-copy">
+    <h1 id="hero-title" class="sr-only">Disciplina. Coraggio. Liberta. Crescita.</h1>
+    <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
+    <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
+    <a class="hero-cta" href="#profilo">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></a>
+    <StatsStrip stats={results.heroStats} />
+  </div>
+
+  <img class="hero-ideogram" src={heroIdeogramImage.src} alt="" aria-hidden="true" width={heroIdeogramImage.width} height={heroIdeogramImage.height} />
+</section>

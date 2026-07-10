@@ -1,6 +1,11 @@
 node_modules
 dist
+.astro
 .git
-.qa
+.gitignore
+.codex-*.png
+.codex-*.txt
+*.log
 npm-debug.log*
-README.md
+.npm-cache
+solution-design-structured.docx

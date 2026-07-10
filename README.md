@@ -1,55 +1,54 @@
-# Sito Arianna Milano
+# Arianna Milano - sito ufficiale
 
-Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda.
+Sito statico Astro per Arianna Milano, giovane atleta agonista di Sanda.
 
-Il progetto nasce come portfolio sportivo e archivio documentale: deve raccontare un percorso di crescita serio, costante e verificabile, senza presentare Arianna come fenomeno, promessa annunciata o futura campionessa.
+Il progetto e una homepage single page premium, con navigazione ad anchor e contenuti aggiornabili da file JSON.
 
-## Direzione
-
-- Brand principale: Arianna Milano.
-- Firma personale secondaria: Ying / ideogramma dell'aquila.
-- Target prioritario: selezionatori, federazioni, allenatori, direttori tecnici, organizzatori e societa sportive.
-- Tono: determinazione, talento, crescita, disciplina e maturita sportiva.
-- Contatti: solo email famiglia/partnership nel footer.
-- CMS tradizionale: non previsto.
-
-## Aggiornamento contenuti
-
-I contenuti modificabili sono in file statici versionabili:
-
-- `src/data/profile.json`: profilo, bio, dati atleta, stats principali.
-- `src/data/results.json`: risultati, partecipazioni, vittorie, statistiche riepilogative.
-- `src/data/media.json`: video, gallery e note sulla provenienza delle immagini.
-- `public/assets`: immagini usate dal sito.
-
-Per aggiungere una nuova parola in stile brush, creare un componente in `src/assets/svg` usando `BrushWordmark` da `src/assets/svg/BrushLettering.tsx`.
-
-## Immagini
-
-Fase iniziale:
-
-- hero, ritratti, combattimenti e gallery possono usare immagini generate.
-- risultati ufficiali, foto podio e contenuti federali dovranno essere sostituiti da materiale reale appena disponibile.
-- non usare AI per documenti ufficiali, loghi federali, attestati, classifiche, badge o prove di risultato.
-
-## Sviluppo
+## Avvio locale
 
 ```bash
 npm install
 npm run dev
-npm run lint
-npm run build
 ```
+
+URL locale predefinito: `http://127.0.0.1:4321`.
+
+## Build
+
+```bash
+npm run build
+npm run preview
+```
+
+La build statica viene generata in `dist/` ed e compatibile con Cloudflare Pages, Netlify, Vercel o hosting statico tradizionale.
 
 ## Docker
 
-```bash
-docker build -t sito-arianna:latest .
-docker run --rm -p 8080:80 sito-arianna:latest
-```
-
-Oppure:
+Sviluppo:
 
 ```bash
-docker compose up --build
+docker compose up web
 ```
+
+Produzione locale:
+
+```bash
+docker compose --profile prod up --build prod
+```
+
+Il container di produzione serve la build Astro statica con Nginx su `http://127.0.0.1:8080`.
+
+## Contenuti
+
+- Profilo atleta: `src/data/profile.json`
+- Statistiche e risultati: `src/data/results.json`
+- Media gallery: `src/data/media.json`
+- Navigazione: `src/data/navigation.json`
+- Immagini: `src/assets/images/`
+
+La hero attiva usa `src/assets/images/hero-ary13-shift-left-medium.png`.
+L'immagine sorgente originale e conservata in `src/assets/images/hero-ary13.png`.
+
+## Produzione
+
+Il sito non deve contenere puntamenti a path assoluti locali. Gli asset usati dai componenti vengono importati tramite percorsi relativi al progetto e risolti dalla build Astro.

@@ -2,9 +2,9 @@
 import Header from "./Header.astro";
 import StatsStrip from "./StatsStrip.astro";
 import results from "../data/results.json";
-import heroImage from "../assets/images/hero-ary13-shift-left-medium.png";
+import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
-import heroYingLayer from "../assets/images/aq1-layer.png";
+import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
   <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
@@ -22,7 +22,5 @@ import heroYingLayer from "../assets/images/aq1-layer.png";
     <StatsStrip stats={results.heroStats} />
   </div>
 
-  <div class="hero-ying-layer" aria-hidden="true">
-    <img src={heroYingLayer.src} alt="" width={heroYingLayer.width} height={heroYingLayer.height} />
-  </div>
+  <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />
 </section>

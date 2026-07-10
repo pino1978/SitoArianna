@@ -72,12 +72,14 @@ button:focus-visible {
 .hero::after {
   position: absolute;
   z-index: 1;
-  top: clamp(132px, 19vh, 182px);
-  right: clamp(28px, 5.5vw, 92px);
-  width: clamp(240px, 21vw, 340px);
-  height: clamp(240px, 21vw, 340px);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 0, 0, 0.64) 0%, rgba(0, 0, 0, 0.48) 42%, rgba(0, 0, 0, 0) 73%);
+  top: clamp(78px, 9vh, 118px);
+  right: clamp(-120px, -7vw, -60px);
+  width: clamp(520px, 43vw, 760px);
+  height: clamp(360px, 46vh, 560px);
+  background:
+    radial-gradient(ellipse at 56% 40%, rgba(185, 134, 50, 0.14), transparent 38%),
+    radial-gradient(ellipse at 72% 58%, rgba(155, 23, 19, 0.12), transparent 34%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0.42), transparent 70%);
   content: "";
   pointer-events: none;
 }
@@ -234,17 +236,32 @@ button:focus-visible {
   filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.38));
 }
 
-.hero-ideogram {
+.hero-ying-layer {
   position: absolute;
   z-index: 2;
-  top: clamp(118px, 17.1vh, 158px);
-  right: clamp(56px, 8vw, 132px);
-  width: clamp(188px, 15.8vw, 252px);
-  height: auto;
-  opacity: 0.96;
+  top: clamp(88px, 12vh, 132px);
+  right: clamp(-118px, -5vw, -42px);
+  width: clamp(380px, 39vw, 660px);
+  aspect-ratio: 1402 / 1122;
+  opacity: 0.46;
   pointer-events: none;
-  mix-blend-mode: normal;
-  filter: contrast(1.06) brightness(1.02) drop-shadow(0 16px 24px rgba(0, 0, 0, 0.62));
+  mix-blend-mode: screen;
+  transform: rotate(-3deg);
+  transform-origin: 58% 48%;
+  filter:
+    saturate(0.86)
+    contrast(1.08)
+    brightness(0.82)
+    drop-shadow(-18px 22px 34px rgba(0, 0, 0, 0.54));
+  -webkit-mask-image: radial-gradient(ellipse at 48% 48%, #000 0%, #000 46%, transparent 76%);
+  mask-image: radial-gradient(ellipse at 48% 48%, #000 0%, #000 46%, transparent 76%);
+}
+
+.hero-ying-layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
 }
 
 .hero-title > span:not(.lettering-word) {
@@ -975,11 +992,12 @@ button:focus-visible {
     padding-top: 128px;
   }
 
-  .hero-ideogram {
-    top: 152px;
-    right: 20px;
-    width: 138px;
-    opacity: 0.56;
+  .hero-ying-layer {
+    top: 138px;
+    right: -112px;
+    width: min(420px, 58vw);
+    opacity: 0.34;
+    transform: rotate(-2deg);
   }
 
   .stats-strip {
@@ -1070,7 +1088,7 @@ button:focus-visible {
     margin: -6px 0 -10px -6px;
   }
 
-  .hero-ideogram {
+  .hero-ying-layer {
     display: none;
   }
 

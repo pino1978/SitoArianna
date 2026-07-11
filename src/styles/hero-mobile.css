@@ -1,0 +1,47 @@
+@media (max-width: 640px) {
+  .hero {
+    min-height: 860px;
+    background-size: auto 100%;
+    background-position: 72% 50%;
+  }
+
+  .hero-overlay-left {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.08) 34%, rgba(0, 0, 0, 0.9) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.2) 42%, rgba(0, 0, 0, 0) 68%);
+  }
+
+  .hero-copy {
+    width: min(44vw, 176px);
+    margin-left: 16px;
+    padding-top: 112px;
+  }
+
+  .hero-title-image {
+    width: min(176px, 43vw);
+    margin: -4px 0 -8px -4px;
+  }
+
+  .hero-subcopy {
+    position: absolute;
+    top: 570px;
+    left: 0;
+    width: calc(100vw - 32px);
+    margin: 0;
+  }
+
+  .hero-cta {
+    position: absolute;
+    top: 632px;
+    left: 0;
+    margin-top: 0;
+  }
+
+  .hero-copy .stats-strip {
+    position: absolute;
+    top: 700px;
+    left: 0;
+    width: calc(100vw - 32px);
+    margin: 0;
+  }
+}

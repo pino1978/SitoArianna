@@ -3,7 +3,7 @@
     min-height: 760px;
     padding-bottom: 24px;
     background-size: auto 90%;
-    background-position: 35% 42%;
+    background-position: 28% 42%;
   }
 
   .hero-overlay-left {
@@ -63,7 +63,7 @@
 @media (max-width: 390px) {
   .hero {
     background-size: auto 88%;
-    background-position: 33% 42%;
+    background-position: 26% 42%;
   }
 
   .hero-copy {

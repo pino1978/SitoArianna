@@ -6,6 +6,25 @@
     background-position: 44% 42%;
   }
 
+  .hero .site-header {
+    left: 16px;
+    right: 12px;
+    width: auto;
+    grid-template-columns: auto 1fr;
+    transform: none;
+  }
+
+  .nav-toggle {
+    grid-column: 2;
+    justify-self: end;
+    gap: 5px;
+    padding: 10px;
+  }
+
+  .nav-toggle span:not(.sr-only) {
+    width: 20px;
+  }
+
   .hero-overlay-left {
     background:
       linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0.02) 38%, rgba(0, 0, 0, 0.68) 100%),

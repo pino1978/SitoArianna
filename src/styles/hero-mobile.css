@@ -1,47 +1,76 @@
 @media (max-width: 640px) {
   .hero {
-    min-height: 860px;
-    background-size: auto 100%;
-    background-position: 72% 50%;
+    min-height: 790px;
+    padding-bottom: 24px;
+    background-size: auto 90%;
+    background-position: 40% 46%;
   }
 
   .hero-overlay-left {
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.08) 34%, rgba(0, 0, 0, 0.9) 100%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.2) 42%, rgba(0, 0, 0, 0) 68%);
+      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.04) 34%, rgba(0, 0, 0, 0.88) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.14) 38%, rgba(0, 0, 0, 0) 62%);
   }
 
   .hero-copy {
-    width: min(44vw, 176px);
+    width: min(41vw, 164px);
     margin-left: 16px;
     padding-top: 112px;
   }
 
   .hero-title-image {
-    width: min(176px, 43vw);
+    width: min(164px, 40vw);
     margin: -4px 0 -8px -4px;
   }
 
   .hero-subcopy {
     position: absolute;
-    top: 570px;
+    top: 500px;
     left: 0;
     width: calc(100vw - 32px);
     margin: 0;
+    font-size: 0.98rem;
+    line-height: 1.28;
+  }
+
+  .hero-subcopy strong {
+    font-size: 0.84rem;
   }
 
   .hero-cta {
     position: absolute;
-    top: 632px;
+    top: 558px;
     left: 0;
+    min-height: 42px;
     margin-top: 0;
+    padding: 0 17px;
+    font-size: 0.68rem;
   }
 
   .hero-copy .stats-strip {
     position: absolute;
-    top: 700px;
+    top: 626px;
     left: 0;
     width: calc(100vw - 32px);
     margin: 0;
+  }
+
+  .hero-copy .stats-strip::after {
+    right: 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .hero {
+    background-size: auto 88%;
+    background-position: 38% 46%;
+  }
+
+  .hero-copy {
+    width: min(39vw, 152px);
+  }
+
+  .hero-title-image {
+    width: min(152px, 38vw);
   }
 }

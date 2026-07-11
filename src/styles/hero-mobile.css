@@ -8,8 +8,22 @@
 
   .hero-overlay-left {
     background:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.04) 34%, rgba(0, 0, 0, 0.88) 100%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.14) 38%, rgba(0, 0, 0, 0) 62%);
+      linear-gradient(180deg, rgba(0, 0, 0, 0.48) 0%, rgba(0, 0, 0, 0.02) 38%, rgba(0, 0, 0, 0.68) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.08) 36%, rgba(0, 0, 0, 0) 60%);
+  }
+
+  .hero-overlay-bottom {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 64%, rgba(0, 0, 0, 0.52) 100%);
+  }
+
+  .hero-overlay-top {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0) 25%);
+  }
+
+  .hero-overlay-right {
+    background:
+      radial-gradient(circle at 88% 24%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.18) 18%, transparent 34%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.18) 82%, rgba(0, 0, 0, 0.4) 100%);
   }
 
   .hero-copy {

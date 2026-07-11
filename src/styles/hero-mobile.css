@@ -2,7 +2,7 @@
   .hero {
     min-height: 760px;
     padding-bottom: 24px;
-    background-size: auto 84%;
+    background-size: auto 81%;
     background-position: 44% 42%;
   }
 
@@ -62,7 +62,7 @@
 
 @media (max-width: 390px) {
   .hero {
-    background-size: auto 82%;
+    background-size: auto 79%;
     background-position: 42% 42%;
   }
 

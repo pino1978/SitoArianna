@@ -1,8 +1,8 @@
 @media (max-width: 640px) {
   .hero {
-    min-height: 760px;
+    min-height: 820px;
     padding-bottom: 24px;
-    background-size: auto 75%;
+    background-size: auto 70%;
     background-position: 44% 42%;
   }
 
@@ -14,15 +14,46 @@
     transform: none;
   }
 
+  .brand-mark {
+    width: 128px;
+    height: 40px;
+  }
+
+  .brand-mark img {
+    width: 128px;
+  }
+
   .nav-toggle {
     grid-column: 2;
     justify-self: end;
     gap: 5px;
-    padding: 10px;
+    width: 40px;
+    height: 40px;
+    padding: 9px;
   }
 
   .nav-toggle span:not(.sr-only) {
     width: 20px;
+  }
+
+  .primary-nav {
+    top: 54px;
+    right: 0;
+    width: min(238px, calc(100vw - 40px));
+    padding: 18px 20px;
+    border-color: rgba(185, 134, 50, 0.5);
+    background: rgba(5, 5, 5, 0.96);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.46);
+  }
+
+  .primary-nav[data-open] {
+    gap: 14px;
+  }
+
+  .primary-nav a {
+    padding: 4px 0;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
   }
 
   .hero-overlay-left {
@@ -32,17 +63,17 @@
   }
 
   .hero-overlay-bottom {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 64%, rgba(0, 0, 0, 0.52) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 66%, rgba(0, 0, 0, 0.46) 100%);
   }
 
   .hero-overlay-top {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.34) 0%, rgba(0, 0, 0, 0) 25%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0) 24%);
   }
 
   .hero-overlay-right {
     background:
-      radial-gradient(circle at 88% 24%, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.18) 18%, transparent 34%),
-      linear-gradient(90deg, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.18) 82%, rgba(0, 0, 0, 0.4) 100%);
+      radial-gradient(circle at 88% 24%, rgba(0, 0, 0, 0.24) 0%, rgba(0, 0, 0, 0.12) 18%, transparent 34%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.14) 82%, rgba(0, 0, 0, 0.32) 100%);
   }
 
   .hero-copy {
@@ -58,7 +89,7 @@
 
   .hero-subcopy {
     position: absolute;
-    top: 470px;
+    top: 500px;
     left: 0;
     width: calc(100vw - 32px);
     margin: 0;
@@ -72,31 +103,91 @@
 
   .hero-cta {
     position: absolute;
-    top: 526px;
+    top: 562px;
     left: 0;
-    min-height: 42px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    width: min(232px, calc(100vw - 48px));
+    min-height: 52px;
     margin-top: 0;
-    padding: 0 17px;
+    padding: 0 16px 0 18px;
+    border: 1px solid rgba(217, 164, 65, 0.78);
+    background: rgba(3, 3, 3, 0.38);
     font-size: 0.68rem;
+    line-height: 1.15;
+  }
+
+  .hero-cta::after {
+    content: "→";
+    font-size: 1.05rem;
   }
 
   .hero-copy .stats-strip {
     position: absolute;
-    top: 592px;
+    top: 640px;
     left: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
     width: calc(100vw - 32px);
     margin: 0;
+    padding: 12px;
+    border: 1px solid rgba(185, 134, 50, 0.24);
+    background: rgba(5, 5, 5, 0.54);
+    backdrop-filter: blur(6px);
   }
 
   .hero-copy .stats-strip::after {
-    right: 0;
+    display: none;
+  }
+
+  .hero-copy .stats-strip li {
+    min-width: 0;
+    min-height: 64px;
+    margin: 0;
+    padding: 10px 8px;
+    border: 1px solid rgba(185, 134, 50, 0.18);
+    background: rgba(0, 0, 0, 0.24);
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 5px;
+  }
+
+  .hero-copy .stats-strip li::after {
+    display: none;
+  }
+
+  .hero-copy .stats-strip strong {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+
+  .hero-copy .stats-strip span {
+    grid-column: 1;
+    grid-row: 2;
+    width: auto;
+    max-width: none;
+    font-size: 0.58rem;
+    line-height: 1.2;
+  }
+
+  .hero-copy .stats-strip img {
+    display: none;
   }
 }
 
 @media (max-width: 390px) {
   .hero {
-    background-size: auto 73%;
+    background-size: auto 68%;
     background-position: 42% 42%;
+  }
+
+  .brand-mark,
+  .brand-mark img {
+    width: 120px;
   }
 
   .hero-copy {

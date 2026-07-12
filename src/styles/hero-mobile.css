@@ -1,9 +1,9 @@
 @media (max-width: 640px) {
   .hero {
-    min-height: 840px;
+    min-height: 760px;
     padding-bottom: 0;
-    background-size: auto 58%;
-    background-position: 46% 28%;
+    background-size: auto 62%;
+    background-position: 45% 30%;
   }
 
   .hero::after,
@@ -19,8 +19,8 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     width: auto;
-    min-height: 76px;
-    padding-top: 14px;
+    min-height: 72px;
+    padding-top: 12px;
     transform: none;
   }
 
@@ -28,7 +28,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    width: 122px;
+    width: 120px;
     height: 42px;
     overflow: visible;
   }
@@ -44,7 +44,7 @@
   }
 
   .brand-mark img {
-    width: 114px;
+    width: 112px;
     height: auto;
     filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
   }
@@ -61,7 +61,7 @@
     height: 38px;
     padding: 8px;
     border: 1px solid rgba(216, 161, 58, 0.48);
-    background: rgba(4, 4, 4, 0.3);
+    background: rgba(4, 4, 4, 0.34);
     backdrop-filter: blur(8px);
   }
 
@@ -74,7 +74,7 @@
 
   .primary-nav {
     position: absolute;
-    top: 60px;
+    top: 58px;
     right: 0;
     display: none;
     width: min(208px, calc(100vw - 46px));
@@ -103,12 +103,12 @@
   .hero-overlay-left {
     background:
       radial-gradient(circle at 18% 32%, rgba(216, 161, 58, 0.14), transparent 22%),
-      linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 34%, rgba(0, 0, 0, 0.72) 100%),
+      linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0) 34%, rgba(0, 0, 0, 0.74) 100%),
       linear-gradient(90deg, rgba(0, 0, 0, 0.46) 0%, rgba(0, 0, 0, 0.06) 42%, rgba(0, 0, 0, 0) 68%);
   }
 
   .hero-overlay-bottom {
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 46%, rgba(0, 0, 0, 0.28) 66%, rgba(0, 0, 0, 0.98) 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 44%, rgba(0, 0, 0, 0.3) 64%, rgba(0, 0, 0, 0.98) 100%);
   }
 
   .hero-overlay-top {
@@ -126,47 +126,60 @@
     padding-top: 0;
   }
 
+  .hero-kicker {
+    position: absolute;
+    top: 425px;
+    left: 0;
+    margin: 0;
+    color: var(--gold-bright);
+    font-family: var(--font-ui);
+    font-size: 0.64rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hero-kicker::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 1px;
+    margin: 0 10px 3px 0;
+    background: var(--gold-bright);
+  }
+
   .hero-subcopy {
     position: absolute;
-    top: 510px;
+    top: 458px;
     left: 0;
     width: calc(100vw - 36px);
     margin: 0;
-    font-size: 1.5rem;
-    line-height: 1.15;
+    font-size: 1.38rem;
+    line-height: 1.16;
     text-shadow: 0 5px 20px rgba(0, 0, 0, 0.72);
-  }
-
-  .hero-subcopy::before {
-    content: "";
-    display: block;
-    width: 44px;
-    height: 1px;
-    margin-bottom: 13px;
-    background: var(--gold-bright);
   }
 
   .hero-subcopy strong {
     display: inline-block;
-    margin-top: 7px;
+    margin-top: 6px;
     color: var(--lacquer);
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     letter-spacing: 0.2em;
   }
 
   .hero-cta {
     position: absolute;
-    top: 612px;
+    top: 548px;
     left: 0;
     display: grid;
     grid-template-columns: 1fr 44px;
     align-items: center;
     width: calc(100vw - 36px);
-    min-height: 60px;
+    min-height: 58px;
     margin: 0;
     padding: 0 8px 0 20px;
     border: 1px solid rgba(216, 161, 58, 0.88);
-    background: rgba(7, 7, 7, 0.72);
+    background: rgba(7, 7, 7, 0.74);
     color: var(--ivory);
     font-size: 0.7rem;
     letter-spacing: 0.14em;
@@ -194,16 +207,16 @@
 
   .hero-copy .stats-strip {
     position: absolute;
-    top: 696px;
+    top: 628px;
     left: 0;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     width: calc(100vw - 36px);
     margin: 0;
-    padding: 16px 0 14px;
+    padding: 15px 0 13px;
     border-top: 1px solid rgba(216, 161, 58, 0.52);
     border-bottom: 1px solid rgba(216, 161, 58, 0.2);
-    background: rgba(5, 5, 5, 0.68);
+    background: rgba(5, 5, 5, 0.7);
     backdrop-filter: blur(10px);
   }
 
@@ -217,7 +230,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto auto;
     align-content: center;
-    min-height: 64px;
+    min-height: 62px;
     margin: 0;
     padding: 0 7px;
     text-align: center;
@@ -227,7 +240,7 @@
     display: block;
     top: 6px;
     right: 0;
-    height: 52px;
+    height: 50px;
     background: linear-gradient(180deg, transparent, rgba(216, 161, 58, 0.38), transparent);
   }
 
@@ -239,7 +252,7 @@
     grid-column: 1;
     grid-row: 1;
     color: var(--gold-bright);
-    font-size: 1.55rem;
+    font-size: 1.48rem;
     line-height: 1;
   }
 
@@ -269,8 +282,8 @@
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: center;
-    min-height: 100px;
-    padding: 16px 10px;
+    min-height: 82px;
+    padding: 12px 10px;
     font-family: var(--font-ui);
     text-align: center;
     text-transform: uppercase;
@@ -281,9 +294,9 @@
     position: relative;
     display: grid;
     place-items: center;
-    min-height: 54px;
+    min-height: 46px;
     padding: 0 6px;
-    font-size: 0.56rem;
+    font-size: 0.54rem;
     letter-spacing: 0.08em;
   }
 
@@ -291,17 +304,17 @@
   .hero-values__inner strong::after {
     content: "";
     position: absolute;
-    top: 10px;
+    top: 8px;
     right: 0;
     width: 1px;
-    height: 34px;
+    height: 30px;
     background: linear-gradient(180deg, transparent, rgba(216, 161, 58, 0.3), transparent);
   }
 
   .hero-values__inner strong {
     color: var(--lacquer);
     font-family: var(--font-display);
-    font-size: 0.98rem;
+    font-size: 0.94rem;
     font-style: italic;
     letter-spacing: 0.01em;
   }
@@ -309,29 +322,33 @@
 
 @media (max-width: 390px) {
   .hero {
-    min-height: 820px;
-    background-size: auto 56%;
-    background-position: 44% 28%;
+    min-height: 740px;
+    background-size: auto 60%;
+    background-position: 44% 30%;
   }
 
   .brand-mark {
-    width: 116px;
+    width: 114px;
   }
 
   .brand-mark img {
-    width: 108px;
+    width: 106px;
+  }
+
+  .hero-kicker {
+    top: 408px;
   }
 
   .hero-subcopy {
-    top: 492px;
-    font-size: 1.38rem;
+    top: 440px;
+    font-size: 1.28rem;
   }
 
   .hero-cta {
-    top: 590px;
+    top: 528px;
   }
 
   .hero-copy .stats-strip {
-    top: 674px;
+    top: 606px;
   }
 }

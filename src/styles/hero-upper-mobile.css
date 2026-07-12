@@ -2,67 +2,43 @@
   .hero-upper-signature {
     position: absolute;
     z-index: 3;
-    top: 122px;
+    top: 94px;
     left: 18px;
-    display: grid;
-    gap: 8px;
-    width: min(72vw, 330px);
+    display: block;
+    width: auto;
     padding-left: 14px;
     color: var(--ivory);
     font-family: var(--font-ui);
     text-transform: uppercase;
-    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.72);
+    text-shadow: 0 8px 22px rgba(0, 0, 0, 0.78);
   }
 
   .hero-upper-signature::before {
     content: "";
     position: absolute;
     top: 2px;
-    bottom: 8px;
+    bottom: 2px;
     left: 0;
-    width: 1px;
-    background: linear-gradient(180deg, rgba(216, 161, 58, 0.95), rgba(216, 161, 58, 0.18));
+    width: 2px;
+    background: linear-gradient(180deg, rgba(216, 161, 58, 0.98), rgba(216, 161, 58, 0.28));
   }
 
   .hero-upper-signature__eyebrow {
-    position: relative;
-    z-index: 2;
+    display: inline-block;
     color: var(--lacquer);
-    font-size: 0.66rem;
+    font-size: clamp(1.5rem, 7vw, 2.25rem);
     font-weight: 900;
-    letter-spacing: 0.2em;
-  }
-
-  .hero-upper-signature__eagle {
-    width: min(68vw, 328px);
-    max-width: none;
-    height: 192px;
-    margin: -6px 0 0 -18px;
-    object-fit: contain;
-    object-position: left center;
-    opacity: 0.28;
-    mix-blend-mode: screen;
-    filter: grayscale(0.16) contrast(1.08) brightness(0.74) drop-shadow(0 16px 28px rgba(0, 0, 0, 0.52));
-    -webkit-mask-image:
-      linear-gradient(90deg, transparent 0%, #000 8%, #000 72%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
-    -webkit-mask-composite: source-in;
-    mask-image:
-      linear-gradient(90deg, transparent 0%, #000 8%, #000 72%, transparent 100%),
-      linear-gradient(180deg, transparent 0%, #000 12%, #000 82%, transparent 100%);
-    mask-composite: intersect;
+    line-height: 0.95;
+    letter-spacing: 0.08em;
   }
 }
 
 @media (max-width: 390px) {
   .hero-upper-signature {
-    top: 116px;
-    width: min(76vw, 296px);
+    top: 88px;
   }
 
-  .hero-upper-signature__eagle {
-    width: min(72vw, 292px);
-    height: 176px;
-    margin-left: -20px;
+  .hero-upper-signature__eyebrow {
+    font-size: clamp(1.4rem, 7.4vw, 2rem);
   }
 }

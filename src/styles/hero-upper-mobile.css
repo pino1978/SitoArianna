@@ -1,6 +1,18 @@
 @media (max-width: 640px) {
   .hero {
-    background-position: 46% 20%;
+    background-position: 46% 14%;
+  }
+
+  .hero-subcopy {
+    top: 470px;
+  }
+
+  .hero-cta {
+    top: 572px;
+  }
+
+  .hero-copy .stats-strip {
+    top: 656px;
   }
 
   .hero-upper-signature {
@@ -39,7 +51,19 @@
 
 @media (max-width: 390px) {
   .hero {
-    background-position: 44% 18%;
+    background-position: 44% 12%;
+  }
+
+  .hero-subcopy {
+    top: 452px;
+  }
+
+  .hero-cta {
+    top: 550px;
+  }
+
+  .hero-copy .stats-strip {
+    top: 634px;
   }
 
   .hero-upper-signature {

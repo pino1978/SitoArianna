@@ -3,6 +3,22 @@
     background-position: 46% 14%;
   }
 
+  .primary-nav {
+    right: 0;
+    width: min(190px, calc(100vw - 92px));
+    padding: 12px 18px;
+  }
+
+  .primary-nav[data-open] {
+    gap: 8px;
+  }
+
+  .primary-nav a {
+    padding: 5px 0;
+    font-size: 0.62rem;
+    letter-spacing: 0.13em;
+  }
+
   .hero-subcopy {
     top: 440px;
   }
@@ -84,6 +100,11 @@
 @media (max-width: 390px) {
   .hero {
     background-position: 44% 12%;
+  }
+
+  .primary-nav {
+    width: min(176px, calc(100vw - 82px));
+    padding: 10px 16px;
   }
 
   .hero-subcopy {

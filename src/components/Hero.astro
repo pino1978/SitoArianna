@@ -3,7 +3,6 @@ import Header from "./Header.astro";
 import StatsStrip from "./StatsStrip.astro";
 import results from "../data/results.json";
 import heroImage from "../assets/images/hero-ary14.png";
-import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
@@ -15,12 +14,20 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
   <Header />
 
   <div class="hero-copy">
-    <h1 id="hero-title" class="sr-only">Disciplina. Coraggio. Liberta. Crescita.</h1>
-    <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
+    <h1 id="hero-title" class="sr-only">Arianna Milano, atleta di Sanda</h1>
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
     <a class="hero-cta" href="#profilo">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></a>
     <StatsStrip stats={results.heroStats} />
   </div>
 
   <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />
+</section>
+
+<section class="hero-values" aria-label="I valori di Arianna">
+  <div class="hero-values__inner">
+    <span>Disciplina</span>
+    <span>Coraggio</span>
+    <strong>Libertà</strong>
+    <span>Crescita</span>
+  </div>
 </section>

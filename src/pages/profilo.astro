@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import profile from "../data/profile.json";
+import portrait from "../assets/images/profile-portrait-placeholder.png";
+---
+<BaseLayout title="Profilo atleta | Arianna Milano" description="Profilo sportivo, percorso, valori e obiettivi di Arianna Milano, giovane atleta agonista di Sanda.">
+  <main id="main" class="internal-page">
+    <section class="page-hero">
+      <Header />
+      <div>
+        <p class="eyebrow">Profilo atleta</p>
+        <h1>Arianna Milano</h1>
+        <p>Disciplina, determinazione e crescita continua nel Sanda agonistico.</p>
+      </div>
+    </section>
+
+    <section class="profile-intro">
+      <img src={portrait.src} alt="Segnaposto per il ritratto professionale di Arianna" width={portrait.width} height={portrait.height} />
+      <div>
+        <p class="eyebrow">Chi sono</p>
+        <h2>Un percorso costruito con costanza.</h2>
+        <p>{profile.summary}</p>
+        <dl>
+          <div><dt>Disciplina</dt><dd>{profile.discipline}</dd></div>
+          <div><dt>Società</dt><dd>{profile.club}</dd></div>
+          <div><dt>Maestro</dt><dd>{profile.coach}</dd></div>
+          <div><dt>Categoria</dt><dd>{profile.category}</dd></div>
+          <div><dt>Inizio attività</dt><dd>{profile.startedIn}</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <article><p class="eyebrow">Valori sportivi</p><h2>Carattere e atteggiamento</h2><div class="traits">{profile.traits.map((trait) => <span>{trait}</span>)}</div></article>
+      <article><p class="eyebrow">Perché il Sanda</p><h2>Tecnica, controllo, coraggio.</h2><p>{profile.origin}</p><p>Il Sanda rappresenta per Arianna un percorso di crescita completo: preparazione fisica, lettura dell’avversario, concentrazione, rispetto e capacità di gestire la gara.</p></article>
+      <article><p class="eyebrow">Allenamenti</p><h2>Continuità prima del risultato.</h2><p>Si allena tre giorni alla settimana, per circa un’ora e mezza a sessione. In prossimità delle competizioni il lavoro viene intensificato sotto la guida del maestro Eduardo Mazzara.</p></article>
+      <article><p class="eyebrow">Obiettivi</p><h2>Il prossimo passo.</h2><p>L’obiettivo sportivo attuale è continuare a crescere tecnicamente e affrontare i Campionati Italiani FIWUK di novembre 2026 con preparazione, equilibrio e determinazione.</p></article>
+    </section>
+
+    <section class="timeline">
+      <p class="eyebrow">Timeline sportiva</p><h2>Una crescita progressiva</h2>
+      <ol>
+        <li><strong>2022</strong><span>Inizio del percorso nel Kung Fu sportivo e nel Sanda.</span></li>
+        <li><strong>2023–2025</strong><span>Allenamenti continui, prime esperienze agonistiche e crescita tecnica.</span></li>
+        <li><strong>2026</strong><span>Quattro vittorie al C.K.A. World Open di Perugia e due vittorie alla ChampionCup di Sora.</span></li>
+        <li><strong>Novembre 2026</strong><span>Obiettivo: Campionati Italiani FIWUK.</span></li>
+      </ol>
+    </section>
+  </main>
+  <style>
+    .internal-page{background:#080706;color:#f5f0e7}.page-hero{min-height:440px;padding:150px max(28px,calc((100vw - 1160px)/2)) 70px;background:radial-gradient(circle at 80% 20%,rgba(185,134,50,.18),transparent 28%),linear-gradient(135deg,#080706,#15120e);position:relative}.page-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}.page-hero h1,.profile-intro h2,.content-grid h2,.timeline h2{font-family:var(--font-display);text-transform:uppercase;line-height:.95;margin:.2em 0}.page-hero h1{font-size:clamp(3rem,8vw,7rem)}.page-hero>div>p:last-child{max-width:620px;font-size:1.15rem}.eyebrow{color:var(--gold-bright);font-family:var(--font-ui);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.profile-intro{display:grid;grid-template-columns:minmax(280px,.85fr) 1.15fr;gap:clamp(36px,7vw,100px);padding:90px max(28px,calc((100vw - 1160px)/2));background:var(--ivory);color:var(--ink)}.profile-intro img{width:100%;height:100%;max-height:650px;object-fit:cover}.profile-intro h2,.content-grid h2,.timeline h2{font-size:clamp(2rem,4vw,4rem)}.profile-intro p{line-height:1.75}.profile-intro dl{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(8,7,6,.18);margin-top:30px}.profile-intro dl div{background:var(--ivory);padding:18px}.profile-intro dt{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#6d5b3c}.profile-intro dd{margin:7px 0 0;font-weight:800}.content-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(185,134,50,.25);padding:1px}.content-grid article{padding:clamp(42px,6vw,86px);background:#0d0c0b}.content-grid p{line-height:1.75;color:#d7d0c5}.traits{display:flex;flex-wrap:wrap;gap:10px}.traits span{border:1px solid rgba(185,134,50,.5);padding:10px 14px;text-transform:capitalize}.timeline{padding:90px max(28px,calc((100vw - 1160px)/2));background:var(--ivory);color:var(--ink)}.timeline ol{list-style:none;padding:0;margin:45px 0 0;border-top:1px solid rgba(8,7,6,.25)}.timeline li{display:grid;grid-template-columns:180px 1fr;gap:30px;padding:26px 0;border-bottom:1px solid rgba(8,7,6,.18)}.timeline strong{color:#8b641f;font-size:1.2rem}@media(max-width:760px){.page-hero{min-height:380px;padding-top:135px}.profile-intro,.content-grid{grid-template-columns:1fr}.profile-intro dl{grid-template-columns:1fr}.timeline li{grid-template-columns:1fr;gap:8px}}
+  </style>
+</BaseLayout>

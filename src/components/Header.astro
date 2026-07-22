@@ -32,6 +32,7 @@ const isActive = (href) => {
           {item.label === "Risultati" && <svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM9 20h6M12 13v7M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4" /></svg>}
           {item.label === "Media" && <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10" r="2" /><path d="m5 17 4-4 3 3 2-2 5 3" /></svg>}
           {item.label === "Contatti" && <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>}
+          {item.label === "Scopri il secondo regalo" && <svg viewBox="0 0 24 24"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13" /><path d="M12 7H8.5a2.5 2.5 0 1 1 2.5-2.5V7Zm0 0h3.5A2.5 2.5 0 1 0 13 4.5V7Z" /></svg>}
         </span>
         <span class="nav-label">{item.label}</span>
       </a>
@@ -40,8 +41,10 @@ const isActive = (href) => {
     <div class="mobile-nav-footer" aria-hidden="true">
       <div class="mobile-nav-footer__line"></div>
       <img src={yingHeaderMark.src} alt="" width={yingHeaderMark.width} height={yingHeaderMark.height} />
-      <p class="mobile-nav-footer__signature">Yīng <span>·</span> 鹰</p>
-      <small>Arianna Milano</small>
+      <p class="mobile-nav-footer__signature">
+        <span class="mobile-nav-footer__name">Yīng</span>
+        <span class="mobile-nav-footer__ideogram">鹰</span>
+      </p>
     </div>
   </nav>
 
@@ -88,6 +91,8 @@ const isActive = (href) => {
     }
 
     .primary-nav {
+      position: fixed !important;
+      z-index: 21 !important;
       top: 0 !important;
       right: 0 !important;
       bottom: 0 !important;
@@ -103,6 +108,13 @@ const isActive = (href) => {
       gap: 0 !important;
       overflow-y: auto;
       border-radius: 12px 0 0 12px;
+      pointer-events: auto !important;
+      isolation: isolate;
+    }
+
+    .primary-nav::before,
+    .primary-nav::after {
+      pointer-events: none !important;
     }
 
     .primary-nav::before {
@@ -115,6 +127,8 @@ const isActive = (href) => {
     }
 
     .primary-nav a {
+      position: relative;
+      z-index: 2;
       flex: 0 0 auto !important;
       grid-template-columns: 28px 1fr !important;
       column-gap: 10px !important;
@@ -124,6 +138,13 @@ const isActive = (href) => {
       padding: 0 0 0 2px !important;
       font-size: 0.7rem !important;
       letter-spacing: 0.11em !important;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+    }
+
+    .primary-nav .nav-icon,
+    .primary-nav .nav-label {
+      pointer-events: none;
     }
 
     .primary-nav .nav-icon {
@@ -138,6 +159,7 @@ const isActive = (href) => {
 
     .primary-nav a::after {
       left: 38px;
+      pointer-events: none;
     }
 
     .primary-nav a:first-child {
@@ -164,8 +186,10 @@ const isActive = (href) => {
       flex-direction: column;
       align-items: flex-start;
       position: relative;
+      z-index: 1;
       min-height: 118px;
       overflow: hidden;
+      pointer-events: none;
     }
 
     .mobile-nav-footer__line {
@@ -186,34 +210,39 @@ const isActive = (href) => {
       pointer-events: none;
     }
 
-    .mobile-nav-footer__signature,
-    .mobile-nav-footer small {
+    .mobile-nav-footer__signature {
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
       margin: 0;
+      line-height: 1;
+      transform: translateY(8px);
+      opacity: 0;
+      transition: transform 360ms ease 120ms, opacity 360ms ease 120ms;
     }
 
-    .mobile-nav-footer__signature {
-      color: rgba(247, 240, 228, 0.88);
+    body.menu-open .mobile-nav-footer__signature {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav-footer__name {
+      color: #8f2028;
       font-family: var(--font-display, serif);
-      font-size: 1rem;
-      line-height: 1.2;
-      letter-spacing: 0.08em;
+      font-size: 1.42rem;
+      line-height: 1;
+      letter-spacing: 0.06em;
       text-transform: none;
     }
 
-    .mobile-nav-footer__signature span {
-      color: rgba(196, 157, 93, 0.82);
-      padding: 0 0.12em;
-    }
-
-    .mobile-nav-footer small {
-      margin-top: 7px;
-      color: rgba(247, 240, 228, 0.42);
-      font-size: 0.54rem;
-      line-height: 1.4;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
+    .mobile-nav-footer__ideogram {
+      margin-top: 5px;
+      color: rgba(143, 32, 40, 0.72);
+      font-family: var(--font-display, serif);
+      font-size: 1.05rem;
+      line-height: 1;
     }
   }
 
@@ -232,6 +261,16 @@ const isActive = (href) => {
     .mobile-nav-footer {
       min-height: 104px;
       padding-top: 16px;
+    }
+
+    .mobile-nav-footer__name {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav-footer__signature {
+      transition: none !important;
     }
   }
 </style>

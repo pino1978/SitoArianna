@@ -233,47 +233,48 @@ const isActive = (href) => {
   const backdrop = document.querySelector("[data-menu-backdrop]");
   let scrollPosition = 0;
 
-  const setMenuState = (open) => {
-    toggle?.setAttribute("aria-expanded", String(open));
-    nav?.toggleAttribute("data-open", open);
+  const openMenu = () => {
+    scrollPosition = window.scrollY;
+    toggle?.setAttribute("aria-expanded", "true");
+    nav?.setAttribute("data-open", "");
+    document.body.style.top = `-${scrollPosition}px`;
+    document.body.classList.add("menu-open");
+  };
 
-    if (open) {
-      scrollPosition = window.scrollY;
-      document.body.style.top = `-${scrollPosition}px`;
-      document.body.classList.add("menu-open");
-    } else {
-      document.body.classList.remove("menu-open");
-      document.body.style.top = "";
+  const closeMenu = ({ restoreScroll = true } = {}) => {
+    toggle?.setAttribute("aria-expanded", "false");
+    nav?.removeAttribute("data-open");
+    document.body.classList.remove("menu-open");
+    document.body.style.top = "";
+
+    if (restoreScroll) {
       window.scrollTo(0, scrollPosition);
     }
   };
 
   toggle?.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    setMenuState(!isOpen);
+    isOpen ? closeMenu() : openMenu();
   });
 
-  backdrop?.addEventListener("click", () => setMenuState(false));
+  backdrop?.addEventListener("click", () => closeMenu());
 
   nav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const destination = link.href;
-      setMenuState(false);
-      window.setTimeout(() => window.location.assign(destination), 0);
+    link.addEventListener("click", () => {
+      closeMenu({ restoreScroll: false });
     });
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
-      setMenuState(false);
+      closeMenu();
       toggle.focus();
     }
   });
 
   window.addEventListener("resize", () => {
     if (window.innerWidth > 640 && toggle?.getAttribute("aria-expanded") === "true") {
-      setMenuState(false);
+      closeMenu();
     }
   });
 </script>

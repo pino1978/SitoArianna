@@ -43,6 +43,7 @@ const isActive = (href) => {
       <img src={yingHeaderMark.src} alt="" width={yingHeaderMark.width} height={yingHeaderMark.height} />
       <p class="mobile-nav-footer__signature">
         <span class="mobile-nav-footer__name">Yīng</span>
+        <span class="mobile-nav-footer__separator">·</span>
         <span class="mobile-nav-footer__ideogram">鹰</span>
       </p>
     </div>
@@ -71,12 +72,7 @@ const isActive = (href) => {
       z-index: 19;
       inset: 0;
       display: block;
-      background:
-        linear-gradient(90deg,
-          rgba(0, 0, 0, 0.03) 0%,
-          rgba(26, 18, 10, 0.08) 38%,
-          rgba(64, 42, 18, 0.18) 68%,
-          rgba(8, 7, 6, 0.34) 100%);
+      background: linear-gradient(90deg, rgba(0,0,0,.03) 0%, rgba(26,18,10,.08) 38%, rgba(64,42,18,.18) 68%, rgba(8,7,6,.34) 100%);
       opacity: 0;
       visibility: hidden;
       pointer-events: none;
@@ -104,7 +100,6 @@ const isActive = (href) => {
       display: flex !important;
       flex-direction: column !important;
       justify-content: flex-start !important;
-      align-content: stretch !important;
       gap: 0 !important;
       overflow-y: auto;
       border-radius: 12px 0 0 12px;
@@ -113,24 +108,17 @@ const isActive = (href) => {
     }
 
     .primary-nav::before,
-    .primary-nav::after {
-      pointer-events: none !important;
-    }
-
-    .primary-nav::before {
-      top: 20%;
-      height: 42px;
-    }
-
-    .primary-nav::after {
-      display: none;
-    }
+    .primary-nav::after { pointer-events: none !important; }
+    .primary-nav::before { top: 20%; height: 42px; }
+    .primary-nav::after { display: none; }
 
     .primary-nav a {
       position: relative;
-      z-index: 2;
+      z-index: 3;
+      display: grid !important;
       flex: 0 0 auto !important;
-      grid-template-columns: 28px 1fr !important;
+      grid-template-columns: 28px minmax(0, 1fr) !important;
+      align-items: center !important;
       column-gap: 10px !important;
       min-height: 50px !important;
       height: 50px !important;
@@ -140,44 +128,18 @@ const isActive = (href) => {
       letter-spacing: 0.11em !important;
       pointer-events: auto !important;
       touch-action: manipulation;
+      cursor: pointer;
     }
 
     .primary-nav .nav-icon,
-    .primary-nav .nav-label {
-      pointer-events: none;
-    }
-
-    .primary-nav .nav-icon {
-      width: 24px !important;
-      height: 24px !important;
-    }
-
-    .primary-nav .nav-icon svg {
-      width: 21px !important;
-      height: 21px !important;
-    }
-
-    .primary-nav a::after {
-      left: 38px;
-      pointer-events: none;
-    }
-
-    .primary-nav a:first-child {
-      color: rgba(247, 240, 228, 0.92);
-    }
-
-    .primary-nav a:first-child::after {
-      transform: scaleX(0);
-    }
-
-    .primary-nav a.is-active {
-      color: var(--gold-bright);
-    }
-
-    .primary-nav a.is-active::after {
-      display: block;
-      transform: scaleX(1);
-    }
+    .primary-nav .nav-label { pointer-events: none; }
+    .primary-nav .nav-icon { width: 24px !important; height: 24px !important; }
+    .primary-nav .nav-icon svg { width: 21px !important; height: 21px !important; }
+    .primary-nav a::after { left: 38px; pointer-events: none; }
+    .primary-nav a:first-child { color: rgba(247,240,228,.92); }
+    .primary-nav a:first-child::after { transform: scaleX(0); }
+    .primary-nav a.is-active { color: var(--gold-bright); }
+    .primary-nav a.is-active::after { display: block; transform: scaleX(1); }
 
     .mobile-nav-footer {
       display: flex;
@@ -196,7 +158,7 @@ const isActive = (href) => {
       width: 42px;
       height: 1px;
       margin-bottom: 14px;
-      background: linear-gradient(90deg, rgba(196, 157, 93, 0.9), rgba(196, 157, 93, 0));
+      background: linear-gradient(90deg, rgba(196,157,93,.9), rgba(196,157,93,0));
     }
 
     .mobile-nav-footer img {
@@ -205,73 +167,62 @@ const isActive = (href) => {
       bottom: -24px;
       width: 112px;
       height: auto;
-      opacity: 0.075;
-      filter: saturate(0.75);
+      opacity: .075;
+      filter: saturate(.75);
       pointer-events: none;
     }
 
     .mobile-nav-footer__signature {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: baseline;
+      gap: .22em;
+      width: max-content;
       margin: 0;
+      white-space: nowrap;
       line-height: 1;
       transform: translateY(8px);
       opacity: 0;
       transition: transform 360ms ease 120ms, opacity 360ms ease 120ms;
     }
 
-    body.menu-open .mobile-nav-footer__signature {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    body.menu-open .mobile-nav-footer__signature { transform: translateY(0); opacity: 1; }
 
     .mobile-nav-footer__name {
       color: #8f2028;
       font-family: var(--font-display, serif);
       font-size: 1.42rem;
       line-height: 1;
-      letter-spacing: 0.06em;
+      letter-spacing: .06em;
       text-transform: none;
     }
 
-    .mobile-nav-footer__ideogram {
-      margin-top: 5px;
-      color: rgba(143, 32, 40, 0.72);
-      font-family: var(--font-display, serif);
+    .mobile-nav-footer__separator {
+      color: rgba(143,32,40,.72);
       font-size: 1.05rem;
+    }
+
+    .mobile-nav-footer__ideogram {
+      margin: 0;
+      color: rgba(143,32,40,.78);
+      font-family: var(--font-display, serif);
+      font-size: 1.14rem;
       line-height: 1;
     }
   }
 
   @media (max-width: 390px) {
-    .primary-nav {
-      width: min(58vw, 210px) !important;
-      padding: 72px 16px max(14px, env(safe-area-inset-bottom)) !important;
-    }
-
-    .primary-nav a {
-      min-height: 48px !important;
-      height: 48px !important;
-      font-size: 0.68rem !important;
-    }
-
-    .mobile-nav-footer {
-      min-height: 104px;
-      padding-top: 16px;
-    }
-
-    .mobile-nav-footer__name {
-      font-size: 1.3rem;
-    }
+    .primary-nav { width: min(58vw, 210px) !important; padding: 72px 16px max(14px, env(safe-area-inset-bottom)) !important; }
+    .primary-nav a { min-height: 48px !important; height: 48px !important; font-size: .68rem !important; }
+    .mobile-nav-footer { min-height: 104px; padding-top: 16px; }
+    .mobile-nav-footer__name { font-size: 1.3rem; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .mobile-nav-footer__signature {
-      transition: none !important;
-    }
+    .mobile-nav-footer__signature { transition: none !important; }
   }
 </style>
 
@@ -305,7 +256,12 @@ const isActive = (href) => {
   backdrop?.addEventListener("click", () => setMenuState(false));
 
   nav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenuState(false));
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      const destination = link.href;
+      setMenuState(false);
+      window.setTimeout(() => window.location.assign(destination), 0);
+    });
   });
 
   document.addEventListener("keydown", (event) => {

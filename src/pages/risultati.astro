@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+---
+<BaseLayout title="Risultati agonistici | Arianna Milano" description="Risultati, competizioni e obiettivi agonistici di Arianna Milano nel Sanda.">
+  <main id="main" class="results-page">
+    <section class="page-hero"><Header /><div><p class="eyebrow">Risultati agonistici</p><h1>Competizioni</h1><p>Un archivio chiaro del percorso sportivo, aggiornato con dati verificati.</p></div></section>
+    <section class="medal-summary">
+      <div><strong>6</strong><span>incontri confermati nel 2026</span></div>
+      <div><strong>6</strong><span>vittorie confermate</span></div>
+      <div><strong>2</strong><span>competizioni documentate</span></div>
+    </section>
+    <section class="results-content">
+      <div class="section-heading"><p class="eyebrow">Archivio gare</p><h2>Risultati principali</h2><p>I dettagli non ancora disponibili restano volutamente esclusi fino alla verifica ufficiale.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Anno</th><th>Competizione</th><th>Luogo</th><th>Categoria</th><th>Esito</th><th>Note</th></tr></thead><tbody><tr><td>2026</td><td>C.K.A. World Open</td><td>Perugia</td><td>-40 kg</td><td><strong>4 vittorie su 4</strong></td><td>Partecipazione internazionale</td></tr><tr><td>2026</td><td>ChampionCup</td><td>Sora</td><td>-40 kg</td><td><strong>2 vittorie su 2</strong></td><td>Competizione nazionale</td></tr></tbody></table></div>
+    </section>
+    <section class="result-timeline"><p class="eyebrow">Percorso</p><h2>Timeline agonistica</h2><div class="timeline-card"><span>2022</span><p>Inizio dell’attività sportiva nel Sanda.</p></div><div class="timeline-card"><span>2023–2025</span><p>Prime esperienze di gara e consolidamento tecnico.</p></div><div class="timeline-card"><span>2026</span><p>Sei incontri confermati e sei vittorie tra Perugia e Sora.</p></div><div class="timeline-card future"><span>Novembre 2026</span><p>Obiettivo: Campionati Italiani FIWUK.</p></div></section>
+  </main>
+  <style>
+    .results-page{background:#080706;color:#f5f0e7}.page-hero{min-height:430px;padding:150px max(28px,calc((100vw - 1160px)/2)) 70px;background:radial-gradient(circle at 78% 20%,rgba(139,20,18,.2),transparent 30%),linear-gradient(135deg,#080706,#16110d);position:relative}.page-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}h1,h2{font-family:var(--font-display);text-transform:uppercase;line-height:.95;margin:.2em 0}.page-hero h1{font-size:clamp(3rem,8vw,7rem)}.page-hero>div>p:last-child{max-width:620px;font-size:1.15rem}.eyebrow{color:var(--gold-bright);font-family:var(--font-ui);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.medal-summary{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(185,134,50,.35);border-bottom:1px solid rgba(185,134,50,.35)}.medal-summary div{padding:34px;text-align:center;border-right:1px solid rgba(185,134,50,.25)}.medal-summary div:last-child{border-right:0}.medal-summary strong{display:block;color:var(--gold-bright);font-size:3rem}.medal-summary span{text-transform:uppercase;font-size:.72rem;letter-spacing:.1em}.results-content,.result-timeline{padding:90px max(28px,calc((100vw - 1160px)/2))}.results-content{background:var(--ivory);color:var(--ink)}.section-heading{max-width:700px;margin-bottom:38px}.section-heading h2,.result-timeline h2{font-size:clamp(2.2rem,5vw,4.8rem)}.section-heading>p:last-child{line-height:1.7}.table-wrap{overflow-x:auto;border:1px solid rgba(8,7,6,.18)}table{width:100%;border-collapse:collapse;min-width:820px}th,td{padding:20px;text-align:left;border-bottom:1px solid rgba(8,7,6,.14)}th{font-size:.68rem;text-transform:uppercase;letter-spacing:.12em;color:#725424;background:#eee6da}td strong{color:#7a5517}.result-timeline{background:#0d0c0b}.timeline-card{display:grid;grid-template-columns:190px 1fr;gap:30px;padding:27px 0;border-top:1px solid rgba(185,134,50,.28)}.timeline-card span{color:var(--gold-bright);font-weight:800}.timeline-card p{margin:0;color:#d8d0c4}.timeline-card.future{border-bottom:1px solid rgba(185,134,50,.28)}@media(max-width:700px){.medal-summary{grid-template-columns:1fr}.medal-summary div{border-right:0;border-bottom:1px solid rgba(185,134,50,.25)}.timeline-card{grid-template-columns:1fr;gap:8px}}
+  </style>
+</BaseLayout>

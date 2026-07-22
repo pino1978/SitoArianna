@@ -40,8 +40,8 @@ const isActive = (href) => {
     <div class="mobile-nav-footer" aria-hidden="true">
       <div class="mobile-nav-footer__line"></div>
       <img src={yingHeaderMark.src} alt="" width={yingHeaderMark.width} height={yingHeaderMark.height} />
-      <p>Arianna Milano</p>
-      <span>Official Athlete Portfolio</span>
+      <p class="mobile-nav-footer__signature">Yīng <span>·</span> 鹰</p>
+      <small>Arianna Milano</small>
     </div>
   </nav>
 
@@ -186,28 +186,33 @@ const isActive = (href) => {
       pointer-events: none;
     }
 
-    .mobile-nav-footer p,
-    .mobile-nav-footer span {
+    .mobile-nav-footer__signature,
+    .mobile-nav-footer small {
       position: relative;
       z-index: 1;
       margin: 0;
     }
 
-    .mobile-nav-footer p {
-      color: rgba(247, 240, 228, 0.76);
-      font-size: 0.68rem;
-      line-height: 1.3;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+    .mobile-nav-footer__signature {
+      color: rgba(247, 240, 228, 0.88);
+      font-family: var(--font-display, serif);
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: 0.08em;
+      text-transform: none;
     }
 
-    .mobile-nav-footer span {
-      margin-top: 5px;
-      max-width: 150px;
-      color: rgba(247, 240, 228, 0.38);
-      font-size: 0.56rem;
-      line-height: 1.45;
-      letter-spacing: 0.1em;
+    .mobile-nav-footer__signature span {
+      color: rgba(196, 157, 93, 0.82);
+      padding: 0 0.12em;
+    }
+
+    .mobile-nav-footer small {
+      margin-top: 7px;
+      color: rgba(247, 240, 228, 0.42);
+      font-size: 0.54rem;
+      line-height: 1.4;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
     }
   }

@@ -41,13 +41,13 @@ const highlights = [
   },
 ];
 ---
-<section class="highlights-strip" aria-labelledby="highlights-title">
+<section class="highlights-strip" id="highlights" aria-labelledby="highlights-title">
   <div class="section-head compact">
     <div>
       <p>Highlights</p>
       <h2 id="highlights-title">I momenti che contano</h2>
     </div>
-    <a href="#media">Vai a tutti i video <span aria-hidden="true">→</span></a>
+    <a href="/media">Vai a tutti i video <span aria-hidden="true">→</span></a>
   </div>
 
   <div class="highlight-rail" aria-label="Video in evidenza">
@@ -55,7 +55,7 @@ const highlights = [
       const image = imageFor(item.image.image);
       return (
         <article class="highlight-card">
-          <a href="#media" aria-label={`Apri il video ${item.title}`}>
+          <a href="/media" aria-label={`Apri il video ${item.title}`}>
             <img src={image.src} alt={item.image.alt} loading="lazy" width={image.width} height={image.height} />
             <span class="play-badge" aria-hidden="true"></span>
             <time>{item.duration}</time>

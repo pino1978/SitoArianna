@@ -51,13 +51,8 @@ const isActive = (href) => {
 <div class="menu-backdrop" data-menu-backdrop aria-hidden="true"></div>
 
 <style is:global>
-  .nav-icon {
-    display: none;
-  }
-
-  .menu-backdrop {
-    display: none;
-  }
+  .nav-icon { display: none; }
+  .menu-backdrop { display: none; }
 
   @media (max-width: 640px) {
     .menu-backdrop {
@@ -80,8 +75,19 @@ const isActive = (href) => {
     }
 
     .primary-nav {
-      width: min(52vw, 210px);
-      padding: 78px 16px 20px;
+      top: 0 !important;
+      right: 0 !important;
+      bottom: auto !important;
+      width: min(54vw, 228px) !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: 100svh !important;
+      padding: 78px 18px 16px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-content: stretch !important;
+      gap: 0 !important;
       border-radius: 12px 0 0 12px;
     }
 
@@ -91,31 +97,33 @@ const isActive = (href) => {
     }
 
     .primary-nav::after {
-      right: 16px;
-      bottom: 18px;
-      left: 16px;
+      display: none;
     }
 
     .primary-nav a {
-      grid-template-columns: 24px 1fr;
-      column-gap: 8px;
-      min-height: 44px;
-      font-size: 0.62rem;
-      letter-spacing: 0.09em;
+      flex: 0 0 auto !important;
+      grid-template-columns: 28px 1fr !important;
+      column-gap: 10px !important;
+      min-height: 50px !important;
+      height: 50px !important;
+      margin: 0 !important;
+      padding: 0 0 0 2px !important;
+      font-size: 0.7rem !important;
+      letter-spacing: 0.11em !important;
     }
 
     .primary-nav .nav-icon {
-      width: 20px;
-      height: 20px;
+      width: 24px !important;
+      height: 24px !important;
     }
 
     .primary-nav .nav-icon svg {
-      width: 18px;
-      height: 18px;
+      width: 21px !important;
+      height: 21px !important;
     }
 
     .primary-nav a::after {
-      left: 31px;
+      left: 38px;
     }
 
     .primary-nav a:first-child {
@@ -138,14 +146,14 @@ const isActive = (href) => {
 
   @media (max-width: 390px) {
     .primary-nav {
-      width: min(55vw, 196px);
-      padding: 72px 14px 18px;
+      width: min(58vw, 210px) !important;
+      padding: 72px 16px 14px !important;
     }
 
     .primary-nav a {
-      grid-template-columns: 22px 1fr;
-      min-height: 41px;
-      font-size: 0.59rem;
+      min-height: 48px !important;
+      height: 48px !important;
+      font-size: 0.68rem !important;
     }
   }
 </style>

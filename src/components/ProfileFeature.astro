@@ -1,34 +1,267 @@
 ---
 import profile from "../data/profile.json";
 import profileImage from "../assets/images/profile-placeholder.png";
+import yingImage from "../assets/images/ying-placeholder.png";
 import signature from "../assets/svg/signature-ying.svg";
-import ideogram from "../assets/svg/ideogram-ying.svg";
 ---
-<section class="profile-feature" id="profilo" aria-labelledby="profile-title">
-  <article class="profile-panel profile-panel-arianna">
-    <div class="profile-visual">
-      <img src={profileImage.src} alt="Placeholder editoriale per ritratto sportivo di Arianna Milano" loading="lazy" width={profileImage.width} height={profileImage.height} />
-    </div>
-    <div class="profile-copy-block">
-      <p class="section-kicker"><span>01</span> Chi e Arianna</p>
-      <h2 id="profile-title">Prima di tutto, Arianna.</h2>
-      <p>{profile.summary}</p>
-      <p>{profile.origin}</p>
-      <a class="text-arrow" href="#risultati">Scopri il mio profilo <span aria-hidden="true">-&gt;</span></a>
-    </div>
-  </article>
+<section class="profile-feature" id="profilo" aria-label="Profilo di Arianna e identità Ying">
+  <div class="feature-grid">
+    <article class="feature-panel feature-arianna" aria-labelledby="profile-title">
+      <div class="feature-copy">
+        <p class="section-kicker"><span>01</span><i aria-hidden="true"></i> Chi è Arianna</p>
+        <h2 id="profile-title">Chi è Arianna</h2>
+        <p>Sono Arianna, ho 12 anni e pratico Sanda. Determinata, curiosa e sempre pronta a mettermi alla prova.</p>
+        <p>Ogni giorno scelgo di migliorare e superare i miei limiti.</p>
+        <p class="hand-signature" aria-hidden="true">Arianna</p>
+        <a class="text-arrow" href="#risultati">Scopri il mio profilo <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-visual feature-visual-arianna">
+        <img src={profileImage.src} alt="Ritratto sportivo di Arianna Milano" loading="lazy" width={profileImage.width} height={profileImage.height} />
+      </div>
+    </article>
 
-  <article class="profile-panel profile-panel-ying" id="ying">
-    <div class="profile-copy-block">
-      <p class="section-kicker"><span>02</span> Ying</p>
-      <h2>Visione, precisione, coraggio.</h2>
-      <p>Ying resta una firma secondaria: accompagna il percorso sportivo senza sostituire Arianna Milano come identita principale.</p>
-      <p>Il segno richiama concentrazione, controllo e capacita di guardare avanti, con un linguaggio sobrio e non folkloristico.</p>
-      <a class="text-arrow" href="#media">Scopri i media <span aria-hidden="true">-&gt;</span></a>
-    </div>
-    <div class="ying-mark-panel" aria-label="Firma identitaria secondaria Ying">
-      <img class="ying-mark-symbol" src={ideogram.src} alt="Ying" loading="lazy" width="180" height="180" />
-      <img class="ying-mark-signature" src={signature.src} alt="Ying" loading="lazy" width="180" height="48" />
-    </div>
-  </article>
+    <article class="feature-panel feature-ying" id="ying" aria-labelledby="ying-title">
+      <div class="feature-copy">
+        <p class="section-kicker"><span>02</span><i aria-hidden="true"></i> Yīng · 鹰</p>
+        <h2 id="ying-title">Yīng · 鹰</h2>
+        <img class="ying-signature" src={signature.src} alt="Yīng, Aquila" loading="lazy" width="150" height="42" />
+        <p>Ho scelto Yīng perché l'aquila vola in alto, vede lontano e non smette mai di allenarsi.</p>
+        <p>Rappresenta libertà, forza interiore e la capacità di superare ogni limite.</p>
+        <a class="text-arrow" href="#media">Scopri il significato <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="feature-visual feature-visual-ying">
+        <img src={yingImage.src} alt="Aquila in volo, simbolo identitario di Yīng" loading="lazy" width={yingImage.width} height={yingImage.height} />
+      </div>
+    </article>
+  </div>
+
+  <blockquote class="profile-quote">
+    <span aria-hidden="true">“</span>
+    <p>Sul tatami non porto solo tecnica. Porto il lavoro fatto ogni giorno.</p>
+    <span aria-hidden="true">”</span>
+  </blockquote>
 </section>
+
+<style>
+  .profile-feature {
+    background: #e8e2d9;
+    color: #111;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-panel {
+    display: grid;
+    grid-template-columns: minmax(250px, .9fr) minmax(310px, 1.1fr);
+    min-height: 360px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(112, 76, 34, .38);
+    background:
+      radial-gradient(circle at 14% 12%, rgba(185,134,50,.08), transparent 30%),
+      #ece7df;
+  }
+
+  .feature-ying {
+    border-left: 1px solid rgba(112, 76, 34, .42);
+  }
+
+  .feature-copy {
+    position: relative;
+    z-index: 2;
+    align-self: center;
+    padding: clamp(32px, 3.4vw, 56px) clamp(28px, 3vw, 50px);
+  }
+
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0 0 8px;
+    font-family: var(--font-ui);
+    font-size: .67rem;
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+  }
+
+  .section-kicker span {
+    color: var(--lacquer);
+  }
+
+  .section-kicker i {
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    background: var(--lacquer);
+  }
+
+  .feature-copy h2 {
+    margin: 0 0 16px;
+    font-family: var(--font-display);
+    font-size: clamp(1.65rem, 2.15vw, 2.45rem);
+    line-height: .96;
+    letter-spacing: .025em;
+    text-transform: uppercase;
+  }
+
+  .feature-copy > p:not(.section-kicker):not(.hand-signature) {
+    max-width: 330px;
+    margin: 0 0 8px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: .88rem;
+    line-height: 1.5;
+  }
+
+  .hand-signature {
+    margin: 9px 0 6px;
+    color: #9e7134;
+    font-family: "Brush Script MT", cursive;
+    font-size: 1.65rem;
+    line-height: 1;
+    transform: rotate(-4deg);
+    transform-origin: left center;
+  }
+
+  .ying-signature {
+    width: 110px;
+    height: auto;
+    margin: -8px 0 12px;
+    filter: sepia(1) saturate(.7) brightness(.55);
+  }
+
+  .text-arrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 8px;
+    color: #151515;
+    font-family: var(--font-ui);
+    font-size: .65rem;
+    font-weight: 900;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .text-arrow span {
+    color: var(--lacquer);
+    font-size: 1.1rem;
+  }
+
+  .feature-visual {
+    position: relative;
+    min-height: 360px;
+    overflow: hidden;
+  }
+
+  .feature-visual::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+  }
+
+  .feature-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feature-visual-arianna::after {
+    background: linear-gradient(90deg, #ece7df 0%, rgba(236,231,223,.62) 10%, transparent 33%);
+  }
+
+  .feature-visual-ying::after {
+    background:
+      linear-gradient(90deg, #ece7df 0%, rgba(236,231,223,.54) 10%, transparent 32%),
+      linear-gradient(180deg, rgba(185,134,50,.08), transparent 55%);
+  }
+
+  .profile-quote {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    min-height: 58px;
+    margin: 0;
+    padding: 10px 24px;
+    border-top: 1px solid rgba(185,134,50,.35);
+    border-bottom: 1px solid rgba(185,134,50,.45);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(185,134,50,.2), transparent 32%),
+      linear-gradient(90deg, rgba(185,134,50,.08), transparent 20%, transparent 80%, rgba(185,134,50,.08)),
+      #0a0a0a;
+    color: var(--ivory);
+    text-align: center;
+  }
+
+  .profile-quote p {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(.95rem, 1.55vw, 1.45rem);
+    font-weight: 700;
+    letter-spacing: .16em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  .profile-quote span {
+    color: var(--lacquer);
+    font-family: Georgia, serif;
+    font-size: 2.1rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  @media (max-width: 1120px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-ying {
+      border-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .feature-panel {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+
+    .feature-copy {
+      padding: 34px 22px 28px;
+    }
+
+    .feature-visual {
+      min-height: 300px;
+    }
+
+    .feature-visual-arianna::after,
+    .feature-visual-ying::after {
+      background: linear-gradient(180deg, #ece7df 0%, transparent 24%);
+    }
+
+    .feature-ying .feature-copy {
+      order: 1;
+    }
+
+    .feature-ying .feature-visual {
+      order: 2;
+    }
+
+    .profile-quote {
+      gap: 9px;
+      padding: 16px 14px;
+    }
+
+    .profile-quote p {
+      max-width: 320px;
+      font-size: .86rem;
+      letter-spacing: .11em;
+    }
+  }
+</style>

@@ -1,6 +1,8 @@
 [
   { "label": "Home", "href": "/" },
+  { "label": "Highlights", "href": "/#highlights" },
   { "label": "Profilo", "href": "/profilo" },
+  { "label": "Yīng", "href": "/#ying" },
   { "label": "Risultati", "href": "/risultati" },
   { "label": "Media", "href": "/media" },
   { "label": "Contatti", "href": "/#footer" }

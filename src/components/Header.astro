@@ -66,6 +66,17 @@ const isActive = (href) => {
   .menu-backdrop { display: none; }
   .mobile-nav-footer { display: none; }
 
+  @media (max-width: 1000px) {
+    .nav-toggle {
+      position: fixed !important;
+      z-index: 30 !important;
+      top: max(20px, env(safe-area-inset-top)) !important;
+      right: 16px !important;
+      margin: 0 !important;
+      transform: none !important;
+    }
+  }
+
   @media (max-width: 640px) {
     .menu-backdrop {
       position: fixed;

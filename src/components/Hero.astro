@@ -3,6 +3,7 @@ import Header from "./Header.astro";
 import StatsStrip from "./StatsStrip.astro";
 import results from "../data/results.json";
 import heroImage from "../assets/images/hero-ary14.png";
+import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
@@ -18,7 +19,8 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
   </div>
 
   <div class="hero-copy">
-    <h1 id="hero-title" class="sr-only">Arianna Milano, atleta di Sanda</h1>
+    <h1 id="hero-title" class="sr-only">Disciplina. Coraggio. Libertà. Crescita.</h1>
+    <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
     <a class="hero-cta" href="#profilo">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></a>
     <StatsStrip stats={results.heroStats} />
@@ -35,3 +37,21 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
     <span>Crescita</span>
   </div>
 </section>
+
+<style>
+  .hero-upper-signature,
+  .hero-values {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .hero-title-image {
+      display: none;
+    }
+
+    .hero-upper-signature,
+    .hero-values {
+      display: block;
+    }
+  }
+</style>

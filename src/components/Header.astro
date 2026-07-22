@@ -51,17 +51,35 @@ import yingHeaderMark from "../assets/images/ying-header-mark.png";
   const header = document.querySelector("[data-header]");
   const toggle = header?.querySelector(".nav-toggle");
   const nav = header?.querySelector(".primary-nav");
+  let scrollPosition = 0;
+
+  const setMenuState = (open) => {
+    toggle?.setAttribute("aria-expanded", String(open));
+    nav?.toggleAttribute("data-open", open);
+
+    if (open) {
+      scrollPosition = window.scrollY;
+      document.body.style.top = `-${scrollPosition}px`;
+      document.body.classList.add("menu-open");
+    } else {
+      document.body.classList.remove("menu-open");
+      document.body.style.top = "";
+      window.scrollTo(0, scrollPosition);
+    }
+  };
 
   toggle?.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    toggle.setAttribute("aria-expanded", String(!isOpen));
-    nav?.toggleAttribute("data-open", !isOpen);
+    setMenuState(!isOpen);
   });
 
   nav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => {
-      toggle?.setAttribute("aria-expanded", "false");
-      nav?.removeAttribute("data-open");
-    });
+    link.addEventListener("click", () => setMenuState(false));
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 640 && toggle?.getAttribute("aria-expanded") === "true") {
+      setMenuState(false);
+    }
   });
 </script>

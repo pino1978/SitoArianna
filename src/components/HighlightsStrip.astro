@@ -10,44 +10,52 @@ function imageFor(fileName) {
 
 const highlights = [
   {
-    title: "World Open Championship",
-    meta: "Finale - Perugia",
+    title: "World Open Championship 2026",
+    meta: "Finale · Perugia",
     duration: "03:12",
     image: media[1],
   },
   {
-    title: "Champion Cup",
-    meta: "Semifinale - Sora",
+    title: "Champion Cup 2026",
+    meta: "Semifinale · Sora",
     duration: "02:45",
     image: media[2],
   },
   {
-    title: "Allenamento tecnico",
-    meta: "Preparazione Sanda",
+    title: "World Open Championship 2025",
+    meta: "Finale · Perugia",
     duration: "04:08",
     image: media[0],
   },
   {
-    title: "Focus gara",
-    meta: "Percorso agonistico",
+    title: "Champion Cup 2025",
+    meta: "Finale · Sora",
     duration: "02:31",
     image: media[3],
+  },
+  {
+    title: "World Open Championship 2024",
+    meta: "Semifinale · Perugia",
+    duration: "03:05",
+    image: media[1],
   },
 ];
 ---
 <section class="highlights-strip" aria-labelledby="highlights-title">
   <div class="section-head compact">
-    <p>Highlights</p>
-    <h2 id="highlights-title">I momenti che contano</h2>
-    <a href="#media">Vai a tutti i video <span aria-hidden="true">-&gt;</span></a>
+    <div>
+      <p>Highlights</p>
+      <h2 id="highlights-title">I momenti che contano</h2>
+    </div>
+    <a href="#media">Vai a tutti i video <span aria-hidden="true">→</span></a>
   </div>
 
-  <div class="highlight-rail">
+  <div class="highlight-rail" aria-label="Video in evidenza">
     {highlights.map((item) => {
       const image = imageFor(item.image.image);
       return (
         <article class="highlight-card">
-          <a href="#media" aria-label={`Apri ${item.title}`}>
+          <a href="#media" aria-label={`Apri il video ${item.title}`}>
             <img src={image.src} alt={item.image.alt} loading="lazy" width={image.width} height={image.height} />
             <span class="play-badge" aria-hidden="true"></span>
             <time>{item.duration}</time>
@@ -59,3 +67,191 @@ const highlights = [
     })}
   </div>
 </section>
+
+<style>
+  .highlights-strip {
+    padding: 18px clamp(28px, 6.4vw, 104px) 22px;
+    border-top: 1px solid rgba(185, 134, 50, 0.52);
+    border-bottom: 1px solid rgba(185, 134, 50, 0.38);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.018), transparent 44%),
+      #080808;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 12px;
+  }
+
+  .section-head p {
+    margin: 0 0 3px;
+    color: var(--gold-bright);
+    font-family: var(--font-ui);
+    font-size: .66rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .section-head h2 {
+    margin: 0;
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 1.55vw, 1.65rem);
+    line-height: 1;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+
+  .section-head > a {
+    padding-bottom: 3px;
+    color: var(--ivory);
+    font-family: var(--font-ui);
+    font-size: .66rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+
+  .section-head > a span {
+    margin-left: 8px;
+    color: var(--gold-bright);
+  }
+
+  .highlight-rail {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .highlight-card {
+    min-width: 0;
+  }
+
+  .highlight-card > a {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 7.2;
+    overflow: hidden;
+    border: 1px solid rgba(185, 134, 50, .72);
+    border-radius: 4px;
+    background: #050505;
+  }
+
+  .highlight-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .82;
+    transition: transform .25s ease, opacity .25s ease;
+  }
+
+  .highlight-card > a::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+    background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.56));
+  }
+
+  .highlight-card > a:hover img {
+    transform: scale(1.035);
+    opacity: 1;
+  }
+
+  .play-badge {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255,255,255,.9);
+    border-radius: 50%;
+    background: rgba(0,0,0,.48);
+    transform: translate(-50%, -50%);
+  }
+
+  .play-badge::after {
+    position: absolute;
+    top: 50%;
+    left: 54%;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 9px solid var(--ivory);
+    content: "";
+    transform: translate(-35%, -50%);
+  }
+
+  .highlight-card time {
+    position: absolute;
+    z-index: 2;
+    right: 7px;
+    bottom: 5px;
+    color: #fff;
+    font-family: var(--font-ui);
+    font-size: .62rem;
+    font-weight: 800;
+  }
+
+  .highlight-card h3 {
+    margin: 7px 0 2px;
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-size: .78rem;
+    line-height: 1.08;
+    letter-spacing: .035em;
+    text-transform: uppercase;
+  }
+
+  .highlight-card p {
+    margin: 0;
+    color: var(--ivory-soft);
+    font-size: .66rem;
+  }
+
+  @media (max-width: 1000px) {
+    .highlight-rail {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .highlights-strip {
+      padding: 22px 0 26px;
+    }
+
+    .section-head {
+      align-items: start;
+      padding: 0 18px;
+    }
+
+    .section-head > a {
+      max-width: 96px;
+      text-align: right;
+      line-height: 1.35;
+    }
+
+    .highlight-rail {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 18px 8px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: thin;
+    }
+
+    .highlight-card {
+      flex: 0 0 78vw;
+      scroll-snap-align: start;
+    }
+
+    .highlight-card > a {
+      aspect-ratio: 16 / 8.6;
+    }
+  }
+</style>

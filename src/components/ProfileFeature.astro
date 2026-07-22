@@ -2,7 +2,6 @@
 import profile from "../data/profile.json";
 import profileImage from "../assets/images/profile-placeholder.png";
 import yingImage from "../assets/images/ying-placeholder.png";
-import signature from "../assets/svg/signature-ying.svg";
 ---
 <section class="profile-feature" id="profilo" aria-label="Profilo di Arianna e identità Ying">
   <div class="feature-grid">
@@ -24,7 +23,7 @@ import signature from "../assets/svg/signature-ying.svg";
       <div class="feature-copy">
         <p class="section-kicker"><span>02</span><i aria-hidden="true"></i> Yīng · 鹰</p>
         <h2 id="ying-title">Yīng · 鹰</h2>
-        <img class="ying-signature" src={signature.src} alt="Yīng, Aquila" loading="lazy" width="150" height="42" />
+        <p class="ying-meaning">Aquila</p>
         <p>Ho scelto Yīng perché l'aquila vola in alto, vede lontano e non smette mai di allenarsi.</p>
         <p>Rappresenta libertà, forza interiore e la capacità di superare ogni limite.</p>
         <a class="text-arrow" href="#media">Scopri il significato <span aria-hidden="true">→</span></a>
@@ -108,7 +107,7 @@ import signature from "../assets/svg/signature-ying.svg";
     text-transform: uppercase;
   }
 
-  .feature-copy > p:not(.section-kicker):not(.hand-signature) {
+  .feature-copy > p:not(.section-kicker):not(.hand-signature):not(.ying-meaning) {
     max-width: 330px;
     margin: 0 0 8px;
     font-family: Georgia, "Times New Roman", serif;
@@ -126,11 +125,14 @@ import signature from "../assets/svg/signature-ying.svg";
     transform-origin: left center;
   }
 
-  .ying-signature {
-    width: 110px;
-    height: auto;
-    margin: -8px 0 12px;
-    filter: sepia(1) saturate(.7) brightness(.55);
+  .ying-meaning {
+    margin: -6px 0 14px;
+    color: #9e7134;
+    font-family: var(--font-ui);
+    font-size: .68rem;
+    font-weight: 900;
+    letter-spacing: .22em;
+    text-transform: uppercase;
   }
 
   .text-arrow {

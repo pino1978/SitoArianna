@@ -48,13 +48,76 @@ const isActive = (href) => {
     </select>
   </label>
 </header>
+<div class="menu-backdrop" data-menu-backdrop aria-hidden="true"></div>
 
 <style is:global>
   .nav-icon {
     display: none;
   }
 
+  .menu-backdrop {
+    display: none;
+  }
+
   @media (max-width: 640px) {
+    .menu-backdrop {
+      position: fixed;
+      z-index: 19;
+      inset: 0;
+      display: block;
+      background: rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 180ms ease, visibility 0s linear 180ms;
+    }
+
+    body.menu-open .menu-backdrop {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transition-delay: 0s;
+    }
+
+    .primary-nav {
+      width: min(52vw, 210px);
+      padding: 78px 16px 20px;
+      border-radius: 12px 0 0 12px;
+    }
+
+    .primary-nav::before {
+      top: 20%;
+      height: 42px;
+    }
+
+    .primary-nav::after {
+      right: 16px;
+      bottom: 18px;
+      left: 16px;
+    }
+
+    .primary-nav a {
+      grid-template-columns: 24px 1fr;
+      column-gap: 8px;
+      min-height: 44px;
+      font-size: 0.62rem;
+      letter-spacing: 0.09em;
+    }
+
+    .primary-nav .nav-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .primary-nav .nav-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .primary-nav a::after {
+      left: 31px;
+    }
+
     .primary-nav a:first-child {
       color: rgba(247, 240, 228, 0.92);
     }
@@ -72,12 +135,26 @@ const isActive = (href) => {
       transform: scaleX(1);
     }
   }
+
+  @media (max-width: 390px) {
+    .primary-nav {
+      width: min(55vw, 196px);
+      padding: 72px 14px 18px;
+    }
+
+    .primary-nav a {
+      grid-template-columns: 22px 1fr;
+      min-height: 41px;
+      font-size: 0.59rem;
+    }
+  }
 </style>
 
 <script>
   const header = document.querySelector("[data-header]");
   const toggle = header?.querySelector(".nav-toggle");
   const nav = header?.querySelector(".primary-nav");
+  const backdrop = document.querySelector("[data-menu-backdrop]");
   let scrollPosition = 0;
 
   const setMenuState = (open) => {
@@ -100,8 +177,17 @@ const isActive = (href) => {
     setMenuState(!isOpen);
   });
 
+  backdrop?.addEventListener("click", () => setMenuState(false));
+
   nav?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => setMenuState(false));
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
+      setMenuState(false);
+      toggle.focus();
+    }
   });
 
   window.addEventListener("resize", () => {

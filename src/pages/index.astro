@@ -3,14 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import HighlightsStrip from "../components/HighlightsStrip.astro";
 import ProfileFeature from "../components/ProfileFeature.astro";
-import SectionTitle from "../components/SectionTitle.astro";
-import MediaCard from "../components/MediaCard.astro";
-import StatsStrip from "../components/StatsStrip.astro";
 import profile from "../data/profile.json";
-import results from "../data/results.json";
-import media from "../data/media.json";
-import disciplineImage from "../assets/images/discipline-placeholder.png";
-import sandaImage from "../assets/images/sanda-placeholder.png";
 import signature from "../assets/svg/signature-ying.svg";
 ---
 <BaseLayout>
@@ -18,69 +11,15 @@ import signature from "../assets/svg/signature-ying.svg";
     <Hero />
     <HighlightsStrip />
     <ProfileFeature />
-
-    <section class="values-section section-dark" aria-labelledby="values-heading">
-      <SectionTitle number="03" kicker="Valori" title="Disciplina, focus, tecnica." />
-      <div class="values-content">
-        <p id="values-heading">La narrazione evita scorciatoie celebrative: mette al centro allenamento, crescita, lucidita in gara e continuita.</p>
-        <div class="values-grid" aria-label="Caratteristiche personali e sportive">
-          {profile.traits.slice(0, 6).map((trait) => <span>{trait}</span>)}
-        </div>
-      </div>
-    </section>
-
-    <section class="split-section section-light" id="sanda">
-      <article>
-        <SectionTitle number="04" kicker="Il Sanda" title="Controllo tecnico e presenza sul tatami." />
-        <p>Il Sanda richiede preparazione fisica proporzionata all'eta, capacita di lettura, rispetto dell'avversario e gestione del momento. Il sito lo racconta come disciplina sportiva, non come spettacolarizzazione del combattimento.</p>
-      </article>
-      <img src={sandaImage.src} alt="Placeholder editoriale dedicato alla disciplina Sanda" loading="lazy" width={sandaImage.width} height={sandaImage.height} />
-    </section>
-
-    <section class="results-section section-dark" id="risultati">
-      <div class="results-head">
-        <SectionTitle number="05" kicker="Risultati principali" title="Archivio progressivo della carriera." />
-        <a href="#footer">Richiedi materiali verificati <span aria-hidden="true">-&gt;</span></a>
-      </div>
-      <div class="result-grid">
-        {results.highlights.map((item) => (
-          <article>
-            <p>{item.scope}</p>
-            <h3>{item.event}</h3>
-            <span>{item.place}</span>
-            <small>{item.note}</small>
-          </article>
-        ))}
-      </div>
-      <StatsStrip stats={results.heroStats} />
-      <p class="placeholder-note">{results.statsNote}</p>
-    </section>
-
-    <section class="media-section section-light" id="media">
-      <div class="media-head">
-        <SectionTitle number="06" kicker="Media gallery" title="Materiali ordinati, senza risultati inventati." />
-        <p>Le immagini attuali sono placeholder pubblicabili: potranno essere sostituite da foto e video reali, con alt text e metadati aggiornati nei file dati.</p>
-      </div>
-      <div class="media-grid">
-        {media.map((item) => <MediaCard item={item} />)}
-      </div>
-    </section>
-
-    <section class="discipline-section section-light">
-      <img src={disciplineImage.src} alt="Placeholder editoriale per dettaglio di allenamento" loading="lazy" width={disciplineImage.width} height={disciplineImage.height} />
-      <blockquote>
-        <p>Dietro ogni tecnica c'e lavoro. Dietro ogni vittoria c'e sacrificio. Dietro ogni sogno c'e disciplina.</p>
-      </blockquote>
-    </section>
   </main>
 
   <footer class="site-footer" id="footer">
     <img src={signature.src} alt="Ying" width="150" height="42" />
     <nav aria-label="Navigazione footer">
-      <a href="#top">Home</a>
-      <a href="#profilo">Profilo</a>
-      <a href="#risultati">Risultati</a>
-      <a href="#media">Media</a>
+      <a href="/">Home</a>
+      <a href="/profilo">Profilo</a>
+      <a href="/risultati">Risultati</a>
+      <a href="/media">Media</a>
     </nav>
     <p>Per richieste sportive e collaborazioni: <a href={`mailto:${profile.contactEmail}`}>{profile.contactEmail}</a></p>
   </footer>

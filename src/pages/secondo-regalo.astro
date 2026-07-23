@@ -29,18 +29,25 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
       </section>
 
       <section class="screen reveal" data-reveal hidden>
-        <div>
-          <span aria-hidden="true">🎉</span>
+        <div class="beam" aria-hidden="true"></div>
+        <div class="flash" aria-hidden="true"></div>
+        <div class="reveal-copy">
+          <span class="unlock-mark" aria-hidden="true">✦</span>
+          <p class="reveal-kicker">ACCESSO CONFERMATO</p>
           <h2>Secondo regalo sbloccato</h2>
           <p>Buon compleanno Arianna ❤️</p>
         </div>
       </section>
 
       <section class="ticket" data-ticket hidden>
+        <div class="ambient ambient-one" aria-hidden="true"></div>
+        <div class="ambient ambient-two" aria-hidden="true"></div>
         <a class="back" href="/">← Torna al sito</a>
         <button class="zoom" type="button" data-zoom aria-pressed="false">Ingrandisci</button>
         <div class="stage">
-          <img src={giftImage} alt="Biglietto per il concerto di Geolier allo Stadio Diego Armando Maradona, 14 giugno 2027" data-image />
+          <div class="ticket-frame">
+            <img src={giftImage} alt="Biglietto per il concerto di Geolier allo Stadio Diego Armando Maradona, 14 giugno 2027" data-image />
+          </div>
         </div>
       </section>
     </main>
@@ -55,6 +62,60 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
       const message = document.querySelector("[data-message]");
       const image = document.querySelector("[data-image]");
       const zoom = document.querySelector("[data-zoom]");
+
+      const playUnlockSound = () => {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (!AudioContextClass) return;
+          const ctx = new AudioContextClass();
+          const now = ctx.currentTime;
+          const master = ctx.createGain();
+          master.gain.setValueAtTime(0.0001, now);
+          master.gain.exponentialRampToValueAtTime(0.22, now + 0.03);
+          master.gain.exponentialRampToValueAtTime(0.0001, now + 1.9);
+          master.connect(ctx.destination);
+
+          const tone = (frequency, start, duration, type = "sine", volume = 0.18) => {
+            const oscillator = ctx.createOscillator();
+            const gain = ctx.createGain();
+            oscillator.type = type;
+            oscillator.frequency.setValueAtTime(frequency, now + start);
+            oscillator.frequency.exponentialRampToValueAtTime(frequency * 1.35, now + start + duration);
+            gain.gain.setValueAtTime(0.0001, now + start);
+            gain.gain.exponentialRampToValueAtTime(volume, now + start + 0.025);
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + start + duration);
+            oscillator.connect(gain);
+            gain.connect(master);
+            oscillator.start(now + start);
+            oscillator.stop(now + start + duration + 0.05);
+          };
+
+          tone(180, 0, 0.65, "sine", 0.28);
+          tone(360, 0.08, 0.5, "triangle", 0.16);
+          tone(720, 0.28, 0.42, "sine", 0.1);
+
+          const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.9, ctx.sampleRate);
+          const data = buffer.getChannelData(0);
+          for (let i = 0; i < data.length; i += 1) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
+          const noise = ctx.createBufferSource();
+          const filter = ctx.createBiquadFilter();
+          const gain = ctx.createGain();
+          noise.buffer = buffer;
+          filter.type = "lowpass";
+          filter.frequency.setValueAtTime(1200, now);
+          filter.frequency.exponentialRampToValueAtTime(180, now + 0.85);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.12, now + 0.05);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.85);
+          noise.connect(filter);
+          filter.connect(gain);
+          gain.connect(master);
+          noise.start(now);
+          noise.stop(now + 0.9);
+
+          window.setTimeout(() => ctx.close(), 2300);
+        } catch (_) {}
+      };
 
       const resetExperience = () => {
         unlock.hidden = false;
@@ -85,6 +146,8 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
         }
 
         message.textContent = "";
+        navigator.vibrate?.([70, 45, 120]);
+        playUnlockSound();
         unlock.hidden = true;
         reveal.hidden = false;
         requestAnimationFrame(() => reveal.classList.add("visible"));
@@ -93,7 +156,7 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
           reveal.hidden = true;
           ticket.hidden = false;
           requestAnimationFrame(() => ticket.classList.add("visible"));
-        }, 1800);
+        }, 2600);
       });
 
       input?.addEventListener("input", () => {
@@ -120,7 +183,7 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
   button, input { font: inherit; }
   .screen, .ticket { width: 100%; min-height: 100svh; }
   .unlock { display: grid; place-items: center; padding: max(32px, env(safe-area-inset-top)) 20px max(32px, env(safe-area-inset-bottom)); background: radial-gradient(circle at 50% 40%, rgba(111,23,29,.18), transparent 38%), radial-gradient(circle at 50% 50%, rgba(196,157,93,.08), transparent 56%), #050505; }
-  .back { position: fixed; z-index: 5; top: max(20px, env(safe-area-inset-top)); left: 20px; color: rgba(247,240,228,.72); font-size: .72rem; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+  .back { position: fixed; z-index: 8; top: max(20px, env(safe-area-inset-top)); left: 20px; color: rgba(247,240,228,.72); font-size: .72rem; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
   .card { width: min(100%, 460px); padding: clamp(34px, 7vw, 56px); border: 1px solid rgba(196,157,93,.24); border-radius: 20px; background: linear-gradient(145deg, rgba(24,22,20,.95), rgba(8,8,8,.98)); box-shadow: 0 30px 80px rgba(0,0,0,.48); text-align: center; }
   .gift { display: block; margin-bottom: 18px; font-size: 2rem; }
   .eyebrow { margin: 0 0 10px; color: #c49d5d; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; }
@@ -132,17 +195,35 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
   form input { width: 100%; min-height: 58px; border: 1px solid rgba(247,240,228,.2); border-radius: 10px; outline: none; background: rgba(255,255,255,.04); color: #fff; font-size: 1.4rem; letter-spacing: .45em; text-align: center; }
   form button { min-height: 54px; border: 1px solid #c49d5d; border-radius: 10px; background: #c49d5d; color: #0a0908; cursor: pointer; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
   .message { min-height: 1.4em; margin: 0; color: #e19096; font-size: .8rem; }
-  .reveal { display: grid; place-items: center; padding: 24px; text-align: center; opacity: 0; transition: opacity 650ms ease; }
-  .reveal.visible { opacity: 1; }
-  .reveal span { font-size: 2.2rem; }
-  .reveal h2 { margin: 16px 0 8px; font-size: clamp(2rem, 8vw, 4.6rem); }
+  .reveal { position: relative; display: grid; place-items: center; overflow: hidden; padding: 24px; background: radial-gradient(circle at 50% 50%, rgba(100,9,18,.18), transparent 34%), #020202; text-align: center; opacity: 0; }
+  .reveal.visible { animation: reveal-screen 2.6s ease forwards; }
+  .reveal-copy { position: relative; z-index: 3; opacity: 0; transform: translateY(16px) scale(.97); }
+  .reveal.visible .reveal-copy { animation: reveal-copy 1.45s .35s cubic-bezier(.2,.8,.2,1) forwards; }
+  .unlock-mark { display: block; color: #c49d5d; font-size: 2.3rem; text-shadow: 0 0 28px rgba(196,157,93,.55); }
+  .reveal-kicker { margin: 14px 0 10px !important; color: #8d202b !important; font-size: .66rem !important; font-weight: 700; letter-spacing: .28em; }
+  .reveal h2 { margin: 0 0 10px; font-size: clamp(2rem, 8vw, 4.6rem); text-shadow: 0 0 34px rgba(255,255,255,.08); }
   .reveal p { margin: 0; color: #c49d5d; font-size: clamp(1rem, 3vw, 1.35rem); }
-  .ticket { position: fixed; inset: 0; display: grid; background: #000; opacity: 0; transition: opacity 700ms ease; }
-  .ticket.visible { opacity: 1; }
-  .stage { width: 100%; height: 100svh; overflow: auto; display: grid; place-items: center; padding: max(64px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom)); touch-action: pinch-zoom; }
-  .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; }
+  .beam { position: absolute; inset: -30% auto -30% -55%; width: 34%; background: linear-gradient(90deg, transparent, rgba(128,16,28,.4), rgba(230,75,87,.14), transparent); filter: blur(10px); transform: skewX(-18deg); opacity: 0; }
+  .reveal.visible .beam { animation: beam-pass 1.5s .1s ease-out forwards; }
+  .flash { position: absolute; inset: 0; background: #7b101b; opacity: 0; mix-blend-mode: screen; }
+  .reveal.visible .flash { animation: flash 1.2s 1.45s ease-out forwards; }
+  .ticket { position: fixed; inset: 0; display: grid; overflow: hidden; background: radial-gradient(circle at 50% 55%, rgba(92,11,20,.22), transparent 42%), #000; opacity: 0; }
+  .ticket.visible { animation: ticket-screen .75s ease forwards; }
+  .ambient { position: absolute; border-radius: 999px; filter: blur(70px); opacity: .18; pointer-events: none; }
+  .ambient-one { width: 38vw; height: 38vw; left: -12vw; top: 8vh; background: #6d111b; }
+  .ambient-two { width: 30vw; height: 30vw; right: -10vw; bottom: 2vh; background: #8c6a38; opacity: .08; }
+  .stage { position: relative; z-index: 2; width: 100%; height: 100svh; overflow: auto; display: grid; place-items: center; padding: max(64px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom)); touch-action: pinch-zoom; perspective: 1200px; }
+  .ticket-frame { opacity: 0; transform: translateY(70px) rotateX(7deg) scale(.93); filter: blur(10px); }
+  .ticket.visible .ticket-frame { animation: ticket-enter 1.15s .18s cubic-bezier(.16,.8,.18,1) forwards; }
+  .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; border-radius: 2px; box-shadow: 0 28px 80px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.05); }
   .stage img.zoomed { max-width: none; max-height: none; width: min(1500px, 180vw); }
-  .zoom { position: fixed; z-index: 5; top: max(16px, env(safe-area-inset-top)); right: 16px; min-height: 38px; padding: 0 14px; border: 1px solid rgba(247,240,228,.28); border-radius: 999px; background: rgba(0,0,0,.58); color: rgba(247,240,228,.86); cursor: pointer; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
-  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } }
+  .zoom { position: fixed; z-index: 8; top: max(16px, env(safe-area-inset-top)); right: 16px; min-height: 38px; padding: 0 14px; border: 1px solid rgba(247,240,228,.28); border-radius: 999px; background: rgba(0,0,0,.58); color: rgba(247,240,228,.86); cursor: pointer; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; }
+  @keyframes reveal-screen { 0% { opacity: 0; } 18%, 88% { opacity: 1; } 100% { opacity: 1; } }
+  @keyframes reveal-copy { to { opacity: 1; transform: translateY(0) scale(1); } }
+  @keyframes beam-pass { 0% { left: -55%; opacity: 0; } 15% { opacity: 1; } 100% { left: 125%; opacity: 0; } }
+  @keyframes flash { 0%, 72% { opacity: 0; } 78% { opacity: .55; } 100% { opacity: 0; } }
+  @keyframes ticket-screen { to { opacity: 1; } }
+  @keyframes ticket-enter { 0% { opacity: 0; transform: translateY(70px) rotateX(7deg) scale(.93); filter: blur(10px); } 65% { opacity: 1; filter: blur(0); } 100% { opacity: 1; transform: translateY(0) rotateX(0) scale(1); filter: blur(0); } }
+  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 </style>

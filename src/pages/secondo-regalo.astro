@@ -1,5 +1,6 @@
 ---
 const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).jpg";
+const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Official%20Video).mp3";
 ---
 <!doctype html>
 <html lang="it">
@@ -40,6 +41,7 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
       </section>
 
       <section class="ticket" data-ticket hidden>
+        <audio src={soundtrack} preload="auto" data-audio></audio>
         <div class="ambient ambient-one" aria-hidden="true"></div>
         <div class="ambient ambient-two" aria-hidden="true"></div>
         <a class="back" href="/">← Torna al sito</a>
@@ -48,6 +50,8 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
           <div class="ticket-frame">
             <div class="ticket-glow" aria-hidden="true"></div>
             <img src={giftImage} alt="Biglietto per il concerto di Geolier allo Stadio Diego Armando Maradona, 14 giugno 2027" data-image />
+            <div class="spotlight-darkness" aria-hidden="true"></div>
+            <div class="spotlight-haze" aria-hidden="true"></div>
           </div>
         </div>
       </section>
@@ -63,6 +67,8 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
       const message = document.querySelector("[data-message]");
       const image = document.querySelector("[data-image]");
       const zoom = document.querySelector("[data-zoom]");
+      const audio = document.querySelector("[data-audio]");
+      let fadeTimer;
 
       const playUnlockSound = () => {
         try {
@@ -113,12 +119,34 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
           gain.connect(master);
           noise.start(now);
           noise.stop(now + 0.9);
-
           window.setTimeout(() => ctx.close(), 2300);
         } catch (_) {}
       };
 
+      const startSoundtrack = () => {
+        if (!audio) return;
+        window.clearInterval(fadeTimer);
+        audio.pause();
+        audio.currentTime = 0;
+        audio.volume = 0;
+        const playback = audio.play();
+        playback?.catch(() => {});
+        window.setTimeout(() => {
+          fadeTimer = window.setInterval(() => {
+            if (audio.volume >= 0.62) {
+              audio.volume = 0.62;
+              window.clearInterval(fadeTimer);
+              return;
+            }
+            audio.volume = Math.min(0.62, audio.volume + 0.025);
+          }, 90);
+        }, 850);
+      };
+
       const resetExperience = () => {
+        window.clearInterval(fadeTimer);
+        audio?.pause();
+        if (audio) { audio.currentTime = 0; audio.volume = 0; }
         unlock.hidden = false;
         reveal.hidden = true;
         ticket.hidden = true;
@@ -138,7 +166,6 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
       form?.addEventListener("submit", (event) => {
         event.preventDefault();
         const value = input.value.trim();
-
         if (value !== CORRECT_PIN) {
           message.textContent = "PIN non corretto. Riprova.";
           input.setAttribute("aria-invalid", "true");
@@ -149,6 +176,7 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
         message.textContent = "";
         navigator.vibrate?.([70, 45, 120]);
         playUnlockSound();
+        startSoundtrack();
         unlock.hidden = true;
         reveal.hidden = false;
         requestAnimationFrame(() => reveal.classList.add("visible"));
@@ -208,34 +236,56 @@ const giftImage = "/images/Screenshot_20260722_221351_Adobe%20Acrobat(1)(1)(1).j
   .reveal.visible .beam { animation: beam-pass 1.5s .1s ease-out forwards; }
   .flash { position: absolute; inset: 0; background: #7b101b; opacity: 0; mix-blend-mode: screen; }
   .reveal.visible .flash { animation: flash 1.2s 1.45s ease-out forwards; }
-  .ticket { position: fixed; inset: 0; display: grid; overflow: hidden; background: radial-gradient(circle at 50% 55%, rgba(92,11,20,.22), transparent 42%), #000; opacity: 0; }
-  .ticket.visible { animation: ticket-screen 1.2s ease forwards; }
-  .ambient { position: absolute; border-radius: 999px; filter: blur(70px); opacity: .18; pointer-events: none; }
+  .ticket { position: fixed; inset: 0; display: grid; overflow: hidden; background: #000; opacity: 0; }
+  .ticket.visible { animation: ticket-screen .8s ease forwards; }
+  .ambient { position: absolute; border-radius: 999px; filter: blur(70px); opacity: 0; pointer-events: none; }
+  .ticket.visible .ambient { animation: ambient-in 2s 10s ease forwards; }
   .ambient-one { width: 38vw; height: 38vw; left: -12vw; top: 8vh; background: #6d111b; }
-  .ambient-two { width: 30vw; height: 30vw; right: -10vw; bottom: 2vh; background: #8c6a38; opacity: .08; }
+  .ambient-two { width: 30vw; height: 30vw; right: -10vw; bottom: 2vh; background: #8c6a38; }
   .stage { position: relative; z-index: 2; width: 100%; height: 100svh; overflow: auto; display: grid; place-items: center; padding: max(64px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom)); touch-action: pinch-zoom; perspective: 1200px; }
-  .ticket-frame { position: relative; opacity: 0; clip-path: inset(100% 0 0 0); transform: translateY(90px) rotateX(10deg) scale(.9); filter: blur(18px) brightness(.38); }
-  .ticket.visible .ticket-frame { animation: ticket-enter 4.2s .35s cubic-bezier(.18,.7,.18,1) forwards; }
-  .ticket-glow { position: absolute; z-index: 2; inset: -10%; pointer-events: none; background: linear-gradient(105deg, transparent 28%, rgba(255,255,255,.02) 42%, rgba(196,157,93,.34) 50%, rgba(255,255,255,.06) 56%, transparent 70%); transform: translateX(-130%); mix-blend-mode: screen; }
-  .ticket.visible .ticket-glow { animation: ticket-glow 2.5s 1.7s ease-in-out forwards; }
-  .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; border-radius: 2px; box-shadow: 0 28px 80px rgba(0,0,0,.62), 0 0 0 1px rgba(255,255,255,.05); }
+  .ticket-frame { position: relative; opacity: 0; transform: scale(.985); filter: brightness(.76) saturate(.82); overflow: hidden; border-radius: 3px; box-shadow: 0 30px 90px rgba(0,0,0,.8); }
+  .ticket.visible .ticket-frame { animation: artifact-arrive 1.4s .25s ease forwards, artifact-settle 1.8s 10.5s ease forwards; }
+  .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; }
   .stage img.zoomed { max-width: none; max-height: none; width: min(1500px, 180vw); }
+  .spotlight-darkness { position: absolute; z-index: 3; inset: -38%; pointer-events: none; background: rgba(0,0,0,.992); -webkit-mask-image: radial-gradient(circle at center, transparent 0 3.5%, rgba(0,0,0,.22) 7%, #000 15%); mask-image: radial-gradient(circle at center, transparent 0 3.5%, rgba(0,0,0,.22) 7%, #000 15%); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 235% 235%; mask-size: 235% 235%; -webkit-mask-position: 15% 18%; mask-position: 15% 18%; }
+  .ticket.visible .spotlight-darkness { animation: spotlight-search 11.5s .4s cubic-bezier(.42,0,.24,1) forwards; }
+  .spotlight-haze { position: absolute; z-index: 4; width: 32%; aspect-ratio: 1; left: 7%; top: 8%; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,242,215,.16) 0, rgba(196,157,93,.07) 28%, transparent 72%); filter: blur(8px); mix-blend-mode: screen; }
+  .ticket.visible .spotlight-haze { animation: haze-search 9.8s .55s cubic-bezier(.4,0,.2,1) forwards; }
+  .ticket-glow { position: absolute; z-index: 5; inset: -10%; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.02) 43%, rgba(196,157,93,.28) 50%, rgba(255,255,255,.05) 57%, transparent 70%); transform: translateX(-130%); mix-blend-mode: screen; }
+  .ticket.visible .ticket-glow { animation: ticket-glow 2.2s 10.4s ease-in-out forwards; }
   .zoom { position: fixed; z-index: 8; top: max(16px, env(safe-area-inset-top)); right: 16px; min-height: 38px; padding: 0 14px; border: 1px solid rgba(247,240,228,.28); border-radius: 999px; background: rgba(0,0,0,.58); color: rgba(247,240,228,.86); cursor: pointer; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; opacity: 0; }
-  .ticket.visible .zoom { animation: controls-in .6s 4.15s ease forwards; }
+  .ticket.visible .zoom { animation: controls-in .7s 11.7s ease forwards; }
   @keyframes reveal-screen { 0% { opacity: 0; } 18%, 88% { opacity: 1; } 100% { opacity: 1; } }
   @keyframes reveal-copy { to { opacity: 1; transform: translateY(0) scale(1); } }
   @keyframes beam-pass { 0% { left: -55%; opacity: 0; } 15% { opacity: 1; } 100% { left: 125%; opacity: 0; } }
   @keyframes flash { 0%, 72% { opacity: 0; } 78% { opacity: .55; } 100% { opacity: 0; } }
   @keyframes ticket-screen { to { opacity: 1; } }
-  @keyframes ticket-enter {
-    0% { opacity: 0; clip-path: inset(100% 0 0 0); transform: translateY(90px) rotateX(10deg) scale(.9); filter: blur(18px) brightness(.38); }
-    18% { opacity: .35; clip-path: inset(78% 0 0 0); }
-    46% { opacity: .72; clip-path: inset(42% 0 0 0); filter: blur(10px) brightness(.62); }
-    72% { opacity: .94; clip-path: inset(12% 0 0 0); transform: translateY(18px) rotateX(3deg) scale(.975); filter: blur(4px) brightness(.84); }
-    100% { opacity: 1; clip-path: inset(0 0 0 0); transform: translateY(0) rotateX(0) scale(1); filter: blur(0) brightness(1); }
+  @keyframes artifact-arrive { to { opacity: 1; transform: scale(1); } }
+  @keyframes artifact-settle { to { filter: brightness(1) saturate(1); box-shadow: 0 30px 90px rgba(0,0,0,.68), 0 0 0 1px rgba(255,255,255,.05); } }
+  @keyframes spotlight-search {
+    0% { opacity: 1; -webkit-mask-position: 8% 16%; mask-position: 8% 16%; -webkit-mask-size: 270% 270%; mask-size: 270% 270%; }
+    12% { -webkit-mask-position: 76% 20%; mask-position: 76% 20%; }
+    25% { -webkit-mask-position: 38% 42%; mask-position: 38% 42%; -webkit-mask-size: 245% 245%; mask-size: 245% 245%; }
+    39% { -webkit-mask-position: 88% 62%; mask-position: 88% 62%; }
+    53% { -webkit-mask-position: 16% 76%; mask-position: 16% 76%; -webkit-mask-size: 225% 225%; mask-size: 225% 225%; }
+    67% { -webkit-mask-position: 58% 34%; mask-position: 58% 34%; }
+    80% { -webkit-mask-position: 43% 88%; mask-position: 43% 88%; -webkit-mask-size: 190% 190%; mask-size: 190% 190%; opacity: 1; }
+    91% { -webkit-mask-position: 50% 50%; mask-position: 50% 50%; -webkit-mask-size: 125% 125%; mask-size: 125% 125%; opacity: .72; }
+    100% { -webkit-mask-position: 50% 50%; mask-position: 50% 50%; -webkit-mask-size: 80% 80%; mask-size: 80% 80%; opacity: 0; }
   }
-  @keyframes ticket-glow { 0% { transform: translateX(-130%); opacity: 0; } 18% { opacity: .9; } 100% { transform: translateX(130%); opacity: 0; } }
+  @keyframes haze-search {
+    0% { left: 5%; top: 7%; opacity: 0; transform: scale(.65); }
+    8% { opacity: .65; }
+    19% { left: 66%; top: 10%; transform: scale(.82); }
+    34% { left: 31%; top: 34%; transform: scale(.72); }
+    48% { left: 72%; top: 55%; transform: scale(.9); }
+    63% { left: 10%; top: 68%; transform: scale(.78); }
+    78% { left: 48%; top: 26%; transform: scale(1.08); opacity: .52; }
+    100% { left: 34%; top: 38%; transform: scale(2.8); opacity: 0; }
+  }
+  @keyframes ticket-glow { 0% { transform: translateX(-130%); opacity: 0; } 18% { opacity: .85; } 100% { transform: translateX(130%); opacity: 0; } }
+  @keyframes ambient-in { to { opacity: .1; } }
   @keyframes controls-in { to { opacity: 1; } }
-  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .ticket.visible .ticket-frame { animation-duration: 3.8s; } }
+  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .spotlight-haze { width: 46%; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 </style>

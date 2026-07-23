@@ -247,9 +247,9 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
   .ticket.visible .ticket-frame { animation: artifact-arrive 1.4s .25s ease forwards, artifact-settle 1.8s 10.5s ease forwards; }
   .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; }
   .stage img.zoomed { max-width: none; max-height: none; width: min(1500px, 180vw); }
-  .spotlight-darkness { position: absolute; z-index: 3; inset: -38%; pointer-events: none; background: rgba(0,0,0,.992); -webkit-mask-image: radial-gradient(circle at center, transparent 0 3.5%, rgba(0,0,0,.22) 7%, #000 15%); mask-image: radial-gradient(circle at center, transparent 0 3.5%, rgba(0,0,0,.22) 7%, #000 15%); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 235% 235%; mask-size: 235% 235%; -webkit-mask-position: 15% 18%; mask-position: 15% 18%; }
+  .spotlight-darkness { position: absolute; z-index: 3; inset: -38%; pointer-events: none; background: rgba(0,0,0,.995); -webkit-mask-image: radial-gradient(circle at center, transparent 0 2.4%, rgba(0,0,0,.12) 5%, #000 10%); mask-image: radial-gradient(circle at center, transparent 0 2.4%, rgba(0,0,0,.12) 5%, #000 10%); -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-size: 320% 320%; mask-size: 320% 320%; -webkit-mask-position: 82% 10%; mask-position: 82% 10%; }
   .ticket.visible .spotlight-darkness { animation: spotlight-search 11.5s .4s cubic-bezier(.42,0,.24,1) forwards; }
-  .spotlight-haze { position: absolute; z-index: 4; width: 32%; aspect-ratio: 1; left: 7%; top: 8%; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,242,215,.16) 0, rgba(196,157,93,.07) 28%, transparent 72%); filter: blur(8px); mix-blend-mode: screen; }
+  .spotlight-haze { position: absolute; z-index: 4; width: 20%; aspect-ratio: 1; left: 72%; top: 5%; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,242,215,.12) 0, rgba(196,157,93,.05) 28%, transparent 72%); filter: blur(7px); mix-blend-mode: screen; }
   .ticket.visible .spotlight-haze { animation: haze-search 9.8s .55s cubic-bezier(.4,0,.2,1) forwards; }
   .ticket-glow { position: absolute; z-index: 5; inset: -10%; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.02) 43%, rgba(196,157,93,.28) 50%, rgba(255,255,255,.05) 57%, transparent 70%); transform: translateX(-130%); mix-blend-mode: screen; }
   .ticket.visible .ticket-glow { animation: ticket-glow 2.2s 10.4s ease-in-out forwards; }
@@ -263,29 +263,30 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
   @keyframes artifact-arrive { to { opacity: 1; transform: scale(1); } }
   @keyframes artifact-settle { to { filter: brightness(1) saturate(1); box-shadow: 0 30px 90px rgba(0,0,0,.68), 0 0 0 1px rgba(255,255,255,.05); } }
   @keyframes spotlight-search {
-    0% { opacity: 1; -webkit-mask-position: 8% 16%; mask-position: 8% 16%; -webkit-mask-size: 270% 270%; mask-size: 270% 270%; }
-    12% { -webkit-mask-position: 76% 20%; mask-position: 76% 20%; }
-    25% { -webkit-mask-position: 38% 42%; mask-position: 38% 42%; -webkit-mask-size: 245% 245%; mask-size: 245% 245%; }
-    39% { -webkit-mask-position: 88% 62%; mask-position: 88% 62%; }
-    53% { -webkit-mask-position: 16% 76%; mask-position: 16% 76%; -webkit-mask-size: 225% 225%; mask-size: 225% 225%; }
-    67% { -webkit-mask-position: 58% 34%; mask-position: 58% 34%; }
-    80% { -webkit-mask-position: 43% 88%; mask-position: 43% 88%; -webkit-mask-size: 190% 190%; mask-size: 190% 190%; opacity: 1; }
-    91% { -webkit-mask-position: 50% 50%; mask-position: 50% 50%; -webkit-mask-size: 125% 125%; mask-size: 125% 125%; opacity: .72; }
+    0% { opacity: 1; -webkit-mask-position: 84% 8%; mask-position: 84% 8%; -webkit-mask-size: 340% 340%; mask-size: 340% 340%; }
+    18% { -webkit-mask-position: 93% 14%; mask-position: 93% 14%; -webkit-mask-size: 325% 325%; mask-size: 325% 325%; }
+    34% { -webkit-mask-position: 96% 52%; mask-position: 96% 52%; -webkit-mask-size: 350% 350%; mask-size: 350% 350%; }
+    50% { -webkit-mask-position: 90% 90%; mask-position: 90% 90%; -webkit-mask-size: 360% 360%; mask-size: 360% 360%; }
+    66% { -webkit-mask-position: 12% 94%; mask-position: 12% 94%; -webkit-mask-size: 370% 370%; mask-size: 370% 370%; }
+    80% { -webkit-mask-position: 5% 44%; mask-position: 5% 44%; -webkit-mask-size: 360% 360%; mask-size: 360% 360%; opacity: 1; }
+    90% { -webkit-mask-position: 8% 8%; mask-position: 8% 8%; -webkit-mask-size: 345% 345%; mask-size: 345% 345%; opacity: 1; }
+    96% { -webkit-mask-position: 50% 50%; mask-position: 50% 50%; -webkit-mask-size: 145% 145%; mask-size: 145% 145%; opacity: .7; }
     100% { -webkit-mask-position: 50% 50%; mask-position: 50% 50%; -webkit-mask-size: 80% 80%; mask-size: 80% 80%; opacity: 0; }
   }
   @keyframes haze-search {
-    0% { left: 5%; top: 7%; opacity: 0; transform: scale(.65); }
-    8% { opacity: .65; }
-    19% { left: 66%; top: 10%; transform: scale(.82); }
-    34% { left: 31%; top: 34%; transform: scale(.72); }
-    48% { left: 72%; top: 55%; transform: scale(.9); }
-    63% { left: 10%; top: 68%; transform: scale(.78); }
-    78% { left: 48%; top: 26%; transform: scale(1.08); opacity: .52; }
-    100% { left: 34%; top: 38%; transform: scale(2.8); opacity: 0; }
+    0% { left: 73%; top: 4%; opacity: 0; transform: scale(.55); }
+    9% { opacity: .48; }
+    22% { left: 82%; top: 8%; transform: scale(.62); }
+    38% { left: 86%; top: 42%; transform: scale(.58); }
+    54% { left: 80%; top: 78%; transform: scale(.56); }
+    69% { left: 8%; top: 82%; transform: scale(.54); }
+    82% { left: 2%; top: 37%; transform: scale(.56); opacity: .42; }
+    92% { left: 4%; top: 3%; transform: scale(.6); opacity: .35; }
+    100% { left: 38%; top: 38%; transform: scale(3.4); opacity: 0; }
   }
   @keyframes ticket-glow { 0% { transform: translateX(-130%); opacity: 0; } 18% { opacity: .85; } 100% { transform: translateX(130%); opacity: 0; } }
   @keyframes ambient-in { to { opacity: .1; } }
   @keyframes controls-in { to { opacity: 1; } }
-  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .spotlight-haze { width: 46%; } }
+  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .spotlight-haze { width: 28%; } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 </style>

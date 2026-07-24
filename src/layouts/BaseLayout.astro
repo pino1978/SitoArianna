@@ -21,5 +21,49 @@ const {
   <body>
     <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <slot />
+
+    <script is:inline>
+      (() => {
+        const setMenuState = (open) => {
+          const header = document.querySelector("[data-header]");
+          const toggle = header?.querySelector(".nav-toggle");
+          const nav = header?.querySelector(".primary-nav");
+
+          toggle?.setAttribute("aria-expanded", String(open));
+          nav?.toggleAttribute("data-open", open);
+          document.body.classList.toggle("menu-open", open);
+        };
+
+        document.addEventListener("click", (event) => {
+          const target = event.target instanceof Element ? event.target : null;
+          if (!target) return;
+
+          const toggle = target.closest(".nav-toggle");
+          if (toggle) {
+            event.stopImmediatePropagation();
+            const isOpen = toggle.getAttribute("aria-expanded") === "true";
+            setMenuState(!isOpen);
+            return;
+          }
+
+          const menuLink = target.closest(".primary-nav a");
+          if (menuLink) {
+            event.stopImmediatePropagation();
+            setMenuState(false);
+          }
+        }, true);
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key !== "Escape") return;
+          const toggle = document.querySelector("[data-header] .nav-toggle");
+          if (toggle?.getAttribute("aria-expanded") === "true") {
+            setMenuState(false);
+            toggle.focus();
+          }
+        });
+
+        window.addEventListener("pageshow", () => setMenuState(false));
+      })();
+    </script>
   </body>
 </html>

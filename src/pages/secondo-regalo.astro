@@ -245,9 +245,9 @@ form button { min-height: 54px; border: 1px solid #c49d5d; border-radius: 10px; 
 .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; }
 .stage img.zoomed { max-width: none; max-height: none; width: min(1500px, 180vw); }
 .spotlight-darkness { position: fixed; z-index: 6; inset: 0; pointer-events: none; opacity: 1; background: radial-gradient(circle at var(--spot-x) var(--spot-y), transparent 0 var(--spot-core), rgba(0,0,0,.72) calc(var(--spot-core) + 1.8vmin), #000 var(--spot-falloff)); }
-.ticket.visible .spotlight-darkness { animation: spotlight-search 18s .25s linear forwards; }
+.ticket.visible .spotlight-darkness { animation: spotlight-search 18s .25s cubic-bezier(.42,0,.24,1) forwards; }
 .spotlight-haze { position: fixed; z-index: 7; width: min(32vw,32vh); aspect-ratio: 1; left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,246,225,.18) 0, rgba(196,157,93,.065) 34%, transparent 72%); filter: blur(10px); mix-blend-mode: screen; }
-.ticket.visible .spotlight-haze { animation: haze-search 18s .25s linear forwards; }
+.ticket.visible .spotlight-haze { animation: haze-search 18s .25s cubic-bezier(.42,0,.24,1) forwards; }
 .ticket-glow { position: absolute; z-index: 5; inset: -10%; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.02) 43%, rgba(196,157,93,.28) 50%, rgba(255,255,255,.05) 57%, transparent 70%); transform: translateX(-130%); mix-blend-mode: screen; }
 .ticket.visible .ticket-glow { animation: ticket-glow 2.5s 18s ease-in-out forwards; }
 .zoom { position: fixed; z-index: 8; top: max(16px, env(safe-area-inset-top)); right: 16px; min-height: 38px; padding: 0 14px; border: 1px solid rgba(247,240,228,.28); border-radius: 999px; background: rgba(0,0,0,.58); color: rgba(247,240,228,.86); cursor: pointer; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; opacity: 0; }
@@ -261,30 +261,34 @@ form button { min-height: 54px; border: 1px solid #c49d5d; border-radius: 10px; 
 @keyframes artifact-settle { to { filter: brightness(1) saturate(1); box-shadow: 0 30px 90px rgba(0,0,0,.68), 0 0 0 1px rgba(255,255,255,.05); } }
 @keyframes spotlight-search {
   0% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-top); --spot-core: 8vmin; --spot-falloff: 17vmin; opacity: 1; }
-  6% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .84); --spot-y: var(--ticket-top); --spot-core: 6vmin; --spot-falloff: 14vmin; }
-  13% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .64); --spot-y: var(--ticket-top); --spot-core: 9vmin; --spot-falloff: 19vmin; }
-  20% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .42); --spot-y: var(--ticket-top); --spot-core: 6.5vmin; --spot-falloff: 15vmin; }
-  27% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .18); --spot-y: var(--ticket-top); --spot-core: 8vmin; --spot-falloff: 18vmin; }
-  33% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-top); --spot-core: 5.5vmin; --spot-falloff: 13vmin; }
-  40% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .28); --spot-core: 8vmin; --spot-falloff: 18vmin; }
-  48% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .62); --spot-core: 6vmin; --spot-falloff: 14vmin; }
-  55% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-bottom); --spot-core: 9vmin; --spot-falloff: 19vmin; }
-  63% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .28); --spot-y: var(--ticket-bottom); --spot-core: 6vmin; --spot-falloff: 14vmin; }
-  71% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .62); --spot-y: var(--ticket-bottom); --spot-core: 8.5vmin; --spot-falloff: 18vmin; }
-  79% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-bottom); --spot-core: 6vmin; --spot-falloff: 14vmin; }
-  86% { --spot-x: var(--ticket-right); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .58); --spot-core: 8vmin; --spot-falloff: 18vmin; }
-  92% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-top); --spot-core: 6.5vmin; --spot-falloff: 15vmin; opacity: 1; }
+  8% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .86); --spot-y: var(--ticket-top); --spot-core: 6.2vmin; --spot-falloff: 14vmin; }
+  16% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .70); --spot-y: var(--ticket-top); --spot-core: 8.8vmin; --spot-falloff: 18.5vmin; }
+  23% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .58); --spot-y: var(--ticket-top); --spot-core: 6.6vmin; --spot-falloff: 15vmin; }
+  30% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .72); --spot-y: var(--ticket-top); --spot-core: 8vmin; --spot-falloff: 17.5vmin; }
+  38% { --spot-x: var(--ticket-right); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .30); --spot-core: 6vmin; --spot-falloff: 14vmin; opacity: 1; }
+  45% { --spot-x: var(--ticket-right); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .48); --spot-core: 5.5vmin; --spot-falloff: 13vmin; opacity: 0; }
+  49% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-bottom); --spot-core: 5.5vmin; --spot-falloff: 13vmin; opacity: 0; }
+  54% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-bottom); --spot-core: 8.8vmin; --spot-falloff: 19vmin; opacity: 1; }
+  62% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .18); --spot-y: var(--ticket-bottom); --spot-core: 6vmin; --spot-falloff: 14vmin; }
+  69% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .34); --spot-y: var(--ticket-bottom); --spot-core: 8.3vmin; --spot-falloff: 18vmin; }
+  76% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .82); --spot-core: 6.2vmin; --spot-falloff: 14.5vmin; }
+  83% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .60); --spot-core: 8vmin; --spot-falloff: 17.5vmin; }
+  90% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .42); --spot-core: 6.5vmin; --spot-falloff: 15vmin; opacity: 1; }
   96% { --spot-x: 50vw; --spot-y: 50vh; --spot-core: 7vmin; --spot-falloff: 16vmin; opacity: 1; }
   97.5% { --spot-x: 50vw; --spot-y: 50vh; --spot-core: 7vmin; --spot-falloff: 16vmin; opacity: 1; }
   100% { --spot-x: 50vw; --spot-y: 50vh; --spot-core: 70vmax; --spot-falloff: 82vmax; opacity: 0; }
 }
 @keyframes haze-search {
   0% { left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); opacity: .62; transform: scale(1); }
-  13% { left: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .64 - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); transform: scale(1.18); }
-  33% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); transform: scale(.78); }
-  55% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-bottom) - min(16vw,16vh)); transform: scale(1.16); }
-  79% { left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-bottom) - min(16vw,16vh)); transform: scale(.82); }
-  92% { left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); transform: scale(1.04); opacity: .55; }
+  16% { left: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .70 - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); transform: scale(1.15); }
+  23% { left: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .58 - min(16vw,16vh)); top: calc(var(--ticket-top) - min(16vw,16vh)); transform: scale(.84); }
+  38% { left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .30 - min(16vw,16vh)); transform: scale(.9); opacity: .55; }
+  45% { left: calc(var(--ticket-right) - min(16vw,16vh)); top: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .48 - min(16vw,16vh)); transform: scale(.72); opacity: 0; }
+  49% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-bottom) - min(16vw,16vh)); transform: scale(.72); opacity: 0; }
+  54% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-bottom) - min(16vw,16vh)); transform: scale(1.18); opacity: .6; }
+  69% { left: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .34 - min(16vw,16vh)); top: calc(var(--ticket-bottom) - min(16vw,16vh)); transform: scale(1.08); }
+  76% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .82 - min(16vw,16vh)); transform: scale(.82); }
+  90% { left: calc(var(--ticket-left) - min(16vw,16vh)); top: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .42 - min(16vw,16vh)); transform: scale(1.03); opacity: .52; }
   97.5% { left: 34vw; top: 34vh; transform: scale(.85); opacity: .45; }
   100% { left: 34vw; top: 34vh; transform: scale(4); opacity: 0; }
 }

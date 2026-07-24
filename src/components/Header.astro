@@ -250,12 +250,37 @@ const isActive = (href) => {
   const header = document.querySelector("[data-header]");
   const toggle = header?.querySelector(".nav-toggle");
   const nav = header?.querySelector(".primary-nav");
+  const backdrop = document.querySelector("[data-menu-backdrop]");
+  const navAnchor = document.createComment("mobile-nav-anchor");
+  const toggleAnchor = document.createComment("mobile-toggle-anchor");
+  const backdropAnchor = document.createComment("mobile-backdrop-anchor");
+
+  toggle?.before(toggleAnchor);
+  nav?.before(navAnchor);
+  backdrop?.before(backdropAnchor);
+
+  const mountMobileNavigation = () => {
+    const isMobile = window.matchMedia("(max-width: 640px)").matches;
+
+    if (isMobile) {
+      if (toggle?.parentElement !== document.body) document.body.appendChild(toggle);
+      if (nav?.parentElement !== document.body) document.body.appendChild(nav);
+      if (backdrop?.parentElement !== document.body) document.body.appendChild(backdrop);
+      return;
+    }
+
+    if (toggleAnchor.parentNode && toggle) toggleAnchor.parentNode.insertBefore(toggle, toggleAnchor.nextSibling);
+    if (navAnchor.parentNode && nav) navAnchor.parentNode.insertBefore(nav, navAnchor.nextSibling);
+    if (backdropAnchor.parentNode && backdrop) backdropAnchor.parentNode.insertBefore(backdrop, backdropAnchor.nextSibling);
+  };
 
   const setMenuState = (open) => {
     toggle?.setAttribute("aria-expanded", String(open));
     nav?.toggleAttribute("data-open", open);
     document.body.classList.toggle("menu-open", open);
   };
+
+  mountMobileNavigation();
 
   toggle?.addEventListener("click", () => {
     const isOpen = toggle.getAttribute("aria-expanded") === "true";
@@ -274,6 +299,7 @@ const isActive = (href) => {
   });
 
   window.addEventListener("resize", () => {
+    mountMobileNavigation();
     if (window.innerWidth > 640 && toggle?.getAttribute("aria-expanded") === "true") {
       setMenuState(false);
     }

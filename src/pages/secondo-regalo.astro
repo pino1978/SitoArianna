@@ -47,7 +47,7 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
         <a class="back" href="/">← Torna al sito</a>
         <button class="zoom" type="button" data-zoom aria-pressed="false">Ingrandisci</button>
         <div class="stage">
-          <div class="ticket-frame">
+          <div class="ticket-frame" data-ticket-frame>
             <div class="ticket-glow" aria-hidden="true"></div>
             <img src={giftImage} alt="Biglietto per il concerto di Geolier allo Stadio Diego Armando Maradona, 14 giugno 2027" data-image />
           </div>
@@ -62,6 +62,7 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
       const unlock = document.querySelector("[data-unlock]");
       const reveal = document.querySelector("[data-reveal]");
       const ticket = document.querySelector("[data-ticket]");
+      const frame = document.querySelector("[data-ticket-frame]");
       const form = document.querySelector("[data-form]");
       const input = document.querySelector("#gift-pin");
       const message = document.querySelector("[data-message]");
@@ -69,6 +70,16 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
       const zoom = document.querySelector("[data-zoom]");
       const audio = document.querySelector("[data-audio]");
       let fadeTimer;
+
+      const syncSpotlightToTicket = () => {
+        if (!ticket || !frame) return;
+        const rect = frame.getBoundingClientRect();
+        const edge = 6;
+        ticket.style.setProperty("--ticket-left", `${Math.max(edge, rect.left + edge)}px`);
+        ticket.style.setProperty("--ticket-right", `${Math.min(window.innerWidth - edge, rect.right - edge)}px`);
+        ticket.style.setProperty("--ticket-top", `${Math.max(edge, rect.top + edge)}px`);
+        ticket.style.setProperty("--ticket-bottom", `${Math.min(window.innerHeight - edge, rect.bottom - edge)}px`);
+      };
 
       const playUnlockSound = () => {
         try {
@@ -81,7 +92,6 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
           master.gain.exponentialRampToValueAtTime(0.22, now + 0.03);
           master.gain.exponentialRampToValueAtTime(0.0001, now + 1.9);
           master.connect(ctx.destination);
-
           const tone = (frequency, start, duration, type = "sine", volume = 0.18) => {
             const oscillator = ctx.createOscillator();
             const gain = ctx.createGain();
@@ -96,11 +106,9 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
             oscillator.start(now + start);
             oscillator.stop(now + start + duration + 0.05);
           };
-
           tone(180, 0, 0.65, "sine", 0.28);
           tone(360, 0.08, 0.5, "triangle", 0.16);
           tone(720, 0.28, 0.42, "sine", 0.1);
-
           const buffer = ctx.createBuffer(1, ctx.sampleRate * 0.9, ctx.sampleRate);
           const data = buffer.getChannelData(0);
           for (let i = 0; i < data.length; i += 1) data[i] = (Math.random() * 2 - 1) * (1 - i / data.length);
@@ -129,8 +137,7 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
         audio.pause();
         audio.currentTime = 0;
         audio.volume = 0;
-        const playback = audio.play();
-        playback?.catch(() => {});
+        audio.play()?.catch(() => {});
         window.setTimeout(() => {
           fadeTimer = window.setInterval(() => {
             if (audio.volume >= 0.62) {
@@ -162,6 +169,8 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
 
       resetExperience();
       window.addEventListener("pageshow", resetExperience);
+      window.addEventListener("resize", syncSpotlightToTicket);
+      image?.addEventListener("load", syncSpotlightToTicket);
 
       form?.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -172,7 +181,6 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
           input.select();
           return;
         }
-
         message.textContent = "";
         navigator.vibrate?.([70, 45, 120]);
         playUnlockSound();
@@ -180,11 +188,13 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
         unlock.hidden = true;
         reveal.hidden = false;
         requestAnimationFrame(() => reveal.classList.add("visible"));
-
         window.setTimeout(() => {
           reveal.hidden = true;
           ticket.hidden = false;
-          requestAnimationFrame(() => ticket.classList.add("visible"));
+          requestAnimationFrame(() => {
+            syncSpotlightToTicket();
+            ticket.classList.add("visible");
+          });
         }, 3100);
       });
 
@@ -198,16 +208,17 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
         const active = image.classList.toggle("zoomed");
         zoom.setAttribute("aria-pressed", String(active));
         zoom.textContent = active ? "Riduci" : "Ingrandisci";
+        requestAnimationFrame(syncSpotlightToTicket);
       });
     </script>
   </body>
 </html>
 
 <style is:global>
-  @property --spot-x { syntax: "<percentage>"; inherits: false; initial-value: 90%; }
-  @property --spot-y { syntax: "<percentage>"; inherits: false; initial-value: 8%; }
-  @property --spot-core { syntax: "<length>"; inherits: false; initial-value: 5vmin; }
-  @property --spot-falloff { syntax: "<length>"; inherits: false; initial-value: 18vmin; }
+  @property --spot-x { syntax: "<length>"; inherits: false; initial-value: 90vw; }
+  @property --spot-y { syntax: "<length>"; inherits: false; initial-value: 8vh; }
+  @property --spot-core { syntax: "<length>"; inherits: false; initial-value: 8vmin; }
+  @property --spot-falloff { syntax: "<length>"; inherits: false; initial-value: 22vmin; }
   :root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background: #050505; }
   * { box-sizing: border-box; }
   html, body { width: 100%; min-height: 100%; margin: 0; background: #050505; color: #f7f0e4; }
@@ -240,21 +251,21 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
   .reveal.visible .beam { animation: beam-pass 1.9s .15s ease-out forwards; }
   .flash { position: absolute; inset: 0; background: #7b101b; opacity: 0; mix-blend-mode: screen; }
   .reveal.visible .flash { animation: flash 1.5s 1.85s ease-out forwards; }
-  .ticket { position: fixed; inset: 0; display: grid; overflow: hidden; background: #000; opacity: 0; }
-  .ticket.visible { animation: ticket-screen 2s cubic-bezier(.22,.7,.2,1) forwards; }
+  .ticket { --ticket-left: 6px; --ticket-right: calc(100vw - 6px); --ticket-top: 6px; --ticket-bottom: calc(100vh - 6px); position: fixed; inset: 0; display: grid; overflow: hidden; background: #000; opacity: 0; }
+  .ticket.visible { animation: ticket-screen .45s ease forwards; }
   .ambient { position: absolute; border-radius: 999px; filter: blur(70px); opacity: 0; pointer-events: none; }
   .ticket.visible .ambient { animation: ambient-in 2.8s 15.5s ease forwards; }
   .ambient-one { width: 38vw; height: 38vw; left: -12vw; top: 8vh; background: #6d111b; }
   .ambient-two { width: 30vw; height: 30vw; right: -10vw; bottom: 2vh; background: #8c6a38; }
   .stage { position: relative; z-index: 2; width: 100%; height: 100svh; overflow: auto; display: grid; place-items: center; padding: max(64px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom)); touch-action: pinch-zoom; perspective: 1200px; }
-  .ticket-frame { position: relative; opacity: 0; transform: scale(.985); filter: brightness(.72) saturate(.78) blur(2px); overflow: hidden; border-radius: 3px; box-shadow: 0 30px 90px rgba(0,0,0,.8); }
-  .ticket.visible .ticket-frame { animation: artifact-arrive 3.2s .4s cubic-bezier(.22,.7,.2,1) forwards, artifact-settle 2.8s 15.8s ease forwards; }
+  .ticket-frame { position: relative; opacity: 1; transform: scale(.985); filter: brightness(.72) saturate(.78) blur(2px); overflow: hidden; border-radius: 3px; box-shadow: 0 30px 90px rgba(0,0,0,.8); }
+  .ticket.visible .ticket-frame { animation: artifact-arrive 1.4s .15s cubic-bezier(.22,.7,.2,1) forwards, artifact-settle 2.8s 15.8s ease forwards; }
   .stage img { display: block; max-width: 100%; max-height: calc(100svh - 90px); object-fit: contain; transform-origin: center; transition: transform 250ms ease; user-select: none; }
   .stage img.zoomed { max-width: none; max-height: none; width: min(1500px, 180vw); }
   .spotlight-darkness { position: fixed; z-index: 6; inset: 0; pointer-events: none; opacity: 1; background: radial-gradient(circle at var(--spot-x) var(--spot-y), transparent 0 var(--spot-core), rgba(0,0,0,.2) calc(var(--spot-core) + 4vmin), rgba(0,0,0,.992) var(--spot-falloff)); }
-  .ticket.visible .spotlight-darkness { animation: spotlight-search 17.5s 1s cubic-bezier(.45,0,.22,1) forwards; }
-  .spotlight-haze { position: fixed; z-index: 7; width: min(30vw,30vh); aspect-ratio: 1; left: 75vw; top: 1vh; border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,242,215,.15) 0, rgba(196,157,93,.065) 28%, transparent 72%); filter: blur(9px); mix-blend-mode: screen; }
-  .ticket.visible .spotlight-haze { animation: haze-search 16.3s 1.15s cubic-bezier(.45,0,.22,1) forwards; }
+  .ticket.visible .spotlight-darkness { animation: spotlight-search 17.5s .25s cubic-bezier(.45,0,.22,1) forwards; }
+  .spotlight-haze { position: fixed; z-index: 7; width: min(36vw,36vh); aspect-ratio: 1; left: calc(var(--ticket-right) - min(18vw,18vh)); top: calc(var(--ticket-top) - min(18vw,18vh)); border-radius: 50%; pointer-events: none; opacity: 0; background: radial-gradient(circle, rgba(255,242,215,.2) 0, rgba(196,157,93,.09) 30%, transparent 74%); filter: blur(9px); mix-blend-mode: screen; }
+  .ticket.visible .spotlight-haze { animation: haze-search 16.3s .35s cubic-bezier(.45,0,.22,1) forwards; }
   .ticket-glow { position: absolute; z-index: 5; inset: -10%; pointer-events: none; opacity: 0; background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.02) 43%, rgba(196,157,93,.28) 50%, rgba(255,255,255,.05) 57%, transparent 70%); transform: translateX(-130%); mix-blend-mode: screen; }
   .ticket.visible .ticket-glow { animation: ticket-glow 3s 16.4s ease-in-out forwards; }
   .zoom { position: fixed; z-index: 8; top: max(16px, env(safe-area-inset-top)); right: 16px; min-height: 38px; padding: 0 14px; border: 1px solid rgba(247,240,228,.28); border-radius: 999px; background: rgba(0,0,0,.58); color: rgba(247,240,228,.86); cursor: pointer; font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; opacity: 0; }
@@ -263,40 +274,36 @@ const soundtrack = "/images/Geolier%2C%20Ultimo%20-%20L'ULTIMA%20POESIA%20(Offic
   @keyframes reveal-copy { to { opacity: 1; transform: translateY(0) scale(1); } }
   @keyframes beam-pass { 0% { left: -55%; opacity: 0; } 18% { opacity: 1; } 100% { left: 125%; opacity: 0; } }
   @keyframes flash { 0%, 70% { opacity: 0; } 82% { opacity: .42; } 100% { opacity: 0; } }
-  @keyframes ticket-screen { 0% { opacity: 0; } 55% { opacity: .42; } 100% { opacity: 1; } }
-  @keyframes artifact-arrive { 0% { opacity: 0; transform: scale(.97); filter: brightness(.4) saturate(.7) blur(8px); } 55% { opacity: .55; } 100% { opacity: 1; transform: scale(1); filter: brightness(.72) saturate(.78) blur(2px); } }
+  @keyframes ticket-screen { to { opacity: 1; } }
+  @keyframes artifact-arrive { 0% { transform: scale(.985); filter: brightness(.62) saturate(.74) blur(2px); } 100% { transform: scale(1); filter: brightness(.72) saturate(.78) blur(2px); } }
   @keyframes artifact-settle { to { filter: brightness(1) saturate(1) blur(0); box-shadow: 0 30px 90px rgba(0,0,0,.68), 0 0 0 1px rgba(255,255,255,.05); } }
   @keyframes spotlight-search {
-    0% { --spot-x: 90%; --spot-y: 8%; --spot-core: 5vmin; --spot-falloff: 18vmin; opacity: 1; }
-    10% { --spot-x: 72%; --spot-y: 6%; }
-    20% { --spot-x: 42%; --spot-y: 5%; --spot-core: 5.5vmin; --spot-falloff: 19vmin; }
-    30% { --spot-x: 12%; --spot-y: 7%; }
-    42% { --spot-x: 6%; --spot-y: 38%; }
-    54% { --spot-x: 7%; --spot-y: 84%; --spot-core: 6vmin; --spot-falloff: 20vmin; }
-    65% { --spot-x: 38%; --spot-y: 94%; }
-    76% { --spot-x: 82%; --spot-y: 93%; --spot-core: 6.5vmin; --spot-falloff: 21vmin; }
-    86% { --spot-x: 94%; --spot-y: 58%; }
-    92% { --spot-x: 93%; --spot-y: 18%; --spot-core: 8vmin; --spot-falloff: 25vmin; opacity: .95; }
-    96% { --spot-x: 58%; --spot-y: 7%; --spot-core: 10vmin; --spot-falloff: 30vmin; opacity: .88; }
-    98.5% { --spot-x: 50%; --spot-y: 50%; --spot-core: 28vmin; --spot-falloff: 56vmin; opacity: .7; }
-    100% { --spot-x: 50%; --spot-y: 50%; --spot-core: 60vmax; --spot-falloff: 75vmax; opacity: 0; }
+    0% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-top); --spot-core: 8vmin; --spot-falloff: 22vmin; opacity: 1; }
+    10% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .72); --spot-y: var(--ticket-top); }
+    20% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .42); --spot-y: var(--ticket-top); --spot-core: 7.5vmin; --spot-falloff: 21vmin; }
+    30% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-top); }
+    42% { --spot-x: var(--ticket-left); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .38); }
+    54% { --spot-x: var(--ticket-left); --spot-y: var(--ticket-bottom); --spot-core: 7vmin; --spot-falloff: 21vmin; }
+    65% { --spot-x: calc(var(--ticket-left) + (var(--ticket-right) - var(--ticket-left)) * .38); --spot-y: var(--ticket-bottom); }
+    76% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-bottom); --spot-core: 7vmin; --spot-falloff: 22vmin; }
+    86% { --spot-x: var(--ticket-right); --spot-y: calc(var(--ticket-top) + (var(--ticket-bottom) - var(--ticket-top)) * .58); }
+    92% { --spot-x: var(--ticket-right); --spot-y: var(--ticket-top); --spot-core: 9vmin; --spot-falloff: 26vmin; opacity: .95; }
+    96% { --spot-x: 50vw; --spot-y: var(--ticket-top); --spot-core: 11vmin; --spot-falloff: 32vmin; opacity: .88; }
+    98.5% { --spot-x: 50vw; --spot-y: 50vh; --spot-core: 28vmin; --spot-falloff: 56vmin; opacity: .7; }
+    100% { --spot-x: 50vw; --spot-y: 50vh; --spot-core: 60vmax; --spot-falloff: 75vmax; opacity: 0; }
   }
   @keyframes haze-search {
-    0% { left: 75vw; top: 1vh; opacity: 0; transform: scale(.62); }
-    8% { opacity: .58; }
-    18% { left: 58vw; top: -2vh; transform: scale(.7); }
-    30% { left: 25vw; top: -3vh; transform: scale(.68); }
-    42% { left: -4vw; top: 23vh; transform: scale(.72); }
-    55% { left: -4vw; top: 69vh; transform: scale(.76); }
-    68% { left: 23vw; top: 77vh; transform: scale(.82); }
-    80% { left: 69vw; top: 76vh; transform: scale(.78); }
-    90% { left: 77vw; top: 35vh; transform: scale(.84); opacity: .5; }
-    96% { left: 54vw; top: -2vh; transform: scale(1.05); opacity: .42; }
-    100% { left: 34vw; top: 34vh; transform: scale(3.6); opacity: 0; }
+    0% { left: calc(var(--ticket-right) - min(18vw,18vh)); top: calc(var(--ticket-top) - min(18vw,18vh)); opacity: 0; transform: scale(.78); }
+    8% { opacity: .68; }
+    30% { left: calc(var(--ticket-left) - min(18vw,18vh)); top: calc(var(--ticket-top) - min(18vw,18vh)); transform: scale(.74); }
+    55% { left: calc(var(--ticket-left) - min(18vw,18vh)); top: calc(var(--ticket-bottom) - min(18vw,18vh)); transform: scale(.78); }
+    80% { left: calc(var(--ticket-right) - min(18vw,18vh)); top: calc(var(--ticket-bottom) - min(18vw,18vh)); transform: scale(.8); }
+    92% { left: calc(var(--ticket-right) - min(18vw,18vh)); top: calc(var(--ticket-top) - min(18vw,18vh)); transform: scale(.88); opacity: .55; }
+    100% { left: 32vw; top: 32vh; transform: scale(3.6); opacity: 0; }
   }
   @keyframes ticket-glow { 0% { transform: translateX(-130%); opacity: 0; } 20% { opacity: .75; } 100% { transform: translateX(130%); opacity: 0; } }
   @keyframes ambient-in { to { opacity: .1; } }
   @keyframes controls-in { to { opacity: 1; } }
-  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .spotlight-haze { width: min(40vw,40vh); } }
+  @media (max-width: 640px) { .card { padding: 34px 22px; border-radius: 16px; } .back { left: 14px; font-size: .64rem; } .stage img.zoomed { width: 190vw; } .ambient { filter: blur(48px); } .spotlight-haze { width: min(46vw,46vh); } }
   @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 </style>

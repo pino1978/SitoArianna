@@ -69,7 +69,7 @@ const isActive = (href) => {
   @media (max-width: 1000px) {
     .nav-toggle {
       position: fixed !important;
-      z-index: 30 !important;
+      z-index: 1004 !important;
       top: max(20px, env(safe-area-inset-top)) !important;
       right: 16px !important;
       margin: 0 !important;
@@ -78,9 +78,18 @@ const isActive = (href) => {
   }
 
   @media (max-width: 640px) {
+    body.menu-open .hero {
+      z-index: 1000 !important;
+      overflow: visible !important;
+    }
+
+    body.menu-open .site-header {
+      z-index: 1002 !important;
+    }
+
     .menu-backdrop {
       position: fixed;
-      z-index: 19;
+      z-index: 1001;
       inset: 0;
       display: block;
       background: linear-gradient(90deg, rgba(0,0,0,.03) 0%, rgba(26,18,10,.08) 38%, rgba(64,42,18,.18) 68%, rgba(8,7,6,.34) 100%);
@@ -99,7 +108,7 @@ const isActive = (href) => {
 
     .primary-nav {
       position: fixed !important;
-      z-index: 21 !important;
+      z-index: 1003 !important;
       top: 0 !important;
       right: 0 !important;
       bottom: 0 !important;

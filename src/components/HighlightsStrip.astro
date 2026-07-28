@@ -24,20 +24,24 @@ const highlights = [
     </div>
   </div>
 
-  <div class="highlight-rail" aria-label="Video in evidenza non disponibili">
-    {highlights.map((item) => {
-      const image = imageFor(item.image.image);
-      return (
-        <article class="highlight-card" aria-disabled="true">
-          <div class="highlight-preview">
-            <img src={image.src} alt={item.image.alt} loading="lazy" width={image.width} height={image.height} />
-            <time>{item.duration}</time>
-          </div>
-          <h3>{item.title}</h3>
-          <p>{item.meta}</p>
-        </article>
-      );
-    })}
+  <div class="highlight-stage">
+    <div class="archive-watermark" aria-hidden="true">Archivio in aggiornamento</div>
+
+    <div class="highlight-rail" aria-label="Video in evidenza non disponibili">
+      {highlights.map((item) => {
+        const image = imageFor(item.image.image);
+        return (
+          <article class="highlight-card" aria-disabled="true">
+            <div class="highlight-preview">
+              <img src={image.src} alt={item.image.alt} loading="lazy" width={image.width} height={image.height} />
+              <time>{item.duration}</time>
+            </div>
+            <h3>{item.title}</h3>
+            <p>{item.meta}</p>
+          </article>
+        );
+      })}
+    </div>
   </div>
 </section>
 
@@ -51,7 +55,29 @@ const highlights = [
   .section-head { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
   .section-head p { margin: 0 0 3px; color: var(--gold-bright); font-family: var(--font-ui); font-size: .66rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
   .section-head h2 { margin: 0; color: var(--ivory); font-family: var(--font-display); font-size: clamp(1.15rem, 1.55vw, 1.65rem); line-height: 1; letter-spacing: .04em; text-transform: uppercase; }
-  .highlight-rail { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .highlight-stage { position: relative; isolation: isolate; overflow: hidden; }
+  .archive-watermark {
+    position: absolute;
+    z-index: 3;
+    top: 34%;
+    left: 50%;
+    width: max-content;
+    max-width: 100%;
+    transform: translate(-50%, -50%);
+    color: rgba(255, 255, 255, .13);
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 6.2vw, 7.5rem);
+    font-weight: 900;
+    line-height: .82;
+    letter-spacing: .045em;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    pointer-events: none;
+    user-select: none;
+    text-shadow: 0 1px 18px rgba(0, 0, 0, .38);
+  }
+  .highlight-rail { position: relative; z-index: 1; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
   .highlight-card { min-width: 0; cursor: default; }
   .highlight-preview { position: relative; display: block; aspect-ratio: 16 / 7.2; overflow: hidden; border: 1px solid rgba(185, 134, 50, .72); border-radius: 4px; background: #050505; pointer-events: none; }
   .highlight-preview::after { position: absolute; inset: 0; content: ""; background: linear-gradient(180deg, transparent 45%, rgba(0,0,0,.56)); }
@@ -59,10 +85,19 @@ const highlights = [
   .highlight-card time { position: absolute; z-index: 2; right: 7px; bottom: 5px; color: #fff; font-family: var(--font-ui); font-size: .62rem; font-weight: 800; }
   .highlight-card h3 { margin: 7px 0 2px; color: var(--ivory); font-family: var(--font-display); font-size: .78rem; line-height: 1.08; letter-spacing: .035em; text-transform: uppercase; }
   .highlight-card p { margin: 0; color: var(--ivory-soft); font-size: .66rem; }
-  @media (max-width: 1000px) { .highlight-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (max-width: 1000px) {
+    .highlight-rail { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .archive-watermark { top: 25%; }
+  }
   @media (max-width: 640px) {
     .highlights-strip { padding: 22px 0 26px; }
     .section-head { align-items: start; padding: 0 18px; }
+    .highlight-stage { overflow: hidden; }
+    .archive-watermark {
+      top: 30%;
+      font-size: clamp(1.65rem, 9vw, 2.6rem);
+      letter-spacing: .025em;
+    }
     .highlight-rail { display: flex; gap: 12px; overflow-x: auto; padding: 0 18px 8px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
     .highlight-card { flex: 0 0 78vw; scroll-snap-align: start; }
     .highlight-preview { aspect-ratio: 16 / 8.6; }

@@ -1,307 +1,51 @@
 ---
-import navigation from "../data/navigation.json";
 import logo from "../assets/svg/logo-arianna-milano.svg";
 import yingHeaderMark from "../assets/images/ying-header-mark.png";
-
-const currentPath = Astro.url.pathname;
-const isActive = (href) => {
-  if (href.includes("#")) return false;
-  return href === "/" ? currentPath === "/" : currentPath.startsWith(href);
-};
 ---
-<header class="site-header" data-header>
-  <a class="brand-mark" href="/" aria-label="Arianna Milano, torna alla Home">
+<header class="site-header site-header--locked" data-header>
+  <div class="brand-mark" aria-label="Arianna Milano">
     <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
-  </a>
-
-  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-    <span class="sr-only">Apri menu</span>
-    <span aria-hidden="true"></span>
-    <span aria-hidden="true"></span>
-    <span aria-hidden="true"></span>
-  </button>
-
-  <nav class="primary-nav" id="primary-navigation" aria-label="Navigazione principale">
-    {navigation.map((item) => (
-      <a href={item.href} class:list={{ "is-active": isActive(item.href) }} aria-current={isActive(item.href) ? "page" : undefined}>
-        <span class="nav-icon" aria-hidden="true">
-          {item.label === "Home" && <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" /></svg>}
-          {item.label === "Highlights" && <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m10 9 5 3-5 3z" /></svg>}
-          {item.label === "Profilo" && <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.7-4 3-6 7-6s6.3 2 7 6" /></svg>}
-          {item.label === "Yīng" && <svg viewBox="0 0 24 24"><path d="M4 13c4-1 6-4 8-8 1.5 3 4 5 8 6-3 1-5 3-6 6l-2-3-3 4-1-4z" /><path d="M12 14v6" /></svg>}
-          {item.label === "Risultati" && <svg viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM9 20h6M12 13v7M8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4" /></svg>}
-          {item.label === "Media" && <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><circle cx="9" cy="10" r="2" /><path d="m5 17 4-4 3 3 2-2 5 3" /></svg>}
-          {item.label === "Contatti" && <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>}
-          {item.label === "Scopri il secondo regalo" && <svg viewBox="0 0 24 24"><path d="M4 10h16v10H4zM3 7h18v3H3zM12 7v13" /><path d="M12 7H8.5a2.5 2.5 0 1 1 2.5-2.5V7Zm0 0h3.5A2.5 2.5 0 1 0 13 4.5V7Z" /></svg>}
-        </span>
-        <span class="nav-label">{item.label}</span>
-      </a>
-    ))}
-
-    <div class="mobile-nav-footer" aria-hidden="true">
-      <div class="mobile-nav-footer__line"></div>
-      <img src={yingHeaderMark.src} alt="" width={yingHeaderMark.width} height={yingHeaderMark.height} />
-      <p class="mobile-nav-footer__signature">
-        <span class="mobile-nav-footer__name">Yīng</span>
-        <span class="mobile-nav-footer__separator">·</span>
-        <span class="mobile-nav-footer__ideogram">鹰</span>
-      </p>
-    </div>
-  </nav>
+  </div>
 
   <img class="ying-header-mark" src={yingHeaderMark.src} alt="" aria-hidden="true" width={yingHeaderMark.width} height={yingHeaderMark.height} />
 
-  <label class="language-select">
-    <span class="sr-only">Lingua</span>
-    <select aria-label="Seleziona lingua">
-      <option value="it" selected>IT</option>
-      <option value="en">EN</option>
-    </select>
-  </label>
+  <div class="language-select" aria-hidden="true">
+    <span>IT</span>
+  </div>
 </header>
-<div class="menu-backdrop" data-menu-backdrop aria-hidden="true"></div>
 
 <style is:global>
-  .nav-icon { display: none; }
-  .menu-backdrop { display: none; }
-  .mobile-nav-footer { display: none; }
+  .site-header--locked {
+    grid-template-columns: 188px 1fr auto auto;
+  }
+
+  .site-header--locked .brand-mark {
+    pointer-events: none;
+  }
+
+  .site-header--locked .ying-header-mark {
+    grid-column: 3;
+  }
+
+  .site-header--locked .language-select {
+    grid-column: 4;
+    justify-self: end;
+    padding-top: 15px;
+    color: var(--gold-bright);
+    font-family: var(--font-ui);
+    font-size: .64rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
 
   @media (max-width: 1000px) {
-    .nav-toggle {
-      position: fixed !important;
-      z-index: 1004 !important;
-      top: max(20px, env(safe-area-inset-top)) !important;
-      right: 16px !important;
-      margin: 0 !important;
-      transform: none !important;
-    }
-  }
-
-  @media (max-width: 640px) {
-    body.menu-open .hero {
-      z-index: 1000 !important;
-      overflow: visible !important;
+    .site-header--locked {
+      grid-template-columns: 160px 1fr;
     }
 
-    body.menu-open .site-header {
-      z-index: 1002 !important;
+    .site-header--locked .ying-header-mark,
+    .site-header--locked .language-select {
+      display: none;
     }
-
-    .menu-backdrop {
-      position: fixed;
-      z-index: 1001;
-      inset: 0;
-      display: block;
-      background: linear-gradient(90deg, rgba(0,0,0,.03) 0%, rgba(26,18,10,.08) 38%, rgba(64,42,18,.18) 68%, rgba(8,7,6,.34) 100%);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none !important;
-      transition: opacity 220ms ease, visibility 0s linear 220ms;
-    }
-
-    body.menu-open .menu-backdrop {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: none !important;
-      transition-delay: 0s;
-    }
-
-    .primary-nav {
-      position: fixed !important;
-      z-index: 1003 !important;
-      top: 0 !important;
-      right: 0 !important;
-      bottom: 0 !important;
-      width: min(54vw, 228px) !important;
-      height: 100svh !important;
-      min-height: 100svh !important;
-      max-height: 100svh !important;
-      padding: 78px 18px max(18px, env(safe-area-inset-bottom)) !important;
-      display: flex !important;
-      flex-direction: column !important;
-      justify-content: flex-start !important;
-      gap: 0 !important;
-      overflow-y: auto;
-      border-radius: 12px 0 0 12px;
-      pointer-events: auto !important;
-      isolation: isolate;
-    }
-
-    .primary-nav::before,
-    .primary-nav::after { pointer-events: none !important; }
-    .primary-nav::before { top: 20%; height: 42px; }
-    .primary-nav::after { display: none; }
-
-    .primary-nav a {
-      position: relative;
-      z-index: 3;
-      display: grid !important;
-      flex: 0 0 auto !important;
-      grid-template-columns: 28px minmax(0, 1fr) !important;
-      align-items: center !important;
-      column-gap: 10px !important;
-      min-height: 50px !important;
-      height: 50px !important;
-      margin: 0 !important;
-      padding: 0 0 0 2px !important;
-      font-size: 0.7rem !important;
-      letter-spacing: 0.11em !important;
-      pointer-events: auto !important;
-      touch-action: manipulation;
-      cursor: pointer;
-    }
-
-    .primary-nav .nav-icon,
-    .primary-nav .nav-label { pointer-events: none; }
-    .primary-nav .nav-icon { width: 24px !important; height: 24px !important; }
-    .primary-nav .nav-icon svg { width: 21px !important; height: 21px !important; }
-    .primary-nav a::after { left: 38px; pointer-events: none; }
-    .primary-nav a:first-child { color: rgba(247,240,228,.92); }
-    .primary-nav a:first-child::after { transform: scaleX(0); }
-    .primary-nav a.is-active { color: var(--gold-bright); }
-    .primary-nav a.is-active::after { display: block; transform: scaleX(1); }
-
-    .mobile-nav-footer {
-      display: flex;
-      margin-top: auto;
-      padding-top: 20px;
-      flex-direction: column;
-      align-items: flex-start;
-      position: relative;
-      z-index: 1;
-      min-height: 118px;
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .mobile-nav-footer__line {
-      width: 42px;
-      height: 1px;
-      margin-bottom: 14px;
-      background: linear-gradient(90deg, rgba(196,157,93,.9), rgba(196,157,93,0));
-    }
-
-    .mobile-nav-footer img {
-      position: absolute;
-      right: -16px;
-      bottom: -24px;
-      width: 112px;
-      height: auto;
-      opacity: .075;
-      filter: saturate(.75);
-      pointer-events: none;
-    }
-
-    .mobile-nav-footer__signature {
-      position: relative;
-      z-index: 1;
-      display: inline-flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      align-items: baseline;
-      gap: .22em;
-      width: max-content;
-      margin: 0;
-      white-space: nowrap;
-      line-height: 1;
-      transform: translateY(8px);
-      opacity: 0;
-      transition: transform 360ms ease 120ms, opacity 360ms ease 120ms;
-    }
-
-    body.menu-open .mobile-nav-footer__signature { transform: translateY(0); opacity: 1; }
-
-    .mobile-nav-footer__name {
-      color: #8f2028;
-      font-family: var(--font-display, serif);
-      font-size: 1.42rem;
-      line-height: 1;
-      letter-spacing: .06em;
-      text-transform: none;
-    }
-
-    .mobile-nav-footer__separator {
-      color: rgba(143,32,40,.72);
-      font-size: 1.05rem;
-    }
-
-    .mobile-nav-footer__ideogram {
-      margin: 0;
-      color: rgba(143,32,40,.78);
-      font-family: var(--font-display, serif);
-      font-size: 1.14rem;
-      line-height: 1;
-    }
-  }
-
-  @media (max-width: 390px) {
-    .primary-nav { width: min(58vw, 210px) !important; padding: 72px 16px max(14px, env(safe-area-inset-bottom)) !important; }
-    .primary-nav a { min-height: 48px !important; height: 48px !important; font-size: .68rem !important; }
-    .mobile-nav-footer { min-height: 104px; padding-top: 16px; }
-    .mobile-nav-footer__name { font-size: 1.3rem; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .mobile-nav-footer__signature { transition: none !important; }
   }
 </style>
-
-<script>
-  const header = document.querySelector("[data-header]");
-  const toggle = header?.querySelector(".nav-toggle");
-  const nav = header?.querySelector(".primary-nav");
-  const backdrop = document.querySelector("[data-menu-backdrop]");
-  const navAnchor = document.createComment("mobile-nav-anchor");
-  const toggleAnchor = document.createComment("mobile-toggle-anchor");
-  const backdropAnchor = document.createComment("mobile-backdrop-anchor");
-
-  toggle?.before(toggleAnchor);
-  nav?.before(navAnchor);
-  backdrop?.before(backdropAnchor);
-
-  const mountMobileNavigation = () => {
-    const isMobile = window.matchMedia("(max-width: 640px)").matches;
-
-    if (isMobile) {
-      if (toggle?.parentElement !== document.body) document.body.appendChild(toggle);
-      if (nav?.parentElement !== document.body) document.body.appendChild(nav);
-      if (backdrop?.parentElement !== document.body) document.body.appendChild(backdrop);
-      return;
-    }
-
-    if (toggleAnchor.parentNode && toggle) toggleAnchor.parentNode.insertBefore(toggle, toggleAnchor.nextSibling);
-    if (navAnchor.parentNode && nav) navAnchor.parentNode.insertBefore(nav, navAnchor.nextSibling);
-    if (backdropAnchor.parentNode && backdrop) backdropAnchor.parentNode.insertBefore(backdrop, backdropAnchor.nextSibling);
-  };
-
-  const setMenuState = (open) => {
-    toggle?.setAttribute("aria-expanded", String(open));
-    nav?.toggleAttribute("data-open", open);
-    document.body.classList.toggle("menu-open", open);
-  };
-
-  mountMobileNavigation();
-
-  toggle?.addEventListener("click", () => {
-    const isOpen = toggle.getAttribute("aria-expanded") === "true";
-    setMenuState(!isOpen);
-  });
-
-  nav?.querySelectorAll("a").forEach((link) => {
-    link.addEventListener("click", () => setMenuState(false));
-  });
-
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && toggle?.getAttribute("aria-expanded") === "true") {
-      setMenuState(false);
-      toggle.focus();
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    mountMobileNavigation();
-    if (window.innerWidth > 640 && toggle?.getAttribute("aria-expanded") === "true") {
-      setMenuState(false);
-    }
-  });
-</script>

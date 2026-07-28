@@ -22,7 +22,7 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
     <h1 id="hero-title" class="sr-only">Disciplina. Coraggio. Libertà. Crescita.</h1>
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
-    <a class="hero-cta" href="/profilo">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></a>
+    <span class="hero-cta hero-cta--disabled" aria-disabled="true">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></span>
     <StatsStrip stats={results.heroStats} />
   </div>
 
@@ -44,9 +44,14 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
     display: none;
   }
 
+  .hero-cta--disabled {
+    cursor: default;
+    user-select: none;
+  }
+
   @media (min-width: 1001px) {
     .hero-subcopy {
-      margin-top: 86px;
+      margin-top: 84px;
     }
   }
 

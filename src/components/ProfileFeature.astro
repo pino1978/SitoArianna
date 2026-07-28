@@ -45,23 +45,27 @@ import yingImage from "../assets/images/ying-placeholder.png";
   .profile-feature {
     display: block !important;
     width: 100%;
-    padding: 34px 0 0;
+    padding: 0;
     background: #0a0908;
     color: #111;
+  }
+
+  .feature-grid,
+  .profile-quote {
+    width: min(1600px, calc(100vw - 96px));
+    margin-inline: auto;
   }
 
   .feature-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    width: var(--container);
-    margin: 0 auto;
   }
 
   .feature-panel {
     display: grid;
-    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, .84fr) minmax(0, 1.16fr);
     min-width: 0;
-    min-height: 430px;
+    min-height: 420px;
     overflow: hidden;
     border-bottom: 1px solid rgba(112, 76, 34, .38);
     background:
@@ -160,7 +164,7 @@ import yingImage from "../assets/images/ying-placeholder.png";
   .feature-visual {
     position: relative;
     min-width: 0;
-    min-height: 430px;
+    min-height: 420px;
     overflow: hidden;
   }
 
@@ -191,12 +195,10 @@ import yingImage from "../assets/images/ying-placeholder.png";
 
   .profile-quote {
     display: flex;
-    width: var(--container);
     align-items: center;
     justify-content: center;
     gap: 18px;
     min-height: 92px;
-    margin: 0 auto;
     padding: 18px 24px;
     border-top: 1px solid rgba(185,134,50,.35);
     border-bottom: 1px solid rgba(185,134,50,.45);
@@ -226,23 +228,39 @@ import yingImage from "../assets/images/ying-placeholder.png";
     line-height: 1;
   }
 
-  @media (max-width: 1120px) {
-    .feature-grid { grid-template-columns: 1fr; }
-    .feature-ying { border-left: 0; }
+  @media (max-width: 1179px) {
+    .feature-grid {
+      grid-template-columns: 1fr;
+      width: min(920px, calc(100vw - 64px));
+    }
+
+    .profile-quote {
+      width: min(920px, calc(100vw - 64px));
+    }
+
+    .feature-ying {
+      border-left: 0;
+    }
   }
 
-  @media (max-width: 640px) {
-    .profile-feature { padding-top: 0; }
+  @media (max-width: 767px) {
     .feature-grid,
-    .profile-quote { width: 100%; }
+    .profile-quote {
+      width: 100%;
+    }
 
     .feature-panel {
       grid-template-columns: 1fr;
       min-height: auto;
     }
 
-    .feature-copy { padding: 34px 22px 28px; }
-    .feature-visual { min-height: 300px; }
+    .feature-copy {
+      padding: 34px 22px 28px;
+    }
+
+    .feature-visual {
+      min-height: 300px;
+    }
 
     .feature-visual-arianna::after,
     .feature-visual-ying::after {

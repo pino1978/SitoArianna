@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import HighlightsStrip from "../components/HighlightsStrip.astro";
 import ProfileFeature from "../components/ProfileFeature.astro";
-import profile from "../data/profile.json";
 import signature from "../assets/svg/signature-ying.svg";
 ---
 <BaseLayout>
@@ -13,14 +12,15 @@ import signature from "../assets/svg/signature-ying.svg";
     <ProfileFeature />
   </main>
 
-  <footer class="site-footer" id="footer">
+  <footer class="site-footer site-footer--locked" id="footer">
     <img src={signature.src} alt="Ying" width="150" height="42" />
-    <nav aria-label="Navigazione footer">
-      <a href="/">Home</a>
-      <a href="/profilo">Profilo</a>
-      <a href="/risultati">Risultati</a>
-      <a href="/media">Media</a>
-    </nav>
-    <p>Per richieste sportive e collaborazioni: <a href={`mailto:${profile.contactEmail}`}>{profile.contactEmail}</a></p>
   </footer>
 </BaseLayout>
+
+<style>
+  .site-footer--locked {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    min-height: 108px;
+  }
+</style>

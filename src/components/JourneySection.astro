@@ -1,8 +1,8 @@
-<section class="journey" id="journey" aria-labelledby="journey-title" hidden>
+<section class="journey" id="journey" aria-labelledby="journey-title">
   <div class="journey__inner">
     <div class="journey__heading">
       <p class="journey__eyebrow">Il mio percorso</p>
-      <h2 id="journey-title" tabindex="-1">Crescere sul tatami</h2>
+      <h2 id="journey-title">Crescere sul tatami</h2>
     </div>
 
     <div class="journey__content">
@@ -23,45 +23,23 @@
       <p>Il mio obiettivo è continuare a crescere come atleta e come persona, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva, dentro e fuori dal tatami.</p>
     </div>
 
-    <button class="journey__close" type="button" data-close-journey>Chiudi il percorso</button>
+    <a class="journey__close" href="#top">Chiudi il percorso</a>
   </div>
 </section>
 
-<script>
-  const journey = document.querySelector<HTMLElement>("#journey");
-  const openButton = document.querySelector<HTMLElement>("[data-open-journey]");
-  const closeButton = document.querySelector<HTMLButtonElement>("[data-close-journey]");
-  const title = document.querySelector<HTMLElement>("#journey-title");
-
-  openButton?.addEventListener("click", () => {
-    if (!journey) return;
-
-    journey.hidden = false;
-    journey.scrollIntoView({ behavior: "smooth", block: "start" });
-    window.setTimeout(() => title?.focus({ preventScroll: true }), 450);
-  });
-
-  closeButton?.addEventListener("click", () => {
-    if (!journey) return;
-
-    journey.hidden = true;
-    openButton?.focus();
-    document.querySelector("#top")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  });
-</script>
-
 <style>
-  .journey[hidden] {
-    display: none;
-  }
-
   .journey {
     position: relative;
+    display: none;
     border-top: 1px solid rgba(185, 134, 50, 0.28);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     background:
       radial-gradient(circle at 82% 12%, rgba(146, 20, 18, 0.16), transparent 32%),
       linear-gradient(135deg, #090909 0%, #030303 68%, #0b0806 100%);
+  }
+
+  .journey:target {
+    display: block;
   }
 
   .journey__inner {
@@ -114,6 +92,7 @@
   }
 
   .journey__close {
+    display: inline-flex;
     margin-top: 34px;
     padding: 13px 18px;
     border: 1px solid rgba(185, 134, 50, 0.62);

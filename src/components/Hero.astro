@@ -5,6 +5,8 @@ import results from "../data/results.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
+
+const showHeroStats = false;
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
   <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
@@ -23,7 +25,7 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
     <span class="hero-cta hero-cta--disabled" aria-disabled="true">Scopri il mio percorso <span aria-hidden="true">-&gt;</span></span>
-    <StatsStrip stats={results.heroStats} />
+    {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
 
   <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />

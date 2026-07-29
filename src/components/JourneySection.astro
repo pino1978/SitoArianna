@@ -1,0 +1,145 @@
+<section class="journey" id="journey" aria-labelledby="journey-title" hidden>
+  <div class="journey__inner">
+    <div class="journey__heading">
+      <p class="journey__eyebrow">Il mio percorso</p>
+      <h2 id="journey-title" tabindex="-1">Crescere sul tatami</h2>
+    </div>
+
+    <div class="journey__content">
+      <p>Il mio percorso nel <strong>Kung Fu</strong> è iniziato nel 2021. Da allora ogni allenamento è diventato un’opportunità per imparare qualcosa di nuovo, migliorare e mettermi alla prova.</p>
+
+      <p>Durante gli allenamenti affronto aspetti diversi di questa disciplina, dalla preparazione tecnica e acrobatica al <strong>Sanda</strong>, il combattimento sportivo del Kung Fu, che oggi rappresenta il cuore del mio percorso agonistico.</p>
+
+      <p>Con il tempo ho scoperto che il Kung Fu è molto più di uno sport. Mi ha insegnato il valore della disciplina, del rispetto, dell’autocontrollo e della determinazione. Sono principi che cerco di portare con me dentro e fuori dal tatami.</p>
+
+      <p>Da quando sono entrata a far parte della <strong>ASD Kasoria Kombat &amp; Fly</strong>, ho trovato un ambiente in cui crescere, allenarmi e mettermi alla prova ogni giorno. Sotto la guida del <strong>Maestro Eduardo Mazzarra</strong>, sto imparando che ogni dettaglio conta: la tecnica, la disciplina, il rispetto dell’avversario e la capacità di affrontare ogni sfida con determinazione. Con il suo esempio, la sua esperienza e la sua passione, mi guida in un percorso che mi aiuta a migliorare non solo come atleta, ma anche come persona.</p>
+
+      <p>Allenarsi significa affrontare nuove sfide, correggere gli errori e ripartire con ancora più voglia di crescere. È un percorso fatto di impegno quotidiano, costanza e piccoli miglioramenti che, giorno dopo giorno, costruiscono qualcosa di più grande.</p>
+
+      <p>Non considero le medaglie un punto di arrivo, ma una tappa del mio percorso. Il vero obiettivo è crescere, imparare e tornare sul tatami ogni volta con qualcosa in più rispetto al giorno precedente.</p>
+
+      <p>So di poter affrontare questo percorso grazie al sostegno della mia famiglia, che mi incoraggia ogni giorno a dare il meglio di me, in palestra e nelle competizioni.</p>
+
+      <p>Il mio obiettivo è continuare a crescere come atleta e come persona, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva, dentro e fuori dal tatami.</p>
+    </div>
+
+    <button class="journey__close" type="button" data-close-journey>Chiudi il percorso</button>
+  </div>
+</section>
+
+<script>
+  const journey = document.querySelector<HTMLElement>("#journey");
+  const openButton = document.querySelector<HTMLElement>("[data-open-journey]");
+  const closeButton = document.querySelector<HTMLButtonElement>("[data-close-journey]");
+  const title = document.querySelector<HTMLElement>("#journey-title");
+
+  openButton?.addEventListener("click", () => {
+    if (!journey) return;
+
+    journey.hidden = false;
+    journey.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => title?.focus({ preventScroll: true }), 450);
+  });
+
+  closeButton?.addEventListener("click", () => {
+    if (!journey) return;
+
+    journey.hidden = true;
+    openButton?.focus();
+    document.querySelector("#top")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+</script>
+
+<style>
+  .journey[hidden] {
+    display: none;
+  }
+
+  .journey {
+    position: relative;
+    border-top: 1px solid rgba(185, 134, 50, 0.28);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background:
+      radial-gradient(circle at 82% 12%, rgba(146, 20, 18, 0.16), transparent 32%),
+      linear-gradient(135deg, #090909 0%, #030303 68%, #0b0806 100%);
+  }
+
+  .journey__inner {
+    width: min(1120px, calc(100% - 48px));
+    margin: 0 auto;
+    padding: clamp(72px, 9vw, 132px) 0;
+  }
+
+  .journey__heading {
+    max-width: 760px;
+    margin-bottom: clamp(36px, 5vw, 64px);
+  }
+
+  .journey__eyebrow {
+    margin: 0 0 14px;
+    color: var(--gold-bright);
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .journey h2 {
+    margin: 0;
+    color: var(--ivory);
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 6.2rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+
+  .journey__content {
+    max-width: 820px;
+    margin-left: auto;
+    columns: 2;
+    column-gap: clamp(40px, 6vw, 88px);
+  }
+
+  .journey__content p {
+    break-inside: avoid;
+    margin: 0 0 1.45rem;
+    color: rgba(247, 243, 235, 0.82);
+    font-size: clamp(1rem, 1.4vw, 1.12rem);
+    line-height: 1.78;
+  }
+
+  .journey__content strong {
+    color: var(--ivory);
+  }
+
+  .journey__close {
+    margin-top: 34px;
+    padding: 13px 18px;
+    border: 1px solid rgba(185, 134, 50, 0.62);
+    background: transparent;
+    color: var(--gold-bright);
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .journey__close:hover {
+    background: rgba(185, 134, 50, 0.12);
+  }
+
+  @media (max-width: 760px) {
+    .journey__inner {
+      width: min(100% - 36px, 640px);
+      padding: 72px 0 64px;
+    }
+
+    .journey__content {
+      columns: 1;
+      margin-left: 0;
+    }
+  }
+</style>

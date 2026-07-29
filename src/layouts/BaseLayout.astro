@@ -24,7 +24,7 @@ const {
 
     <script>
       const lockInteractiveContent = () => {
-        document.querySelectorAll("a").forEach((link) => {
+        document.querySelectorAll("a:not([data-interactive])").forEach((link) => {
           link.removeAttribute("href");
           link.setAttribute("aria-disabled", "true");
           link.setAttribute("tabindex", "-1");
@@ -40,7 +40,7 @@ const {
           media.style.pointerEvents = "none";
         });
 
-        document.querySelectorAll("button").forEach((button) => {
+        document.querySelectorAll("button:not([data-interactive])").forEach((button) => {
           button.disabled = true;
           button.setAttribute("aria-disabled", "true");
           button.setAttribute("tabindex", "-1");
@@ -54,8 +54,8 @@ const {
 </html>
 
 <style is:global>
-  .site-locked a,
-  .site-locked button,
+  .site-locked a:not([data-interactive]),
+  .site-locked button:not([data-interactive]),
   .site-locked video,
   .site-locked iframe,
   .site-locked audio {

@@ -54,4 +54,3 @@ L'immagine sorgente originale e conservata in `src/assets/images/hero-ary13.png`
 Il sito non deve contenere puntamenti a path assoluti locali. Gli asset usati dai componenti vengono importati tramite percorsi relativi al progetto e risolti dalla build Astro.
 
 <!-- Deploy trigger: 2026-07-29 -->
-<!-- Rollback redeploy trigger -->

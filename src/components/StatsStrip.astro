@@ -8,7 +8,7 @@ function iconFor(fileName) {
   return iconModule?.default?.src ?? iconModule?.default ?? iconModule?.src ?? "";
 }
 ---
-<ul class="stats-strip stats-strip--updating" aria-label="Statistiche sportive sintetiche in aggiornamento">
+<ul class="stats-strip" aria-label="Statistiche sportive sintetiche">
   {stats.map((stat) => (
     <li>
       <img src={iconFor(stat.icon)} alt="" aria-hidden="true" width="32" height="32" />
@@ -19,48 +19,8 @@ function iconFor(fileName) {
 </ul>
 
 <style>
-  .stats-strip--updating {
-    position: relative;
-    isolation: isolate;
-  }
-
-  .stats-strip--updating::before {
-    position: absolute;
-    z-index: 10;
-    top: 50%;
-    left: 50%;
-    width: max-content;
-    max-width: 94%;
-    transform: translate(-50%, -50%);
-    color: rgba(255, 255, 255, .22);
-    content: "Sezione in aggiornamento";
-    font-family: var(--font-display);
-    font-size: clamp(1.35rem, 2.8vw, 2.35rem);
-    font-weight: 900;
-    line-height: 1;
-    letter-spacing: .035em;
-    text-align: center;
-    text-transform: uppercase;
-    white-space: nowrap;
-    pointer-events: none;
-    user-select: none;
-    text-shadow: 0 1px 14px rgba(0, 0, 0, .68);
-  }
-
-  .stats-strip--updating li {
-    position: relative;
-    z-index: 2;
-  }
-
-  .stats-strip--updating img {
-    position: relative;
-    z-index: 2;
-    display: block;
-    opacity: 1;
-  }
-
   @media (max-width: 640px) {
-    .stats-strip--updating {
+    .stats-strip {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0;
@@ -69,7 +29,7 @@ function iconFor(fileName) {
       padding: 42px 8px 24px;
     }
 
-    .stats-strip--updating li {
+    .stats-strip li {
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -81,7 +41,7 @@ function iconFor(fileName) {
       text-align: center;
     }
 
-    .stats-strip--updating img {
+    .stats-strip img {
       display: block !important;
       width: 42px;
       height: 42px;
@@ -90,7 +50,7 @@ function iconFor(fileName) {
       object-fit: contain;
     }
 
-    .stats-strip--updating strong {
+    .stats-strip strong {
       display: block;
       margin: 0 0 14px;
       font-size: clamp(2rem, 8.6vw, 2.55rem);
@@ -99,7 +59,7 @@ function iconFor(fileName) {
       white-space: nowrap;
     }
 
-    .stats-strip--updating span {
+    .stats-strip span {
       display: block;
       width: auto;
       max-width: 94px;
@@ -107,17 +67,6 @@ function iconFor(fileName) {
       font-size: clamp(.5rem, 2vw, .66rem);
       line-height: 1.2;
       text-align: center;
-      white-space: normal;
-    }
-
-    .stats-strip--updating::before {
-      top: 48%;
-      width: calc(100% - 20px);
-      max-width: none;
-      transform: translate(-50%, -50%);
-      font-size: clamp(1.05rem, 5.2vw, 1.48rem);
-      letter-spacing: .018em;
-      color: rgba(255, 255, 255, .22);
       white-space: normal;
     }
   }

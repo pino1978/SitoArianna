@@ -3,6 +3,7 @@ import "../styles/tokens.css";
 import "../styles/global.css";
 import "../styles/hero-mobile.css";
 import "../styles/hero-upper-mobile.css";
+import "../styles/palmares-sprite.css";
 
 const {
   title = "Arianna Milano | Sanda Athlete",
@@ -22,6 +23,7 @@ const {
     <main class="sr-only" id="skip-target" tabindex="-1"></main>
     <slot />
 
+    <script src="/scripts/palmares-sprite.js"></script>
     <script>
       const lockInteractiveContent = () => {
         document.querySelectorAll("a:not([data-interactive])").forEach((link) => {

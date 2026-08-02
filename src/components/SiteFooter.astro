@@ -1,0 +1,22 @@
+---
+import logo from "../assets/svg/logo-arianna-milano.svg";
+import signature from "../assets/svg/signature-ying.svg";
+---
+<footer class="global-footer">
+  <div class="global-footer__inner">
+    <a class="global-footer__brand" href="/" data-interactive aria-label="Arianna Milano - Home">
+      <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
+    </a>
+    <nav class="global-footer__nav" aria-label="Navigazione footer">
+      <a href="/" data-interactive>Home</a>
+      <a href="/profilo/" data-interactive>Profilo</a>
+      <a href="/palmares/" data-interactive>Palmarès</a>
+    </nav>
+    <img class="global-footer__signature" src={signature.src} alt="Ying" width="150" height="42" />
+  </div>
+  <p class="global-footer__copy">Arianna Milano · Kung Fu Sanda</p>
+</footer>
+
+<style>
+  .global-footer{border-top:1px solid rgba(217,168,63,.28);background:#050505;color:#f4f0e8;padding:34px clamp(18px,5vw,72px) 22px}.global-footer__inner{display:grid;grid-template-columns:180px 1fr auto;align-items:center;gap:28px;width:min(1240px,100%);margin:auto}.global-footer__brand img{display:block;width:100%;height:auto}.global-footer__nav{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}.global-footer__nav a{color:rgba(244,240,232,.72);text-decoration:none;font:800 .64rem/1 var(--font-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase}.global-footer__nav a:hover,.global-footer__nav a:focus-visible{color:#d9a83f}.global-footer__signature{width:150px;height:auto}.global-footer__copy{width:min(1240px,100%);margin:22px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.06);color:rgba(244,240,232,.42);font:700 .58rem/1.4 var(--font-ui,sans-serif);letter-spacing:.12em;text-transform:uppercase;text-align:center}@media(max-width:700px){.global-footer{padding-top:28px}.global-footer__inner{grid-template-columns:1fr;justify-items:center;text-align:center}.global-footer__brand{width:150px}.global-footer__nav{gap:18px}.global-footer__signature{width:130px}.global-footer__copy{margin-top:18px}}
+</style>

@@ -20,13 +20,20 @@ function iconFor(fileName) {
 
 <style>
   @media (max-width: 640px) {
-    .stats-strip {
+    .stats-strip,
+    .hero-copy .stats-strip {
+      position: relative;
+      left: auto;
+      right: auto;
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 0;
-      width: calc(100vw - 36px);
-      margin-inline: 18px;
-      padding: 42px 8px 24px;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      padding: 42px 10px 24px;
+      transform: none;
+      box-sizing: border-box;
     }
 
     .stats-strip li {
@@ -37,8 +44,12 @@ function iconFor(fileName) {
       min-width: 0;
       min-height: 150px;
       margin: 0;
-      padding: 0 8px;
+      padding: 0 5px;
       text-align: center;
+    }
+
+    .stats-strip li::after {
+      right: 0;
     }
 
     .stats-strip img {
@@ -61,10 +72,10 @@ function iconFor(fileName) {
 
     .stats-strip span {
       display: block;
-      width: auto;
-      max-width: 94px;
+      width: 100%;
+      max-width: 90px;
       margin: 0 auto;
-      font-size: clamp(.5rem, 2vw, .66rem);
+      font-size: clamp(.48rem, 1.9vw, .64rem);
       line-height: 1.2;
       text-align: center;
       white-space: normal;

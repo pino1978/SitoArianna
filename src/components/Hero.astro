@@ -26,7 +26,7 @@ const showHeroStats = true;
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
     <a class="hero-cta" href="/profilo/" data-interactive>Scopri il mio percorso <span aria-hidden="true">-&gt;</span></a>
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
-    <a class="hero-cta hero-cta--palmares" href="/palmares/" data-interactive>Esplora il mio palmarès <span aria-hidden="true">-&gt;</span></a>
+    <span class="hero-cta hero-cta--palmares hero-cta--disabled" aria-disabled="true">Esplora il mio palmarès <span aria-hidden="true">-&gt;</span></span>
   </div>
 
   <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />
@@ -46,6 +46,13 @@ const showHeroStats = true;
   .hero-values { display: none; }
   .hero-cta { cursor: pointer; background: transparent; }
   .hero-cta--palmares { margin-top: 22px; }
+  .hero-cta--disabled {
+    display: inline-flex;
+    align-items: center;
+    opacity: .42;
+    cursor: default;
+    pointer-events: none;
+  }
   @media (min-width: 1001px) { .hero-subcopy { margin-top: 84px; } }
   @media (max-width: 640px) {
     .hero-title-image { display: none; }

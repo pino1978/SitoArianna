@@ -1,0 +1,2 @@
+Trigger deploy del nuovo layout della pagina Profilo.
+Data: 2026-08-02 22:41 Europe/Rome

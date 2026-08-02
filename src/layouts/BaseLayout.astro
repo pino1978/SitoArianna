@@ -4,6 +4,8 @@ import "../styles/global.css";
 import "../styles/hero-mobile.css";
 import "../styles/hero-upper-mobile.css";
 import "../styles/palmares-sprite.css";
+import "../styles/page-refinements.css";
+import SiteFooter from "../components/SiteFooter.astro";
 
 const {
   title = "Arianna Milano | Sanda Athlete",
@@ -22,6 +24,7 @@ const {
   <body class="site-locked">
     <main class="sr-only" id="skip-target" tabindex="-1"></main>
     <slot />
+    <SiteFooter />
 
     <script is:inline src="/scripts/palmares-sprite.js"></script>
     <script>

@@ -1,0 +1,161 @@
+<section class="palmares-cta" aria-labelledby="palmares-cta-title">
+  <div class="palmares-cta__inner">
+    <div class="palmares-cta__copy">
+      <p class="palmares-cta__eyebrow">Risultati</p>
+      <h2 id="palmares-cta-title">Il mio palmarès</h2>
+      <p>Ogni gara è una nuova sfida. Ogni medaglia racconta un passo del mio percorso.</p>
+    </div>
+
+    <div class="palmares-cta__stats" aria-label="Riepilogo medaglie">
+      <span><strong>14</strong> ori</span>
+      <span><strong>2</strong> argenti</span>
+      <span><strong>16</strong> medaglie</span>
+    </div>
+
+    <a class="palmares-cta__button" href="/palmares/" data-interactive>
+      <span>Esplora il palmarès</span>
+      <b aria-hidden="true">→</b>
+    </a>
+  </div>
+</section>
+
+<style>
+  .palmares-cta {
+    padding: clamp(3rem, 7vw, 6rem) clamp(1.1rem, 5vw, 5rem);
+    border-top: 1px solid rgba(197, 145, 54, .42);
+    border-bottom: 1px solid rgba(197, 145, 54, .42);
+    background:
+      radial-gradient(circle at 88% 50%, rgba(151, 21, 20, .16), transparent 34%),
+      #080706;
+  }
+
+  .palmares-cta__inner {
+    width: min(1180px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) auto auto;
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 4rem);
+  }
+
+  .palmares-cta__eyebrow {
+    margin: 0 0 .65rem;
+    color: #d9a83f;
+    font: 800 .76rem/1 var(--font-ui, sans-serif);
+    letter-spacing: .22em;
+    text-transform: uppercase;
+  }
+
+  .palmares-cta h2 {
+    margin: 0;
+    color: #f4f0e8;
+    font: 800 clamp(2rem, 4vw, 3.7rem)/.95 var(--font-ui, sans-serif);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+  }
+
+  .palmares-cta__copy > p:last-child {
+    max-width: 620px;
+    margin: 1rem 0 0;
+    color: rgba(244, 240, 232, .72);
+    line-height: 1.65;
+  }
+
+  .palmares-cta__stats {
+    display: flex;
+    gap: 1.45rem;
+  }
+
+  .palmares-cta__stats span {
+    min-width: 72px;
+    color: rgba(244, 240, 232, .68);
+    font: 700 .68rem/1.25 var(--font-ui, sans-serif);
+    letter-spacing: .1em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .palmares-cta__stats strong {
+    display: block;
+    margin-bottom: .35rem;
+    color: #d9a83f;
+    font-size: 1.9rem;
+    line-height: 1;
+  }
+
+  .palmares-cta__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.4rem;
+    min-width: 240px;
+    padding: .55rem .55rem .55rem 1.3rem;
+    border: 1px solid rgba(217, 168, 63, .7);
+    color: #f4f0e8;
+    font: 800 .72rem/1 var(--font-ui, sans-serif);
+    letter-spacing: .13em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background .25s ease, border-color .25s ease;
+  }
+
+  .palmares-cta__button b {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #d9a83f;
+    color: #080706;
+    font-size: 1.5rem;
+  }
+
+  .palmares-cta__button:hover,
+  .palmares-cta__button:focus-visible {
+    border-color: #d9a83f;
+    background: rgba(217, 168, 63, .08);
+  }
+
+  @media (max-width: 900px) {
+    .palmares-cta__inner {
+      grid-template-columns: 1fr;
+    }
+
+    .palmares-cta__stats {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .palmares-cta__button {
+      width: min(100%, 360px);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .palmares-cta {
+      padding-inline: 1rem;
+    }
+
+    .palmares-cta__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      gap: .5rem;
+    }
+
+    .palmares-cta__stats span {
+      min-width: 0;
+      padding: .8rem .25rem;
+      border-right: 1px solid rgba(217, 168, 63, .25);
+    }
+
+    .palmares-cta__stats span:last-child {
+      border-right: 0;
+    }
+
+    .palmares-cta__button {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+</style>

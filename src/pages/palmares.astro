@@ -1,0 +1,362 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import results from "../data/results.json";
+import signature from "../assets/svg/signature-ying.svg";
+
+const medalLabels = { gold: "Oro", silver: "Argento", bronze: "Bronzo" };
+const years = [...results.resultsByYear].sort((a, b) => b.year - a.year);
+const medals = years.flatMap((yearBlock) =>
+  yearBlock.competitions.flatMap((competition, competitionIndex) =>
+    competition.results.map((result, resultIndex) => ({
+      id: `${yearBlock.year}-${competitionIndex}-${resultIndex}`,
+      year: yearBlock.year,
+      event: competition.event,
+      place: competition.place,
+      discipline: result.discipline,
+      medal: result.medal
+    }))
+  )
+);
+const disciplines = [...new Set(medals.map((item) => item.discipline))];
+const events = [...new Set(medals.map((item) => item.event))];
+---
+<BaseLayout
+  title="Il mio palmarès | Arianna Milano"
+  description="Timeline agonistica e medagliere di Arianna Milano dal 2022 a oggi."
+>
+  <main id="main" class="palmares-page">
+    <section class="palmares-hero" aria-labelledby="page-title">
+      <Header />
+      <a class="back-home" href="/" data-interactive aria-label="Torna alla home">← Home</a>
+      <div class="palmares-hero__content">
+        <p class="eyebrow">Il percorso agonistico</p>
+        <h1 id="page-title">Il mio <span>palmarès</span></h1>
+        <p class="palmares-hero__lead">Ogni gara rappresenta una nuova sfida. Ogni medaglia racconta un passo del mio percorso.</p>
+        <p class="palmares-hero__range">2022 — Oggi</p>
+
+        <div class="hero-medals" aria-label="Statistiche del palmarès">
+          <div><strong>{results.medalSummary.gold}</strong><span>Ori</span></div>
+          <div><strong>{results.medalSummary.silver}</strong><span>Argenti</span></div>
+          <div><strong>{results.medalSummary.total}</strong><span>Medaglie</span></div>
+          <div><strong>{years.length}</strong><span>Stagioni</span></div>
+        </div>
+
+        <nav class="hero-actions" aria-label="Navigazione della pagina">
+          <a href="#timeline" data-interactive>Esplora la timeline</a>
+          <a href="#medagliere" data-interactive>Vedi le medaglie</a>
+        </nav>
+      </div>
+      <div class="hero-ideogram" aria-hidden="true">鹰</div>
+    </section>
+
+    <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
+      <div class="section-heading">
+        <p class="eyebrow">La storia sportiva</p>
+        <h2 id="timeline-title">Il percorso, anno dopo anno</h2>
+        <p>Dal primo podio alle competizioni più recenti.</p>
+      </div>
+
+      <div class="timeline-layout">
+        <div class="timeline-list">
+          {years.map((yearBlock) => (
+            <article class="timeline-year" data-year={yearBlock.year}>
+              <header class="timeline-year__header">
+                <h3>{yearBlock.year}</h3>
+                <p>
+                  {yearBlock.totals.gold > 0 && `${yearBlock.totals.gold} ${yearBlock.totals.gold === 1 ? "oro" : "ori"}`}
+                  {yearBlock.totals.gold > 0 && yearBlock.totals.silver > 0 && " · "}
+                  {yearBlock.totals.silver > 0 && `${yearBlock.totals.silver} ${yearBlock.totals.silver === 1 ? "argento" : "argenti"}`}
+                </p>
+              </header>
+
+              <div class="timeline-events">
+                {yearBlock.competitions.flatMap((competition, competitionIndex) =>
+                  competition.results.map((result, resultIndex) => {
+                    const id = `${yearBlock.year}-${competitionIndex}-${resultIndex}`;
+                    return (
+                      <button
+                        class:list={["timeline-event", `is-${result.medal}`]}
+                        type="button"
+                        data-interactive
+                        data-medal-id={id}
+                        aria-expanded="false"
+                      >
+                        <span class="timeline-event__dot" aria-hidden="true"></span>
+                        <span class="timeline-event__content">
+                          <strong>{competition.event}</strong>
+                          <small>{competition.place || "Sede non indicata"}</small>
+                          <span>{result.discipline}</span>
+                        </span>
+                        <b>{medalLabels[result.medal]}</b>
+                      </button>
+                    );
+                  })
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <aside class="timeline-detail" aria-live="polite" aria-label="Dettaglio della medaglia selezionata">
+          <div class="medal-visual is-gold" aria-hidden="true"><span>1</span></div>
+          <p class="timeline-detail__year">2026</p>
+          <h3>Champion Cup</h3>
+          <p class="timeline-detail__place">Sora (FR)</p>
+          <dl>
+            <div><dt>Disciplina</dt><dd>Sanda</dd></div>
+            <div><dt>Risultato</dt><dd>Oro</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <section class="medal-board" id="medagliere" aria-labelledby="medagliere-title">
+      <div class="section-heading section-heading--board">
+        <div>
+          <p class="eyebrow">Tutti i risultati</p>
+          <h2 id="medagliere-title">La bacheca delle medaglie</h2>
+          <p>Consulta il palmarès per anno, manifestazione, disciplina o risultato.</p>
+        </div>
+        <div class="board-summary" aria-label="Riepilogo medagliere">
+          <span><strong>14</strong> Ori</span>
+          <span><strong>2</strong> Argenti</span>
+          <span><strong>0</strong> Bronzi</span>
+          <span><strong>16</strong> Totale</span>
+        </div>
+      </div>
+
+      <div class="filters" aria-label="Filtri del medagliere">
+        <label>Anno
+          <select id="filter-year" data-interactive>
+            <option value="all">Tutti gli anni</option>
+            {years.map((item) => <option value={item.year}>{item.year}</option>)}
+          </select>
+        </label>
+        <label>Manifestazione
+          <select id="filter-event" data-interactive>
+            <option value="all">Tutte le manifestazioni</option>
+            {events.map((event) => <option value={event}>{event}</option>)}
+          </select>
+        </label>
+        <label>Disciplina
+          <select id="filter-discipline" data-interactive>
+            <option value="all">Tutte le discipline</option>
+            {disciplines.map((discipline) => <option value={discipline}>{discipline}</option>)}
+          </select>
+        </label>
+        <label>Risultato
+          <select id="filter-medal" data-interactive>
+            <option value="all">Tutti i risultati</option>
+            <option value="gold">Oro</option>
+            <option value="silver">Argento</option>
+          </select>
+        </label>
+      </div>
+
+      <p class="filter-count" aria-live="polite"><strong id="visible-count">{medals.length}</strong> medaglie visualizzate</p>
+
+      <div class="medal-grid">
+        {medals.map((item) => (
+          <article
+            class:list={["medal-card", `is-${item.medal}`]}
+            data-year={item.year}
+            data-event={item.event}
+            data-discipline={item.discipline}
+            data-medal={item.medal}
+          >
+            <span class="medal-card__year">{item.year}</span>
+            <div class:list={["medal-visual", `is-${item.medal}`]} aria-hidden="true">
+              <span>{item.medal === "gold" ? "1" : "2"}</span>
+            </div>
+            <h3>{item.event}</h3>
+            {item.place && <p class="medal-card__place">{item.place}</p>}
+            <p class="medal-card__discipline">{item.discipline}</p>
+            <span class="medal-card__result">{medalLabels[item.medal]}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer class="palmares-footer">
+    <a href="/" data-interactive>← Torna alla home</a>
+    <img src={signature.src} alt="Ying" width="150" height="42" />
+  </footer>
+</BaseLayout>
+
+<script define:vars={{ medals, medalLabels }}>
+  const detail = document.querySelector('.timeline-detail');
+  const timelineButtons = [...document.querySelectorAll('.timeline-event')];
+
+  const renderDetail = (item) => {
+    if (!detail || !item) return;
+    const visual = detail.querySelector('.medal-visual');
+    visual.className = `medal-visual is-${item.medal}`;
+    visual.querySelector('span').textContent = item.medal === 'gold' ? '1' : '2';
+    detail.querySelector('.timeline-detail__year').textContent = item.year;
+    detail.querySelector('h3').textContent = item.event;
+    detail.querySelector('.timeline-detail__place').textContent = item.place || 'Sede non indicata';
+    detail.querySelector('dd').textContent = item.discipline;
+    detail.querySelectorAll('dd')[1].textContent = medalLabels[item.medal];
+  };
+
+  timelineButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const item = medals.find((medal) => medal.id === button.dataset.medalId);
+      timelineButtons.forEach((other) => {
+        other.classList.remove('is-active');
+        other.setAttribute('aria-expanded', 'false');
+      });
+      button.classList.add('is-active');
+      button.setAttribute('aria-expanded', 'true');
+      renderDetail(item);
+    });
+  });
+
+  const filters = {
+    year: document.querySelector('#filter-year'),
+    event: document.querySelector('#filter-event'),
+    discipline: document.querySelector('#filter-discipline'),
+    medal: document.querySelector('#filter-medal')
+  };
+  const cards = [...document.querySelectorAll('.medal-card')];
+  const count = document.querySelector('#visible-count');
+
+  const applyFilters = () => {
+    let visible = 0;
+    cards.forEach((card) => {
+      const matches =
+        (filters.year.value === 'all' || card.dataset.year === filters.year.value) &&
+        (filters.event.value === 'all' || card.dataset.event === filters.event.value) &&
+        (filters.discipline.value === 'all' || card.dataset.discipline === filters.discipline.value) &&
+        (filters.medal.value === 'all' || card.dataset.medal === filters.medal.value);
+      card.hidden = !matches;
+      if (matches) visible += 1;
+    });
+    count.textContent = visible;
+  };
+
+  Object.values(filters).forEach((filter) => filter?.addEventListener('change', applyFilters));
+</script>
+
+<style>
+  :global(html) { scroll-behavior: smooth; }
+  .palmares-page { overflow: clip; background: #080706; color: #f4f0e8; }
+  .palmares-hero { position: relative; min-height: 760px; padding: 0 clamp(1rem, 5vw, 5rem) 5rem; border-bottom: 1px solid rgba(217,168,63,.36); background: radial-gradient(circle at 77% 42%, rgba(129,18,18,.24), transparent 31%), linear-gradient(115deg,#080706 0%,#0e0b09 62%,#070606 100%); }
+  .palmares-hero :global(.site-header) { position: relative; z-index: 3; }
+  .back-home { position:absolute; z-index:4; top:110px; left:clamp(1rem,5vw,5rem); color:#d9a83f; text-decoration:none; font:700 .72rem/1 var(--font-ui,sans-serif); letter-spacing:.15em; text-transform:uppercase; }
+  .palmares-hero__content { position:relative; z-index:2; width:min(1180px,100%); margin:0 auto; padding-top:clamp(8rem,18vh,12rem); }
+  .eyebrow { margin:0 0 .8rem; color:#d9a83f; font:800 .74rem/1 var(--font-ui,sans-serif); letter-spacing:.22em; text-transform:uppercase; }
+  .palmares-hero h1 { max-width:850px; margin:0; font:900 clamp(3.4rem,9vw,8rem)/.84 var(--font-ui,sans-serif); letter-spacing:-.045em; text-transform:uppercase; }
+  .palmares-hero h1 span { color:#d9a83f; }
+  .palmares-hero__lead { max-width:650px; margin:1.7rem 0 .8rem; color:rgba(244,240,232,.72); font-size:clamp(1rem,2vw,1.25rem); line-height:1.65; }
+  .palmares-hero__range { color:#b32620; font:800 .84rem/1 var(--font-ui,sans-serif); letter-spacing:.18em; text-transform:uppercase; }
+  .hero-ideogram { position:absolute; right:4vw; bottom:-.12em; color:rgba(217,168,63,.04); font:900 clamp(18rem,40vw,42rem)/.75 serif; }
+  .hero-medals { display:grid; grid-template-columns:repeat(4,minmax(0,145px)); gap:1px; width:max-content; max-width:100%; margin-top:3rem; background:rgba(217,168,63,.25); border:1px solid rgba(217,168,63,.25); }
+  .hero-medals div { padding:1rem 1.4rem; background:rgba(8,7,6,.88); text-align:center; }
+  .hero-medals strong { display:block; color:#d9a83f; font:800 2.25rem/1 var(--font-ui,sans-serif); }
+  .hero-medals span { display:block; margin-top:.45rem; color:rgba(244,240,232,.66); font:700 .62rem/1 var(--font-ui,sans-serif); letter-spacing:.13em; text-transform:uppercase; }
+  .hero-actions { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:2rem; }
+  .hero-actions a { min-width:205px; padding:1rem 1.3rem; border:1px solid rgba(217,168,63,.65); color:#f4f0e8; text-align:center; text-decoration:none; font:800 .68rem/1 var(--font-ui,sans-serif); letter-spacing:.13em; text-transform:uppercase; }
+  .hero-actions a:first-child { background:#d9a83f; color:#080706; }
+  .timeline-section,.medal-board { padding:clamp(4.5rem,10vw,9rem) clamp(1rem,5vw,5rem); }
+  .section-heading { width:min(1180px,100%); margin:0 auto 3.5rem; }
+  .section-heading h2 { max-width:850px; margin:0; font:800 clamp(2.15rem,5vw,4.5rem)/.98 var(--font-ui,sans-serif); text-transform:uppercase; }
+  .section-heading > p:last-child,.section-heading div > p:last-child { color:rgba(244,240,232,.62); }
+  .timeline-layout { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(290px,.65fr); gap:clamp(2rem,6vw,6rem); width:min(1180px,100%); margin:0 auto; }
+  .timeline-list { position:relative; }
+  .timeline-list::before { content:""; position:absolute; top:1rem; bottom:1rem; left:74px; width:1px; background:linear-gradient(#b32620,#d9a83f 65%,rgba(217,168,63,.14)); }
+  .timeline-year { display:grid; grid-template-columns:110px 1fr; position:relative; padding-bottom:3.4rem; }
+  .timeline-year__header h3 { margin:0; color:#d9a83f; font:800 1.65rem/1 var(--font-ui,sans-serif); }
+  .timeline-year__header p { margin:.5rem 0 0; color:rgba(244,240,232,.5); font:700 .61rem/1.3 var(--font-ui,sans-serif); text-transform:uppercase; }
+  .timeline-events { display:grid; gap:.65rem; }
+  .timeline-event { position:relative; display:grid; grid-template-columns:1fr auto; align-items:center; gap:1rem; width:100%; padding:1rem 1.1rem; border:1px solid rgba(217,168,63,.18); background:rgba(255,255,255,.018); color:#f4f0e8; text-align:left; cursor:pointer; transition:border-color .2s ease,background .2s ease; }
+  .timeline-event__dot { position:absolute; left:-42px; width:13px; height:13px; border:3px solid #080706; border-radius:50%; background:#d9a83f; box-shadow:0 0 0 1px #d9a83f; }
+  .timeline-event.is-silver .timeline-event__dot { background:#bfc1c4; box-shadow:0 0 0 1px #bfc1c4; }
+  .timeline-event__content { display:flex; flex-direction:column; gap:.3rem; min-width:0; }
+  .timeline-event__content strong { font:800 .82rem/1.25 var(--font-ui,sans-serif); text-transform:uppercase; }
+  .timeline-event__content small { color:rgba(244,240,232,.48); }
+  .timeline-event__content > span { color:#d9a83f; font-size:.76rem; }
+  .timeline-event > b { color:#d9a83f; font:800 .62rem/1 var(--font-ui,sans-serif); letter-spacing:.12em; text-transform:uppercase; }
+  .timeline-event.is-silver > b { color:#d4d5d7; }
+  .timeline-event:hover,.timeline-event:focus-visible,.timeline-event.is-active { border-color:#d9a83f; background:rgba(217,168,63,.07); }
+  .timeline-detail { position:sticky; top:2rem; align-self:start; min-height:480px; padding:2rem; border:1px solid rgba(217,168,63,.42); background:linear-gradient(160deg,rgba(255,255,255,.035),rgba(255,255,255,.01)); }
+  .medal-visual { display:grid; place-items:center; width:min(230px,70%); aspect-ratio:1; margin:0 auto 1.8rem; border:10px ridge #d9a83f; border-radius:50%; background:radial-gradient(circle at 34% 28%,#f7d778 0 8%,#c38b22 45%,#68440d 100%); box-shadow:inset 0 0 0 7px rgba(54,31,2,.45); }
+  .medal-visual.is-silver { border-color:#c9cbd0; background:radial-gradient(circle at 34% 28%,#fff 0 8%,#b9bbc0 45%,#5c6068 100%); }
+  .medal-visual span { display:grid; place-items:center; width:58%; aspect-ratio:1; border:2px solid rgba(8,7,6,.45); border-radius:50%; color:#241703; font:900 clamp(2rem,6vw,4rem)/1 var(--font-ui,sans-serif); }
+  .timeline-detail__year { margin:0; color:#b32620; font:800 .72rem/1 var(--font-ui,sans-serif); letter-spacing:.15em; }
+  .timeline-detail h3 { margin:.55rem 0 .4rem; font:800 1.5rem/1.1 var(--font-ui,sans-serif); text-transform:uppercase; }
+  .timeline-detail__place { color:rgba(244,240,232,.55); }
+  .timeline-detail dl { margin-top:1.5rem; }
+  .timeline-detail dl div { display:flex; justify-content:space-between; gap:1rem; padding:.85rem 0; border-top:1px solid rgba(217,168,63,.18); }
+  .timeline-detail dt { color:rgba(244,240,232,.48); font-size:.72rem; text-transform:uppercase; }
+  .timeline-detail dd { margin:0; text-align:right; }
+  .medal-board { border-top:1px solid rgba(217,168,63,.28); background:#0b0908; }
+  .section-heading--board { display:flex; justify-content:space-between; gap:2rem; align-items:end; }
+  .board-summary { display:flex; border:1px solid rgba(217,168,63,.32); }
+  .board-summary span { min-width:88px; padding:.8rem; border-right:1px solid rgba(217,168,63,.22); color:rgba(244,240,232,.55); font:700 .58rem/1.2 var(--font-ui,sans-serif); text-align:center; text-transform:uppercase; }
+  .board-summary span:last-child { border-right:0; }
+  .board-summary strong { display:block; margin-bottom:.3rem; color:#d9a83f; font-size:1.35rem; }
+  .filters { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:.8rem; width:min(1180px,100%); margin:0 auto; }
+  .filters label { color:rgba(244,240,232,.55); font:700 .62rem/1 var(--font-ui,sans-serif); letter-spacing:.11em; text-transform:uppercase; }
+  .filters select { display:block; width:100%; margin-top:.55rem; padding:.9rem 2.2rem .9rem .9rem; border:1px solid rgba(217,168,63,.38); border-radius:0; background:#080706; color:#f4f0e8; font-size:.82rem; }
+  .filter-count { width:min(1180px,100%); margin:1.5rem auto; color:rgba(244,240,232,.48); font:700 .65rem/1 var(--font-ui,sans-serif); letter-spacing:.12em; text-transform:uppercase; }
+  .filter-count strong { color:#d9a83f; }
+  .medal-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1rem; width:min(1180px,100%); margin:0 auto; }
+  .medal-card { position:relative; display:flex; flex-direction:column; align-items:center; min-width:0; padding:1.2rem; border:1px solid rgba(217,168,63,.32); background:#0d0b09; text-align:center; transition:transform .22s ease,border-color .22s ease; }
+  .medal-card:hover { transform:translateY(-4px); border-color:#d9a83f; }
+  .medal-card[hidden] { display:none; }
+  .medal-card__year { position:absolute; top:.75rem; left:.75rem; padding:.35rem .5rem; background:#d9a83f; color:#080706; font:800 .65rem/1 var(--font-ui,sans-serif); }
+  .medal-card .medal-visual { width:145px; margin:1.1rem auto 1.2rem; border-width:7px; }
+  .medal-card h3 { margin:0; font:800 .9rem/1.25 var(--font-ui,sans-serif); text-transform:uppercase; }
+  .medal-card__place { margin:.45rem 0 0; color:rgba(244,240,232,.5); font-size:.76rem; }
+  .medal-card__discipline { min-height:2.4em; margin:.8rem 0; color:#c8392f; font:700 .78rem/1.25 var(--font-ui,sans-serif); }
+  .medal-card__result { width:100%; margin-top:auto; padding:.45rem; background:#d9a83f; color:#080706; font:800 .65rem/1 var(--font-ui,sans-serif); letter-spacing:.12em; text-transform:uppercase; }
+  .medal-card.is-silver .medal-card__result { background:#c9cbd0; }
+  .palmares-footer { display:flex; justify-content:space-between; align-items:center; min-height:120px; padding:2rem clamp(1rem,5vw,5rem); border-top:1px solid rgba(217,168,63,.3); background:#080706; }
+  .palmares-footer a { color:#d9a83f; text-decoration:none; font:700 .7rem/1 var(--font-ui,sans-serif); letter-spacing:.12em; text-transform:uppercase; }
+  @media (max-width:1000px) {
+    .palmares-hero { min-height:auto; }
+    .timeline-layout { grid-template-columns:1fr; }
+    .timeline-detail { position:relative; top:auto; display:grid; grid-template-columns:180px 1fr; column-gap:1.5rem; min-height:0; }
+    .timeline-detail .medal-visual { grid-row:1/6; width:160px; margin:0; }
+    .section-heading--board { align-items:start; flex-direction:column; }
+    .medal-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+  }
+  @media (max-width:720px) {
+    .palmares-hero { padding-inline:1rem; padding-bottom:3.5rem; }
+    .back-home { top:92px; left:1rem; }
+    .palmares-hero__content { padding-top:8.5rem; }
+    .hero-medals { grid-template-columns:repeat(2,minmax(0,1fr)); width:100%; }
+    .hero-actions { display:grid; grid-template-columns:1fr; }
+    .hero-actions a { min-width:0; }
+    .timeline-section,.medal-board { padding-inline:1rem; }
+    .timeline-list::before { left:18px; }
+    .timeline-year { display:block; padding-left:46px; }
+    .timeline-year__header { margin-bottom:1rem; }
+    .timeline-event__dot { left:-35px; }
+    .timeline-detail { display:none; }
+    .timeline-event.is-active { padding-bottom:1.2rem; }
+    .timeline-event.is-active::after { content:"Selezionato"; grid-column:1/-1; color:rgba(244,240,232,.45); font-size:.65rem; text-transform:uppercase; }
+    .filters { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .medal-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .board-summary { width:100%; display:grid; grid-template-columns:repeat(4,1fr); }
+    .board-summary span { min-width:0; padding:.65rem .3rem; }
+  }
+  @media (max-width:470px) {
+    .palmares-hero h1 { font-size:clamp(2.8rem,16vw,4.2rem); }
+    .filters { grid-template-columns:1fr; }
+    .medal-grid { grid-template-columns:1fr; }
+    .medal-card { min-height:430px; }
+    .medal-card .medal-visual { width:180px; }
+    .board-summary { grid-template-columns:repeat(2,1fr); }
+    .board-summary span:nth-child(2) { border-right:0; }
+    .board-summary span:nth-child(-n+2) { border-bottom:1px solid rgba(217,168,63,.22); }
+    .palmares-footer { align-items:flex-start; flex-direction:column; gap:1.5rem; }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    :global(html) { scroll-behavior:auto; }
+    .medal-card,.timeline-event { transition:none; }
+  }
+</style>

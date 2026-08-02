@@ -3,7 +3,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/Hero.astro";
 import HighlightsStrip from "../components/HighlightsStrip.astro";
 import ProfileFeature from "../components/ProfileFeature.astro";
-import signature from "../assets/svg/signature-ying.svg";
 ---
 <BaseLayout>
   <main id="main">
@@ -11,16 +10,4 @@ import signature from "../assets/svg/signature-ying.svg";
     <HighlightsStrip />
     <ProfileFeature />
   </main>
-
-  <footer class="site-footer site-footer--locked" id="footer">
-    <img src={signature.src} alt="Ying" width="150" height="42" />
-  </footer>
 </BaseLayout>
-
-<style>
-  .site-footer--locked {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    min-height: 108px;
-  }
-</style>

@@ -3,9 +3,9 @@
   "statsNote": "Statistiche aggiornate sulla base del palmarès verificato dal 2022 al 2026.",
   "heroStats": [
     { "id": "years", "value": "5", "label": "anni di pratica", "icon": "stat-years.svg", "isPlaceholder": false },
-    { "id": "competitions", "value": "12", "label": "competizioni", "icon": "stat-trophy.svg", "isPlaceholder": false },
-    { "id": "gold", "value": "14", "label": "medaglie d'oro", "icon": "stat-medal.svg", "isPlaceholder": false },
-    { "id": "silver", "value": "2", "label": "medaglie d'argento", "icon": "stat-medal-silver.svg", "isPlaceholder": false }
+    { "id": "competitions", "value": "28", "label": "gare disputate", "icon": "stat-trophy.svg", "isPlaceholder": false },
+    { "id": "medals", "value": "16", "label": "medaglie vinte", "icon": "stat-medal-silver.svg", "isPlaceholder": false },
+    { "id": "gold", "value": "14", "label": "medaglie d'oro", "icon": "stat-medal.svg", "isPlaceholder": false }
   ],
   "medalSummary": {
     "gold": 14,

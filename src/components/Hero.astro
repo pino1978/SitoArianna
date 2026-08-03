@@ -27,11 +27,8 @@ const showHeroStats = true;
 
     <div class="hero-actions">
       <a class="hero-cta" href="/profilo/" data-interactive>
-        <span>Scopri il mio percorso</span><span class="hero-cta__arrow" aria-hidden="true">-&gt;</span>
+        Scopri il mio percorso <span aria-hidden="true">-&gt;</span>
       </a>
-      <span class="hero-cta hero-cta--palmares hero-cta--disabled" aria-disabled="true">
-        <span>Esplora il mio palmarès</span><span class="hero-cta__arrow" aria-hidden="true">-&gt;</span>
-      </span>
     </div>
 
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
@@ -61,16 +58,9 @@ const showHeroStats = true;
   }
 
   .hero-actions .hero-cta {
-    position: relative;
-    inset: auto;
-    transform: none;
     margin-top: 0;
     cursor: pointer;
     background: transparent;
-  }
-
-  .hero-cta__arrow {
-    flex: 0 0 auto;
   }
 
   .hero-cta--disabled {
@@ -91,30 +81,20 @@ const showHeroStats = true;
     .hero-values { display: block; }
 
     .hero-actions {
-      display: flex !important;
-      flex-direction: column;
-      align-items: stretch;
+      display: grid;
+      grid-template-columns: 1fr;
       gap: 12px;
       width: 100%;
-      margin: 18px 0 0;
+      margin-top: 18px;
     }
 
     .hero-actions .hero-cta {
-      position: relative !important;
-      inset: auto !important;
-      display: flex !important;
       width: 100%;
       min-height: 58px;
-      margin: 0 !important;
+      margin: 0;
       padding: 0 18px;
       justify-content: space-between;
-      align-items: center;
-      transform: none !important;
       box-sizing: border-box;
-    }
-
-    .hero-actions .hero-cta + .hero-cta {
-      margin-top: 0 !important;
     }
   }
 </style>

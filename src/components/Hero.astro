@@ -27,10 +27,10 @@ const showHeroStats = true;
 
     <div class="hero-actions">
       <a class="hero-cta" href="/profilo/" data-interactive>
-        Scopri il mio percorso <span aria-hidden="true">-&gt;</span>
+        <span>Scopri il mio percorso</span><span class="hero-cta__arrow" aria-hidden="true">-&gt;</span>
       </a>
       <span class="hero-cta hero-cta--palmares hero-cta--disabled" aria-disabled="true">
-        Esplora il mio palmarès <span aria-hidden="true">-&gt;</span>
+        <span>Esplora il mio palmarès</span><span class="hero-cta__arrow" aria-hidden="true">-&gt;</span>
       </span>
     </div>
 
@@ -61,9 +61,16 @@ const showHeroStats = true;
   }
 
   .hero-actions .hero-cta {
+    position: relative;
+    inset: auto;
+    transform: none;
     margin-top: 0;
     cursor: pointer;
     background: transparent;
+  }
+
+  .hero-cta__arrow {
+    flex: 0 0 auto;
   }
 
   .hero-cta--disabled {
@@ -84,20 +91,30 @@ const showHeroStats = true;
     .hero-values { display: block; }
 
     .hero-actions {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex !important;
+      flex-direction: column;
+      align-items: stretch;
       gap: 12px;
       width: 100%;
-      margin-top: 18px;
+      margin: 18px 0 0;
     }
 
     .hero-actions .hero-cta {
+      position: relative !important;
+      inset: auto !important;
+      display: flex !important;
       width: 100%;
       min-height: 58px;
-      margin: 0;
+      margin: 0 !important;
       padding: 0 18px;
       justify-content: space-between;
+      align-items: center;
+      transform: none !important;
       box-sizing: border-box;
+    }
+
+    .hero-actions .hero-cta + .hero-cta {
+      margin-top: 0 !important;
     }
   }
 </style>

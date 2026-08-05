@@ -1,71 +1,135 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import logo from "../assets/svg/logo-arianna-milano.svg";
-import signature from "../assets/svg/signature-ying.svg";
 import eagle from "../assets/images/hero-eagle-layer-aq2.png";
 import portrait from "../assets/images/profile-placeholder.png";
 ---
 <BaseLayout title="Profilo atleta | Arianna Milano" description="Il percorso sportivo di Arianna Milano, giovane atleta agonista di Kung Fu Sanda.">
-  <main class="profile-page" id="main" data-profile-layout="editorial-alternato-v2">
-    <header class="profile-header">
-      <a href="/" class="profile-brand" data-interactive aria-label="Torna alla Home"><img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} /></a>
-      <a href="/" class="profile-back" data-interactive>Home <span aria-hidden="true">↗</span></a>
-    </header>
+  <main class="profile-page" id="main" data-profile-layout="editorial-essential-v3">
+    <a href="/" class="profile-back" data-interactive aria-label="Torna alla Home">
+      <span aria-hidden="true">←</span> Home
+    </a>
 
     <section class="profile-hero" aria-labelledby="profile-title">
       <img class="profile-eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
-      <div>
+      <div class="profile-hero__copy">
         <p class="eyebrow">Profilo atleta · Kung Fu Sanda</p>
         <h1 id="profile-title">Crescere<br /><em>sul tatami</em></h1>
         <p class="lead">Disciplina, tecnica e determinazione. Un percorso iniziato nel 2021 e costruito allenamento dopo allenamento.</p>
       </div>
-      <span class="ideogram" aria-hidden="true">鹰</span>
     </section>
 
-    <section class="editorial-row">
-      <figure class="editorial-visual"><img src={portrait.src} alt="Spazio riservato al ritratto professionale di Arianna" width={portrait.width} height={portrait.height} /><figcaption>Ritratto atleta</figcaption></figure>
+    <section class="editorial-row editorial-row--journey" aria-labelledby="journey-title">
+      <figure class="editorial-visual">
+        <img src={portrait.src} alt="Spazio riservato al ritratto professionale di Arianna" width={portrait.width} height={portrait.height} />
+        <figcaption>Ritratto atleta</figcaption>
+      </figure>
       <div class="editorial-copy">
         <p class="eyebrow">01 · Il mio percorso</p>
-        <h2>La crescita prima del risultato.</h2>
+        <h2 id="journey-title">La crescita prima del risultato.</h2>
         <p>Il mio percorso nel <strong>Kung Fu</strong> è iniziato nel 2021. Da allora ogni allenamento è diventato un’opportunità per imparare qualcosa di nuovo, migliorare e mettermi alla prova.</p>
         <p>Durante gli allenamenti affronto aspetti diversi di questa disciplina, dalla preparazione tecnica e acrobatica al <strong>Sanda</strong>, il combattimento sportivo del Kung Fu, che oggi rappresenta il cuore del mio percorso agonistico.</p>
         <p>Con il tempo ho scoperto che il Kung Fu è molto più di uno sport. Mi ha insegnato il valore della disciplina, del rispetto, dell’autocontrollo e della determinazione. Sono principi che cerco di portare con me dentro e fuori dal tatami.</p>
       </div>
     </section>
 
-    <section class="editorial-row editorial-row--reverse">
-      <figure class="editorial-visual editorial-visual--graphic"><img src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} /><span aria-hidden="true">鹰</span><figcaption>Yīng · Visione e concentrazione</figcaption></figure>
-      <div class="editorial-copy">
+    <section class="values-section" aria-labelledby="values-title">
+      <div class="values-intro">
         <p class="eyebrow">02 · Valori sportivi</p>
-        <h2>Quello che porto<br />sul tatami.</h2>
-        <p>Quattro principi che accompagnano ogni allenamento, ogni gara e ogni nuovo obiettivo.</p>
-        <ul class="values-list"><li><span>01</span>Disciplina</li><li><span>02</span>Coraggio</li><li><span>03</span>Rispetto</li><li><span>04</span>Costanza</li></ul>
+        <h2 id="values-title">Quello che porto sul tatami.</h2>
+        <p>Quattro principi essenziali. Non una lista di qualità, ma il modo in cui scelgo di affrontare ogni allenamento, ogni gara e ogni nuovo obiettivo.</p>
+      </div>
+
+      <div class="values-stage">
+        <img src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
+        <div class="values-grid" role="list" aria-label="Valori sportivi">
+          <article role="listitem"><span>01</span><h3>Disciplina</h3><p>Essere presente, ascoltare e lavorare con continuità.</p></article>
+          <article role="listitem"><span>02</span><h3>Coraggio</h3><p>Entrare sul tatami pronta ad affrontare ogni sfida.</p></article>
+          <article role="listitem"><span>03</span><h3>Rispetto</h3><p>Per il maestro, la squadra, l’avversaria e le regole.</p></article>
+          <article role="listitem"><span>04</span><h3>Costanza</h3><p>Crescere attraverso i piccoli miglioramenti di ogni giorno.</p></article>
+        </div>
       </div>
     </section>
 
-    <section class="editorial-row">
-      <figure class="editorial-visual editorial-visual--team"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna con la sua squadra" width={portrait.width} height={portrait.height} /><figcaption>La mia squadra</figcaption></figure>
-      <div class="editorial-copy"><p class="eyebrow">03 · La mia squadra</p><h2>Kasoria Kombat<br />&amp; Fly</h2><p>Da quando sono entrata a far parte della <strong>ASD Kasoria Kombat &amp; Fly</strong>, ho trovato un ambiente in cui crescere, allenarmi e mettermi alla prova ogni giorno.</p><p>La squadra è il luogo in cui il lavoro individuale incontra il sostegno degli altri: compagni, allenatori e persone che condividono la stessa passione.</p></div>
+    <section class="objective-section" aria-labelledby="objective-title">
+      <img class="objective-eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
+      <div class="objective-copy">
+        <p class="eyebrow">Obiettivo</p>
+        <h2 id="objective-title">Ogni giorno,<br /><span>qualcosa in più.</span></h2>
+        <p>Non considero le medaglie un punto di arrivo, ma una tappa del mio percorso. Il vero obiettivo è crescere, imparare e tornare sul tatami ogni volta con qualcosa in più rispetto al giorno precedente.</p>
+        <p>Voglio continuare a crescere come atleta e come persona, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva, dentro e fuori dal tatami.</p>
+        <a href="/" data-interactive>Torna alla Home <span aria-hidden="true">→</span></a>
+      </div>
     </section>
-
-    <section class="editorial-row editorial-row--reverse">
-      <figure class="editorial-visual editorial-visual--coach"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna con il maestro Eduardo Mazzarra" width={portrait.width} height={portrait.height} /><figcaption>Guida tecnica</figcaption></figure>
-      <div class="editorial-copy"><p class="eyebrow">04 · La guida tecnica</p><h2>Maestro<br />Eduardo Mazzarra</h2><p>Sotto la sua guida sto imparando che ogni dettaglio conta: la tecnica, la disciplina, il rispetto dell’avversario e la capacità di affrontare ogni sfida con determinazione.</p><p>Con il suo esempio, la sua esperienza e la sua passione, mi guida in un percorso che mi aiuta a migliorare non solo come atleta, ma anche come persona.</p></div>
-    </section>
-
-    <section class="editorial-row">
-      <figure class="editorial-visual editorial-visual--training"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna durante l’allenamento" width={portrait.width} height={portrait.height} /><figcaption>Allenamento</figcaption></figure>
-      <div class="editorial-copy"><p class="eyebrow">05 · Allenarsi</p><h2>Ripartire<br />ogni giorno.</h2><p>Allenarsi significa affrontare nuove sfide, correggere gli errori e ripartire con ancora più voglia di crescere.</p><p>È un percorso fatto di impegno quotidiano, costanza e piccoli miglioramenti che, giorno dopo giorno, costruiscono qualcosa di più grande.</p></div>
-    </section>
-
-    <section class="manifesto"><div><p class="eyebrow">Obiettivo</p><h2>Ogni giorno,<br /><span>qualcosa in più.</span></h2></div><div class="manifesto-copy"><p>Non considero le medaglie un punto di arrivo, ma una tappa del mio percorso. Il vero obiettivo è crescere, imparare e tornare sul tatami ogni volta con qualcosa in più rispetto al giorno precedente.</p><p>So di poter affrontare questo percorso grazie al sostegno della mia famiglia, che mi incoraggia ogni giorno a dare il meglio di me, in palestra e nelle competizioni.</p></div></section>
-
-    <section class="profile-closing"><img src={signature.src} alt="Ying" width="210" height="60" /><p>Il mio obiettivo è continuare a crescere come atleta e come persona, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva, dentro e fuori dal tatami.</p><a href="/" data-interactive>Torna alla Home <span aria-hidden="true">→</span></a></section>
   </main>
 </BaseLayout>
 
 <style>
-:global(body){background:#050505}.profile-page{min-height:100vh;color:var(--ivory);background:#050505;overflow:hidden}.profile-header{position:relative;z-index:10;display:flex;align-items:center;justify-content:space-between;width:min(1240px,calc(100% - 48px));margin:auto;padding:28px 0}.profile-brand{width:176px}.profile-brand img{display:block;width:100%;height:auto}.profile-back{color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.profile-hero{position:relative;min-height:70vh;display:grid;align-items:end;width:min(1240px,calc(100% - 48px));margin:auto;padding:70px 0 90px;border-bottom:1px solid rgba(255,255,255,.08);isolation:isolate}.profile-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 82% 24%,rgba(139,20,18,.16),transparent 43%);pointer-events:none;z-index:-1}.profile-eagle{position:absolute;right:-3%;top:2%;width:min(48vw,620px);opacity:.18;filter:grayscale(1) contrast(1.2)}.profile-hero>div{position:relative;z-index:2}.eyebrow{color:var(--gold-bright);font:800 .7rem/1.25 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}.profile-hero h1{margin:20px 0 28px;font-family:var(--font-display);font-size:clamp(4rem,10vw,9rem);line-height:.84;letter-spacing:-.045em;text-transform:uppercase}.profile-hero h1 em{color:transparent;-webkit-text-stroke:1px rgba(247,243,235,.6);font-style:normal}.lead{max-width:680px;margin:0;color:rgba(247,243,235,.72);font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.65}.ideogram{position:absolute;right:0;bottom:50px;color:rgba(185,134,50,.5);font-size:clamp(3rem,7vw,7rem)}
-.editorial-row{display:grid;grid-template-columns:minmax(320px,.86fr) minmax(0,1.14fr);gap:clamp(54px,8vw,112px);align-items:center;width:min(1120px,calc(100% - 48px));margin:auto;padding:120px 0;border-bottom:1px solid rgba(255,255,255,.08)}.editorial-row--reverse{grid-template-columns:minmax(0,1.14fr) minmax(320px,.86fr)}.editorial-row--reverse .editorial-visual{order:2}.editorial-row--reverse .editorial-copy{order:1}.editorial-visual{position:relative;margin:0;min-height:560px}.editorial-visual:after{content:"";position:absolute;inset:16px -16px -16px 16px;border:1px solid rgba(185,134,50,.38);z-index:0}.editorial-visual img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06)}.editorial-visual figcaption{position:absolute;z-index:3;left:18px;bottom:18px;padding:8px 10px;background:rgba(5,5,5,.8);font:700 .62rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}.editorial-copy h2,.manifesto h2{font-family:var(--font-display);text-transform:uppercase;line-height:.94;letter-spacing:-.025em}.editorial-copy h2{margin:.35em 0;font-size:clamp(2.8rem,5vw,5.2rem)}.editorial-copy p,.manifesto-copy p{color:rgba(247,243,235,.78);font-size:1.04rem;line-height:1.8}.editorial-visual--graphic{overflow:hidden;background:radial-gradient(circle at 50% 42%,rgba(139,20,18,.2),transparent 42%),#0b0a09}.editorial-visual--graphic img{inset:8%;width:84%;height:84%;object-fit:contain;opacity:.28;filter:grayscale(1) contrast(1.25)}.editorial-visual--graphic span{position:absolute;z-index:2;right:32px;top:26px;color:rgba(185,134,50,.5);font-size:clamp(5rem,10vw,9rem)}.values-list{list-style:none;margin:42px 0 0;padding:0}.values-list li{display:grid;grid-template-columns:42px 1fr;align-items:center;gap:12px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.1);font-family:var(--font-display);font-size:clamp(2rem,3.3vw,3.45rem);line-height:.92;text-transform:uppercase}.values-list li span{color:rgba(185,134,50,.64);font:700 .62rem/1 var(--font-ui);letter-spacing:.16em}.editorial-visual--team img{object-position:34% center}.editorial-visual--coach img{object-position:66% center}.editorial-visual--training img{object-position:center 30%}.manifesto{display:grid;grid-template-columns:1fr 1fr;gap:80px;width:min(1120px,calc(100% - 48px));margin:auto;padding:120px 0}.manifesto h2{font-size:clamp(3rem,7vw,6rem);margin:.35em 0}.manifesto h2 span{color:#8f1715}.profile-closing{text-align:center;padding:110px max(24px,calc((100vw - 900px)/2));background:#090807}.profile-closing img{width:210px;height:auto}.profile-closing p{margin:35px auto;color:rgba(247,243,235,.84);font-size:clamp(1.25rem,2.5vw,1.75rem);line-height:1.65}.profile-closing a{display:inline-flex;padding:14px 18px;border:1px solid rgba(185,134,50,.55);color:var(--gold-bright);font:800 .7rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
-@media(max-width:760px){.profile-header,.profile-hero,.editorial-row,.manifesto{width:min(100% - 36px,640px)}.profile-brand{width:150px}.profile-hero{min-height:620px;padding-bottom:70px}.profile-eagle{width:85vw;right:-30%;top:8%;opacity:.13}.profile-hero h1{font-size:clamp(3.5rem,18vw,6rem)}.ideogram{bottom:20px}.editorial-row,.editorial-row--reverse,.manifesto{grid-template-columns:1fr}.editorial-row{gap:54px;padding:78px 0}.editorial-row--reverse .editorial-visual,.editorial-row--reverse .editorial-copy{order:initial}.editorial-visual{min-height:460px}.editorial-copy h2{font-size:clamp(2.55rem,13vw,4.5rem)}.values-list li{font-size:clamp(2rem,10vw,3rem)}.manifesto{gap:20px;padding:80px 0}.profile-closing{padding:90px 24px}}
+:global(body){background:#050505}
+.profile-page{min-height:100vh;color:var(--ivory);background:#050505;overflow:hidden}
+.profile-back{position:absolute;z-index:20;top:30px;left:max(24px,calc((100vw - 1240px)/2));display:inline-flex;align-items:center;gap:10px;color:rgba(247,243,235,.7);font:800 .66rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase;transition:color .2s ease}
+.profile-back:hover,.profile-back:focus-visible{color:var(--gold-bright)}
+.eyebrow{color:var(--gold-bright);font:800 .7rem/1.25 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}
+.profile-hero{position:relative;min-height:72vh;display:flex;align-items:flex-end;width:min(1240px,calc(100% - 48px));margin:auto;padding:110px 0 72px;border-bottom:1px solid rgba(255,255,255,.08);isolation:isolate}
+.profile-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 82% 30%,rgba(139,20,18,.14),transparent 44%);pointer-events:none;z-index:-1}
+.profile-eagle{position:absolute;right:-4%;top:4%;width:min(52vw,680px);height:88%;object-fit:contain;object-position:right center;opacity:.28;filter:grayscale(1) contrast(1.18)}
+.profile-hero__copy{position:relative;z-index:2;max-width:760px}
+.profile-hero h1{margin:18px 0 24px;font-family:var(--font-display);font-size:clamp(4rem,9.4vw,8.5rem);line-height:.84;letter-spacing:-.045em;text-transform:uppercase}
+.profile-hero h1 em{color:transparent;-webkit-text-stroke:1px rgba(247,243,235,.62);font-style:normal}
+.lead{max-width:680px;margin:0;color:rgba(247,243,235,.74);font-size:clamp(1.05rem,2vw,1.32rem);line-height:1.65}
+.editorial-row{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(0,1.1fr);gap:clamp(54px,8vw,108px);align-items:center;width:min(1120px,calc(100% - 48px));margin:auto;padding:92px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.editorial-visual{position:relative;margin:0;min-height:590px}
+.editorial-visual:after{content:"";position:absolute;inset:16px -16px -16px 16px;border:1px solid rgba(185,134,50,.35);z-index:0}
+.editorial-visual img{position:absolute;inset:0;z-index:1;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.06)}
+.editorial-visual figcaption{position:absolute;z-index:3;left:18px;bottom:18px;padding:8px 10px;background:rgba(5,5,5,.82);font:700 .62rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
+.editorial-copy h2,.values-intro h2,.objective-copy h2{font-family:var(--font-display);text-transform:uppercase;line-height:.94;letter-spacing:-.03em}
+.editorial-copy h2{margin:.35em 0;font-size:clamp(2.8rem,5vw,5.1rem)}
+.editorial-copy p,.values-intro p,.objective-copy p{color:rgba(247,243,235,.78);font-size:1.04rem;line-height:1.8}
+.values-section{width:min(1240px,calc(100% - 48px));margin:auto;padding:96px 0 104px;border-bottom:1px solid rgba(255,255,255,.08)}
+.values-intro{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(320px,1.1fr);column-gap:clamp(54px,8vw,112px);align-items:end;margin-bottom:54px}
+.values-intro .eyebrow{grid-column:1/-1}
+.values-intro h2{margin:18px 0 0;font-size:clamp(3.1rem,6.4vw,6.8rem);max-width:760px}
+.values-intro>p:last-child{margin:0 0 8px;max-width:500px}
+.values-stage{position:relative;min-height:610px;padding:54px;background:#0a0908;border:1px solid rgba(185,134,50,.18);overflow:hidden;isolation:isolate}
+.values-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,5,5,.96) 0%,rgba(5,5,5,.84) 48%,rgba(5,5,5,.26) 100%);z-index:-1}
+.values-stage>img{position:absolute;z-index:-2;right:-4%;top:-6%;width:62%;height:112%;object-fit:contain;opacity:.42;filter:grayscale(1) contrast(1.25)}
+.values-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;max-width:760px}
+.values-grid article{min-height:235px;padding:24px 38px 30px 0;border-bottom:1px solid rgba(255,255,255,.12)}
+.values-grid article:nth-child(odd){border-right:1px solid rgba(255,255,255,.12)}
+.values-grid article:nth-child(even){padding-left:38px}
+.values-grid article:nth-last-child(-n+2){border-bottom:0}
+.values-grid span{color:rgba(185,134,50,.72);font:700 .62rem/1 var(--font-ui);letter-spacing:.16em}
+.values-grid h3{margin:18px 0 14px;font-family:var(--font-display);font-size:clamp(2.2rem,4vw,4rem);font-weight:500;line-height:.95;text-transform:uppercase}
+.values-grid p{max-width:280px;margin:0;color:rgba(247,243,235,.65);font-size:.95rem;line-height:1.65}
+.objective-section{position:relative;min-height:76vh;display:flex;align-items:center;padding:110px max(24px,calc((100vw - 1120px)/2));background:#090807;overflow:hidden;isolation:isolate}
+.objective-section:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#090807 0%,rgba(9,8,7,.9) 48%,rgba(9,8,7,.35) 100%);z-index:-1}
+.objective-eagle{position:absolute;z-index:-2;right:-4%;top:-12%;width:64%;height:124%;object-fit:contain;opacity:.42;filter:grayscale(1) contrast(1.2)}
+.objective-copy{position:relative;z-index:2;max-width:660px}
+.objective-copy h2{margin:.3em 0;font-size:clamp(3.4rem,7vw,7rem)}
+.objective-copy h2 span{color:#9f1d19}
+.objective-copy a{display:inline-flex;margin-top:24px;padding:14px 18px;border:1px solid rgba(185,134,50,.55);color:var(--gold-bright);font:800 .7rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
+@media(max-width:760px){
+.profile-back{top:22px;left:18px}
+.profile-hero,.editorial-row,.values-section{width:min(100% - 36px,640px)}
+.profile-hero{min-height:590px;padding:100px 0 58px}
+.profile-eagle{width:96vw;right:-38%;top:4%;height:78%;opacity:.17}
+.profile-hero h1{font-size:clamp(3.45rem,18vw,5.8rem)}
+.editorial-row{grid-template-columns:1fr;gap:46px;padding:70px 0}
+.editorial-visual{min-height:455px}
+.editorial-copy h2{font-size:clamp(2.55rem,13vw,4.4rem)}
+.values-section{padding:70px 0}
+.values-intro{grid-template-columns:1fr;gap:18px;margin-bottom:38px}
+.values-intro h2{font-size:clamp(2.7rem,13vw,4.8rem)}
+.values-stage{min-height:auto;padding:32px 24px}
+.values-stage:after{background:rgba(5,5,5,.82)}
+.values-stage>img{width:120%;height:100%;right:-50%;top:0;opacity:.2}
+.values-grid{grid-template-columns:1fr}
+.values-grid article,.values-grid article:nth-child(even){min-height:auto;padding:24px 0;border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+.values-grid article:last-child{border-bottom:0}
+.values-grid h3{font-size:clamp(2.25rem,12vw,3.6rem)}
+.objective-section{min-height:680px;padding:88px 24px}
+.objective-section:after{background:linear-gradient(180deg,rgba(9,8,7,.56),#090807 62%)}
+.objective-eagle{width:130%;height:76%;right:-48%;top:-8%;opacity:.24}
+.objective-copy{align-self:flex-end}
+.objective-copy h2{font-size:clamp(3rem,15vw,5.3rem)}
+}
 </style>

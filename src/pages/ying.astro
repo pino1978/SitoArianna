@@ -1,0 +1,117 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import eagle from "../assets/images/hero-eagle-layer-aq2.png";
+import portrait from "../assets/images/profile-placeholder.png";
+import yingVisual from "../assets/images/ying-placeholder.png";
+
+const tatamiValues = [
+  ["Osservare", "Leggere l’avversaria e capire il momento."],
+  ["Concentrarsi", "Restare presente e lasciare fuori il rumore."],
+  ["Scegliere", "Agire con lucidità, tecnica e precisione."],
+  ["Controllare", "Gestire emozioni, ritmo e distanza."],
+  ["Determinarsi", "Continuare a lavorare, anche quando è difficile."]
+];
+---
+<BaseLayout title="Yīng · 鹰 | Arianna Milano" description="Yīng, aquila: il significato del nome di combattimento scelto da Arianna Milano e i valori che porta con sé sul tatami.">
+  <main class="ying-page" id="main">
+    <header class="ying-nav" aria-label="Navigazione Yīng">
+      <a href="/" data-interactive>Home</a>
+      <nav aria-label="Sezioni principali">
+        <a href="/profilo/" data-interactive>Profilo</a>
+        <a class="is-active" href="/ying/" data-interactive aria-current="page">Yīng</a>
+        <a href="/risultati/" data-interactive>Risultati</a>
+        <a href="/media/" data-interactive>Media</a>
+      </nav>
+      <a class="ying-nav__back" href="/" data-interactive>← Home</a>
+    </header>
+
+    <section class="ying-hero" aria-labelledby="ying-title">
+      <div class="ying-hero__glow" aria-hidden="true"></div>
+      <img class="ying-hero__eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
+      <img class="ying-hero__portrait" src={portrait.src} alt="Ritratto temporaneo di Arianna, da sostituire con la fotografia definitiva" width={portrait.width} height={portrait.height} />
+      <div class="ying-hero__copy">
+        <span class="ying-mark" aria-hidden="true">鹰</span>
+        <p class="eyebrow">Yīng · 鹰</p>
+        <h1 id="ying-title">Yīng</h1>
+        <p class="hero-meaning">Aquila</p>
+        <p class="hero-line">Il nome che ho scelto.<br />Un simbolo che mi accompagna.</p>
+      </div>
+    </section>
+
+    <section class="split split--ivory" aria-labelledby="meaning-title">
+      <div class="split__copy">
+        <p class="kicker">Il significato</p>
+        <h2 id="meaning-title">Guardare<br />lontano.</h2>
+        <span class="rule" aria-hidden="true"></span>
+        <p><strong>Yīng · 鹰</strong> significa aquila.</p>
+        <p>Per Arianna è un’immagine legata alla capacità di osservare, scegliere la propria direzione e affrontare ciò che arriva con coraggio e determinazione.</p>
+        <p class="note">Non è un secondo brand: è una firma personale dentro il suo percorso sportivo.</p>
+      </div>
+      <figure class="split__visual split__visual--eagle">
+        <img src={yingVisual.src} alt="Aquila in volo, simbolo identitario di Yīng" width={yingVisual.width} height={yingVisual.height} loading="lazy" />
+      </figure>
+    </section>
+
+    <section class="split split--dark split--reverse" aria-labelledby="why-title">
+      <figure class="split__visual split__visual--portrait">
+        <img src={portrait.src} alt="Spazio riservato a una fotografia reale di Arianna" width={portrait.width} height={portrait.height} loading="lazy" />
+      </figure>
+      <div class="split__copy">
+        <p class="kicker">Perché Yīng</p>
+        <h2 id="why-title">Osservare.<br />Scegliere.<br /><em>Agire.</em></h2>
+        <span class="rule" aria-hidden="true"></span>
+        <p>Mi riconosco nell’aquila perché guarda lontano prima di agire. Non ha fretta: aspetta il momento giusto e poi segue la sua direzione.</p>
+        <p>Sul tatami cerco la stessa lucidità: leggere ciò che accade, restare concentrata e trasformare l’allenamento in una scelta precisa.</p>
+      </div>
+    </section>
+
+    <section class="tatami" aria-labelledby="tatami-title">
+      <div class="tatami__head">
+        <p class="kicker">Sul tatami</p>
+        <h2 id="tatami-title">I valori che guidano ogni scelta.</h2>
+      </div>
+      <div class="tatami__values" role="list">
+        {tatamiValues.map(([title, text]) => (
+          <article class="tatami-value" role="listitem">
+            <span aria-hidden="true"></span>
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </div>
+      <img class="tatami__portrait" src={portrait.src} alt="Spazio riservato a una fotografia di Arianna durante un allenamento Sanda" width={portrait.width} height={portrait.height} loading="lazy" />
+    </section>
+
+    <section class="identity" aria-labelledby="identity-title">
+      <div class="identity__copy">
+        <p class="kicker">La mia identità</p>
+        <h2 id="identity-title">Yīng è parte<br />del mio percorso.</h2>
+        <p>Rappresenta ciò che cerco oggi e la direzione verso cui voglio crescere: visione, precisione, coraggio e determinazione.</p>
+        <p class="identity__values">Visione <b>·</b> Precisione <b>·</b> Coraggio <b>·</b> Determinazione</p>
+      </div>
+      <div class="identity__mark" aria-hidden="true">
+        <span>Yīng</span>
+        <strong>鹰</strong>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <img class="closing__eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} loading="lazy" />
+      <img class="closing__portrait" src={portrait.src} alt="Ritratto temporaneo di Arianna, da sostituire con una fotografia reale" width={portrait.width} height={portrait.height} loading="lazy" />
+      <div class="closing__copy">
+        <p class="kicker">Essere Yīng</p>
+        <h2 id="closing-title">Ogni giorno<br />un passo avanti.</h2>
+        <p>Con disciplina, rispetto e passione. Senza perdere di vista la direzione.</p>
+        <div class="closing__actions">
+          <a href="/profilo/" data-interactive>Scopri il mio percorso <span aria-hidden="true">→</span></a>
+          <a href="/risultati/" data-interactive>Risultati <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+:global(body){background:#050504}.ying-page{--y-ink:#050504;--y-panel:#0b0a08;--y-gold:#b58a3c;--y-red:#7d1715;--y-ivory:#f0eadf;min-height:100vh;background:var(--y-ink);color:var(--y-ivory);overflow:hidden}.ying-nav{position:absolute;z-index:20;top:0;left:50%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:min(1280px,calc(100% - 64px));height:84px;transform:translateX(-50%);font:800 .67rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}.ying-nav nav{display:flex;gap:40px}.ying-nav a{color:rgba(240,234,223,.74)}.ying-nav a:hover,.ying-nav a:focus-visible,.ying-nav .is-active{color:var(--y-gold)}.ying-nav__back{justify-self:end;border:1px solid rgba(181,138,60,.35);padding:11px 15px}.ying-hero{position:relative;min-height:790px;display:flex;align-items:center;border-bottom:1px solid rgba(181,138,60,.4);isolation:isolate;overflow:hidden;background:radial-gradient(circle at 76% 36%,rgba(181,138,60,.08),transparent 23%),linear-gradient(90deg,#020202 0%,#050504 50%,#0b0908 100%)}.ying-hero__glow{position:absolute;inset:0;z-index:-4;background:radial-gradient(circle at 82% 38%,rgba(125,23,21,.14),transparent 23%),linear-gradient(90deg,rgba(0,0,0,.1),transparent 65%,rgba(0,0,0,.45))}.ying-hero__eagle{position:absolute;z-index:-3;right:1%;top:7%;width:min(62vw,940px);height:86%;object-fit:contain;object-position:right center;opacity:.6;mix-blend-mode:screen;filter:contrast(1.08) saturate(.7) brightness(.68)}.ying-hero__portrait{position:absolute;z-index:-2;right:13%;bottom:0;width:min(31vw,470px);height:88%;object-fit:cover;object-position:center top;filter:sepia(.1) saturate(.7) contrast(1.08) brightness(.8);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%)}.ying-hero__copy{position:relative;width:min(1280px,calc(100% - 64px));margin:auto;padding-top:72px}.ying-mark{position:absolute;left:-10px;top:-130px;color:rgba(181,138,60,.88);font-family:serif;font-size:clamp(8rem,14vw,13rem);line-height:1}.eyebrow,.kicker{margin:0;color:var(--y-gold);font:800 .7rem/1.2 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.ying-hero h1{margin:52px 0 0;font-family:var(--font-display);font-size:clamp(5.8rem,10vw,9.6rem);font-weight:900;line-height:.78;letter-spacing:.02em;text-transform:uppercase}.hero-meaning{margin:12px 0 26px;color:var(--y-red);font:800 .78rem/1 var(--font-ui);letter-spacing:.26em;text-transform:uppercase}.hero-line{margin:0;font-family:Georgia,serif;font-size:1.3rem;line-height:1.45}.split{display:grid;grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);min-height:590px}.split--ivory{background:var(--y-ivory);color:#171411}.split--dark{background:#090807;color:var(--y-ivory)}.split--reverse .split__visual{order:1}.split--reverse .split__copy{order:2}.split__copy{display:flex;flex-direction:column;justify-content:center;padding:72px max(42px,calc((100vw - 1280px)/2)) 72px max(42px,calc((100vw - 1280px)/2));}.split--ivory .kicker{color:var(--y-red)}.split__copy h2,.tatami h2,.identity h2,.closing h2{margin:14px 0 0;font-family:var(--font-display);font-weight:850;line-height:.92;letter-spacing:-.025em;text-transform:uppercase}.split__copy h2{font-size:clamp(3.4rem,5.8vw,5.9rem)}.split__copy h2 em{color:var(--y-red);font-style:normal}.split__copy p:not(.kicker){max-width:520px;font-size:1rem;line-height:1.72}.split--ivory .split__copy p{color:#37312a}.split--dark .split__copy p{color:rgba(240,234,223,.76)}.rule{display:block;width:58px;height:2px;margin:23px 0;background:var(--y-red)}.note{font-size:.88rem!important;color:#7b6d5f!important}.split__visual{position:relative;margin:0;min-height:590px;overflow:hidden}.split__visual img{width:100%;height:100%;object-fit:cover}.split__visual--eagle img{filter:sepia(.18) saturate(.65) contrast(1.08)}.split__visual--portrait img{filter:sepia(.12) saturate(.72) contrast(1.08) brightness(.8)}.split__visual:after{position:absolute;inset:0;content:"";pointer-events:none}.split--ivory .split__visual:after{background:linear-gradient(90deg,var(--y-ivory) 0%,transparent 18%)}.split--dark .split__visual:after{background:linear-gradient(270deg,#090807 0%,transparent 20%)}.tatami{position:relative;padding:86px max(32px,calc((100vw - 1280px)/2)) 230px;background:radial-gradient(circle at 83% 65%,rgba(125,23,21,.12),transparent 23%),#11100e;overflow:hidden}.tatami__head{max-width:850px}.tatami h2{margin-top:12px;font-size:clamp(3rem,5vw,5.1rem)}.tatami__values{position:relative;z-index:2;display:grid;grid-template-columns:repeat(5,1fr);margin-top:52px;border-top:1px solid rgba(181,138,60,.26);border-bottom:1px solid rgba(181,138,60,.26)}.tatami-value{position:relative;min-height:185px;padding:28px 20px;border-right:1px solid rgba(181,138,60,.2)}.tatami-value:last-child{border-right:0}.tatami-value span{display:block;width:34px;height:2px;margin-bottom:24px;background:var(--y-red)}.tatami-value h3{margin:0 0 12px;color:var(--y-gold);font:800 .76rem/1.2 var(--font-ui);letter-spacing:.1em;text-transform:uppercase}.tatami-value p{margin:0;color:rgba(240,234,223,.68);font-size:.88rem;line-height:1.55}.tatami__portrait{position:absolute;right:5%;bottom:-22px;width:min(30vw,430px);height:300px;object-fit:cover;object-position:center top;opacity:.82;filter:sepia(.12) saturate(.72) contrast(1.08) brightness(.72);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 30%,#000 100%)}.identity{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:480px;padding:76px max(32px,calc((100vw - 1280px)/2));background:linear-gradient(90deg,#070605,#0b0908);border-top:1px solid rgba(181,138,60,.2)}.identity__copy h2{font-size:clamp(3.2rem,5.6vw,5.8rem)}.identity__copy>p:not(.kicker){max-width:590px;color:rgba(240,234,223,.76);font-size:1rem;line-height:1.72}.identity__values{margin-top:28px!important;color:var(--y-gold)!important;font:800 .72rem/1.5 var(--font-ui)!important;letter-spacing:.12em;text-transform:uppercase}.identity__values b{padding:0 8px;color:var(--y-red)}.identity__mark{display:flex;align-items:center;justify-content:center;gap:26px;transform:rotate(-3deg)}.identity__mark span{color:var(--y-gold);font-family:"Brush Script MT",cursive;font-size:clamp(5rem,9vw,9rem);line-height:1}.identity__mark strong{color:var(--y-red);font-family:serif;font-size:clamp(6rem,10vw,10rem);font-weight:500;line-height:1}.closing{position:relative;min-height:650px;display:flex;align-items:center;padding:84px max(32px,calc((100vw - 1280px)/2));isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#040404 0%,#090806 58%,#110b09 100%)}.closing:after{position:absolute;inset:0;z-index:-4;content:"";background:radial-gradient(circle at 75% 48%,rgba(181,138,60,.11),transparent 28%),linear-gradient(90deg,rgba(0,0,0,.15),transparent 65%,rgba(0,0,0,.45))}.closing__eagle{position:absolute;z-index:-3;right:-5%;top:2%;width:min(62vw,900px);height:96%;object-fit:contain;opacity:.44;mix-blend-mode:screen;filter:contrast(1.08) saturate(.7) brightness(.65)}.closing__portrait{position:absolute;z-index:-2;right:18%;bottom:0;width:min(28vw,410px);height:88%;object-fit:cover;object-position:center top;filter:sepia(.1) saturate(.7) contrast(1.06) brightness(.75);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 82%,transparent 100%)}.closing__copy{max-width:620px}.closing h2{margin-top:13px;font-size:clamp(3.5rem,6vw,6.2rem)}.closing__copy>p:not(.kicker){max-width:470px;color:rgba(240,234,223,.76);font-size:1rem;line-height:1.7}.closing__actions{display:flex;gap:14px;margin-top:30px}.closing__actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:20px;min-width:205px;padding:14px 16px;border:1px solid rgba(181,138,60,.58);color:var(--y-gold);font:800 .67rem/1 var(--font-ui);letter-spacing:.11em;text-transform:uppercase}.closing__actions a:hover{background:rgba(181,138,60,.09)}
+@media(max-width:900px){.ying-nav{width:calc(100% - 36px);height:68px;grid-template-columns:1fr auto}.ying-nav nav{display:none}.ying-nav__back{padding:9px 11px}.ying-hero{min-height:720px;align-items:flex-start;padding-top:130px}.ying-hero__copy{width:calc(100% - 40px);padding-top:0}.ying-mark{position:relative;display:block;top:auto;left:auto;margin:0 0 8px;font-size:8rem}.ying-hero h1{margin:0;font-size:4.6rem}.ying-hero__eagle{right:-38%;top:24%;width:112vw;height:58%;opacity:.43}.ying-hero__portrait{right:-6%;width:66vw;height:54%}.hero-line{font-size:1.05rem}.split,.split--reverse{grid-template-columns:1fr}.split__copy,.split--reverse .split__copy{order:1;padding:52px 24px}.split__visual,.split--reverse .split__visual{order:2;min-height:380px}.split__copy h2{font-size:3.3rem}.split--ivory .split__visual:after,.split--dark .split__visual:after{background:linear-gradient(180deg,currentColor 0%,transparent 17%);opacity:.08}.tatami{padding:60px 24px 280px}.tatami h2{font-size:3.25rem}.tatami__values{grid-template-columns:1fr;margin-top:36px}.tatami-value{min-height:0;padding:21px 0;border-right:0;border-bottom:1px solid rgba(181,138,60,.18)}.tatami-value:last-child{border-bottom:0}.tatami-value span{margin-bottom:13px}.tatami__portrait{right:-4%;width:78vw;height:280px}.identity{grid-template-columns:1fr;gap:34px;padding:58px 24px}.identity__copy h2{font-size:3.3rem}.identity__mark{justify-content:flex-start}.identity__mark span{font-size:5.4rem}.identity__mark strong{font-size:6rem}.closing{min-height:720px;align-items:flex-start;padding:70px 24px}.closing h2{font-size:3.55rem}.closing__eagle{right:-48%;top:34%;width:125vw;height:54%}.closing__portrait{right:-7%;width:66vw;height:48%}.closing__actions{position:absolute;left:24px;right:24px;bottom:30px;display:grid}.closing__actions a{min-width:0}.closing__copy{max-width:100%}}
+</style>

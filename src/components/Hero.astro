@@ -25,12 +25,6 @@ const showHeroStats = true;
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
 
-    <div class="hero-actions">
-      <a class="hero-cta" href="/profilo/" data-interactive>
-        Scopri il mio percorso <span aria-hidden="true">-&gt;</span>
-      </a>
-    </div>
-
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
 
@@ -50,27 +44,6 @@ const showHeroStats = true;
   .hero-upper-signature,
   .hero-values { display: none; }
 
-  .hero-actions {
-    display: flex;
-    align-items: stretch;
-    gap: 14px;
-    margin-top: 18px;
-  }
-
-  .hero-actions .hero-cta {
-    margin-top: 0;
-    cursor: pointer;
-    background: transparent;
-  }
-
-  .hero-cta--disabled {
-    display: inline-flex;
-    align-items: center;
-    opacity: .42;
-    cursor: default;
-    pointer-events: none;
-  }
-
   @media (min-width: 1001px) {
     .hero-subcopy { margin-top: 84px; }
   }
@@ -79,22 +52,5 @@ const showHeroStats = true;
     .hero-title-image { display: none; }
     .hero-upper-signature,
     .hero-values { display: block; }
-
-    .hero-actions {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      width: 100%;
-      margin-top: 18px;
-    }
-
-    .hero-actions .hero-cta {
-      width: 100%;
-      min-height: 58px;
-      margin: 0;
-      padding: 0 18px;
-      justify-content: space-between;
-      box-sizing: border-box;
-    }
   }
 </style>

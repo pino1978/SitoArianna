@@ -1,0 +1,20 @@
+{
+  "name": "Arianna Milano",
+  "birthDate": "2014-07-29",
+  "city": "Napoli",
+  "club": "ASD Kasoria Kombat & Fly",
+  "coach": "Eduardo Mazzara",
+  "discipline": "Sanda",
+  "category": "-40kg",
+  "started": "2022",
+  "identity": {
+    "name": "Yīng",
+    "ideogram": "鹰",
+    "meaning": "Aquila",
+    "values": ["visione", "concentrazione", "precisione", "coraggio", "determinazione"]
+  },
+  "traits": ["determinata", "competitiva", "coraggiosa", "tenace", "concentrata", "tecnica", "solare", "estroversa", "empatica"],
+  "summary": "Giovane atleta agonista di Sanda, impegnata in un percorso di crescita sportiva serio, costante e documentato.",
+  "origin": "Arianna ha scoperto il Kung Fu attraverso un film, ma quella scintilla è diventata presto una passione autentica per tecnica, combattimento, acrobatica e competizione.",
+  "contactEmail": "contatto.famiglia@example.com"
+}

@@ -1,0 +1,10 @@
+---
+const { item } = Astro.props;
+---
+<article class="media-card">
+  <img src={item.image} alt={item.alt} loading="lazy" />
+  <div>
+    <span>{item.type}</span>
+    <h3>{item.title}</h3>
+  </div>
+</article>

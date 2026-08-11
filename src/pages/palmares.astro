@@ -2,7 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import results from "../data/results.json";
-import signature from "../assets/svg/signature-ying.svg";
 const medalLabels = { gold: "Oro", silver: "Argento", bronze: "Bronzo" };
 const imageFor = (year, event) => {
   const key = `${year}|${event}`;
@@ -67,7 +66,7 @@ const recapGroups = [
                 <em>{item.discipline}</em></button>)}
             </div></section>;
         })}
-      </div></section></main><footer class="palmares-footer"><a href="/" data-interactive>← Torna alla home</a><img src={signature.src} alt="Ying" width="150" height="42" /></footer></BaseLayout><script define:vars={{ medals, medalLabels }}>
+      </div></section></main></BaseLayout><script define:vars={{ medals, medalLabels }}>
   const detail = document.querySelector('.timeline-detail');
   const eventButtons = [...document.querySelectorAll('.timeline-event')];
   const showDetail = (id) => {

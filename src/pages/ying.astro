@@ -1,92 +1,85 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import SiteFooter from "../components/SiteFooter.astro";
 import logo from "../assets/svg/logo-arianna-milano.svg";
-import ideogram from "../assets/svg/ideogram-ying.svg";
-import signature from "../assets/svg/signature-ying.svg";
+import hero from "../assets/images/ying-hero-wide.png";
+import eagleDetail from "../assets/images/hero-eagle-layer-aq2.png";
 import portrait from "../assets/images/profile-placeholder.png";
 
-const steps = [
-  ["01", "Osservare", "Capire ciò che sta cambiando"],
-  ["02", "Misurare", "Distanza, ritmo, tempo"],
-  ["03", "Decidere", "Senza perdere lucidità"],
-  ["04", "Agire", "Con tecnica e controllo"]
+const values = [
+  ["Osservare", "Guardo e ascolto prima di muovermi."],
+  ["Provare", "Metto in pratica quello che imparo."],
+  ["Crescere", "Ogni allenamento mi insegna qualcosa."]
 ];
 ---
 
-<BaseLayout title="Yīng · 鹰 | Arianna Milano" description="Yīng significa aquila: la firma personale scelta da Arianna Milano e il modo in cui prende forma sul tatami.">
+<BaseLayout title="Yīng · Aquila | Arianna Milano" description="Yīng significa aquila: il nome scelto da Arianna per accompagnarla sul tatami, un allenamento alla volta.">
   <a class="skip-link" href="#main" data-interactive>Vai al contenuto</a>
-  <main class="ying" id="main">
-    <section class="opening" aria-labelledby="ying-title" id="top">
-      <header class="opening__header">
+  <main class="ying-page" id="main">
+    <section class="hero" id="top" aria-labelledby="ying-title">
+      <header class="site-head">
         <a href="/" data-interactive aria-label="Arianna Milano — Home"><img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} /></a>
         <nav aria-label="Navigazione principale">
-          <a href="/profilo/" data-interactive>Profilo</a>
-          <a href="/ying/" data-interactive aria-current="page">Yīng</a>
-          <a href="/risultati/" data-interactive>Risultati</a>
-          <a href="/media/" data-interactive>Media</a>
+          <a href="/profilo/" data-interactive>Profilo</a><a href="/ying/" data-interactive aria-current="page">Yīng</a><a href="/risultati/" data-interactive>Risultati</a><a href="/media/" data-interactive>Media</a>
         </nav>
-        <span class="opening__menu">Menu</span>
+        <span class="site-head__menu" aria-hidden="true"><i></i><i></i><i></i></span>
       </header>
-      <img class="opening__art" src="/images/ying-eagle-hero.webp" alt="" aria-hidden="true" width="1500" height="600" fetchpriority="high" />
-      <div class="opening__veil" aria-hidden="true"></div><div class="opening__light" aria-hidden="true"></div>
-      <div class="opening__copy">
-        <p class="kicker">Una firma personale</p>
-        <div class="opening__title-row"><h1 id="ying-title">Yīng</h1><span>· Aquila</span></div>
-        <div class="opening__rule"></div>
-        <p class="opening__claim">Prima lo sguardo.<br /><em>Poi l’azione.</em></p>
-        <p class="opening__intro">Yīng è il nome che ho scelto per raccontare un modo di stare sul tatami: osservare, restare concentrata e decidere nel momento giusto.</p>
+      <img class="hero__art" src={hero.src} alt="Illustrazione pittorica di un'aquila in volo" width={hero.width} height={hero.height} fetchpriority="high" />
+      <div class="hero__shade" aria-hidden="true"></div>
+      <div class="hero__content">
+        <p class="eyebrow">Il mio nome sul tatami</p>
+        <div class="wordmark" aria-label="Ying, aquila">
+          <h1 id="ying-title" aria-label="Yīng"><b>Y</b><i>i</i><b>ng</b></h1><span>Aquila</span>
+        </div>
+        <p class="hero__claim">Un nome che mi ricorda<br />di guardare avanti.</p>
+        <p class="hero__intro">Yīng significa aquila. È il nome che ho scelto per accompagnarmi sul tatami.</p>
       </div>
-      <p class="opening__note">Aquila e 鹰 restano nello stesso visual</p><p class="opening__index">01 / Identità</p>
     </section>
 
     <section class="meaning" aria-labelledby="meaning-title">
-      <div class="meaning__copy">
-        <p class="section-label">02 / Il significato</p>
-        <h2 id="meaning-title">Un segno.<br /><em>Una presenza.</em></h2>
-        <span class="small-rule" aria-hidden="true"></span>
-        <p>鹰 si legge Yīng e significa aquila. Nella tradizione figurativa cinese è stata associata a fermezza e carattere.</p>
-        <p>Per me il significato è più personale: nasce dal suo sguardo e dalla capacità di trasformare l’attesa in un’azione precisa.</p>
-        <p class="meaning__note">鹰 forma semplificata · 鷹 forma tradizionale</p>
+      <div class="meaning__copy content-pad">
+        <p class="eyebrow eyebrow--red">Il significato</p>
+        <h2 id="meaning-title">Guardare lontano.<br /><em>Restare presenti.</em></h2>
+        <p>Mi piace l’aquila perché osserva ciò che ha intorno e sceglie il momento giusto per muoversi.</p>
+        <p>Per me Yīng è un piccolo promemoria: restare attenta, avere coraggio e continuare a imparare.</p>
       </div>
-      <div class="meaning__visual" aria-hidden="true">
-        <img class="meaning__eagle" src="/images/ying-eagle-hero.webp" alt="" width="1500" height="600" loading="lazy" />
-        <img class="meaning__mark" src={ideogram.src} alt="" width={ideogram.width} height={ideogram.height} />
-        <span>Non un emblema. Un modo di agire.</span>
-      </div>
-    </section>
-
-    <section class="method" aria-labelledby="method-title">
-      <div class="method__head"><h2 id="method-title">Osservare <em>prima</em><br />di agire.</h2><p>Non ho scelto l’aquila per sembrare più forte. L’ho scelta per il suo modo di guardare: prima osserva, poi sceglie la direzione e si muove.</p></div>
-      <div class="method__steps" role="list">
-        {steps.map(([number, title, text]) => <article role="listitem" class:list={["method__step", number === "04" && "method__step--last"]}><span>{number}</span><h3>{title}</h3><p>{text}</p></article>)}
-      </div>
-      <p class="method__note">La precisione non è immobilità. È sapere quando muoversi.</p>
+      <div class="meaning__visual" aria-hidden="true"><img src={eagleDetail.src} alt="" width={eagleDetail.width} height={eagleDetail.height} loading="lazy" /><span>Un allenamento alla volta</span></div>
     </section>
 
     <section class="choice" aria-labelledby="choice-title">
-      <figure class="choice__photo"><img src={portrait.src} alt="Segnaposto per una fotografia di Arianna mentre studia l’avversaria sul tatami" width={portrait.width} height={portrait.height} loading="lazy" /><figcaption>Placeholder foto Arianna · 4:5</figcaption></figure>
-      <div class="choice__copy"><p class="section-label">03 / Dal simbolo al tatami</p><h2 id="choice-title">Lo sguardo<br />diventa<br /><em>scelta.</em></h2><p>Yīng vive qui: non in un gesto spettacolare, ma nelle decisioni che costruiscono ogni scambio. La fotografia definitiva dovrà cogliere l’istante di studio prima dell’attacco: sguardo, distanza, controllo. Non l’impatto.</p><span class="choice__rule" aria-hidden="true"></span></div>
+      <div class="choice__image"><img src={portrait.src} alt="Arianna durante un momento di allenamento" width={portrait.width} height={portrait.height} loading="lazy" /></div>
+      <div class="choice__copy content-pad">
+        <p class="eyebrow">Perché l’ho scelto</p>
+        <h2 id="choice-title">Mi somiglia nel modo<br /><em>in cui voglio crescere.</em></h2>
+        <p>Non perché devo essere la più forte, ma perché voglio imparare a osservare, scegliere e provare con fiducia.</p>
+        <p>Sul tatami ascolto il mio maestro, imparo dai miei errori e cerco di dare il meglio che posso.</p>
+      </div>
     </section>
 
-    <section class="direction" aria-labelledby="direction-title">
-      <div class="direction__ghost" aria-hidden="true">YĪNG</div>
-      <img src={signature.src} alt="" aria-hidden="true" width={signature.width} height={signature.height} />
-      <p class="kicker">Yīng non è un traguardo.</p><h2 id="direction-title">È una direzione.</h2><p>Mi ricorda come voglio affrontare ogni incontro:<br />con attenzione, controllo e decisione.</p>
+    <section class="values" aria-labelledby="values-title">
+      <div class="values__head"><p class="eyebrow eyebrow--red">Yīng sul tatami</p><h2 id="values-title">Tre gesti semplici.<br /><em>Ogni giorno.</em></h2></div>
+      <div class="values__list" role="list">
+        {values.map(([title, text]) => <article role="listitem"><span aria-hidden="true"></span><h3>{title}</h3><p>{text}</p></article>)}
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <p class="eyebrow">Essere Yīng</p>
+      <h2 id="closing-title">Non devo essere perfetta.</h2>
+      <p>Voglio imparare, divertirmi e dare il meglio che posso.</p>
       <a href="/profilo/" data-interactive>Scopri il mio percorso <span aria-hidden="true">→</span></a>
     </section>
-    <SiteFooter />
   </main>
 </BaseLayout>
 
 <style>
-  :global(body){background:#070605}.ying{--paper:#f1eadf;--deep:#070605;--panel:#12100e;--gold:#c49a54;--red:#981d18;--muted:#bdb3a5;overflow:hidden;background:var(--deep);color:var(--paper)}
-  .opening{position:relative;min-height:980px;isolation:isolate;background:var(--deep);overflow:hidden}.opening__header{position:absolute;z-index:8;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;height:94px;padding:0 clamp(24px,4.45vw,64px);border-bottom:1px solid rgba(241,234,223,.12);font:800 .62rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.opening__header img{width:185px;height:auto}.opening__header nav{display:flex;gap:22px}.opening__header a{color:rgba(241,234,223,.72)}.opening__header a:hover,.opening__header a:focus-visible,.opening__header [aria-current=page]{color:var(--gold)}.opening__menu{display:none}.opening__art{position:absolute;z-index:-4;inset:94px 0 auto;width:100%;height:auto;aspect-ratio:1983/793;object-fit:fill;opacity:0;transform:scale(1.025);filter:contrast(.82) brightness(.58);animation:art-in 1.45s cubic-bezier(.22,1,.36,1) .12s forwards}.opening__veil{position:absolute;z-index:-2;inset:94px 0 0;background:linear-gradient(180deg,rgba(7,6,5,.02) 0%,transparent 48%,rgba(7,6,5,.88) 72%,var(--deep) 88%),linear-gradient(90deg,transparent 0 47%,rgba(7,6,5,.2) 58%,rgba(7,6,5,.8) 79%,var(--deep) 100%)}.opening__light{position:absolute;z-index:-1;left:-10%;top:12%;width:58%;height:62%;opacity:0;transform:rotate(-8deg);background:radial-gradient(ellipse,rgba(218,175,98,.2),transparent 68%);mix-blend-mode:screen;animation:light-pass 1.1s ease-out .45s forwards}.opening__copy{position:absolute;z-index:3;top:205px;left:55%;width:min(38%,540px)}.kicker,.section-label{margin:0;color:var(--gold);font:800 .65rem/1.2 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}.opening__copy>*{opacity:0;transform:translateY(18px);animation:copy-in .72s cubic-bezier(.22,1,.36,1) forwards}.opening__copy .kicker{animation-delay:1.02s}.opening__title-row{display:flex;align-items:flex-end;gap:30px;margin-top:38px;animation-delay:1.16s}.opening h1{margin:0;font:900 clamp(6rem,10.3vw,9.3rem)/.76 var(--font-display);letter-spacing:-.065em;text-transform:uppercase}.opening__title-row span{padding-bottom:14px;color:var(--gold);font:800 .64rem/1 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.opening__rule{height:1px;margin:34px 0 28px;background:rgba(196,154,84,.55);animation-delay:1.28s}.opening__claim{margin:0;font:800 1.75rem/1.2 var(--font-ui);letter-spacing:.02em;text-transform:uppercase;animation-delay:1.36s}.opening__claim em{color:var(--gold);font-style:normal}.opening__intro{max-width:49ch;margin:38px 0 0;color:var(--muted);font:400 1rem/1.65 var(--font-body);animation-delay:1.52s}.opening__note,.opening__index{position:absolute;bottom:72px;margin:0;color:var(--gold);font:800 .55rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}.opening__note{left:64px}.opening__index{right:64px}
-  .meaning{display:grid;grid-template-columns:1.08fr .92fr;min-height:980px;background:var(--paper);color:#15120f}.meaning__copy{position:relative;display:flex;flex-direction:column;justify-content:center;padding:100px clamp(34px,5.2vw,76px)}.section-label{color:var(--red)}.meaning h2,.method h2,.choice h2,.direction h2{margin:36px 0 0;font:900 clamp(4rem,6.4vw,6.2rem)/.88 var(--font-display);letter-spacing:-.045em;text-transform:uppercase}.meaning h2 em,.choice h2 em{color:var(--red);font-style:normal}.small-rule{width:74px;height:2px;margin:45px 0;background:var(--gold)}.meaning__copy>p:not(.section-label,.meaning__note){max-width:58ch;margin:0 0 12px;color:#4c443b;font:400 1rem/1.65 var(--font-body)}.meaning__note{position:absolute;bottom:58px;margin:0;color:#6d6256;font:800 .5rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.meaning__visual{position:relative;overflow:hidden;background:linear-gradient(90deg,#eee5d7,#e6dccb)}.meaning__visual:after{position:absolute;inset:0;content:"";background:linear-gradient(90deg,var(--paper),transparent 19%),linear-gradient(180deg,rgba(241,234,223,.25),rgba(241,234,223,.08));pointer-events:none}.meaning__eagle{position:absolute;right:-34%;bottom:5%;width:150%;height:76%;object-fit:cover;object-position:30% 52%;filter:grayscale(1) sepia(.28) contrast(.75) brightness(1.35);mix-blend-mode:multiply;opacity:.58;transform:rotate(-5deg)}.meaning__mark{position:absolute;z-index:2;top:22%;left:15%;width:36%;height:auto;filter:sepia(1) saturate(.6);opacity:.82}.meaning__visual span{position:absolute;z-index:3;right:36px;bottom:50px;color:var(--red);font:800 .5rem/1 var(--font-ui);letter-spacing:.15em;text-transform:uppercase}
-  .method{position:relative;min-height:880px;padding:150px clamp(28px,5vw,72px) 100px;background:radial-gradient(circle at 72% 32%,rgba(196,154,84,.045),transparent 26%),#080706}.method:before{position:absolute;top:-80px;left:-3%;width:110%;height:155px;border-radius:0 0 50% 50%;background:var(--paper);content:""}.method__head{display:grid;grid-template-columns:1.4fr .6fr;gap:8vw;align-items:end}.method h2{font-size:clamp(4.5rem,8vw,8rem)}.method h2 em{color:var(--gold);font-style:normal}.method__head>p{max-width:42ch;margin:0 0 12px;color:#a69c8f;font:400 .95rem/1.65 var(--font-body)}.method__steps{display:grid;grid-template-columns:repeat(4,1fr);gap:7vw;margin-top:120px}.method__step{padding-top:22px;border-top:1px solid rgba(196,154,84,.38)}.method__step span{color:var(--gold);font:800 .56rem/1 var(--font-ui);letter-spacing:.18em}.method__step h3{margin:32px 0 10px;font:850 1.45rem/1 var(--font-display);text-transform:uppercase}.method__step p{margin:0;color:#8e857a;font:400 .75rem/1.5 var(--font-body)}.method__step--last{border-color:rgba(152,29,24,.58)}.method__step--last span{color:var(--red)}.method__note{position:absolute;bottom:52px;left:72px;margin:0;color:var(--gold);font:800 .52rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
-  .choice{display:grid;grid-template-columns:1fr 1fr;gap:10vw;min-height:930px;padding:80px clamp(28px,7vw,100px);background:#14110f}.choice__photo{position:relative;align-self:center;margin:0;padding-left:34px;border-left:8px solid var(--red)}.choice__photo img{width:min(100%,540px);aspect-ratio:4/5;object-fit:cover;object-position:center top;filter:grayscale(1) contrast(1.18) brightness(.3)}.choice__photo figcaption{margin-top:30px;color:var(--gold);font:800 .5rem/1 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.choice__copy{align-self:center}.choice h2{font-size:clamp(4rem,6vw,6.6rem)}.choice__copy>p:not(.section-label){max-width:51ch;margin:52px 0 0;color:#aaa095;font:400 .95rem/1.65 var(--font-body)}.choice__rule{display:block;width:100%;height:1px;margin-top:72px;background:rgba(196,154,84,.34)}
-  .direction{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:700px;padding:100px 24px;text-align:center;background:#030303;overflow:hidden}.direction__ghost{position:absolute;top:0;color:rgba(196,154,84,.18);font:900 clamp(11rem,25vw,23rem)/.8 var(--font-display);letter-spacing:-.08em}.direction>img{position:relative;width:150px;height:auto;margin-bottom:34px;opacity:.78}.direction h2{position:relative;margin:20px 0 30px;font-size:clamp(4rem,6.8vw,7rem)}.direction>p:not(.kicker){position:relative;margin:0;color:#a89e92;font:400 1rem/1.75 var(--font-body)}.direction>a{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:50px;min-width:320px;margin-top:50px;padding:17px 22px;border:1px solid rgba(196,154,84,.64);color:var(--paper);font:800 .6rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase;transition:background .2s,color .2s}.direction>a:hover{background:var(--gold);color:#090806}
-  @keyframes art-in{to{opacity:1;transform:scale(1);filter:contrast(1.03) brightness(.9)}}@keyframes light-pass{0%{opacity:0;transform:translateX(-18%) rotate(-8deg)}45%{opacity:.9}100%{opacity:0;transform:translateX(35%) rotate(-8deg)}}@keyframes copy-in{to{opacity:1;transform:none}}
-  @media(max-width:760px){.opening{min-height:950px}.opening__header{height:66px;padding:0 18px}.opening__header img{width:132px}.opening__header nav{display:none}.opening__menu{display:block;color:var(--paper);font-size:.52rem}.opening__art{top:66px;left:-22%;width:145%;max-width:none;aspect-ratio:1983/793;object-fit:cover;object-position:left center}.opening__veil{inset:66px 0 0;background:linear-gradient(180deg,transparent 12%,rgba(7,6,5,.02) 30%,var(--deep) 43%)}.opening__light{display:none}.opening__copy{top:433px;left:20px;width:calc(100% - 40px)}.opening__copy .kicker{font-size:.54rem}.opening__title-row{justify-content:space-between;margin-top:26px}.opening h1{font-size:4.8rem}.opening__title-row span{padding-bottom:10px;font-size:.5rem}.opening__rule{display:none}.opening__claim{margin-top:31px;font-size:1.35rem}.opening__intro{margin-top:31px;font-size:.92rem}.opening__note{left:20px;bottom:70px}.opening__index{display:none}.meaning{grid-template-columns:1fr;min-height:0}.meaning__visual{grid-row:1;min-height:340px}.meaning__visual:after{background:linear-gradient(180deg,transparent 58%,var(--paper))}.meaning__eagle{right:-33%;bottom:-4%;width:160%;height:92%}.meaning__mark{top:18%;left:59%;width:27%}.meaning__visual span{display:none}.meaning__copy{padding:58px 20px 88px}.meaning h2{margin-top:32px;font-size:3.1rem}.small-rule{margin:34px 0}.meaning__copy>p:not(.section-label,.meaning__note){font-size:.9rem}.meaning__note{left:20px;bottom:42px}.method{min-height:0;padding:105px 20px 72px}.method:before{top:-40px;height:70px}.method__head{grid-template-columns:1fr;gap:34px}.method h2{font-size:3.5rem}.method__head>p{font-size:.86rem}.method__steps{grid-template-columns:1fr;gap:0;margin-top:55px}.method__step{padding:22px 0}.method__step h3{margin:18px 0 8px;font-size:1.35rem}.method__note{position:static;margin-top:50px;font-size:.47rem;line-height:1.6}.choice{grid-template-columns:1fr;gap:58px;min-height:0;padding:70px 20px 84px}.choice__photo{padding-left:18px;border-left-width:5px}.choice__photo img{width:100%}.choice__photo figcaption{margin-top:22px}.choice__copy .section-label{font-size:.52rem}.choice h2{margin-top:28px;font-size:3.25rem}.choice__copy>p:not(.section-label){margin-top:36px;font-size:.88rem}.choice__rule{margin-top:48px}.direction{min-height:570px;padding:80px 20px}.direction__ghost{top:18px;font-size:8rem}.direction>img{width:110px}.direction h2{font-size:2.8rem}.direction>p:not(.kicker){font-size:.84rem}.direction>a{min-width:0;width:100%;margin-top:40px;gap:30px}.direction+.global-footer{} }
-  @media(prefers-reduced-motion:reduce){.opening__art,.opening__copy>*{animation:none;opacity:1;transform:none;filter:none}.opening__light{display:none}.direction>a{transition:none}}
+  :global(body){background:#060605}.ying-page{--ink:#080706;--panel:#12100e;--paper:#eee7dc;--gold:#c49a54;--red:#a4201b;--soft:#bdb3a5;overflow:hidden;background:var(--ink);color:var(--paper)}
+  .site-head{position:absolute;z-index:5;inset:0 0 auto;display:flex;align-items:center;justify-content:space-between;height:88px;padding:0 clamp(22px,4vw,64px);border-bottom:1px solid rgba(238,231,220,.12)}.site-head img{display:block;width:174px;height:auto}.site-head nav{display:flex;gap:28px}.site-head nav a{position:relative;padding:34px 0;color:rgba(238,231,220,.72);font:800 .62rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.site-head nav a:after{position:absolute;right:0;bottom:25px;left:0;height:1px;background:var(--red);transform:scaleX(0);content:""}.site-head nav a:hover,.site-head nav a:focus-visible,.site-head nav [aria-current=page]{color:#fff}.site-head nav [aria-current=page]:after{transform:scaleX(1)}.site-head__menu{display:none;width:24px}.site-head__menu i{display:block;height:1px;margin:5px 0;background:var(--gold)}
+  .hero{position:relative;min-height:min(920px,100svh);isolation:isolate}.hero__art{position:absolute;z-index:-3;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}.hero__shade{position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,rgba(5,5,4,.18),rgba(5,5,4,.7) 40%,rgba(5,5,4,.08) 72%),linear-gradient(180deg,rgba(5,5,4,.15) 55%,#080706 100%)}.hero__content{width:min(520px,38vw);padding-top:clamp(175px,22vh,250px);margin-left:clamp(36px,7.4vw,118px)}.eyebrow{margin:0;color:var(--gold);font:800 .66rem/1.2 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}.eyebrow--red{color:var(--red)}
+  .wordmark{position:relative;display:inline-block;margin-top:30px;padding-bottom:30px}.wordmark:after{position:absolute;bottom:16px;left:2px;width:72%;height:2px;background:linear-gradient(90deg,var(--red),transparent);transform:skewX(-28deg);content:""}.wordmark h1{margin:0;color:#efe7da;font:500 clamp(5.8rem,9vw,9rem)/.78 Georgia,"Times New Roman",serif;letter-spacing:-.055em}.wordmark h1 b{font:inherit}.wordmark h1 i{position:relative;font:inherit}.wordmark h1 i:before{position:absolute;top:-.02em;left:48%;width:.62em;height:2px;background:linear-gradient(90deg,#9d7232,#e2b65e 55%,#9d7232);content:"";transform:translateX(-50%) rotate(-4deg)}.wordmark span{position:absolute;right:-25px;bottom:0;color:var(--gold);font:800 .6rem/1 var(--font-ui);letter-spacing:.34em;text-transform:uppercase}.hero__claim{margin:45px 0 0;color:#fff;font:600 clamp(1.75rem,2.5vw,2.55rem)/1.15 Georgia,"Times New Roman",serif}.hero__intro{max-width:40ch;margin:25px 0 0;color:var(--soft);font:400 1rem/1.7 var(--font-body)}
+  .content-pad{padding:clamp(80px,9vw,140px) clamp(28px,7vw,108px)}.meaning{display:grid;grid-template-columns:.84fr 1.16fr;min-height:720px;background:var(--paper);color:#17130f}.meaning h2,.choice h2,.values h2,.closing h2{margin:30px 0 40px;font:500 clamp(3.2rem,5.6vw,6rem)/.94 Georgia,"Times New Roman",serif;letter-spacing:-.04em}.meaning h2 em,.values h2 em{color:var(--red);font-style:normal}.meaning__copy>p:not(.eyebrow),.choice__copy>p:not(.eyebrow){max-width:50ch;margin:0 0 18px;color:#544b41;font:400 1rem/1.7 var(--font-body)}.meaning__visual{position:relative;overflow:hidden;background:#ddd2c3}.meaning__visual img{position:absolute;inset:0;width:180%;height:100%;max-width:none;object-fit:cover;object-position:left center;filter:grayscale(1) sepia(.3) brightness(1.3) contrast(.82);mix-blend-mode:multiply}.meaning__visual:after{position:absolute;inset:0;background:linear-gradient(90deg,var(--paper),transparent 20%);content:""}.meaning__visual span{position:absolute;z-index:1;right:36px;bottom:36px;color:var(--red);font:800 .58rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}
+  .choice{display:grid;grid-template-columns:1fr 1fr;min-height:780px;background:var(--panel)}.choice__image{position:relative;overflow:hidden}.choice__image:after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,7,6,.05),rgba(18,16,14,.75) 100%);content:""}.choice__image img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) sepia(.12) brightness(.55) contrast(1.12)}.choice__copy{align-self:center}.choice h2 em{color:var(--gold);font-style:normal}.choice__copy>p:not(.eyebrow){color:#b5aa9d}
+  .values{padding:clamp(86px,9vw,130px) clamp(28px,6vw,92px);background:var(--paper);color:#181410}.values__head{display:flex;align-items:end;justify-content:space-between;gap:50px}.values h2{margin-bottom:0}.values__list{display:grid;grid-template-columns:repeat(3,1fr);margin-top:75px;border-top:1px solid rgba(83,62,36,.22)}.values article{position:relative;padding:42px clamp(20px,3vw,48px) 0;border-right:1px solid rgba(83,62,36,.18)}.values article:first-child{padding-left:0}.values article:last-child{border:0}.values article span{display:block;width:34px;height:34px;border:1px solid var(--gold);border-radius:50%}.values article span:after{display:block;width:8px;height:8px;margin:12px;border-radius:50%;background:var(--red);content:""}.values h3{margin:25px 0 12px;font:800 1rem/1 var(--font-ui);letter-spacing:.13em;text-transform:uppercase}.values article p{max-width:30ch;margin:0;color:#62584c;font:400 .88rem/1.65 var(--font-body)}
+  .closing{position:relative;display:flex;min-height:650px;flex-direction:column;align-items:center;justify-content:center;padding:90px 24px;text-align:center;background:radial-gradient(circle at 50% 48%,rgba(196,154,84,.09),transparent 34%),#050504}.closing h2{position:relative;margin:26px 0 20px;color:#f2ebe1}.closing>p:not(.eyebrow){position:relative;margin:0;color:var(--soft);font:400 1rem/1.7 var(--font-body)}.closing>a{position:relative;display:flex;gap:44px;align-items:center;margin-top:42px;padding:16px 22px;border:1px solid rgba(196,154,84,.58);color:#f2ebe1;font:800 .6rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.closing>a:hover,.closing>a:focus-visible{background:var(--gold);color:#080706}
+  @media(max-width:760px){.site-head{height:68px;padding:0 18px}.site-head img{width:140px}.site-head nav{display:none}.site-head__menu{display:block}.hero{min-height:850px}.hero__art{height:47%;object-position:66% center}.hero__shade{background:linear-gradient(180deg,rgba(5,5,4,.05) 0 30%,var(--ink) 48%)}.hero__content{width:auto;margin:0;padding:440px 20px 72px}.hero__content>.eyebrow{text-align:center}.wordmark{display:block;width:max-content;margin:24px auto 0}.wordmark h1{font-size:5.3rem}.wordmark span{right:-8px}.hero__claim{margin-top:36px;font-size:1.7rem}.hero__intro{font-size:1rem}.meaning,.choice{grid-template-columns:1fr;min-height:0}.meaning__visual{grid-row:1;min-height:300px}.meaning__visual:after{background:linear-gradient(180deg,transparent 50%,var(--paper))}.meaning__visual span{right:20px;bottom:24px}.content-pad{padding:62px 20px 76px}.meaning h2,.choice h2,.values h2,.closing h2{font-size:2.85rem}.meaning__copy>p:not(.eyebrow),.choice__copy>p:not(.eyebrow),.values article p{font-size:1rem}.choice__image{height:420px}.choice__image:after{background:linear-gradient(180deg,transparent 55%,var(--panel))}.values{padding:72px 20px}.values__head{display:block}.values__list{grid-template-columns:1fr;margin-top:48px}.values article,.values article:first-child{padding:28px 0;border-right:0;border-bottom:1px solid rgba(83,62,36,.18)}.values article:last-child{border:0}.values article span{width:30px;height:30px}.values article span:after{margin:10px}.closing{min-height:560px;padding:78px 20px}.closing>a{width:100%;justify-content:space-between}.closing h2{font-size:2.65rem}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>

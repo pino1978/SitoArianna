@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Allenamento tecnico",
+    "type": "Foto placeholder",
+    "image": "/assets/images/media-training-placeholder.png",
+    "alt": "Placeholder AI per allenamento tecnico, da sostituire con foto reale."
+  },
+  {
+    "title": "Azione sul tatami",
+    "type": "Video placeholder",
+    "image": "/assets/images/media-action-placeholder.png",
+    "alt": "Placeholder AI per azione sportiva, da sostituire con video reale."
+  },
+  {
+    "title": "Ritratto atleta",
+    "type": "Foto placeholder",
+    "image": "/assets/images/profile-placeholder.png",
+    "alt": "Placeholder AI ritratto sportivo, da sostituire con ritratto reale."
+  }
+]

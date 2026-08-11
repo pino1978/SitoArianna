@@ -1,0 +1,26 @@
+{
+  "statsArePlaceholders": true,
+  "heroStats": [
+    { "label": "Anni di pratica", "value": "3", "icon": "/assets/svg/stat-years.svg" },
+    { "label": "Gare disputate", "value": "28", "icon": "/assets/svg/stat-trophy.svg" },
+    { "label": "Podi", "value": "26", "icon": "/assets/svg/stat-podium.svg" },
+    { "label": "Medaglie d'oro", "value": "26", "icon": "/assets/svg/stat-medal.svg" }
+  ],
+  "highlights": [
+    {
+      "event": "World Open Championship",
+      "place": "Perugia",
+      "note": "Partecipazioni multiple e vittorie ripetute. Dati da validare prima della pubblicazione definitiva."
+    },
+    {
+      "event": "Champion Cup",
+      "place": "Sora",
+      "note": "Partecipazioni multiple con risultati positivi. Dati da completare con archivio ufficiale."
+    },
+    {
+      "event": "Campionati Italiani FIWuK",
+      "place": "Obiettivo sportivo",
+      "note": "Prossima tappa del percorso agonistico."
+    }
+  ]
+}

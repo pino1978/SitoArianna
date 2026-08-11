@@ -7,5 +7,11 @@ dist
 .codex-*.txt
 *.log
 npm-debug.log*
-.npm-cache
+site/node_modules
+site/dist
+site/.astro
+worklogs
+epics
+stories
+subtasks
 solution-design-structured.docx

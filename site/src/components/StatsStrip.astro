@@ -1,0 +1,12 @@
+---
+const { stats } = Astro.props;
+---
+<div class="stats-strip" aria-label="Statistiche sportive principali">
+  {stats.map((stat) => (
+    <article>
+      <img src={stat.icon} alt="" aria-hidden="true" />
+      <strong>{stat.value}</strong>
+      <span>{stat.label}</span>
+    </article>
+  ))}
+</div>

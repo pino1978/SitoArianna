@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 260" role="img" aria-labelledby="title desc">
+  <title id="title">Tratto circolare brush</title>
+  <desc id="desc">Cerchio vettoriale aperto in oro satinato per la firma Ying.</desc>
+  <g fill="none" stroke="#b98943" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M220 84C205 47 165 25 122 31 66 38 27 84 29 139c2 54 45 95 101 96 34 1 65-12 86-36" stroke-width="3.5" opacity=".82"/>
+    <path d="M211 193c15-19 22-42 20-68" stroke-width="2" opacity=".42"/>
+  </g>
+</svg>
+*** Add File: C:\Users\g.milano\OneDrive - LUTECH SPA\Documenti\Personale\Progetti\software-factory-virtual-team\projects\sito-arianna\site\public\assets\textures\gold-line.svg
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 28" aria-hidden="true">
+  <path d="M4 18C116 8 216 23 329 13c119-11 198-7 307 6" fill="none" stroke="#c79a50" stroke-width="2" stroke-linecap="round" opacity=".74"/>
+</svg>

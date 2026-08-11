@@ -1,0 +1,20 @@
+:root {
+  color-scheme: dark;
+  --ink: #080706;
+  --black-warm: #0d0b09;
+  --graphite: #171614;
+  --graphite-soft: #23201b;
+  --ivory: #f3eadc;
+  --ivory-soft: #dfd1bd;
+  --gold: #c79a50;
+  --gold-dark: #8d642f;
+  --red: #a6262f;
+  --line-dark: rgba(243, 234, 220, 0.18);
+  --line-light: rgba(13, 11, 9, 0.16);
+  --muted-dark: rgba(243, 234, 220, 0.68);
+  --muted-light: #62584c;
+  --max: 1180px;
+  --font-display: "Arial Narrow", "Roboto Condensed", "Segoe UI", Arial, sans-serif;
+  --font-body: "Segoe UI", Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+}

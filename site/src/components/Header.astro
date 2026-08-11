@@ -1,0 +1,34 @@
+---
+import navigation from "../data/navigation.json";
+---
+<header class="site-header" aria-label="Intestazione sito">
+  <a class="brand-lockup" href="#top" aria-label="Arianna Milano, Sanda athlete">
+    <img src="/assets/svg/logo-arianna-milano.svg" alt="" aria-hidden="true" />
+    <span>
+      <strong>Arianna</strong>
+      <em>Milano</em>
+      <small>Sanda Athlete</small>
+    </span>
+  </a>
+  <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+    <span class="sr-only">Apri menu</span>
+    <span aria-hidden="true"></span>
+  </button>
+  <nav id="primary-nav" class="site-nav" aria-label="Navigazione principale">
+    {navigation.map((item) => <a href={item.href}>{item.label}</a>)}
+  </nav>
+  <a class="nav-signature" href="#ying" aria-label="Firma identitaria Yīng">
+    <img src="/assets/svg/signature-ying.svg" alt="Yīng · 鹰" />
+  </a>
+</header>
+
+<script>
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#primary-nav");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!isOpen));
+    nav?.classList.toggle("is-open", !isOpen);
+  });
+</script>

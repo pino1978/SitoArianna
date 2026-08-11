@@ -1,0 +1,29 @@
+---
+import Header from "./Header.astro";
+import StatsStrip from "./StatsStrip.astro";
+import results from "../data/results.json";
+---
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <img class="hero-bg" src="/assets/images/hero.png" alt="Arianna Milano in posa tecnica durante un allenamento di Sanda" fetchpriority="high" />
+  <div class="hero-overlay-left" aria-hidden="true"></div>
+  <div class="hero-overlay-bottom" aria-hidden="true"></div>
+  <Header />
+
+  <div class="hero-copy">
+    <h1 id="hero-title">
+      <span>Disciplina.</span>
+      <span>Focus.</span>
+      <img src="/assets/svg/lettering-liberta.svg" alt="Libertà" />
+      <span>Domani.</span>
+    </h1>
+    <p>Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
+    <a class="hero-cta" href="#profilo">Scopri il mio percorso <span aria-hidden="true">→</span></a>
+  </div>
+
+  <div class="hero-signature" aria-label="Firma identitaria Yīng">
+    <img class="hero-circle" src="/assets/textures/brush-circle.svg" alt="" aria-hidden="true" />
+    <img class="hero-ideogram" src="/assets/svg/ideogram-ying.svg" alt="鹰" />
+  </div>
+
+  <StatsStrip stats={results.heroStats} />
+</section>

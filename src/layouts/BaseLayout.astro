@@ -1,11 +1,6 @@
 ---
 import "../styles/tokens.css";
 import "../styles/global.css";
-import "../styles/hero-mobile.css";
-import "../styles/hero-upper-mobile.css";
-import "../styles/palmares-sprite.css";
-import "../styles/page-refinements.css";
-import "../styles/profile-hero-fidelity.css";
 
 const {
   title = "Arianna Milano | Sanda Athlete",
@@ -21,49 +16,8 @@ const {
     <meta name="theme-color" content="#080706" />
     <title>{title}</title>
   </head>
-  <body class="site-locked">
-    <div class="sr-only" id="skip-target" tabindex="-1"></div>
+  <body>
+    <a class="skip-link" href="#main">Vai al contenuto principale</a>
     <slot />
-
-    <script is:inline src="/scripts/palmares-sprite.js"></script>
-    <script>
-      const lockInteractiveContent = () => {
-        document.querySelectorAll("a:not([data-interactive])").forEach((link) => {
-          link.removeAttribute("href");
-          link.setAttribute("aria-disabled", "true");
-          link.setAttribute("tabindex", "-1");
-        });
-
-        document.querySelectorAll("video, iframe, audio").forEach((media) => {
-          if (media instanceof HTMLMediaElement) {
-            media.pause();
-            media.controls = false;
-          }
-          media.setAttribute("aria-disabled", "true");
-          media.setAttribute("tabindex", "-1");
-          media.style.pointerEvents = "none";
-        });
-
-        document.querySelectorAll("button:not([data-interactive])").forEach((button) => {
-          button.disabled = true;
-          button.setAttribute("aria-disabled", "true");
-          button.setAttribute("tabindex", "-1");
-        });
-      };
-
-      lockInteractiveContent();
-      document.addEventListener("astro:page-load", lockInteractiveContent);
-    </script>
   </body>
 </html>
-
-<style is:global>
-  .site-locked a:not([data-interactive]),
-  .site-locked button:not([data-interactive]),
-  .site-locked video,
-  .site-locked iframe,
-  .site-locked audio {
-    pointer-events: none !important;
-    cursor: default !important;
-  }
-</style>

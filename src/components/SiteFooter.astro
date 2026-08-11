@@ -1,19 +1,8 @@
 ---
 import logo from "../assets/svg/logo-arianna-milano.svg";
-import yingPanorama from "../assets/images/ying-footer-panorama-v2.png";
-
-const { variant = "default" } = Astro.props;
 ---
 
-<footer class:list={["site-footer", { "site-footer--ying": variant === "ying" }]} id="footer" aria-label="Piè di pagina">
-  {variant === "ying" && <section class="site-footer__story" aria-labelledby="footer-story-title">
-    <img src={yingPanorama.src} alt="Una giovane atleta osserva le montagne al tramonto mentre un’aquila vola in lontananza" width={yingPanorama.width} height={yingPanorama.height} loading="lazy" />
-    <div class="site-footer__story-copy">
-      <p>Essere Yīng</p>
-      <h2 id="footer-story-title">Continuare a imparare.</h2>
-      <span>Con impegno, curiosità e il coraggio di riprovare.</span>
-    </div>
-  </section>}
+<footer class="site-footer" id="footer" aria-label="Piè di pagina">
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="/" data-interactive aria-label="Arianna Milano, torna alla home">
       <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
@@ -39,8 +28,7 @@ const { variant = "default" } = Astro.props;
   .site-footer__contact{display:inline-flex;min-height:44px;align-items:center;justify-self:end;gap:9px;color:rgba(244,240,232,.68);font:600 .68rem/1 var(--font-ui,sans-serif);letter-spacing:.035em;text-decoration:none;transition:color .2s ease}
   .site-footer__contact svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4}
   .site-footer__contact:hover,.site-footer__contact:focus-visible{color:#fff}
-  .site-footer--ying{padding-top:0}.site-footer__story{position:relative;height:clamp(280px,24vw,360px);margin:0 calc(clamp(22px,4vw,64px)*-1);overflow:hidden;border-bottom:1px solid rgba(196,154,84,.3);background:#050607}.site-footer__story img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 61%}.site-footer__story:after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.92),rgba(3,3,3,.48) 34%,transparent 68%),linear-gradient(0deg,rgba(2,2,2,.28),transparent 48%);content:""}.site-footer__story-copy{position:absolute;z-index:1;top:50%;left:clamp(24px,6vw,96px);max-width:410px;transform:translateY(-50%)}.site-footer__story-copy p{margin:0 0 15px;color:#e3aa45;font:800 .65rem/1 var(--font-ui,sans-serif);letter-spacing:.2em;text-transform:uppercase}.site-footer__story-copy h2{margin:0;color:#f5eee3;font:500 clamp(2rem,3vw,3.25rem)/1 Georgia,"Times New Roman",serif;letter-spacing:-.035em}.site-footer__story-copy span{display:block;max-width:38ch;margin-top:15px;color:rgba(245,238,227,.76);font:400 .95rem/1.55 Georgia,"Times New Roman",serif}
-  @media(max-width:760px){.site-footer{padding:34px 20px}.site-footer--ying{padding-top:0}.site-footer__story{display:flex;height:auto;min-height:0;flex-direction:column;margin:0 -20px}.site-footer__story img{height:auto;min-height:0;object-fit:contain;object-position:center}.site-footer__story:after{display:none}.site-footer__story-copy{position:static;max-width:none;padding:30px 20px 34px;transform:none;background:#050607}.site-footer__story-copy h2{font-size:2.2rem}.site-footer__inner{grid-template-columns:1fr;gap:18px;min-height:0;text-align:center}.site-footer__brand{grid-row:1;justify-self:center}.site-footer__contact{grid-row:2;justify-self:center}.site-footer__legal{grid-row:3}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
+  @media(max-width:760px){.site-footer{padding:26px 20px}.site-footer__inner{grid-template-columns:1fr;gap:12px;min-height:0;text-align:center}.site-footer__brand{grid-row:1;justify-self:center}.site-footer__contact{grid-row:2;justify-self:center}.site-footer__legal{grid-row:3}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
   @media(max-width:390px){.site-footer__contact{font-size:.64rem}.site-footer__legal span{display:block}}
   @media(prefers-reduced-motion:reduce){.site-footer__contact{transition:none}}
 </style>

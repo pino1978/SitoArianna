@@ -10,8 +10,7 @@ import SiteFooter from "../components/SiteFooter.astro";
 
 const {
   title = "Arianna Milano | Sanda Athlete",
-  description = "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda.",
-  footerVariant = "default"
+  description = "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda."
 } = Astro.props;
 ---
 <!doctype html>
@@ -26,7 +25,7 @@ const {
   <body class="site-locked">
     <div class="sr-only" id="skip-target" tabindex="-1"></div>
     <slot />
-    <SiteFooter variant={footerVariant} />
+    <SiteFooter />
 
     <script is:inline src="/scripts/palmares-sprite.js"></script>
     <script>

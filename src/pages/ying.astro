@@ -28,38 +28,27 @@ import artwork from "../assets/images/profile-ying-bg.png";
 
       <div class="ying-manifesto">
         <div class="manifesto-inner">
-          <p class="manifesto-kicker">La mia firma sul tatami</p>
+          <p class="manifesto-kicker">Perché Yīng</p>
 
-          <div class="identity-line">
-            <h1 id="ying-title">Yīng</h1>
-            <p><span lang="zh-Hans">鹰</span><i aria-hidden="true"></i>Aquila</p>
+          <div class="identity-mark">
+            <span class="identity-ideogram" lang="zh-Hans" aria-hidden="true">鹰</span>
+            <h1 id="ying-title" aria-label="Yīng">
+              <span class="wordmark-y">Y</span><span class="wordmark-i">i</span><span>ng</span>
+              <i class="wordmark-tail" aria-hidden="true"></i>
+            </h1>
+            <p class="identity-meaning"><span aria-hidden="true"></span>Aquila</p>
           </div>
 
           <div class="manifesto-statement">
-            <p>Vedere prima.<br />Scegliere <em>il momento.</em></p>
+            <p>Un nome che mi ricorda<br /><em>di guardare avanti.</em></p>
           </div>
 
-          <p class="manifesto-intro">
-            Ho scelto Yīng perché nell’aquila riconosco il mio modo di affrontare il tatami:
-            osservare, restare concentrata e agire con precisione.
-          </p>
+          <div class="manifesto-intro">
+            <p>Yīng significa aquila. È il nome che ho scelto per accompagnarmi sul tatami.</p>
+            <p>Mi ricorda di restare attenta, avere coraggio e continuare a imparare, un allenamento alla volta.</p>
+          </div>
 
-          <ol class="principles" aria-label="I tre principi di Yīng">
-            <li>
-              <strong>Visione</strong>
-              <p>Leggere lo spazio prima del movimento.</p>
-            </li>
-            <li>
-              <strong>Controllo</strong>
-              <p>Restare lucida, anche sotto pressione.</p>
-            </li>
-            <li>
-              <strong>Precisione</strong>
-              <p>Trasformare l’attesa nell’azione giusta.</p>
-            </li>
-          </ol>
-
-          <p class="manifesto-note">Yīng non è un personaggio. È il segno del percorso di Arianna.</p>
+          <p class="manifesto-note"><span aria-hidden="true"></span>Ogni giorno, un passo avanti.</p>
         </div>
       </div>
     </section>
@@ -82,26 +71,29 @@ import artwork from "../assets/images/profile-ying-bg.png";
   .ying-manifesto { position: relative; display: grid; align-items: center; min-width: 0; padding: clamp(44px, 5.2vw, 86px) clamp(44px, 6vw, 100px); background: radial-gradient(circle at 2% 5%, rgba(185,134,50,.11), transparent 30%), radial-gradient(circle at 100% 100%, rgba(105,13,11,.07), transparent 36%), #070706; }
   .ying-manifesto::before { position: absolute; inset: 7% auto 7% 0; width: 1px; background: linear-gradient(transparent, rgba(217,164,65,.46) 20%, rgba(217,164,65,.2) 82%, transparent); content: ""; }
   .manifesto-inner { width: min(100%, 620px); }
-  .manifesto-kicker { margin: 0 0 18px; color: var(--gold-bright); font-family: var(--font-ui); font-size: .68rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; }
-  .identity-line { display: flex; align-items: baseline; gap: 24px; }
-  .identity-line h1 { margin: 0; color: #f4eee5; font-family: var(--font-display); font-size: clamp(5.1rem, 7.25vw, 7.6rem); font-weight: 800; line-height: .88; letter-spacing: -.055em; }
-  .identity-line > p { display: flex; gap: 10px; align-items: center; margin: 0; color: var(--gold-bright); font-family: var(--font-ui); font-size: .67rem; font-style: normal; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; white-space: nowrap; }
-  .identity-line > p span { font-family: serif; font-size: 1.1rem; }
-  .identity-line i { width: 18px; height: 1px; background: rgba(217,164,65,.65); }
-  .manifesto-statement { margin-top: 27px; padding: 23px 0 21px; border-top: 1px solid rgba(217,164,65,.32); border-bottom: 1px solid rgba(217,164,65,.18); }
-  .manifesto-statement p { margin: 0; color: #f4eee5; font-family: var(--font-display); font-size: clamp(2rem, 2.5vw, 2.65rem); font-weight: 800; line-height: .98; letter-spacing: -.025em; text-transform: uppercase; }
+  .manifesto-kicker { margin: 0 0 8px; color: var(--gold-bright); font-family: var(--font-ui); font-size: .68rem; font-weight: 800; letter-spacing: .22em; text-transform: uppercase; }
+  .identity-mark { position: relative; width: fit-content; min-width: min(100%, 440px); padding: 8px 68px 20px 0; }
+  .identity-ideogram { position: absolute; top: 4px; right: 4px; color: #b98632; font-family: Georgia, serif; font-size: clamp(2.7rem, 3.7vw, 4.25rem); line-height: 1; opacity: .9; }
+  .identity-mark h1 { position: relative; width: fit-content; margin: 0; color: #f4eee5; font-family: Didot, "Bodoni 72", "Times New Roman", serif; font-size: clamp(5.5rem, 8vw, 8.4rem); font-style: italic; font-weight: 400; line-height: .88; letter-spacing: -.085em; text-shadow: 0 14px 34px rgba(0,0,0,.42); }
+  .wordmark-y { display: inline-block; margin-right: -.025em; font-size: 1.08em; transform: skewX(-3deg); }
+  .wordmark-i { position: relative; display: inline-block; }
+  .wordmark-i::before { position: absolute; top: -.03em; left: 53%; width: .58em; height: 2px; background: linear-gradient(90deg, #8e682b, #e0b35f 56%, #8e682b); content: ""; transform: translateX(-50%) rotate(-4deg); box-shadow: 0 0 12px rgba(217,164,65,.12); }
+  .wordmark-tail { position: absolute; right: -.72em; bottom: .1em; width: 1.02em; height: .34em; border-top: 1px solid rgba(217,164,65,.82); border-radius: 55% 0 0; transform: rotate(-8deg); }
+  .wordmark-tail::after { position: absolute; top: -3px; right: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--gold-bright); content: ""; }
+  .identity-meaning { display: flex; gap: 12px; align-items: center; margin: 12px 0 0 10px; color: #b9afa2; font-family: var(--font-ui); font-size: .62rem; font-weight: 800; letter-spacing: .34em; text-transform: uppercase; }
+  .identity-meaning span { width: 34px; height: 1px; background: linear-gradient(90deg, var(--gold-muted), rgba(185,134,50,.2)); }
+  .manifesto-statement { margin-top: 20px; padding: 23px 0 21px; border-top: 1px solid rgba(217,164,65,.28); border-bottom: 1px solid rgba(217,164,65,.16); }
+  .manifesto-statement p { margin: 0; color: #f4eee5; font-family: var(--font-display); font-size: clamp(2rem, 2.5vw, 2.65rem); font-weight: 800; line-height: 1; letter-spacing: -.025em; text-transform: uppercase; }
   .manifesto-statement em { color: var(--gold-bright); font-style: normal; }
-  .manifesto-intro { max-width: 535px; margin: 20px 0 23px; color: #d3cbc0; font-size: clamp(.98rem, 1.05vw, 1.1rem); line-height: 1.55; }
-  .principles { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid rgba(217,164,65,.2); }
-  .principles li { display: grid; grid-template-columns: 122px 1fr; gap: 12px; align-items: center; min-height: 46px; border-top: 1px solid rgba(217,164,65,.2); font-family: var(--font-ui); }
-  .principles strong { color: #eee8df; font-size: .69rem; letter-spacing: .13em; text-transform: uppercase; }
-  .principles p { margin: 0; color: #aaa39a; font-family: var(--font-body); font-size: .86rem; line-height: 1.35; }
-  .manifesto-note { margin: 18px 0 0; color: #827b72; font-family: var(--font-ui); font-size: .62rem; letter-spacing: .11em; line-height: 1.5; text-transform: uppercase; }
+  .manifesto-intro { max-width: 515px; margin: 21px 0 0; color: #d3cbc0; font-size: clamp(.98rem, 1.05vw, 1.08rem); line-height: 1.58; }
+  .manifesto-intro p { margin: 0; }
+  .manifesto-intro p + p { margin-top: 10px; color: #aaa198; }
+  .manifesto-note { display: flex; gap: 13px; align-items: center; margin: 24px 0 0; color: #b6aa9c; font-family: var(--font-ui); font-size: .62rem; font-weight: 700; letter-spacing: .16em; line-height: 1.5; text-transform: uppercase; }
+  .manifesto-note span { width: 22px; height: 1px; background: #8e2019; }
   @media (max-width: 1100px) {
     .ying-hero { grid-template-columns: 47% 53%; }
     .ying-manifesto { padding-inline: 42px; }
-    .identity-line { display: block; }
-    .identity-line > p { margin-top: 12px; }
+    .identity-mark { min-width: min(100%, 390px); }
   }
   @media (max-width: 760px) {
     .ying-header { height: 76px; padding-inline: 20px; }
@@ -116,7 +108,10 @@ import artwork from "../assets/images/profile-ying-bg.png";
     .ying-artwork img { object-position: 69% center; }
     .ying-manifesto { padding: 34px 24px 46px; }
     .ying-manifesto::before { display: none; }
-    .identity-line h1 { font-size: clamp(4rem, 20vw, 5.2rem); }
+    .identity-mark { min-width: 0; padding-right: 55px; }
+    .identity-mark h1 { font-size: clamp(4.6rem, 22vw, 6rem); }
+    .identity-ideogram { font-size: 2.8rem; }
+    .wordmark-tail { right: -.48em; width: .72em; }
     .manifesto-statement { margin-top: 24px; }
     .principles li { grid-template-columns: 1fr; gap: 5px; padding: 11px 0; }
   }

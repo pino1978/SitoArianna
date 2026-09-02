@@ -238,7 +238,7 @@
 
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__copy {
     position: absolute;
-    top: clamp(76px, 20vw, 88px);
+    top: clamp(38px, 10vw, 46px);
     left: 18px;
     width: calc(100% - 36px);
     margin: 0;

@@ -160,6 +160,32 @@
   color: rgba(242, 235, 221, .78);
 }
 
+.profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote {
+  position: relative;
+  max-width: 440px;
+  margin: 0;
+  padding: 8px 0 4px 30px;
+  border-left: 1px solid rgba(181, 138, 60, .72);
+  color: rgba(242, 235, 221, .88);
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 1.25vw, 1.16rem);
+  font-style: normal;
+  line-height: 1.55;
+  text-wrap: balance;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .82);
+}
+
+.profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote::before {
+  content: "“";
+  position: absolute;
+  top: -22px;
+  left: 13px;
+  color: var(--profile-gold);
+  font-family: Georgia, serif;
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
 @media (max-width: 980px) {
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-nav {
     width: calc(100% - 44px);
@@ -212,7 +238,7 @@
 
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__copy {
     position: absolute;
-    top: clamp(102px, 27vw, 116px);
+    top: clamp(76px, 20vw, 88px);
     left: 18px;
     width: calc(100% - 36px);
     margin: 0;
@@ -220,9 +246,9 @@
   }
 
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero h1 {
-    max-width: 330px;
-    margin: 0;
-    font-size: clamp(2.85rem, 13vw, 3.2rem);
+    max-width: 315px;
+    margin: 0 0 24px;
+    font-size: clamp(2.65rem, 12vw, 3rem);
     line-height: .84;
     letter-spacing: -.035em;
   }
@@ -252,6 +278,22 @@
   }
 
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero .lead {
-    display: none;
+    display: block;
+  }
+
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote {
+    width: min(47vw, 184px);
+    max-width: none;
+    padding: 7px 0 2px 16px;
+    font-family: Georgia, serif;
+    font-size: clamp(.9rem, 3.85vw, .98rem);
+    line-height: 1.44;
+    text-wrap: pretty;
+  }
+
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote::before {
+    top: -18px;
+    left: 8px;
+    font-size: 2.8rem;
   }
 }

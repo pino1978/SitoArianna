@@ -1,13 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import eagle from "../assets/images/hero-eagle-layer-aq2.png";
-import portrait from "../assets/images/Ying_profile.png";
+import heroContext from "../assets/images/profile-hero-context-v1.webp";
+import journeyContext from "../assets/images/profile-journey-context-v1.webp";
+import guidePhoto from "../assets/images/profile-guide-real-v1.webp";
+import trainingContext from "../assets/images/profile-training-context-v1.webp";
+import objectiveContext from "../assets/images/profile-objective-context-v1.webp";
 
 const values = [
-  { symbol: "律", title: "Disciplina", text: "Regole e regolarità, mi alleno nel metodo. La disciplina è la base di ogni mio progresso." },
-  { symbol: "勇", title: "Coraggio", text: "Affronto ogni sfida senza paura. Dentro il tatami e nella vita." },
-  { symbol: "敬", title: "Rispetto", text: "Rispetto l’avversaria, i compagni, il maestro e ogni momento del mio percorso." },
-  { symbol: "恒", title: "Costanza", text: "Ogni giorno scelgo di migliorare un po’. La costanza trasforma gli obiettivi in realtà." }
+  { title: "Disciplina", text: "Allenarmi con regolarità e attenzione." },
+  { title: "Coraggio", text: "Affrontare ogni sfida senza fermarmi davanti alla difficoltà." },
+  { title: "Rispetto", text: "Riconoscere il valore di chi si allena con me e di chi incontro sul tatami." },
+  { title: "Costanza", text: "Continuare anche quando migliorare richiede tempo." }
 ];
 ---
 <BaseLayout title="Profilo atleta | Arianna Milano" description="Il percorso sportivo di Arianna Milano, giovane atleta agonista di Kung Fu Sanda.">
@@ -25,7 +29,7 @@ const values = [
     <section class="profile-hero" aria-labelledby="profile-title">
       <div class="profile-hero__wash" aria-hidden="true"></div>
       <img class="profile-hero__eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
-      <img class="profile-hero__portrait" src={portrait.src} alt="Ritratto temporaneo di Arianna, da sostituire con la fotografia definitiva" width={portrait.width} height={portrait.height} />
+      <img class="profile-hero__context" src={heroContext.src} alt="Giovane atleta osservata di spalle prima di entrare sul tatami. Immagine provvisoria" width={heroContext.width} height={heroContext.height} />
       <div class="profile-hero__copy">
         <p class="eyebrow">Profilo atleta · Kung Fu Sanda</p>
         <h1 id="profile-title">Crescere<br /><em>sul tatami</em></h1>
@@ -37,14 +41,13 @@ const values = [
       <p class="section-index">01 · Il mio percorso</p>
       <div class="journey__grid">
         <figure class="photo-frame">
-          <img src={portrait.src} alt="Spazio riservato al ritratto professionale di Arianna" width={portrait.width} height={portrait.height} />
+          <img src={journeyContext.src} alt="Preparazione delle fasce prima dell’allenamento. Immagine provvisoria" width={journeyContext.width} height={journeyContext.height} />
         </figure>
         <div class="journey__copy">
           <h2 id="journey-title">La crescita<br />prima del risultato.</h2>
           <span class="gold-rule" aria-hidden="true"></span>
-          <p>Il mio percorso nel <strong>Kung Fu</strong> è iniziato nel 2021. Da allora ogni allenamento è diventato un’opportunità per imparare qualcosa di nuovo, migliorare e mettermi alla prova.</p>
-          <p>Durante gli allenamenti affronto aspetti diversi di questa disciplina, dalla preparazione tecnica e acrobatica al <strong>Sanda</strong>, il combattimento sportivo del Kung Fu, che oggi rappresenta il cuore del mio percorso agonistico.</p>
-          <p>Con il tempo ho scoperto che il Kung Fu è molto più di uno sport. Mi ha insegnato il valore della disciplina, del rispetto, dell’autocontrollo e della determinazione.</p>
+          <p>Il mio percorso nel <strong>Kung Fu</strong> è iniziato nel 2021.<br />Da allora ho imparato tecniche diverse, dalla preparazione acrobatica al <strong>Sanda</strong>, il combattimento sportivo che oggi rappresenta il centro della mia attività agonistica.</p>
+          <p>Ogni allenamento mi aiuta a conoscere meglio le mie capacità e ad affrontare nuove sfide con maggiore consapevolezza.</p>
         </div>
       </div>
     </section>
@@ -55,7 +58,6 @@ const values = [
       <div class="values__grid" role="list">
         {values.map((value) => (
           <article class="value-card" role="listitem">
-            <div class="value-seal" aria-hidden="true"><span>{value.symbol}</span></div>
             <h3>{value.title}</h3>
             <span class="red-rule" aria-hidden="true"></span>
             <p>{value.text}</p>
@@ -64,44 +66,34 @@ const values = [
       </div>
     </section>
 
-    <section class="story-band section-shell" aria-labelledby="team-title">
-      <div class="story-band__copy">
-        <p class="section-index">03 · La mia squadra</p>
-        <h2 id="team-title">Kasoria Kombat<br />&amp; Fly</h2>
-        <p>Da quando sono entrata a far parte della <strong>ASD Kasoria Kombat &amp; Fly</strong>, ho trovato un ambiente in cui crescere, allenarmi e mettermi alla prova ogni giorno.</p>
-        <p>La squadra è il luogo in cui il lavoro individuale incontra il sostegno degli altri: compagni, allenatori e persone che condividono la stessa passione.</p>
-      </div>
-      <figure class="story-band__visual"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna con la sua squadra" width={portrait.width} height={portrait.height} /></figure>
-    </section>
-
     <section class="story-band story-band--reverse section-shell" aria-labelledby="coach-title">
       <div class="story-band__copy">
-        <p class="section-index">04 · La guida tecnica</p>
+        <p class="section-index">03 · La mia guida</p>
         <h2 id="coach-title">Maestro<br />Eduardo Mazzarra</h2>
-        <p>Sotto la sua guida sto imparando che ogni dettaglio conta: la tecnica, la disciplina, il rispetto dell’avversario e la capacità di affrontare ogni sfida con determinazione.</p>
-        <p>Con il suo esempio, la sua esperienza e la sua passione, mi guida in un percorso che mi aiuta a migliorare non solo come atleta, ma anche come persona.</p>
+        <p>Nella <strong>Kasoria Kombat &amp; Fly</strong> ho trovato un ambiente in cui allenarmi, confrontarmi e crescere insieme agli altri.</p>
+        <p>Il maestro Eduardo Mazzarra mi accompagna nella crescita tecnica e agonistica.<br />Con lui imparo a curare ogni dettaglio e ad affrontare il tatami con attenzione, rispetto e determinazione.</p>
       </div>
-      <figure class="story-band__visual"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna con il maestro Eduardo Mazzarra" width={portrait.width} height={portrait.height} /></figure>
+      <figure class="story-band__visual"><img src={guidePhoto.src} alt="Il maestro Eduardo Mazzarra prepara Arianna prima di un incontro" width={guidePhoto.width} height={guidePhoto.height} /></figure>
     </section>
 
     <section class="story-band section-shell" aria-labelledby="training-title">
       <div class="story-band__copy">
-        <p class="section-index">05 · Allenarsi</p>
+        <p class="section-index">04 · Allenarsi</p>
         <h2 id="training-title">Ripartire<br />ogni giorno.</h2>
-        <p>Allenarsi significa affrontare nuove sfide, correggere gli errori e ripartire con ancora più voglia di crescere.</p>
-        <p>È un percorso fatto di impegno quotidiano, costanza e piccoli miglioramenti che, giorno dopo giorno, costruiscono qualcosa di più grande.</p>
+        <p>Ogni allenamento è fatto di tecnica, preparazione fisica e ripetizione.</p>
+        <p>Correggere un movimento, provarlo ancora e renderlo più preciso è il lavoro che precede ogni gara.</p>
       </div>
-      <figure class="story-band__visual"><img src={portrait.src} alt="Spazio riservato a una fotografia di Arianna durante l’allenamento" width={portrait.width} height={portrait.height} /></figure>
+      <figure class="story-band__visual"><img src={trainingContext.src} alt="Allenamento con i colpitori. Immagine provvisoria" width={trainingContext.width} height={trainingContext.height} /></figure>
     </section>
 
     <section class="objective" aria-labelledby="objective-title">
       <div class="objective__texture" aria-hidden="true"></div>
       <img class="objective__eagle" src={eagle.src} alt="" aria-hidden="true" width={eagle.width} height={eagle.height} />
-      <img class="objective__portrait" src={portrait.src} alt="Ritratto temporaneo di Arianna, da sostituire con la fotografia definitiva" width={portrait.width} height={portrait.height} />
+      <img class="objective__context" src={objectiveContext.src} alt="Giovane atleta davanti al tatami di gara. Immagine provvisoria" width={objectiveContext.width} height={objectiveContext.height} />
       <div class="objective__copy">
         <p class="objective__eyebrow">Il mio obiettivo</p>
         <h2 id="objective-title">Ogni allenamento<br />mi avvicina alla versione<br />migliore di me.</h2>
-        <p>Il mio obiettivo è continuare a crescere come atleta e come persona, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva, dentro e fuori dal tatami.</p>
+        <p>Voglio continuare a crescere, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva.</p>
         <a href="/risultati/">Scopri i risultati <span aria-hidden="true">→</span></a>
       </div>
     </section>
@@ -112,4 +104,32 @@ const values = [
 :global(body){background:#050504}.profile-page{--profile-ink:#050504;--profile-panel:#0b0a08;--profile-gold:#b58a3c;--profile-red:#7d1715;--profile-ivory:#f2ebdd;min-height:100vh;color:var(--profile-ivory);background:radial-gradient(circle at 82% 12%,rgba(181,138,60,.055),transparent 24%),var(--profile-ink);overflow:hidden}.profile-nav{position:absolute;z-index:20;top:0;left:50%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;width:min(1280px,calc(100% - 64px));height:86px;transform:translateX(-50%);font:800 .67rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}.profile-nav nav{display:flex;gap:44px}.profile-nav a{color:rgba(242,235,221,.72)}.profile-nav a:hover,.profile-nav a:focus-visible,.profile-nav .is-active{color:var(--profile-gold)}.profile-nav .is-active{position:relative}.profile-nav .is-active:after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:1px;background:var(--profile-gold)}.profile-nav__home{justify-self:start}.profile-nav__back{justify-self:end;border:1px solid rgba(181,138,60,.35);padding:11px 15px}.profile-hero{position:relative;min-height:760px;display:flex;align-items:center;width:100%;border-bottom:1px solid rgba(181,138,60,.48);isolation:isolate;overflow:hidden;background:linear-gradient(90deg,#030303 0%,#050504 43%,#0a0907 100%)}.profile-hero__wash{position:absolute;inset:0;z-index:-4;background:radial-gradient(circle at 73% 37%,rgba(181,138,60,.13),transparent 25%),radial-gradient(circle at 90% 46%,rgba(125,23,21,.13),transparent 22%),linear-gradient(90deg,rgba(0,0,0,.25),transparent 56%,rgba(0,0,0,.18))}.profile-hero__eagle{position:absolute;z-index:-3;right:-5%;top:2%;width:min(64vw,980px);height:98%;object-fit:contain;object-position:right center;opacity:.48;mix-blend-mode:screen;filter:contrast(1.08) saturate(.76) brightness(.72)}.profile-hero__eagle:after{content:""}.profile-hero__portrait{position:absolute;z-index:-2;right:19%;bottom:0;width:min(31vw,470px);height:88%;object-fit:cover;object-position:center top;mix-blend-mode:screen;filter:sepia(.12) saturate(.72) contrast(1.08) brightness(.82);-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 78%,transparent 100%)}.profile-hero__copy{position:relative;z-index:2;width:min(1280px,calc(100% - 64px));margin:auto;padding-top:74px}.eyebrow,.section-index{color:var(--profile-gold);font:800 .69rem/1.2 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.profile-hero h1{max-width:690px;margin:20px 0 28px;font-family:var(--font-display);font-size:clamp(5rem,9vw,8.6rem);font-weight:900;line-height:.82;letter-spacing:-.045em;text-transform:uppercase}.profile-hero h1 em{color:transparent;-webkit-text-stroke:1px rgba(181,138,60,.8);font-style:normal}.lead{max-width:590px;margin:0;color:rgba(242,235,221,.78);font-size:1.08rem;line-height:1.55}.section-shell{width:min(1280px,calc(100% - 64px));margin:auto}.journey{padding:62px 0 76px}.journey__grid{display:grid;grid-template-columns:minmax(360px,.92fr) minmax(0,1.08fr);gap:72px;align-items:center;margin-top:20px}.photo-frame{position:relative;margin:0;min-height:520px;border:1px solid rgba(181,138,60,.32);overflow:hidden}.photo-frame img,.story-band__visual img{width:100%;height:100%;object-fit:cover;filter:sepia(.16) saturate(.68) contrast(1.06) brightness(.84)}.journey__copy{padding-right:34px}.journey h2,.story-band h2,.objective h2{margin:0;font-family:var(--font-display);font-weight:850;line-height:.94;letter-spacing:-.025em;text-transform:uppercase}.journey h2{font-size:clamp(3rem,5.3vw,5rem)}.gold-rule{display:block;width:54px;height:2px;margin:22px 0;background:var(--profile-gold)}.journey p,.story-band p,.objective p{color:rgba(242,235,221,.76);font-size:1rem;line-height:1.75}.values{padding:0 0 76px}.values__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px}.value-card{min-height:330px;padding:26px 24px 30px;text-align:center;border:1px solid rgba(181,138,60,.43);background:linear-gradient(180deg,rgba(181,138,60,.025),transparent 42%)}.value-seal{position:relative;display:grid;place-items:center;width:126px;height:126px;margin:0 auto 20px;border:1px solid rgba(181,138,60,.6);border-radius:50%;box-shadow:inset 0 0 0 7px rgba(181,138,60,.045),0 0 34px rgba(181,138,60,.06)}.value-seal:before,.value-seal:after{content:"";position:absolute;border-radius:50%;border:1px dashed rgba(181,138,60,.34)}.value-seal:before{inset:8px}.value-seal:after{inset:17px}.value-seal span{position:relative;z-index:2;color:var(--profile-gold);font-family:serif;font-size:3.65rem;line-height:1;text-shadow:0 0 24px rgba(181,138,60,.18)}.value-card h3{margin:0;font-family:var(--font-display);font-size:1.28rem;letter-spacing:.04em;text-transform:uppercase}.red-rule{display:block;width:40px;height:2px;margin:12px auto;background:var(--profile-red)}.value-card p{max-width:210px;margin:0 auto;color:rgba(242,235,221,.69);font-size:.88rem;line-height:1.55}.story-band{display:grid;grid-template-columns:minmax(0,.9fr) minmax(440px,1.1fr);gap:70px;align-items:center;padding:78px 0;border-top:1px solid rgba(181,138,60,.15)}.story-band--reverse .story-band__copy{order:2}.story-band--reverse .story-band__visual{order:1}.story-band__copy{padding:0 24px}.story-band h2{margin:14px 0 24px;font-size:clamp(3rem,5.4vw,5.4rem)}.story-band__visual{height:470px;margin:0;overflow:hidden;border:1px solid rgba(181,138,60,.28)}.objective{position:relative;min-height:680px;display:flex;align-items:center;padding:92px max(32px,calc((100vw - 1280px)/2));border-top:1px solid rgba(181,138,60,.38);background:#050504;overflow:hidden;isolation:isolate}.objective__texture{position:absolute;inset:0;z-index:-4;background:radial-gradient(circle at 74% 44%,rgba(181,138,60,.15),transparent 24%),radial-gradient(circle at 91% 67%,rgba(125,23,21,.17),transparent 22%),linear-gradient(90deg,#050504 0%,rgba(5,5,4,.94) 48%,rgba(5,5,4,.45) 100%)}.objective__eagle{position:absolute;z-index:-3;right:-4%;top:-8%;width:66%;height:116%;object-fit:contain;opacity:.28;filter:contrast(1.1) saturate(.75) brightness(.62)}.objective__portrait{position:absolute;z-index:-2;right:12%;bottom:0;width:min(34vw,500px);height:92%;object-fit:cover;object-position:center top;filter:sepia(.16) saturate(.7) contrast(1.08) brightness(.74);-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 100%)}.objective__copy{position:relative;z-index:2;max-width:630px}.objective__eyebrow{margin:0 0 16px;color:#a92420;font:800 .7rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.objective h2{font-size:clamp(3.2rem,5.6vw,5.8rem)}.objective p{max-width:540px}.objective a{display:inline-flex;align-items:center;gap:16px;margin-top:18px;padding:14px 18px;border:1px solid rgba(181,138,60,.62);color:var(--profile-gold);font:800 .68rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
 @media(max-width:900px){.profile-nav{width:calc(100% - 36px);height:70px}.profile-nav nav{gap:20px}.profile-nav__home{display:none}.profile-hero{min-height:680px}.profile-hero__copy,.section-shell{width:calc(100% - 36px)}.profile-hero__portrait{right:4%;width:52vw;height:76%;opacity:.75}.profile-hero__eagle{right:-32%;width:108vw;opacity:.32}.journey__grid,.story-band{grid-template-columns:1fr}.story-band--reverse .story-band__copy,.story-band--reverse .story-band__visual{order:initial}.values__grid{grid-template-columns:repeat(2,1fr)}.objective__portrait{right:-5%;width:58vw;opacity:.65}.objective__eagle{right:-36%;width:110%}}
 @media(max-width:620px){.profile-nav{grid-template-columns:1fr auto}.profile-nav nav{display:none}.profile-nav__back{grid-column:2}.profile-hero{min-height:620px;align-items:flex-end}.profile-hero__copy{padding:0 0 58px}.profile-hero h1{font-size:clamp(3.6rem,17vw,5.2rem)}.profile-hero__portrait{right:-5%;width:76vw;height:72%;opacity:.52}.profile-hero__eagle{right:-55%;width:150vw;opacity:.2}.lead{font-size:.98rem}.journey{padding:50px 0}.journey__grid{gap:34px}.photo-frame{min-height:430px}.journey__copy{padding:0}.journey h2{font-size:clamp(2.7rem,13vw,4.2rem)}.values{padding-bottom:54px}.values__grid{grid-template-columns:1fr}.value-card{min-height:auto}.story-band{gap:28px;padding:54px 0}.story-band__visual{height:390px}.story-band h2{font-size:clamp(2.7rem,13vw,4.3rem)}.objective{min-height:690px;align-items:flex-end;padding:70px 18px}.objective__portrait{right:-25%;width:100vw;height:68%;opacity:.42}.objective__eagle{right:-60%;width:160%;opacity:.16}.objective h2{font-size:clamp(2.8rem,13vw,4.5rem)}}
+/* Profile refresh: contextual imagery and a more compact values section. */
+.profile-hero__wash{z-index:-1;background:linear-gradient(90deg,rgba(3,3,3,.96) 0%,rgba(5,5,4,.84) 42%,rgba(5,5,4,.32) 76%,rgba(0,0,0,.36) 100%),radial-gradient(circle at 73% 37%,rgba(181,138,60,.18),transparent 30%)}
+.profile-hero__eagle{z-index:-2;opacity:.2}
+.profile-hero__context{position:absolute;z-index:-3;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.72) contrast(1.08) brightness(.7)}
+.photo-frame img,.story-band__visual img{filter:sepia(.08) saturate(.82) contrast(1.04) brightness(.9)}
+.values{padding-bottom:64px}
+.values__grid{grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(181,138,60,.32);border-bottom:1px solid rgba(181,138,60,.32)}
+.value-card{min-height:0;padding:30px 26px 32px;text-align:left;border:0;border-right:1px solid rgba(181,138,60,.28);background:linear-gradient(180deg,rgba(181,138,60,.035),transparent 72%)}
+.value-card:last-child{border-right:0}
+.value-card h3{font-size:1.18rem}
+.red-rule{width:32px;margin:12px 0}
+.value-card p{max-width:240px;margin:0;font-size:.9rem}
+.objective__texture{z-index:-1;background:linear-gradient(90deg,rgba(5,5,4,.97) 0%,rgba(5,5,4,.88) 48%,rgba(5,5,4,.34) 100%),radial-gradient(circle at 74% 44%,rgba(181,138,60,.18),transparent 28%)}
+.objective__eagle{z-index:-2;opacity:.12}
+.objective__context{position:absolute;z-index:-3;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.75) contrast(1.06) brightness(.68)}
+@media(max-width:900px){
+  .profile-hero__context,.objective__context{object-position:62% center}
+  .values__grid{grid-template-columns:repeat(2,1fr)}
+  .value-card:nth-child(2){border-right:0}
+  .value-card:nth-child(-n+2){border-bottom:1px solid rgba(181,138,60,.28)}
+}
+@media(max-width:620px){
+  .profile-hero__context,.objective__context{object-position:70% center}
+  .values__grid{grid-template-columns:1fr}
+  .value-card{border-right:0;border-bottom:1px solid rgba(181,138,60,.28)}
+  .value-card:nth-child(2){border-bottom:1px solid rgba(181,138,60,.28)}
+  .value-card:last-child{border-bottom:0}
+}
 </style>

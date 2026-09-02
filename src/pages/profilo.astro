@@ -157,14 +157,15 @@ const values = [
   .value-card:nth-child(-n+2){border-bottom:1px solid rgba(181,138,60,.28)}
 }
 @media(max-width:620px){
-  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero{height:clamp(540px,145vw,560px);min-height:0;align-items:flex-start}
-  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__copy{position:absolute;top:clamp(54px,14vw,62px);left:18px;width:calc(100% - 36px);margin:0;padding:0}
-  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero h1{max-width:330px;margin:0 0 16px;font-size:clamp(2.65rem,12.5vw,3.2rem);line-height:.9;letter-spacing:-.04em}
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero{height:clamp(460px,123vw,500px);min-height:0;align-items:flex-start}
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__copy{position:absolute;top:clamp(102px,27vw,116px);left:18px;width:calc(100% - 36px);margin:0;padding:0}
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero h1{max-width:330px;margin:0;font-size:clamp(2.85rem,13vw,3.2rem);line-height:.84;letter-spacing:-.035em}
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero h1 em{color:var(--profile-gold);-webkit-text-stroke:0;text-shadow:0 3px 18px rgba(0,0,0,.8)}
-  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero .lead{max-width:28ch;color:rgba(255,250,241,.96);font-size:1rem;line-height:1.45;text-shadow:0 2px 10px rgba(0,0,0,.9)}
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero .lead{display:none}
   .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero::after{display:none}
-  .profile-hero__wash{background:linear-gradient(180deg,rgba(0,0,0,.58) 0%,rgba(0,0,0,.4) 40%,rgba(0,0,0,.08) 64%,rgba(2,2,2,.42) 100%),linear-gradient(90deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.2) 52%,transparent 76%)}
-  .profile-hero__context{object-position:center 58%;filter:saturate(.82) contrast(1.05) brightness(.8)}
+  .profile-hero__wash{background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.52) 42%,rgba(0,0,0,.05) 72%),linear-gradient(180deg,rgba(0,0,0,.32) 0%,transparent 42%,rgba(0,0,0,.18) 100%)}
+  .profile-hero__context{object-position:center 58%;filter:saturate(.82) contrast(1.05) brightness(.8);transform:scale(1.16);transform-origin:center 58%}
+  .journey{padding-top:28px}
   .objective__context{object-position:70% center}
   .story-band__visual--guide{width:100%;height:450px;aspect-ratio:auto}
   .values__grid{grid-template-columns:1fr}

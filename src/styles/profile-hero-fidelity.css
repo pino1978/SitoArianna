@@ -187,16 +187,15 @@
   line-height: 1;
 }
 
-.profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote::after {
-  content: "”";
-  position: absolute;
-  right: -2px;
-  bottom: -24px;
+.profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote-close {
+  display: inline-block;
+  margin-left: .06em;
   color: var(--profile-gold);
   font-family: Georgia, serif;
-  font-size: 2.8rem;
-  line-height: 1;
+  font-size: 3.4rem;
+  line-height: 0;
   opacity: .78;
+  vertical-align: -.32em;
 }
 
 @media (max-width: 980px) {
@@ -310,9 +309,7 @@
     font-size: 2.8rem;
   }
 
-  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote::after {
-    right: -3px;
-    bottom: -19px;
-    font-size: 2.2rem;
+  .profile-page[data-profile-layout="approved-mockup-v1"] .profile-hero__quote-close {
+    font-size: 2.8rem;
   }
 }

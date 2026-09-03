@@ -103,8 +103,6 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
           const id = button.getAttribute("data-youtube-id") || "";
           if (!id) return;
 
-          // GLightbox 3.3.1 has problems parsing /shorts/ URLs directly.
-          // Feed it a canonical watch URL and explicitly declare YouTube instead.
           const canonicalUrl = `https://www.youtube.com/watch?v=${id}`;
           const lightbox = GLightbox({
             elements: [{
@@ -126,6 +124,17 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
               config: {
                 ratio: "9:16",
                 autoplay: true,
+                hideControls: false,
+                controls: ["play", "progress", "current-time", "mute", "volume", "fullscreen"],
+                fullscreen: {
+                  enabled: true,
+                  fallback: true,
+                  iosNative: true
+                },
+                tooltips: {
+                  controls: true,
+                  seek: true
+                },
                 youtube: {
                   noCookie: true,
                   rel: 0,

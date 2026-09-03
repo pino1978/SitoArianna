@@ -28,11 +28,11 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
       <p>Highlights</p>
       <h2 id="highlights-title">I momenti che contano</h2>
     </div>
-    <a class="media-cta" href="/media">Esplora tutti i media <span aria-hidden="true">→</span></a>
+    <a class="media-cta" href="/media" data-interactive>Esplora tutti i media <span aria-hidden="true">→</span></a>
   </div>
 
   <div class="highlight-stage">
-    <button class="rail-arrow rail-arrow--prev" type="button" aria-label="Media precedenti" hidden>‹</button>
+    <button class="rail-arrow rail-arrow--prev" type="button" aria-label="Media precedenti" data-interactive hidden>‹</button>
     <div class="highlight-rail" tabindex="0" aria-label="Media in evidenza">
       {highlights.map((item) => {
         const id = item.tipo === "video" ? youtubeId(item.urlYouTube) : "";
@@ -44,6 +44,7 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
             <button
               class="highlight-open"
               type="button"
+              data-interactive
               data-media-type={item.tipo}
               data-youtube-id={id}
               data-image={image?.src ?? ""}
@@ -66,19 +67,19 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
         );
       })}
     </div>
-    <button class="rail-arrow rail-arrow--next" type="button" aria-label="Media successivi" hidden>›</button>
+    <button class="rail-arrow rail-arrow--next" type="button" aria-label="Media successivi" data-interactive hidden>›</button>
   </div>
 
-  <a class="media-cta media-cta--mobile" href="/media">Esplora tutti i media <span aria-hidden="true">→</span></a>
+  <a class="media-cta media-cta--mobile" href="/media" data-interactive>Esplora tutti i media <span aria-hidden="true">→</span></a>
 
   <dialog class="media-viewer" aria-label="Visualizzatore media">
-    <button class="viewer-close" type="button" aria-label="Chiudi">×</button>
-    <button class="viewer-arrow viewer-arrow--prev" type="button" aria-label="Media precedente">‹</button>
+    <button class="viewer-close" type="button" aria-label="Chiudi" data-interactive>×</button>
+    <button class="viewer-arrow viewer-arrow--prev" type="button" aria-label="Media precedente" data-interactive>‹</button>
     <div class="viewer-content">
       <div class="viewer-media"></div>
       <div class="viewer-copy"><h3></h3><p></p><time></time></div>
     </div>
-    <button class="viewer-arrow viewer-arrow--next" type="button" aria-label="Media successivo">›</button>
+    <button class="viewer-arrow viewer-arrow--next" type="button" aria-label="Media successivo" data-interactive>›</button>
   </dialog>
 </section>
 
@@ -127,6 +128,7 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
 
       if (type === 'video' && youtubeId) {
         const iframe = document.createElement('iframe');
+        iframe.setAttribute('data-interactive', '');
         iframe.src = `https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0`;
         iframe.title = `Video: ${title}`;
         iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';

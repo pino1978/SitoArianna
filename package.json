@@ -11,7 +11,9 @@
     "preview:docker": "astro preview --host 0.0.0.0 --port 4321"
   },
   "dependencies": {
-    "astro": "^5.18.2"
+    "@splidejs/splide": "4.1.4",
+    "astro": "^5.18.2",
+    "glightbox": "3.3.1"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

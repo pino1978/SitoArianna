@@ -31,12 +31,14 @@ const {
     <script>
       const lockInteractiveContent = () => {
         document.querySelectorAll("a:not([data-interactive])").forEach((link) => {
+          if (link.closest(".highlights-strip")) return;
           link.removeAttribute("href");
           link.setAttribute("aria-disabled", "true");
           link.setAttribute("tabindex", "-1");
         });
 
         document.querySelectorAll("video, iframe, audio").forEach((media) => {
+          if (media.closest(".highlights-strip")) return;
           if (media instanceof HTMLMediaElement) {
             media.pause();
             media.controls = false;
@@ -47,6 +49,7 @@ const {
         });
 
         document.querySelectorAll("button:not([data-interactive])").forEach((button) => {
+          if (button.closest(".highlights-strip")) return;
           button.disabled = true;
           button.setAttribute("aria-disabled", "true");
           button.setAttribute("tabindex", "-1");
@@ -67,5 +70,16 @@ const {
   .site-locked audio {
     pointer-events: none !important;
     cursor: default !important;
+  }
+
+  .site-locked .highlights-strip a,
+  .site-locked .highlights-strip button,
+  .site-locked .highlights-strip iframe {
+    pointer-events: auto !important;
+  }
+
+  .site-locked .highlights-strip a,
+  .site-locked .highlights-strip button {
+    cursor: pointer !important;
   }
 </style>

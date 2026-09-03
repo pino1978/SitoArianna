@@ -31,14 +31,14 @@ const {
     <script>
       const lockInteractiveContent = () => {
         document.querySelectorAll("a:not([data-interactive])").forEach((link) => {
-          if (link.closest(".highlights-strip")) return;
+          if (link.closest(".highlights-strip, .glightbox-container")) return;
           link.removeAttribute("href");
           link.setAttribute("aria-disabled", "true");
           link.setAttribute("tabindex", "-1");
         });
 
         document.querySelectorAll("video:not([data-interactive]), iframe:not([data-interactive]), audio:not([data-interactive])").forEach((media) => {
-          if (media.closest(".highlights-strip")) return;
+          if (media.closest(".highlights-strip, .glightbox-container")) return;
           if (media instanceof HTMLMediaElement) {
             media.pause();
             media.controls = false;
@@ -49,7 +49,7 @@ const {
         });
 
         document.querySelectorAll("button:not([data-interactive])").forEach((button) => {
-          if (button.closest(".highlights-strip")) return;
+          if (button.closest(".highlights-strip, .glightbox-container")) return;
           button.disabled = true;
           button.setAttribute("aria-disabled", "true");
           button.setAttribute("tabindex", "-1");
@@ -63,11 +63,11 @@ const {
 </html>
 
 <style is:global>
-  .site-locked a:not([data-interactive]),
-  .site-locked button:not([data-interactive]),
-  .site-locked video:not([data-interactive]),
-  .site-locked iframe:not([data-interactive]),
-  .site-locked audio:not([data-interactive]) {
+  .site-locked a:not([data-interactive]):not(.glightbox-container *),
+  .site-locked button:not([data-interactive]):not(.glightbox-container *),
+  .site-locked video:not([data-interactive]):not(.glightbox-container *),
+  .site-locked iframe:not([data-interactive]):not(.glightbox-container *),
+  .site-locked audio:not([data-interactive]):not(.glightbox-container *) {
     pointer-events: none !important;
     cursor: default !important;
   }
@@ -75,12 +75,15 @@ const {
   .site-locked .highlights-strip a,
   .site-locked .highlights-strip button,
   .site-locked .highlights-strip iframe,
+  .site-locked .glightbox-container,
+  .site-locked .glightbox-container *,
   .site-locked [data-interactive] {
     pointer-events: auto !important;
   }
 
   .site-locked .highlights-strip a,
   .site-locked .highlights-strip button,
+  .site-locked .glightbox-container button,
   .site-locked [data-interactive]:is(a,button) {
     cursor: pointer !important;
   }

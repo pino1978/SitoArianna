@@ -37,7 +37,7 @@ const {
           link.setAttribute("tabindex", "-1");
         });
 
-        document.querySelectorAll("video, iframe, audio").forEach((media) => {
+        document.querySelectorAll("video:not([data-interactive]), iframe:not([data-interactive]), audio:not([data-interactive])").forEach((media) => {
           if (media.closest(".highlights-strip")) return;
           if (media instanceof HTMLMediaElement) {
             media.pause();
@@ -65,21 +65,23 @@ const {
 <style is:global>
   .site-locked a:not([data-interactive]),
   .site-locked button:not([data-interactive]),
-  .site-locked video,
-  .site-locked iframe,
-  .site-locked audio {
+  .site-locked video:not([data-interactive]),
+  .site-locked iframe:not([data-interactive]),
+  .site-locked audio:not([data-interactive]) {
     pointer-events: none !important;
     cursor: default !important;
   }
 
   .site-locked .highlights-strip a,
   .site-locked .highlights-strip button,
-  .site-locked .highlights-strip iframe {
+  .site-locked .highlights-strip iframe,
+  .site-locked [data-interactive] {
     pointer-events: auto !important;
   }
 
   .site-locked .highlights-strip a,
-  .site-locked .highlights-strip button {
+  .site-locked .highlights-strip button,
+  .site-locked [data-interactive]:is(a,button) {
     cursor: pointer !important;
   }
 </style>

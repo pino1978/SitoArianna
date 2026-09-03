@@ -84,11 +84,10 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
       const container = document.querySelector(".glightbox-container");
       if (!container) return;
       container.classList.add(className);
-      container.querySelectorAll("button, iframe").forEach((node) => {
+      container.querySelectorAll("button, iframe, input").forEach((node) => {
         node.setAttribute("data-interactive", "");
         node.removeAttribute("disabled");
         node.removeAttribute("aria-disabled");
-        node.removeAttribute("tabindex");
         if (node instanceof HTMLElement) node.style.pointerEvents = "auto";
       });
     };
@@ -106,13 +105,7 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
 
           const canonicalUrl = `https://www.youtube.com/watch?v=${id}`;
           const lightbox = GLightbox({
-            elements: [{
-              href: canonicalUrl,
-              type: "video",
-              source: "youtube",
-              width: "430px",
-              height: "765px"
-            }],
+            elements: [{ href: canonicalUrl, type: "video", source: "youtube", width: "430px", height: "765px" }],
             autoplayVideos: true,
             autofocusVideos: true,
             loop: false,
@@ -127,21 +120,9 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
                 autoplay: true,
                 hideControls: false,
                 controls: ["play", "progress", "current-time", "mute", "volume", "fullscreen"],
-                fullscreen: {
-                  enabled: true,
-                  fallback: true,
-                  iosNative: true
-                },
-                tooltips: {
-                  controls: true,
-                  seek: true
-                },
-                youtube: {
-                  noCookie: true,
-                  rel: 0,
-                  modestbranding: 1,
-                  playsinline: 1
-                }
+                fullscreen: { enabled: true, fallback: true, iosNative: true },
+                tooltips: { controls: true, seek: true },
+                youtube: { noCookie: true, rel: 0, modestbranding: 1, playsinline: 1 }
               }
             }
           });
@@ -185,6 +166,9 @@ const highlights = media.filter((item) => item.visibile && item.inEvidenza);
 :global(.highlights-video-lightbox .gslider),:global(.highlights-video-lightbox .gslide),:global(.highlights-video-lightbox .gslide-inner-content),:global(.highlights-video-lightbox .ginner-container){width:100%!important;height:100%!important}
 :global(.highlights-video-lightbox .gslide-media){position:relative!important;width:min(430px,calc(100vw - 56px))!important;height:min(80dvh,765px)!important;max-width:none!important;max-height:none!important;aspect-ratio:9/16!important;margin:auto!important;padding:0!important;background:#000!important;box-shadow:0 24px 80px rgba(0,0,0,.48)!important;overflow:hidden!important}
 :global(.highlights-video-lightbox .gslide-media .plyr),:global(.highlights-video-lightbox .gslide-media .plyr__video-wrapper),:global(.highlights-video-lightbox .gslide-media .plyr__video-embed),:global(.highlights-video-lightbox .gslide-media .plyr__video-embed__container){width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;aspect-ratio:9/16!important}
+:global(.highlights-video-lightbox .plyr__controls){display:flex!important;visibility:visible!important;opacity:1!important;transform:none!important;pointer-events:auto!important;z-index:10!important}
+:global(.highlights-video-lightbox .plyr--hide-controls .plyr__controls){visibility:visible!important;opacity:1!important;transform:none!important;pointer-events:auto!important}
+:global(.highlights-video-lightbox .plyr__controls button),:global(.highlights-video-lightbox .plyr__controls input){pointer-events:auto!important}
 :global(.highlights-video-lightbox .gslide-media iframe){position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;border:0!important}
 :global(.highlights-video-lightbox .gslide-description){display:none!important}
 

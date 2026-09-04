@@ -1,51 +1,40 @@
 ---
 import logo from "../assets/svg/logo-arianna-milano.svg";
 import yingHeaderMark from "../assets/images/ying-header-mark.png";
+const path = Astro.url.pathname;
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/profilo/", label: "Profilo" },
+  { href: "/risultati/", label: "Palmarès" },
+  { href: "/ying/", label: "Yīng" }
+];
 ---
-<header class="site-header site-header--locked" data-header>
-  <div class="brand-mark" aria-label="Arianna Milano">
-    <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
-  </div>
-
+<header class="site-header premium-header" data-header>
+  <a class="brand-mark" href="/" data-interactive aria-label="Arianna Milano · Home"><img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} /></a>
+  <nav class="primary-nav premium-nav" aria-label="Navigazione principale">
+    {nav.map(item => <a href={item.href} data-interactive aria-current={path === item.href ? "page" : undefined}>{item.label}</a>)}
+  </nav>
   <img class="ying-header-mark" src={yingHeaderMark.src} alt="" aria-hidden="true" width={yingHeaderMark.width} height={yingHeaderMark.height} />
-
-  <div class="language-select" aria-hidden="true">
-    <span>IT</span>
+  <span class="language-select" aria-hidden="true">IT</span>
+  <button class="nav-toggle" type="button" data-nav-toggle data-interactive aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span><b>Menu</b></button>
+  <div class="mobile-nav" id="mobile-nav" data-mobile-nav hidden>
+    <div class="mobile-nav__inner">
+      <p>ARIANNA MILANO</p>
+      {nav.map((item,index) => <a href={item.href} data-interactive aria-current={path === item.href ? "page" : undefined}><span>0{index+1}</span>{item.label}</a>)}
+      <small>Sanda athlete · Napoli</small>
+    </div>
   </div>
 </header>
-
+<script>
+  const header=document.querySelector('[data-header]');
+  const toggle=header?.querySelector('[data-nav-toggle]');
+  const menu=header?.querySelector('[data-mobile-nav]');
+  const close=()=>{if(!(toggle instanceof HTMLButtonElement)||!(menu instanceof HTMLElement))return;toggle.setAttribute('aria-expanded','false');menu.hidden=true;document.body.classList.remove('nav-open');};
+  toggle?.addEventListener('click',()=>{if(!(toggle instanceof HTMLButtonElement)||!(menu instanceof HTMLElement))return;const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));menu.hidden=!open;document.body.classList.toggle('nav-open',open);if(open)menu.querySelector('a')?.focus();});
+  menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')close();});
+</script>
 <style is:global>
-  .site-header--locked {
-    grid-template-columns: 188px 1fr auto auto;
-  }
-
-  .site-header--locked .brand-mark {
-    pointer-events: none;
-  }
-
-  .site-header--locked .ying-header-mark {
-    grid-column: 3;
-  }
-
-  .site-header--locked .language-select {
-    grid-column: 4;
-    justify-self: end;
-    padding-top: 15px;
-    color: var(--gold-bright);
-    font-family: var(--font-ui);
-    font-size: .64rem;
-    font-weight: 800;
-    letter-spacing: .12em;
-  }
-
-  @media (max-width: 1000px) {
-    .site-header--locked {
-      grid-template-columns: 160px 1fr;
-    }
-
-    .site-header--locked .ying-header-mark,
-    .site-header--locked .language-select {
-      display: none;
-    }
-  }
+.premium-header{grid-template-columns:188px 1fr auto auto;align-items:start}.premium-header .brand-mark{pointer-events:auto}.premium-nav{display:flex;align-items:center;justify-self:end;gap:clamp(18px,2.2vw,36px);padding-top:15px}.premium-nav a{color:rgba(245,240,231,.78);font-size:.63rem;letter-spacing:.14em;transition:color .2s ease}.premium-nav a:hover,.premium-nav a:focus-visible,.premium-nav a[aria-current="page"]{color:var(--gold-bright)}.premium-nav a[aria-current="page"]::after{left:0;right:0;bottom:-9px;height:1px;background:var(--gold-bright)}.premium-header .ying-header-mark{width:106px;margin-left:18px}.premium-header .language-select{padding-top:15px;color:var(--gold-bright);font-family:var(--font-ui);font-size:.64rem;font-weight:800;letter-spacing:.12em}.mobile-nav{display:none}.nav-toggle{display:none}
+@media(max-width:1000px){.premium-header{grid-template-columns:1fr auto;width:calc(100vw - 36px)!important}.premium-nav,.premium-header .ying-header-mark,.premium-header .language-select{display:none}.nav-toggle{display:grid;grid-template-columns:22px auto;grid-template-rows:repeat(3,4px);align-items:center;column-gap:9px;width:auto;min-width:76px;min-height:48px;padding:8px 0;border:0;background:transparent;color:var(--ivory);font:700 .62rem var(--font-ui);letter-spacing:.12em;text-transform:uppercase}.nav-toggle span{grid-column:1;width:22px;height:1px;background:var(--gold-bright)}.nav-toggle b{grid-column:2;grid-row:1/4;font:inherit}.mobile-nav{position:fixed;z-index:9998;inset:0;display:block;background:rgba(5,5,5,.985);padding:104px 26px 32px}.mobile-nav[hidden]{display:none}.mobile-nav__inner{display:grid;max-width:520px;margin:auto}.mobile-nav__inner>p{margin:0 0 30px;color:var(--gold-bright);font:800 .66rem var(--font-ui);letter-spacing:.18em}.mobile-nav__inner>a{display:grid;grid-template-columns:42px 1fr;align-items:center;padding:16px 0;border-top:1px solid rgba(185,134,50,.22);font:800 clamp(2rem,10vw,3.4rem)/.95 var(--font-display);text-transform:uppercase}.mobile-nav__inner>a span{color:var(--gold-bright);font:700 .62rem var(--font-ui);letter-spacing:.12em}.mobile-nav__inner>a[aria-current="page"]{color:var(--gold-bright)}.mobile-nav__inner small{margin-top:30px;color:rgba(245,240,231,.52);font:700 .62rem var(--font-ui);letter-spacing:.12em;text-transform:uppercase}.nav-open{overflow:hidden}.nav-open .nav-toggle{position:relative;z-index:9999}}
 </style>

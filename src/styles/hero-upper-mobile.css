@@ -203,7 +203,7 @@
     transform-origin: center;
   }
 
-  .hero-copy .stats-strip { top: 626px; }
+  .hero-copy .stats-strip { top: 512px; }
 
   .hero-upper-signature {
     position: absolute;
@@ -261,7 +261,7 @@
 
   .hero-subcopy { top: 422px; }
   .hero-cta { top: 520px; }
-  .hero-copy .stats-strip { top: 604px; }
+  .hero-copy .stats-strip { top: 492px; }
   .hero-upper-signature { top: 88px; }
 
   .hero-upper-signature__eyebrow {

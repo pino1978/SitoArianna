@@ -9,7 +9,7 @@ const highlights=media.filter(item=>item.visibile&&item.inEvidenza);
 <section class="highlights-strip" id="highlights" aria-labelledby="highlights-title">
  <div class="section-head compact"><div><p>Highlights</p><h2 id="highlights-title">I momenti che contano</h2></div></div>
  <div class="highlight-carousel splide" aria-label="Media in evidenza"><div class="splide__arrows"><button class="splide__arrow splide__arrow--prev" type="button" aria-label="Precedente" data-interactive>‹</button><button class="splide__arrow splide__arrow--next" type="button" aria-label="Successivo" data-interactive>›</button></div><div class="splide__track"><ul class="splide__list">{highlights.map(item=>{const id=item.tipo==="video"?youtubeId(item.urlYouTube):"";const image=item.tipo==="foto"?photoUrl(item):"";const thumb=id?`https://i.ytimg.com/vi/${id}/hqdefault.jpg`:image;return <li class={`splide__slide highlight-slide highlight-slide--${item.tipo}`}><button class="highlight-open" type="button" data-interactive data-type={item.tipo} data-image={image} data-youtube={id} aria-label={`${item.tipo==="video"?"Riproduci":"Apri"} ${item.titolo}`}><span class="highlight-preview">{thumb&&<img src={thumb} alt={item.testoAlternativo||item.titolo} loading="lazy"/>}{item.tipo==="video"&&<span class="play-mark" aria-hidden="true">▶</span>}</span></button></li>})}</ul></div></div>
- <div class="viewer" data-viewer hidden aria-hidden="true"><button class="viewer__backdrop" data-close data-interactive aria-label="Chiudi"></button><div class="viewer__dialog" data-dialog role="dialog" aria-modal="true"><button class="viewer__close" data-close data-interactive aria-label="Chiudi">×</button><button class="viewer__full" data-full data-interactive aria-label="Schermo intero">⛶</button><button class="viewer__nav viewer__prev" data-prev data-interactive aria-label="Foto precedente">‹</button><div class="viewer__stage" data-stage></div><button class="viewer__nav viewer__next" data-next data-interactive aria-label="Foto successiva">›</button></div></div>
+ <div class="viewer" data-viewer hidden aria-hidden="true"><button class="viewer__backdrop" data-close data-interactive aria-label="Chiudi"></button><div class="viewer__dialog" data-dialog role="dialog" aria-modal="true"><button class="viewer__close" data-close data-interactive aria-label="Chiudi">×</button><button class="viewer__full" data-full data-interactive aria-label="Schermo intero">⛶</button><button class="viewer__nav viewer__prev" data-prev data-interactive aria-label="Contenuto precedente">‹</button><div class="viewer__stage" data-stage></div><button class="viewer__nav viewer__next" data-next data-interactive aria-label="Contenuto successivo">›</button></div></div>
 </section>
 <script>
  import Splide from '@splidejs/splide';
@@ -20,11 +20,14 @@ const highlights=media.filter(item=>item.visibile&&item.inEvidenza);
    const viewer=root.querySelector('[data-viewer]'),dialog=root.querySelector('[data-dialog]'),stage=root.querySelector('[data-stage]'),full=root.querySelector('[data-full]');
    const allButtons=Array.from(root.querySelectorAll('.highlight-open'));
    const photoButtons=allButtons.filter(b=>b.getAttribute('data-type')==='foto');
+   const videoButtons=allButtons.filter(b=>b.getAttribute('data-type')==='video');
    const prev=root.querySelector('[data-prev]'),next=root.querySelector('[data-next]');
-   let photoIndex=-1,last=null,currentType='';
-   const updatePhotoNav=()=>{
-     const showPrev=currentType==='foto'&&photoButtons.length>1&&photoIndex>0;
-     const showNext=currentType==='foto'&&photoButtons.length>1&&photoIndex<photoButtons.length-1;
+   let currentIndex=-1,last=null,currentType='';
+   const currentButtons=()=>currentType==='video'?videoButtons:photoButtons;
+   const updateNav=()=>{
+     const buttons=currentButtons();
+     const showPrev=buttons.length>1&&currentIndex>0;
+     const showNext=buttons.length>1&&currentIndex<buttons.length-1;
      if(prev instanceof HTMLButtonElement){prev.hidden=!showPrev;prev.disabled=!showPrev;}
      if(next instanceof HTMLButtonElement){next.hidden=!showNext;next.disabled=!showNext;}
    };
@@ -32,34 +35,35 @@ const highlights=media.filter(item=>item.visibile&&item.inEvidenza);
    const mountPhoto=(button)=>{
      if(!stage)return;
      setViewerType('foto');
-     photoIndex=photoButtons.indexOf(button);
+     currentIndex=photoButtons.indexOf(button);
      const src=button.getAttribute('data-image')||'';
      const alt=button.getAttribute('aria-label')?.replace(/^Apri /,'')||'';
      stage.innerHTML=`<img class="viewer__image" src="${src}" alt="${alt}">`;
-     updatePhotoNav();
+     updateNav();
    };
    const mountVideo=(button)=>{
      if(!stage)return;
      setViewerType('video');
-     photoIndex=-1;
+     currentIndex=videoButtons.indexOf(button);
      const id=button.getAttribute('data-youtube');
      stage.innerHTML=`<iframe class="viewer__video" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="Video Arianna Milano" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen data-interactive></iframe>`;
      updatePhotoNav();
    };
    const open=(button)=>{if(!viewer)return;last=button;viewer.hidden=false;viewer.setAttribute('aria-hidden','false');document.body.classList.add('viewer-open');button.getAttribute('data-type')==='foto'?mountPhoto(button):mountVideo(button)};
-   const close=async()=>{if(!viewer)return;if(document.fullscreenElement)await document.exitFullscreen().catch(()=>{});viewer.hidden=true;viewer.setAttribute('aria-hidden','true');document.body.classList.remove('viewer-open');currentType='';photoIndex=-1;delete viewer.dataset.mediaType;if(stage)stage.innerHTML='';updatePhotoNav();last?.focus()};
+   const close=async()=>{if(!viewer)return;if(document.fullscreenElement)await document.exitFullscreen().catch(()=>{});viewer.hidden=true;viewer.setAttribute('aria-hidden','true');document.body.classList.remove('viewer-open');currentType='';currentIndex=-1;delete viewer.dataset.mediaType;if(stage)stage.innerHTML='';updatePhotoNav();last?.focus()};
    allButtons.forEach(button=>button.addEventListener('click',()=>open(button)));
    root.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',close));
-   prev?.addEventListener('click',()=>{if(currentType==='foto'&&photoIndex>0)mountPhoto(photoButtons[photoIndex-1])});
-   next?.addEventListener('click',()=>{if(currentType==='foto'&&photoIndex<photoButtons.length-1)mountPhoto(photoButtons[photoIndex+1])});
+   const navigate=(direction)=>{const buttons=currentButtons(),target=currentIndex+direction;if(target<0||target>=buttons.length)return;currentType==='video'?mountVideo(buttons[target]):mountPhoto(buttons[target]);};
+   prev?.addEventListener('click',()=>navigate(-1));
+   next?.addEventListener('click',()=>navigate(1));
    if(full instanceof HTMLButtonElement){if(!document.fullscreenEnabled)full.hidden=true;full.addEventListener('click',async()=>{if(!dialog)return;document.fullscreenElement?await document.exitFullscreen().catch(()=>{}):await dialog.requestFullscreen?.().catch(()=>{})});}
-   document.addEventListener('keydown',e=>{if(!viewer||viewer.hidden)return;if(e.key==='Escape'&&!document.fullscreenElement)close();if(currentType==='foto'&&e.key==='ArrowLeft'&&photoIndex>0)mountPhoto(photoButtons[photoIndex-1]);if(currentType==='foto'&&e.key==='ArrowRight'&&photoIndex<photoButtons.length-1)mountPhoto(photoButtons[photoIndex+1])});
-   let sx=0;viewer?.addEventListener('touchstart',e=>sx=e.touches[0]?.clientX||0,{passive:true});viewer?.addEventListener('touchend',e=>{if(currentType!=='foto')return;const d=(e.changedTouches[0]?.clientX||0)-sx;if(Math.abs(d)>60){if(d>0&&photoIndex>0)mountPhoto(photoButtons[photoIndex-1]);if(d<0&&photoIndex<photoButtons.length-1)mountPhoto(photoButtons[photoIndex+1])}},{passive:true});
+   document.addEventListener('keydown',e=>{if(!viewer||viewer.hidden)return;if(e.key==='Escape'&&!document.fullscreenElement)close();if(e.key==='ArrowLeft')navigate(-1);if(e.key==='ArrowRight')navigate(1)});
+   let sx=0;viewer?.addEventListener('touchstart',e=>sx=e.touches[0]?.clientX||0,{passive:true});viewer?.addEventListener('touchend',e=>{const d=(e.changedTouches[0]?.clientX||0)-sx;if(Math.abs(d)>60)navigate(d>0?-1:1)},{passive:true});
    updatePhotoNav();
  }
 </script>
 <style>
 .highlights-strip{position:relative;margin-top:-1px;padding:10px clamp(28px,6.4vw,104px) 14px;border-top:1px solid rgba(185,134,50,.62);border-bottom:1px solid rgba(185,134,50,.28);background:#080808}.section-head{margin-bottom:8px}.section-head p{margin:0 0 2px;color:var(--gold-bright);font:800 .56rem var(--font-ui);letter-spacing:.17em;text-transform:uppercase}.section-head h2{margin:0;font:800 clamp(1rem,1.28vw,1.35rem)/1 var(--font-display);letter-spacing:.025em;text-transform:uppercase}.highlight-open{display:block;width:100%;padding:0;border:0;background:none;cursor:pointer}.highlight-preview{position:relative;display:block;aspect-ratio:2.7/1;overflow:hidden;border:1px solid rgba(185,134,50,.48);background:#050505}.highlight-preview img{width:100%;height:100%;object-fit:cover;opacity:.92;transition:.25s}.highlight-open:hover img{transform:scale(1.025);opacity:1}.play-mark{position:absolute;inset:50% auto auto 50%;display:grid;width:40px;height:40px;place-items:center;transform:translate(-50%,-50%);border:1px solid #fff;border-radius:50%;background:#0008;color:#fff;font-size:.82rem}:global(.highlight-carousel .splide__arrow){width:34px;height:34px;border:1px solid rgba(185,134,50,.72);background:#080808e8;color:#fff}:global(.highlight-carousel .splide__arrow svg){display:none}:global(.highlight-carousel .splide__arrow--prev){left:-18px}:global(.highlight-carousel .splide__arrow--next){right:-18px}:global(.highlight-carousel .splide__arrow:disabled){display:none!important}
-.viewer[hidden]{display:none!important}.viewer{position:fixed;z-index:99999;inset:0;width:100vw;height:100dvh;background:#000;overflow:hidden}.viewer__backdrop{position:absolute;inset:0;border:0;background:#000}.viewer__dialog{position:absolute;z-index:1;inset:0;width:100%;height:100%;background:#000}.viewer__stage{position:absolute;inset:70px 58px 18px;display:flex;align-items:center;justify-content:center;overflow:hidden}.viewer__image{display:block;width:100%;height:100%;object-fit:contain}:global(.viewer__video){display:block;height:min(calc(100dvh - 90px),960px);width:auto;max-width:calc(100vw - 16px);aspect-ratio:9/16;border:0;background:#000}.viewer__close,.viewer__full{position:absolute;z-index:5;top:max(16px,env(safe-area-inset-top));width:44px;height:44px;border:1px solid #ffffff47;border-radius:50%;background:#080808d9;color:#fff;cursor:pointer}.viewer__close{right:max(16px,env(safe-area-inset-right));font-size:1.8rem}.viewer__full{right:max(70px,calc(env(safe-area-inset-right) + 70px));font-size:1.2rem}.viewer__nav{position:absolute;z-index:4;top:50%;width:44px;height:58px;transform:translateY(-50%);border:1px solid #ffffff38;border-radius:50%;background:#080808a8;color:#fff;font-size:1.8rem;cursor:pointer}.viewer__prev{left:10px}.viewer__next{right:10px}.viewer__nav[hidden]{display:none!important}.viewer[data-media-type="video"] .viewer__stage{inset:64px 0 8px}.viewer[data-media-type="video"] .viewer__nav{display:none!important}.viewer__dialog:fullscreen{width:100vw;height:100vh}.viewer__dialog:fullscreen .viewer__stage{inset:0}:global(body.viewer-open){overflow:hidden}
+.viewer[hidden]{display:none!important}.viewer{position:fixed;z-index:99999;inset:0;width:100vw;height:100dvh;background:#000;overflow:hidden}.viewer__backdrop{position:absolute;inset:0;border:0;background:#000}.viewer__dialog{position:absolute;z-index:1;inset:0;width:100%;height:100%;background:#000}.viewer__stage{position:absolute;inset:70px 58px 18px;display:flex;align-items:center;justify-content:center;overflow:hidden}.viewer__image{display:block;width:100%;height:100%;object-fit:contain}:global(.viewer__video){display:block;height:min(calc(100dvh - 90px),960px);width:auto;max-width:calc(100vw - 16px);aspect-ratio:9/16;border:0;background:#000}.viewer__close,.viewer__full{position:absolute;z-index:5;top:max(16px,env(safe-area-inset-top));width:44px;height:44px;border:1px solid #ffffff47;border-radius:50%;background:#080808d9;color:#fff;cursor:pointer}.viewer__close{right:max(16px,env(safe-area-inset-right));font-size:1.8rem}.viewer__full{right:max(70px,calc(env(safe-area-inset-right) + 70px));font-size:1.2rem}.viewer__nav{position:absolute;z-index:4;top:50%;width:44px;height:58px;transform:translateY(-50%);border:1px solid #ffffff38;border-radius:50%;background:#080808a8;color:#fff;font-size:1.8rem;cursor:pointer}.viewer__prev{left:10px}.viewer__next{right:10px}.viewer__nav[hidden]{display:none!important}.viewer[data-media-type="video"] .viewer__stage{inset:64px 0 8px}.viewer__dialog:fullscreen{width:100vw;height:100vh}.viewer__dialog:fullscreen .viewer__stage{inset:0}:global(body.viewer-open){overflow:hidden}
 @media(max-width:640px){.highlights-strip{padding:8px 0 12px}.section-head{padding:0 18px;margin-bottom:7px}.highlight-preview{aspect-ratio:2.25/1}.viewer__stage{inset:max(68px,calc(env(safe-area-inset-top) + 58px)) 46px max(12px,env(safe-area-inset-bottom))}.viewer__image{width:100%;height:100%;object-fit:contain}.viewer__nav{width:36px;height:48px;font-size:1.5rem}.viewer__prev{left:5px}.viewer__next{right:5px}.viewer__close,.viewer__full{top:max(10px,env(safe-area-inset-top))}.viewer__close{right:max(10px,env(safe-area-inset-right))}.viewer__full{right:max(62px,calc(env(safe-area-inset-right) + 62px))}.viewer[data-media-type="video"] .viewer__stage{inset:max(58px,calc(env(safe-area-inset-top) + 50px)) 0 max(2px,env(safe-area-inset-bottom));align-items:center}:global(.viewer__video){display:block;height:min(calc(100dvh - 62px),calc((100vw - 8px) * 16 / 9));width:auto;max-width:calc(100vw - 8px);aspect-ratio:9/16}:global(.highlight-carousel .splide__arrow--prev){left:6px}:global(.highlight-carousel .splide__arrow--next){right:6px}}
 </style>

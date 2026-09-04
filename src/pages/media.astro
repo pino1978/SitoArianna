@@ -1,29 +1,138 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
-import placeholderA from "../assets/images/discipline-placeholder.png";
-import placeholderB from "../assets/images/sanda-placeholder.png";
-import placeholderC from "../assets/images/Ying_profile.png";
-const placeholders = [
-  { image: placeholderA, label: "Allenamenti", year: "2026" },
-  { image: placeholderB, label: "Gare", year: "2026" },
-  { image: placeholderC, label: "Ritratto atleta", year: "2026" },
-  { image: placeholderB, label: "Podi", year: "2026" },
-  { image: placeholderA, label: "Eventi", year: "2026" },
-  { image: placeholderC, label: "Backstage", year: "2026" }
+import media from "../data/media.json";
+import profile from "../data/profile.json";
+
+const copy = profile.content.mediaPage;
+const imageModules = import.meta.glob("../assets/images/*.{png,jpg,jpeg,webp}", { eager: true });
+function localImage(fileName) {
+  if (!fileName) return null;
+  return imageModules[`../assets/images/${fileName}`]?.default ?? null;
+}
+function photoUrl(item) {
+  if (item.url) return item.url;
+  const image = localImage(item.immagine);
+  return image?.src ?? "";
+}
+function youtubeId(url = "") {
+  const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
+  return match?.[1] ?? "";
+}
+function displayDate(value) {
+  if (!value) return "";
+  const [year, month, day] = value.split("-");
+  return `${day}/${month}/${year}`;
+}
+const photos = media.filter((item) => item.tipo === "foto" && item.visibile && !item.isPlaceholder && photoUrl(item));
+const videos = media.filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube));
+const categories = [
+  ["tutti", "Tutti"],
+  ["allenamento", "Allenamenti"],
+  ["gara", "Gare"],
+  ["podio", "Podi"],
+  ["ritratto", "Ritratti"],
+  ["evento", "Eventi"]
 ];
 ---
-<BaseLayout title="Media | Arianna Milano" description="Foto, video, gare e allenamenti di Arianna Milano, atleta di Sanda.">
+<BaseLayout title={copy.seo.title} description={copy.seo.description}>
   <main id="main" class="media-page">
-    <section class="page-hero"><Header /><div><p class="eyebrow">Media</p><h1>Foto & Video</h1><p>Uno spazio editoriale dedicato ad allenamenti, competizioni, podi ed eventi.</p></div></section>
-    <section class="media-content">
-      <div class="section-heading"><p class="eyebrow">Gallery fotografica</p><h2>Archivio immagini</h2><p>Le immagini presenti sono segnaposto. Verranno sostituite con fotografie reali selezionate e autorizzate.</p></div>
-      <div class="filters" aria-label="Filtri gallery"><button type="button" aria-pressed="true">Tutti</button><button type="button">Allenamenti</button><button type="button">Gare</button><button type="button">Podi</button><button type="button">Eventi</button></div>
-      <div class="gallery-grid">{placeholders.map((item) => <article><img src={item.image.src} alt={`Segnaposto per la sezione ${item.label}`} width={item.image.width} height={item.image.height} loading="lazy" /><div><span>{item.year}</span><h3>{item.label}</h3></div></article>)}</div>
+    <section class="page-hero">
+      <Header />
+      <div>
+        <p class="eyebrow">{copy.hero.kicker}</p>
+        <h1>{copy.hero.title}</h1>
+        <p>{copy.hero.intro}</p>
+      </div>
     </section>
-    <section class="video-section"><div class="section-heading"><p class="eyebrow">Video</p><h2>Highlights e incontri</h2><p>I video YouTube ufficiali saranno inseriti qui con titolo, data e descrizione.</p></div><div class="video-grid">{[1,2,3].map((item) => <article class="video-placeholder"><span aria-hidden="true">▶</span><h3>Video highlight {item}</h3><p>Segnaposto per contenuto YouTube</p></article>)}</div></section>
+
+    <section class="media-content" aria-labelledby="gallery-title">
+      <div class="section-heading">
+        <p class="eyebrow">{copy.gallery.kicker}</p>
+        <h2 id="gallery-title">{copy.gallery.title}</h2>
+        <p>{copy.gallery.intro}</p>
+      </div>
+
+      {photos.length > 0 ? (
+        <>
+          <div class="filters" aria-label="Filtri gallery">
+            {categories.map(([value,label], index) => <button type="button" data-filter={value} aria-pressed={index === 0 ? "true" : "false"}>{label}</button>)}
+          </div>
+          <div class="gallery-grid" data-gallery-grid>
+            {photos.map((item) => (
+              <article data-category={item.categoria || "evento"}>
+                <button class="gallery-open" type="button" data-interactive data-image={photoUrl(item)} data-title={item.titolo} data-detail={item.dettaglio || ""} aria-label={`Apri foto: ${item.titolo}`}>
+                  <img src={photoUrl(item)} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" />
+                  <div>
+                    <span>{item.anno || ""}</span>
+                    <h3>{item.titolo}</h3>
+                    {item.dettaglio && <p>{item.dettaglio}</p>}
+                  </div>
+                </button>
+              </article>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="media-empty"><strong>Gallery in preparazione</strong><p>Le fotografie selezionate verranno pubblicate qui dalla console.</p></div>
+      )}
+    </section>
+
+    <section class="video-section" aria-labelledby="video-title">
+      <div class="section-heading">
+        <p class="eyebrow">{copy.video.kicker}</p>
+        <h2 id="video-title">{copy.video.title}</h2>
+        <p>{copy.video.intro}</p>
+      </div>
+      {videos.length > 0 ? (
+        <div class="video-grid">
+          {videos.map((item) => {
+            const id = youtubeId(item.urlYouTube);
+            return <article class="video-card">
+              <a href={item.urlYouTube} target="_blank" rel="noopener" data-interactive aria-label={`Apri su YouTube: ${item.titolo}`}>
+                <span class="video-thumb"><img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /><i aria-hidden="true">▶</i></span>
+                <span class="video-copy"><strong>{item.titolo}</strong>{item.dettaglio && <span>{item.dettaglio}</span>}{item.data && <time datetime={item.data}>{displayDate(item.data)}</time>}</span>
+              </a>
+            </article>;
+          })}
+        </div>
+      ) : (
+        <div class="media-empty media-empty--dark"><strong>Nessun video pubblicato</strong><p>I video YouTube verranno aggiunti dalla console.</p></div>
+      )}
+    </section>
   </main>
+
+  <dialog class="photo-lightbox" id="photo-lightbox">
+    <button class="photo-lightbox__close" type="button" data-lightbox-close aria-label="Chiudi">×</button>
+    <figure><img id="lightbox-image" alt="" /><figcaption><strong id="lightbox-title"></strong><span id="lightbox-detail"></span></figcaption></figure>
+  </dialog>
+
+  <script>
+    const filters = Array.from(document.querySelectorAll('[data-filter]'));
+    const cards = Array.from(document.querySelectorAll('[data-gallery-grid] > article'));
+    filters.forEach((button) => button.addEventListener('click', () => {
+      const value = button.getAttribute('data-filter') || 'tutti';
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      cards.forEach((card) => { card.hidden = value !== 'tutti' && card.getAttribute('data-category') !== value; });
+    }));
+
+    const dialog = document.querySelector('#photo-lightbox');
+    const image = document.querySelector('#lightbox-image');
+    const title = document.querySelector('#lightbox-title');
+    const detail = document.querySelector('#lightbox-detail');
+    document.querySelectorAll('.gallery-open').forEach((button) => button.addEventListener('click', () => {
+      if (!(dialog instanceof HTMLDialogElement) || !(image instanceof HTMLImageElement)) return;
+      image.src = button.getAttribute('data-image') || '';
+      image.alt = button.getAttribute('data-title') || '';
+      if (title) title.textContent = button.getAttribute('data-title') || '';
+      if (detail) detail.textContent = button.getAttribute('data-detail') || '';
+      dialog.showModal();
+    }));
+    document.querySelector('[data-lightbox-close]')?.addEventListener('click', () => dialog instanceof HTMLDialogElement && dialog.close());
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog && dialog instanceof HTMLDialogElement) dialog.close(); });
+  </script>
+
   <style>
-    .media-page{background:#080706;color:#f5f0e7}.page-hero{min-height:430px;padding:150px max(28px,calc((100vw - 1160px)/2)) 70px;background:radial-gradient(circle at 80% 18%,rgba(185,134,50,.18),transparent 30%),linear-gradient(135deg,#080706,#17130f);position:relative}.page-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}h1,h2,h3{font-family:var(--font-display);text-transform:uppercase;line-height:.95}.page-hero h1{font-size:clamp(3rem,8vw,7rem);margin:.2em 0}.page-hero>div>p:last-child{max-width:620px;font-size:1.15rem}.eyebrow{color:var(--gold-bright);font-family:var(--font-ui);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.media-content,.video-section{padding:90px max(28px,calc((100vw - 1160px)/2))}.media-content{background:var(--ivory);color:var(--ink)}.section-heading{max-width:760px;margin-bottom:36px}.section-heading h2{font-size:clamp(2.2rem,5vw,4.8rem);margin:.2em 0}.section-heading>p:last-child{line-height:1.7}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}.filters button{border:1px solid rgba(8,7,6,.25);background:transparent;padding:10px 15px;font:inherit;text-transform:uppercase;font-size:.68rem;letter-spacing:.1em}.filters button[aria-pressed="true"]{background:#080706;color:#f5f0e7}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.gallery-grid article{position:relative;min-height:310px;overflow:hidden;background:#141210}.gallery-grid img{width:100%;height:100%;object-fit:cover;opacity:.72;transition:.25s}.gallery-grid article:hover img{transform:scale(1.025);opacity:.9}.gallery-grid article div{position:absolute;left:0;right:0;bottom:0;padding:45px 20px 18px;background:linear-gradient(transparent,rgba(0,0,0,.88));color:#fff}.gallery-grid span{font-size:.7rem;color:var(--gold-bright)}.gallery-grid h3{margin:6px 0 0;font-size:1.25rem}.video-section{background:#0d0c0b}.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.video-placeholder{min-height:260px;display:grid;place-content:center;text-align:center;border:1px solid rgba(185,134,50,.35);background:radial-gradient(circle,rgba(185,134,50,.1),transparent 58%)}.video-placeholder>span{font-size:2.2rem;color:var(--gold-bright)}.video-placeholder h3{margin:18px 0 6px}.video-placeholder p{margin:0;color:#aaa}@media(max-width:800px){.gallery-grid,.video-grid{grid-template-columns:1fr}.gallery-grid article{min-height:360px}}
+    .media-page{background:#080706;color:#f5f0e7}.page-hero{min-height:430px;padding:150px max(28px,calc((100vw - 1160px)/2)) 70px;background:radial-gradient(circle at 80% 18%,rgba(185,134,50,.18),transparent 30%),linear-gradient(135deg,#080706,#17130f);position:relative}.page-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}h1,h2,h3{font-family:var(--font-display);text-transform:uppercase;line-height:.95}.page-hero h1{font-size:clamp(3rem,8vw,7rem);margin:.2em 0}.page-hero>div>p:last-child{max-width:620px;font-size:1.15rem}.eyebrow{color:var(--gold-bright);font-family:var(--font-ui);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.media-content,.video-section{padding:90px max(28px,calc((100vw - 1160px)/2))}.media-content{background:var(--ivory);color:var(--ink)}.section-heading{max-width:760px;margin-bottom:36px}.section-heading h2{font-size:clamp(2.2rem,5vw,4.8rem);margin:.2em 0}.section-heading>p:last-child{line-height:1.7}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}.filters button{border:1px solid rgba(8,7,6,.25);background:transparent;padding:10px 15px;font:inherit;text-transform:uppercase;font-size:.68rem;letter-spacing:.1em;cursor:pointer}.filters button[aria-pressed="true"]{background:#080706;color:#f5f0e7}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.gallery-grid article{position:relative;min-height:310px;overflow:hidden;background:#141210}.gallery-grid article[hidden]{display:none}.gallery-open{display:block;position:relative;width:100%;height:100%;min-height:310px;padding:0;border:0;background:none;color:inherit;text-align:left;cursor:pointer}.gallery-grid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.82;transition:.25s}.gallery-open:hover img,.gallery-open:focus-visible img{transform:scale(1.025);opacity:.96}.gallery-grid article div{position:absolute;left:0;right:0;bottom:0;padding:56px 20px 18px;background:linear-gradient(transparent,rgba(0,0,0,.9));color:#fff}.gallery-grid span{font-size:.7rem;color:var(--gold-bright)}.gallery-grid h3{margin:6px 0 0;font-size:1.25rem}.gallery-grid p{margin:6px 0 0;color:#d7d0c4;font-size:.78rem}.video-section{background:#0d0c0b}.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.video-card{border:1px solid rgba(185,134,50,.3);background:#090807}.video-card a{display:block;color:inherit;text-decoration:none}.video-thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#000}.video-thumb img{width:100%;height:100%;object-fit:cover;opacity:.82}.video-thumb i{position:absolute;left:50%;top:50%;display:grid;width:54px;height:54px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(0,0,0,.44);font-style:normal}.video-copy{display:grid;gap:5px;padding:16px}.video-copy strong{font-family:var(--font-display);font-size:1rem;text-transform:uppercase}.video-copy>span{color:#c8c0b5;font-size:.78rem}.video-copy time{color:var(--gold-bright);font-size:.72rem}.media-empty{padding:42px;border:1px solid rgba(8,7,6,.16);text-align:center}.media-empty strong{font-family:var(--font-display);text-transform:uppercase}.media-empty p{margin:8px 0 0;color:#70695f}.media-empty--dark{border-color:rgba(185,134,50,.25)}.media-empty--dark p{color:#aaa}.photo-lightbox{width:min(1100px,calc(100vw - 32px));max-width:none;border:0;padding:0;background:#050505;color:#fff}.photo-lightbox::backdrop{background:rgba(0,0,0,.92)}.photo-lightbox figure{margin:0;display:grid}.photo-lightbox img{display:block;max-width:100%;max-height:82vh;margin:auto;object-fit:contain}.photo-lightbox figcaption{display:grid;gap:5px;padding:16px 20px}.photo-lightbox figcaption strong{font-family:var(--font-display);text-transform:uppercase}.photo-lightbox figcaption span{color:#bbb}.photo-lightbox__close{position:absolute;z-index:2;right:12px;top:12px;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:1.5rem;cursor:pointer}@media(max-width:800px){.gallery-grid,.video-grid{grid-template-columns:1fr}.gallery-grid article,.gallery-open{min-height:360px}.media-content,.video-section{padding:64px 18px}.page-hero{padding-left:18px;padding-right:18px}}
   </style>
 </BaseLayout>

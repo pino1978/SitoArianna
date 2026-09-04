@@ -20,5 +20,163 @@
     "empatica"
   ],
   "summary": "Arianna Milano è una giovane atleta agonista di Sanda. Vive il percorso sportivo con costanza, disciplina e attenzione tecnica, costruendo esperienza attraverso allenamenti, gare regionali, nazionali e internazionali.",
-  "origin": "La passione per il Kung Fu nasce da un riferimento semplice e autentico: un immaginario scoperto da bambina e trasformato, con il tempo, in pratica sportiva, allenamento e impegno agonistico."
+  "origin": "La passione per il Kung Fu nasce da un riferimento semplice e autentico: un immaginario scoperto da bambina e trasformato, con il tempo, in pratica sportiva, allenamento e impegno agonistico.",
+  "content": {
+    "home": {
+      "hero": {
+        "screenReaderTitle": "Disciplina. Coraggio. Libertà. Crescita.",
+        "subcopy": "Ogni giorno, un passo avanti.",
+        "subcopyStrong": "Sanda is my way.",
+        "mobileValues": ["Disciplina", "Coraggio", "Libertà", "Crescita"]
+      },
+      "highlights": {
+        "kicker": "Highlights",
+        "title": "I momenti che contano",
+        "cta": "Esplora tutti i media"
+      },
+      "profile": {
+        "kicker": "Chi è Arianna",
+        "title": "Chi è Arianna",
+        "paragraph1": "Sono Arianna, ho 12 anni e pratico Sanda. Determinata, curiosa e sempre pronta a mettermi alla prova.",
+        "paragraph2": "Ogni giorno scelgo di migliorare e superare i miei limiti.",
+        "cta": "Scopri il mio percorso",
+        "quote": "Sul tatami non porto solo tecnica. Porto il lavoro fatto ogni giorno."
+      },
+      "ying": {
+        "kicker": "Yīng · 鹰",
+        "title": "Yīng · 鹰",
+        "meaning": "Aquila",
+        "paragraph1": "Ho scelto Yīng perché l'aquila vola in alto, vede lontano e non smette mai di allenarsi.",
+        "paragraph2": "Rappresenta libertà, forza interiore e la capacità di superare ogni limite.",
+        "cta": "Scopri il significato"
+      }
+    },
+    "profilePage": {
+      "seo": {
+        "title": "Profilo atleta | Arianna Milano",
+        "description": "Il percorso sportivo di Arianna Milano, giovane atleta agonista di Kung Fu Sanda."
+      },
+      "hero": {
+        "titleLine1": "Crescere",
+        "titleLine2": "sul tatami",
+        "quote": "Il tatami non insegna soltanto a combattere. Insegna a conoscere i propri limiti, ad affrontarli e a superarli, un allenamento alla volta."
+      },
+      "journey": {
+        "kicker": "01 · Il mio percorso",
+        "titleLine1": "La crescita",
+        "titleLine2": "prima del risultato.",
+        "paragraph1": "Il mio percorso nel Kung Fu è iniziato nel 2021. Da allora ho imparato tecniche diverse, dalla preparazione acrobatica al Sanda, il combattimento sportivo che oggi rappresenta il centro della mia attività agonistica.",
+        "paragraph2": "Ogni allenamento mi aiuta a conoscere meglio le mie capacità e ad affrontare nuove sfide con maggiore consapevolezza."
+      },
+      "values": {
+        "kicker": "02 · Valori sportivi",
+        "items": [
+          {"title": "Disciplina", "text": "Allenarmi con regolarità e attenzione."},
+          {"title": "Coraggio", "text": "Affrontare ogni sfida senza fermarmi davanti alla difficoltà."},
+          {"title": "Rispetto", "text": "Riconoscere il valore di chi si allena con me e di chi incontro sul tatami."},
+          {"title": "Costanza", "text": "Continuare anche quando migliorare richiede tempo."}
+        ]
+      },
+      "coach": {
+        "kicker": "03 · La mia guida",
+        "titleLine1": "Maestro",
+        "titleLine2": "Eduardo Mazzarra",
+        "paragraph": "Il maestro Eduardo Mazzarra mi accompagna nella crescita tecnica e agonistica. Con lui imparo a curare ogni dettaglio e ad affrontare il tatami con attenzione, rispetto e determinazione."
+      },
+      "training": {
+        "kicker": "04 · Allenarsi",
+        "titleLine1": "Ripartire",
+        "titleLine2": "ogni giorno.",
+        "paragraph1": "Ogni allenamento è fatto di tecnica, preparazione fisica e ripetizione.",
+        "paragraph2": "Correggere un movimento, provarlo ancora e renderlo più preciso è il lavoro che precede ogni gara."
+      },
+      "objective": {
+        "kicker": "Il mio obiettivo",
+        "titleLine1": "Ogni allenamento",
+        "titleLine2": "mi avvicina alla versione",
+        "titleLine3": "migliore di me.",
+        "paragraph": "Voglio continuare a crescere, affrontare competizioni sempre più importanti e rappresentare con orgoglio la mia società sportiva.",
+        "cta": "Scopri i risultati"
+      }
+    },
+    "yingPage": {
+      "seo": {
+        "title": "Yīng · Aquila | Arianna Milano",
+        "description": "Yīng significa aquila. È il nome scelto da Arianna per accompagnarla sul tatami, un allenamento alla volta."
+      },
+      "hero": {
+        "kicker": "Il mio nome sul tatami",
+        "meaning": "Aquila",
+        "claim": "Guardo. Scelgo. Provo.",
+        "intro": "Yīng significa aquila.\nHo scelto questo nome perché mi ricorda di osservare.\nDi restare concentrata.\nDi capire quello che succede intorno a me per poi agire."
+      },
+      "meaning": {
+        "imageCaption": "Attenzione prima dell’azione",
+        "kicker": "Cosa significa per me",
+        "titleLine1": "Prima guardo.",
+        "titleLine2": "Poi mi muovo.",
+        "paragraph1": "Mi piace l’idea dell’aquila che osserva prima di muoversi. Non è soltanto forza. È attenzione, pazienza e capacità di scegliere il momento giusto.",
+        "paragraph2": "Sul tatami provo a fare lo stesso. Guardo chi ho davanti e ascolto il mio maestro. Poi decido."
+      },
+      "choice": {
+        "kicker": "Perché l’ho scelto",
+        "titleLine1": "Un nome che cresce",
+        "titleLine2": "insieme a me.",
+        "paragraph1": "Yīng non racconta quello che sono già. Racconta qualcosa verso cui voglio continuare a crescere.",
+        "paragraph2": "Più mi alleno, più capisco che essere forte non significa riuscire sempre. Significa continuare a provarci e imparare. Ogni volta torno sul tatami con qualcosa in più."
+      },
+      "journey": {
+        "kicker": "Essere Yīng",
+        "title": "Continuare a imparare.",
+        "paragraph": "Con impegno, curiosità e il coraggio di riprovare."
+      }
+    },
+    "resultsPage": {
+      "seo": {
+        "title": "Risultati agonistici | Arianna Milano",
+        "description": "Risultati, competizioni e obiettivi agonistici di Arianna Milano nel Sanda."
+      },
+      "hero": {
+        "kicker": "Risultati agonistici",
+        "title": "Competizioni",
+        "intro": "Un archivio chiaro del percorso sportivo, aggiornato con dati verificati."
+      },
+      "archive": {
+        "kicker": "Archivio gare",
+        "title": "Risultati principali",
+        "intro": "I dettagli non ancora disponibili restano volutamente esclusi fino alla verifica ufficiale."
+      },
+      "timeline": {
+        "kicker": "Percorso",
+        "title": "Timeline agonistica",
+        "items": [
+          {"period": "2022", "text": "Inizio dell’attività sportiva nel Sanda."},
+          {"period": "2023–2025", "text": "Prime esperienze di gara e consolidamento tecnico."},
+          {"period": "2026", "text": "Sei incontri confermati e sei vittorie tra Perugia e Sora."},
+          {"period": "Novembre 2026", "text": "Obiettivo: Campionati Italiani FIWUK."}
+        ]
+      }
+    },
+    "mediaPage": {
+      "seo": {
+        "title": "Media | Arianna Milano",
+        "description": "Foto, video, gare e allenamenti di Arianna Milano, atleta di Sanda."
+      },
+      "hero": {
+        "kicker": "Media",
+        "title": "Foto & Video",
+        "intro": "Uno spazio editoriale dedicato ad allenamenti, competizioni, podi ed eventi."
+      },
+      "gallery": {
+        "kicker": "Gallery fotografica",
+        "title": "Archivio immagini",
+        "intro": "Le immagini presenti sono segnaposto. Verranno sostituite con fotografie reali selezionate e autorizzate."
+      },
+      "video": {
+        "kicker": "Video",
+        "title": "Highlights e incontri",
+        "intro": "I video YouTube ufficiali saranno inseriti qui con titolo, data e descrizione."
+      }
+    }
+  }
 }

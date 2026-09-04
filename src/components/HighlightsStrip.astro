@@ -47,10 +47,10 @@ const highlights=media.filter(item=>item.visibile&&item.inEvidenza);
      currentIndex=videoButtons.indexOf(button);
      const id=button.getAttribute('data-youtube');
      stage.innerHTML=`<iframe class="viewer__video" src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&playsinline=1" title="Video Arianna Milano" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen data-interactive></iframe>`;
-     updatePhotoNav();
+     updateNav();
    };
    const open=(button)=>{if(!viewer)return;last=button;viewer.hidden=false;viewer.setAttribute('aria-hidden','false');document.body.classList.add('viewer-open');button.getAttribute('data-type')==='foto'?mountPhoto(button):mountVideo(button)};
-   const close=async()=>{if(!viewer)return;if(document.fullscreenElement)await document.exitFullscreen().catch(()=>{});viewer.hidden=true;viewer.setAttribute('aria-hidden','true');document.body.classList.remove('viewer-open');currentType='';currentIndex=-1;delete viewer.dataset.mediaType;if(stage)stage.innerHTML='';updatePhotoNav();last?.focus()};
+   const close=async()=>{if(!viewer)return;if(document.fullscreenElement)await document.exitFullscreen().catch(()=>{});viewer.hidden=true;viewer.setAttribute('aria-hidden','true');document.body.classList.remove('viewer-open');currentType='';currentIndex=-1;delete viewer.dataset.mediaType;if(stage)stage.innerHTML='';updateNav();last?.focus()};
    allButtons.forEach(button=>button.addEventListener('click',()=>open(button)));
    root.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',close));
    const navigate=(direction)=>{const buttons=currentButtons(),target=currentIndex+direction;if(target<0||target>=buttons.length)return;currentType==='video'?mountVideo(buttons[target]):mountPhoto(buttons[target]);};
@@ -59,7 +59,7 @@ const highlights=media.filter(item=>item.visibile&&item.inEvidenza);
    if(full instanceof HTMLButtonElement){if(!document.fullscreenEnabled)full.hidden=true;full.addEventListener('click',async()=>{if(!dialog)return;document.fullscreenElement?await document.exitFullscreen().catch(()=>{}):await dialog.requestFullscreen?.().catch(()=>{})});}
    document.addEventListener('keydown',e=>{if(!viewer||viewer.hidden)return;if(e.key==='Escape'&&!document.fullscreenElement)close();if(e.key==='ArrowLeft')navigate(-1);if(e.key==='ArrowRight')navigate(1)});
    let sx=0;viewer?.addEventListener('touchstart',e=>sx=e.touches[0]?.clientX||0,{passive:true});viewer?.addEventListener('touchend',e=>{const d=(e.changedTouches[0]?.clientX||0)-sx;if(Math.abs(d)>60)navigate(d>0?-1:1)},{passive:true});
-   updatePhotoNav();
+   updateNav();
  }
 </script>
 <style>

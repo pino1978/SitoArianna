@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /secondo-regalo/
+
+Sitemap: https://www.ariannamilano.it/sitemap.xml

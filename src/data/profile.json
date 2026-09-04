@@ -25,9 +25,14 @@
     "home": {
       "hero": {
         "screenReaderTitle": "Disciplina. Coraggio. Libertà. Crescita.",
-        "subcopy": "Ogni giorno, un passo avanti.",
+        "subcopy": "Ogni giorno, un passo avanti...",
         "subcopyStrong": "Sanda is my way.",
-        "mobileValues": ["Disciplina", "Coraggio", "Libertà", "Crescita"]
+        "mobileValues": [
+          "Disciplina",
+          "Coraggio",
+          "Libertà",
+          "Crescita"
+        ]
       },
       "highlights": {
         "kicker": "Highlights",
@@ -71,10 +76,22 @@
       "values": {
         "kicker": "02 · Valori sportivi",
         "items": [
-          {"title": "Disciplina", "text": "Allenarmi con regolarità e attenzione."},
-          {"title": "Coraggio", "text": "Affrontare ogni sfida senza fermarmi davanti alla difficoltà."},
-          {"title": "Rispetto", "text": "Riconoscere il valore di chi si allena con me e di chi incontro sul tatami."},
-          {"title": "Costanza", "text": "Continuare anche quando migliorare richiede tempo."}
+          {
+            "title": "Disciplina",
+            "text": "Allenarmi con regolarità e attenzione."
+          },
+          {
+            "title": "Coraggio",
+            "text": "Affrontare ogni sfida senza fermarmi davanti alla difficoltà."
+          },
+          {
+            "title": "Rispetto",
+            "text": "Riconoscere il valore di chi si allena con me e di chi incontro sul tatami."
+          },
+          {
+            "title": "Costanza",
+            "text": "Continuare anche quando migliorare richiede tempo."
+          }
         ]
       },
       "coach": {
@@ -150,10 +167,22 @@
         "kicker": "Percorso",
         "title": "Timeline agonistica",
         "items": [
-          {"period": "2022", "text": "Inizio dell’attività sportiva nel Sanda."},
-          {"period": "2023–2025", "text": "Prime esperienze di gara e consolidamento tecnico."},
-          {"period": "2026", "text": "Sei incontri confermati e sei vittorie tra Perugia e Sora."},
-          {"period": "Novembre 2026", "text": "Obiettivo: Campionati Italiani FIWUK."}
+          {
+            "period": "2022",
+            "text": "Inizio dell’attività sportiva nel Sanda."
+          },
+          {
+            "period": "2023–2025",
+            "text": "Prime esperienze di gara e consolidamento tecnico."
+          },
+          {
+            "period": "2026",
+            "text": "Sei incontri confermati e sei vittorie tra Perugia e Sora."
+          },
+          {
+            "period": "Novembre 2026",
+            "text": "Obiettivo: Campionati Italiani FIWUK."
+          }
         ]
       }
     },

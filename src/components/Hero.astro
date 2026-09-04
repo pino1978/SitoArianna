@@ -6,50 +6,24 @@ import profile from "../data/profile.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
-
-const showHeroStats = true;
 const copy = profile.content.home.hero;
 ---
-<section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
-  <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
-  <div class="hero-overlay hero-overlay-right" aria-hidden="true"></div>
-  <div class="hero-overlay hero-overlay-bottom" aria-hidden="true"></div>
-  <div class="hero-overlay hero-overlay-top" aria-hidden="true"></div>
-
+<section class="hero hero--compact" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
+  <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div><div class="hero-overlay hero-overlay-right" aria-hidden="true"></div><div class="hero-overlay hero-overlay-bottom" aria-hidden="true"></div><div class="hero-overlay hero-overlay-top" aria-hidden="true"></div>
   <Header />
-
-  <div class="hero-upper-signature" aria-hidden="true">
-    <span class="hero-upper-signature__eyebrow">Yīng · 鹰</span>
-  </div>
-
+  <div class="hero-upper-signature" aria-hidden="true"><span class="hero-upper-signature__eyebrow">Yīng · 鹰</span></div>
   <div class="hero-copy">
     <h1 id="hero-title" class="sr-only">{copy.screenReaderTitle}</h1>
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
-
-    {showHeroStats && <StatsStrip stats={results.heroStats} />}
+    <div class="hero-performance"><StatsStrip stats={results.heroStats} /><a class="palmares-cta" href="/risultati/" data-interactive><span>Scopri</span><strong>Palmarès</strong><b aria-hidden="true">→</b></a></div>
   </div>
-
   <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />
 </section>
-
-<section class="hero-values" aria-label="I valori di Arianna">
-  <div class="hero-values__inner">
-    {copy.mobileValues.map((value, index) => index === 2 ? <strong>{value}</strong> : <span>{value}</span>)}
-  </div>
-</section>
-
+<section class="hero-values" aria-label="I valori di Arianna"><div class="hero-values__inner">{copy.mobileValues.map((value,index)=>index===2?<strong>{value}</strong>:<span>{value}</span>)}</div></section>
 <style>
-  .hero-upper-signature,
-  .hero-values { display: none; }
-
-  @media (min-width: 1001px) {
-    .hero-subcopy { margin-top: 84px; }
-  }
-
-  @media (max-width: 640px) {
-    .hero-title-image { display: none; }
-    .hero-upper-signature,
-    .hero-values { display: block; }
-  }
+.hero-upper-signature,.hero-values{display:none}.hero--compact{min-height:min(760px,88svh);background-position:54% 42%}.hero--compact .hero-copy{padding-top:clamp(104px,12vh,122px)}.hero--compact .hero-subcopy{margin-top:54px}.hero-performance{display:flex;align-items:flex-end;gap:18px}.hero-performance :global(.stats-strip){flex:0 0 auto}.palmares-cta{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;align-items:center;min-width:138px;margin:34px 0 0;padding:9px 13px 10px;border-left:1px solid rgba(185,134,50,.7);color:var(--ivory);font-family:var(--font-ui);text-transform:uppercase}.palmares-cta span{font-size:.52rem;letter-spacing:.14em;color:var(--gold-bright)}.palmares-cta strong{font-size:.75rem;letter-spacing:.08em}.palmares-cta b{grid-column:2;grid-row:1/3;color:var(--gold-bright);font-size:1.2rem}.palmares-cta:hover{background:rgba(185,134,50,.08)}
+@media(min-width:1001px){.hero--compact .hero-eagle-layer{top:clamp(116px,14vh,156px)} }
+@media(max-width:1000px){.hero-performance{display:block}.palmares-cta{width:max-content;margin:8px auto 18px}.hero--compact{min-height:auto}}
+@media(max-width:640px){.hero-title-image{display:none}.hero-upper-signature,.hero-values{display:block}.hero--compact .hero-subcopy{margin-top:0}}
 </style>

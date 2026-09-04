@@ -18,11 +18,23 @@ const managedSeo = {
 const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const seo = managedSeo[pathname];
 const {
-  title = seo?.title || "Arianna Milano | Sanda Athlete",
-  description = seo?.description || "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda."
+  title = seo?.title || "Arianna Milano | Atleta Sanda e Kung Fu",
+  description = seo?.description || "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda e Kung Fu. Profilo sportivo, risultati, competizioni, foto e video.",
+  noindex = false
 } = Astro.props;
 const resolvedTitle = seo?.title || title;
 const resolvedDescription = seo?.description || description;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://www.ariannamilano.it");
+const socialImage = new URL("/images/hero-home.jpg", Astro.site || "https://www.ariannamilano.it");
+const athleteSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Arianna Milano",
+  url: "https://www.ariannamilano.it/",
+  description: resolvedDescription,
+  knowsAbout: ["Sanda", "Kung Fu", "Sanda Light", "arti marziali", "competizioni Sanda"],
+  sameAs: ["https://www.youtube.com/@arianna.milano"]
+};
 ---
 <!doctype html>
 <html lang="it">
@@ -30,7 +42,21 @@ const resolvedDescription = seo?.description || description;
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={resolvedDescription} />
+    <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Arianna Milano" />
+    <meta property="og:title" content={resolvedTitle} />
+    <meta property="og:description" content={resolvedDescription} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTitle} />
+    <meta name="twitter:description" content={resolvedDescription} />
+    <meta name="twitter:image" content={socialImage} />
     <meta name="theme-color" content="#080706" />
+    <script type="application/ld+json" set:html={JSON.stringify(athleteSchema)}></script>
     <title>{resolvedTitle}</title>
   </head>
   <body class="site-locked">

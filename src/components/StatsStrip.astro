@@ -22,29 +22,31 @@ function iconFor(fileName) {
   @media (max-width: 640px) {
     .stats-strip,
     .hero-copy .stats-strip {
-      position: relative;
-      left: auto;
-      right: auto;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 0;
-      width: 100%;
-      max-width: none;
-      margin: 0;
-      padding: 42px 10px 24px;
-      transform: none;
-      box-sizing: border-box;
+      position: absolute !important;
+      left: 0 !important;
+      right: auto !important;
+      display: grid !important;
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      gap: 0 !important;
+      width: calc(100vw - 36px) !important;
+      max-width: none !important;
+      margin: 0 !important;
+      padding: 12px 0 10px !important;
+      transform: none !important;
+      box-sizing: border-box !important;
     }
 
     .stats-strip li {
-      display: flex;
-      flex-direction: column;
+      position: relative;
+      display: grid !important;
+      grid-template-rows: 30px auto auto;
       align-items: center;
-      justify-content: flex-start;
+      justify-items: center;
+      align-content: start;
       min-width: 0;
-      min-height: 150px;
-      margin: 0;
-      padding: 0 5px;
+      min-height: 88px !important;
+      margin: 0 !important;
+      padding: 0 4px !important;
       text-align: center;
     }
 
@@ -54,18 +56,19 @@ function iconFor(fileName) {
 
     .stats-strip img {
       display: block !important;
-      width: 42px;
-      height: 42px;
+      width: 29px !important;
+      height: 29px !important;
       max-width: none;
-      margin: 0 0 18px;
+      margin: 0 0 5px !important;
       object-fit: contain;
     }
 
     .stats-strip strong {
       display: block;
-      margin: 0 0 14px;
-      font-size: clamp(2rem, 8.6vw, 2.55rem);
-      line-height: .9;
+      margin: 0 0 5px !important;
+      color: var(--gold-bright);
+      font-size: clamp(1.45rem, 6.4vw, 1.85rem) !important;
+      line-height: .92 !important;
       text-align: center;
       white-space: nowrap;
     }
@@ -73,10 +76,10 @@ function iconFor(fileName) {
     .stats-strip span {
       display: block;
       width: 100%;
-      max-width: 90px;
-      margin: 0 auto;
-      font-size: clamp(.48rem, 1.9vw, .64rem);
-      line-height: 1.2;
+      max-width: 84px;
+      margin: 0 auto !important;
+      font-size: clamp(.42rem, 1.65vw, .52rem) !important;
+      line-height: 1.12 !important;
       text-align: center;
       white-space: normal;
     }

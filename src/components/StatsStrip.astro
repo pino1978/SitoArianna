@@ -39,7 +39,8 @@ function iconFor(fileName) {
     .stats-strip li {
       position: relative;
       display: grid !important;
-      grid-template-rows: 30px auto auto;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: 32px auto auto !important;
       align-items: center;
       justify-items: center;
       align-content: start;
@@ -61,10 +62,14 @@ function iconFor(fileName) {
       max-width: none;
       margin: 0 0 5px !important;
       object-fit: contain;
+      grid-column: 1 !important;
+      grid-row: 1 !important;
     }
 
     .stats-strip strong {
       display: block;
+      grid-column: 1 !important;
+      grid-row: 2 !important;
       margin: 0 0 5px !important;
       color: var(--gold-bright);
       font-size: clamp(1.45rem, 6.4vw, 1.85rem) !important;
@@ -75,6 +80,8 @@ function iconFor(fileName) {
 
     .stats-strip span {
       display: block;
+      grid-column: 1 !important;
+      grid-row: 3 !important;
       width: 100%;
       max-width: 84px;
       margin: 0 auto !important;

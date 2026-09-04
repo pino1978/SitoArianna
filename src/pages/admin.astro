@@ -1,5 +1,6 @@
 ---
 import "../styles/admin.css";
+import "../styles/admin-ux-v2.css";
 ---
 
 <!doctype html>
@@ -74,7 +75,7 @@ import "../styles/admin.css";
                 <button type="button" data-action-view="results"><span class="quick-icon">＋</span><span><strong>Aggiungi un risultato</strong><small>Gara, disciplina, categoria e medaglia</small></span><span aria-hidden="true">›</span></button>
                 <button type="button" data-action-view="photos"><span class="quick-icon">▧</span><span><strong>Carica nuove foto</strong><small>Ottimizzazione automatica prima dell’upload</small></span><span aria-hidden="true">›</span></button>
                 <button type="button" data-action-view="videos"><span class="quick-icon">▷</span><span><strong>Aggiungi un video YouTube</strong><small>Incolla il link e completa i dettagli</small></span><span aria-hidden="true">›</span></button>
-                <button type="button" data-action-view="profile"><span class="quick-icon">✎</span><span><strong>Modifica i testi</strong><small>Profilo e contenuti principali</small></span><span aria-hidden="true">›</span></button>
+                <button type="button" data-action-view="profile"><span class="quick-icon">✎</span><span><strong>Modifica i testi</strong><small>Testi organizzati per pagina e sezione</small></span><span aria-hidden="true">›</span></button>
               </div>
             </section>
 
@@ -93,22 +94,47 @@ import "../styles/admin.css";
         </section>
 
         <section class="admin-view" id="view-profile" data-title="Profilo e testi">
-          <div class="page-intro compact"><div><p class="eyebrow">Contenuti</p><h1>Profilo e testi</h1><p>Modifica solo i contenuti testuali. La grafica del sito non cambia.</p></div></div>
-          <form class="editor-layout" id="profile-form">
-            <section class="panel form-panel">
-              <div class="form-grid two-columns">
-                <label>Nome<input name="name" required /></label>
-                <label>Categoria<input name="category" /></label>
-                <label>Società sportiva<input name="club" /></label>
-                <label>Maestro<input name="coach" /></label>
-                <label>Disciplina<input name="discipline" /></label>
-                <label>Anno di inizio<input name="startedIn" type="number" min="2000" max="2100" /></label>
+          <div class="page-intro compact">
+            <div><p class="eyebrow">Contenuti editoriali</p><h1>Profilo e testi</h1><p>Ogni testo è associato alla pagina e alla sezione in cui compare sul sito.</p></div>
+          </div>
+          <div class="unsaved-warning" id="unsaved-copy-warning">Hai modifiche non salvate in una o più pagine. Salvale prima di pubblicare.</div>
+
+          <form class="editor-layout editor-layout--structured" id="profile-form">
+            <section class="profile-master-panel form-panel">
+              <section class="athlete-data-card" aria-labelledby="athlete-data-title">
+                <header class="athlete-data-card__head">
+                  <div><span class="component-kicker">Dati condivisi</span><h2 id="athlete-data-title">Dati atleta</h2><p>Questi valori possono essere utilizzati in più sezioni del sito e nelle statistiche.</p></div>
+                  <span class="status-tag">Dati base</span>
+                </header>
+                <div class="form-grid two-columns">
+                  <label>Nome<input name="name" required /></label>
+                  <label>Categoria<input name="category" /></label>
+                  <label>Società sportiva<input name="club" /></label>
+                  <label>Maestro<input name="coach" /></label>
+                  <label>Disciplina<input name="discipline" /></label>
+                  <label>Anno di inizio<input name="startedIn" type="number" min="2000" max="2100" /></label>
+                </div>
+                <label hidden>Presentazione<textarea name="summary" rows="4" maxlength="700"></textarea></label>
+                <label hidden>Origine della passione<textarea name="origin" rows="4" maxlength="700"></textarea></label>
+                <div class="athlete-data-actions"><small>Il salvataggio crea una bozza. Il sito cambia solo dopo “Pubblica modifiche”.</small><button class="button button-secondary" id="save-athlete-data" type="button">Salva dati atleta</button></div>
+              </section>
+
+              <div class="content-editor-intro">
+                <div><span class="component-kicker">Testi del sito</span><h2>Pagine e sezioni</h2><p>Apri una pagina alla volta, modifica i testi e salva la relativa bozza.</p></div>
+                <div class="content-editor-legend" aria-label="Legenda"><span class="legend-chip">Una pagina aperta alla volta</span><span class="legend-chip">Salvataggio per pagina</span></div>
               </div>
-              <label>Presentazione<textarea name="summary" rows="6" maxlength="700"></textarea><small class="field-hint">Testo breve, professionale e verificabile.</small></label>
-              <label>Origine della passione<textarea name="origin" rows="5" maxlength="700"></textarea></label>
-              <div class="save-row"><span class="autosave-status">Salvataggio automatico in bozza</span><button class="button button-secondary" type="submit">Salva bozza</button></div>
+              <nav class="copy-jumpbar" id="copy-jumpbar" aria-label="Vai rapidamente a una pagina"></nav>
+              <section id="site-copy-editor" class="site-copy-editor" aria-label="Testi organizzati per pagina"></section>
+              <div class="save-row" hidden><span class="autosave-status">Bozza</span><button class="button button-secondary" type="submit">Salva bozza</button></div>
             </section>
-            <aside class="panel preview-card"><span class="preview-kicker">Anteprima contenuto</span><h2 id="profile-preview-name">Arianna Milano</h2><p id="profile-preview-summary"></p><dl><div><dt>Disciplina</dt><dd id="profile-preview-discipline"></dd></div><div><dt>Categoria</dt><dd id="profile-preview-category"></dd></div></dl></aside>
+
+            <aside class="panel preview-card structured-preview">
+              <span class="preview-kicker">Riepilogo atleta</span>
+              <h2 id="profile-preview-name">Arianna Milano</h2>
+              <p id="profile-preview-summary"></p>
+              <dl><div><dt>Disciplina</dt><dd id="profile-preview-discipline"></dd></div><div><dt>Categoria</dt><dd id="profile-preview-category"></dd></div></dl>
+              <div class="privacy-note"><strong>Pubblicazione controllata</strong><p>Salvare una pagina non modifica il sito online. Tutte le bozze vengono pubblicate solo con il pulsante in alto.</p></div>
+            </aside>
           </form>
         </section>
 
@@ -145,7 +171,7 @@ import "../styles/admin.css";
         </section>
 
         <section class="admin-view" id="view-history" data-title="Cronologia">
-          <div class="page-intro compact"><div><p class="eyebrow">Controllo</p><h1>Cronologia pubblicazioni</h1><p>Consulta le ultime modifiche inviate al sito.</p></div></div>
+          <div class="page-intro compact"><div><p class="eyebrow">Controllo</p><h1>Cronologia pubblicazioni</h1><p>Consulta le ultime modifiche inviate al sito. Il ripristino versioni verrà gestito da questa area.</p></div></div>
           <section class="panel"><ul class="history-list" id="history-list"><li class="empty-state"><strong>Cronologia non ancora disponibile</strong><p>Le pubblicazioni effettuate dalla console appariranno qui.</p></li></ul></section>
         </section>
       </main>
@@ -206,9 +232,161 @@ import "../styles/admin.css";
     <script>
       import netlifyIdentity from "netlify-identity-widget";
       import "../scripts/admin.js";
+
       netlifyIdentity.init({ APIUrl: `${window.location.origin}/.netlify/identity` });
       window.ariannaIdentity = netlifyIdentity;
       window.dispatchEvent(new CustomEvent("arianna:identity-ready"));
+
+      const pageMeta = {
+        Home: { key: "home", icon: "H" },
+        Profilo: { key: "profilo", icon: "P" },
+        "Yīng": { key: "ying", icon: "鹰" },
+        Risultati: { key: "risultati", icon: "R" },
+        Media: { key: "media", icon: "M" }
+      };
+
+      const profileForm = document.querySelector("#profile-form");
+      const copyRoot = document.querySelector("#site-copy-editor");
+      const jumpbar = document.querySelector("#copy-jumpbar");
+      const warning = document.querySelector("#unsaved-copy-warning");
+      const publishButton = document.querySelector("#publish-button");
+      const metaNames = ["name","category","club","coach","discipline","startedIn","summary","origin"];
+
+      const contentFields = () => Array.from(copyRoot?.querySelectorAll("[data-content-path]") || []);
+      const metaFields = () => metaNames.map((name) => profileForm?.elements.namedItem(name)).filter((field) => field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement);
+      const rememberValue = (field) => { if (field.dataset.savedValue === undefined) field.dataset.savedValue = field.value; };
+      const isChanged = (field) => field.value !== (field.dataset.savedValue ?? field.value);
+
+      function updatePageState(details) {
+        const fields = Array.from(details.querySelectorAll("[data-content-path]"));
+        const changed = fields.some(isChanged);
+        const state = details.querySelector(".page-state");
+        const save = details.querySelector(".page-save");
+        if (state) {
+          state.textContent = changed ? "Modifiche non salvate" : (details.dataset.savedOnce === "true" ? "Bozza salvata" : "Aggiornato");
+          state.classList.toggle("is-unsaved", changed);
+          state.classList.toggle("is-draft", !changed && details.dataset.savedOnce === "true");
+        }
+        if (save instanceof HTMLButtonElement) save.disabled = !changed;
+        updateGlobalUnsavedState();
+      }
+
+      function updateGlobalUnsavedState() {
+        const hasUnsaved = contentFields().some(isChanged);
+        warning?.classList.toggle("is-visible", hasUnsaved);
+        document.body.dataset.hasUnsavedCopy = String(hasUnsaved);
+      }
+
+      function scopedSubmit(pageDetails = null) {
+        if (!profileForm) return;
+        const pageFields = pageDetails ? Array.from(pageDetails.querySelectorAll("[data-content-path]")) : [];
+        const keep = new Set(pageFields);
+        const temporary = [];
+        const protect = pageDetails ? [...contentFields().filter((field) => !keep.has(field)), ...metaFields()] : contentFields();
+        protect.forEach((field) => {
+          rememberValue(field);
+          temporary.push([field, field.value]);
+          field.value = field.dataset.savedValue ?? field.value;
+        });
+        const committed = (pageDetails ? pageFields : metaFields()).map((field) => [field, field.value]);
+        profileForm.requestSubmit();
+        temporary.forEach(([field, value]) => { field.value = value; });
+        committed.forEach(([field, value]) => { field.dataset.savedValue = value; });
+        if (pageDetails) {
+          pageDetails.dataset.savedOnce = "true";
+          updatePageState(pageDetails);
+          const label = pageDetails.dataset.pageLabel || "Pagina";
+          const status = document.querySelector("#global-status");
+          if (status) status.textContent = `${label}: bozza salvata`;
+        }
+      }
+
+      document.querySelector("#save-athlete-data")?.addEventListener("click", () => scopedSubmit(null));
+      metaFields().forEach((field) => rememberValue(field));
+
+      function enhanceCopyEditor() {
+        if (!copyRoot) return;
+        const legacyPages = Array.from(copyRoot.querySelectorAll(":scope > .copy-page"));
+        if (!legacyPages.length) return;
+
+        legacyPages.forEach((article) => {
+          const head = article.querySelector(".copy-page__head");
+          const raw = head?.querySelector("strong")?.textContent?.trim() || "Pagina";
+          const page = raw.replace(/^Pagina\s+/i, "");
+          const url = head?.querySelector("small")?.textContent?.trim() || "/";
+          const meta = pageMeta[page] || { key: page.toLowerCase().replace(/[^a-z0-9]+/g,"-"), icon: page.slice(0,1) };
+          const sections = Array.from(article.querySelectorAll(".copy-section"));
+          const openLink = head?.querySelector("a")?.cloneNode(true);
+          const fieldCount = sections.reduce((total, section) => total + section.querySelectorAll("[data-content-path]").length, 0);
+
+          const details = document.createElement("details");
+          details.className = `content-accordion content-accordion--${meta.key}`;
+          details.dataset.pageKey = meta.key;
+          details.dataset.pageLabel = page;
+          details.innerHTML = `<summary><span class="page-icon" aria-hidden="true">${meta.icon}</span><span class="page-summary-copy"><strong>${page}</strong><small>${url}</small></span><span class="page-summary-meta"><span class="page-count">${sections.length} sezioni · ${fieldCount} campi</span><span class="page-state">Aggiornato</span></span><span class="page-chevron" aria-hidden="true">⌄</span></summary><div class="content-accordion__body"><div class="page-toolbar"><p>Modifica solo i contenuti di questa pagina.</p></div><div class="content-accordion__sections"></div><footer class="content-accordion__footer"><small>Il salvataggio crea una bozza; la pubblicazione resta globale.</small><button class="button page-save" type="button" disabled>Salva modifiche ${page}</button></footer></div>`;
+
+          const toolbar = details.querySelector(".page-toolbar");
+          if (openLink && toolbar) {
+            openLink.textContent = `Apri ${page} ↗`;
+            openLink.className = "page-open-link";
+            toolbar.append(openLink);
+          }
+          const sectionsHost = details.querySelector(".content-accordion__sections");
+          sections.forEach((section, index) => {
+            const heading = section.querySelector("h3");
+            const title = heading?.textContent?.replace(/^Sezione\s*·\s*/i, "") || `Sezione ${index + 1}`;
+            if (heading) heading.innerHTML = `<span class="section-index-chip">${String(index + 1).padStart(2,"0")}</span><span>${title}</span>`;
+            section.dataset.sectionSeo = String(/seo/i.test(title));
+            sectionsHost?.append(section);
+          });
+          article.replaceWith(details);
+
+          Array.from(details.querySelectorAll("[data-content-path]")).forEach((field) => {
+            rememberValue(field);
+            field.addEventListener("input", () => updatePageState(details));
+          });
+          details.querySelector(".page-save")?.addEventListener("click", () => scopedSubmit(details));
+          details.addEventListener("toggle", () => {
+            if (!details.open) return;
+            document.querySelectorAll(".content-accordion").forEach((other) => { if (other !== details) other.open = false; });
+            jumpbar?.querySelectorAll("button").forEach((button) => button.setAttribute("aria-current", String(button.dataset.page === meta.key)));
+          });
+        });
+
+        if (jumpbar) {
+          jumpbar.innerHTML = "";
+          Array.from(copyRoot.querySelectorAll(".content-accordion")).forEach((details, index) => {
+            const key = details.dataset.pageKey || "page";
+            const page = details.dataset.pageLabel || "Pagina";
+            const button = document.createElement("button");
+            button.type = "button";
+            button.dataset.page = key;
+            button.textContent = page;
+            button.setAttribute("aria-current", String(index === 0));
+            button.addEventListener("click", () => {
+              details.open = true;
+              details.scrollIntoView({ behavior: "smooth", block: "start" });
+            });
+            jumpbar.append(button);
+            if (index === 0) details.open = true;
+          });
+        }
+        updateGlobalUnsavedState();
+      }
+
+      const observer = new MutationObserver(() => enhanceCopyEditor());
+      if (copyRoot) observer.observe(copyRoot, { childList: true });
+      enhanceCopyEditor();
+
+      publishButton?.addEventListener("click", (event) => {
+        if (document.body.dataset.hasUnsavedCopy === "true") {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          warning?.classList.add("is-visible");
+          document.querySelector("#view-profile [data-view]")?.focus();
+          alert("Prima di pubblicare, salva le modifiche ancora aperte nelle singole pagine.");
+        }
+      }, true);
     </script>
   </body>
 </html>

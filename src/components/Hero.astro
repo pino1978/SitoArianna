@@ -2,11 +2,13 @@
 import Header from "./Header.astro";
 import StatsStrip from "./StatsStrip.astro";
 import results from "../data/results.json";
+import profile from "../data/profile.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 
 const showHeroStats = true;
+const copy = profile.content.home.hero;
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
   <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
@@ -21,9 +23,9 @@ const showHeroStats = true;
   </div>
 
   <div class="hero-copy">
-    <h1 id="hero-title" class="sr-only">Disciplina. Coraggio. Libertà. Crescita.</h1>
+    <h1 id="hero-title" class="sr-only">{copy.screenReaderTitle}</h1>
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
-    <p class="hero-subcopy">Ogni giorno, un passo avanti.<br /><strong>Sanda is my way.</strong></p>
+    <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
 
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
@@ -33,10 +35,7 @@ const showHeroStats = true;
 
 <section class="hero-values" aria-label="I valori di Arianna">
   <div class="hero-values__inner">
-    <span>Disciplina</span>
-    <span>Coraggio</span>
-    <strong>Libertà</strong>
-    <span>Crescita</span>
+    {copy.mobileValues.map((value, index) => index === 2 ? <strong>{value}</strong> : <span>{value}</span>)}
   </div>
 </section>
 

@@ -1,0 +1,214 @@
+---
+import "../styles/admin.css";
+---
+
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="color-scheme" content="light" />
+    <title>Console contenuti · Arianna Milano</title>
+  </head>
+  <body>
+    <a class="admin-skip" href="#admin-content">Vai al contenuto</a>
+
+    <div class="login-screen" id="login-screen">
+      <div class="login-card">
+        <div class="brand-mark" aria-hidden="true">AM</div>
+        <p class="eyebrow">Arianna Milano</p>
+        <h1>Console contenuti</h1>
+        <p>Area riservata alla famiglia. Accedi con il tuo account autorizzato.</p>
+        <button class="button button-primary" id="login-button" type="button">Accedi alla console</button>
+        <p class="login-help">Non è possibile registrarsi liberamente. Gli account vengono creati solo su invito.</p>
+      </div>
+    </div>
+
+    <div class="admin-shell" id="admin-shell" hidden>
+      <aside class="admin-sidebar" id="admin-sidebar">
+        <div class="admin-brand">
+          <div class="brand-mark" aria-hidden="true">AM</div>
+          <div><strong>Arianna Milano</strong><span>Console contenuti</span></div>
+        </div>
+
+        <nav class="admin-nav" aria-label="Navigazione console">
+          <button type="button" data-view="dashboard" aria-current="page"><span aria-hidden="true">⌂</span>Panoramica</button>
+          <button type="button" data-view="profile"><span aria-hidden="true">◯</span>Profilo e testi</button>
+          <button type="button" data-view="results"><span aria-hidden="true">♜</span>Risultati</button>
+          <button type="button" data-view="photos"><span aria-hidden="true">▧</span>Foto</button>
+          <button type="button" data-view="videos"><span aria-hidden="true">▷</span>Video</button>
+          <button type="button" data-view="stats"><span aria-hidden="true">▥</span>Statistiche</button>
+          <button type="button" data-view="history"><span aria-hidden="true">↶</span>Cronologia</button>
+        </nav>
+
+        <div class="admin-account">
+          <span class="account-avatar" id="account-avatar">AM</span>
+          <span><strong id="account-name">Account autorizzato</strong><small id="account-role">Editor</small></span>
+          <button type="button" id="logout-button" aria-label="Esci dalla console">Esci</button>
+        </div>
+      </aside>
+
+      <main class="admin-main" id="admin-content">
+        <header class="admin-topbar">
+          <button class="icon-button mobile-menu" id="mobile-menu" type="button" aria-expanded="false" aria-controls="admin-sidebar" aria-label="Apri il menu">☰</button>
+          <div><span class="topbar-label">Console</span><strong id="view-title">Panoramica</strong></div>
+          <div class="topbar-actions">
+            <a class="button button-secondary public-link" href="/" target="_blank" rel="noopener">Apri il sito</a>
+            <button class="button button-primary" id="publish-button" type="button" disabled>Pubblica modifiche</button>
+          </div>
+        </header>
+
+        <div class="global-status" id="global-status" role="status" aria-live="polite"></div>
+
+        <section class="admin-view is-active" id="view-dashboard" data-title="Panoramica">
+          <div class="page-intro">
+            <div><p class="eyebrow">Gestione del sito</p><h1 id="greeting">Buonasera</h1><p>Aggiorna i contenuti senza intervenire sul codice.</p></div>
+            <div class="site-status"><span></span>Sito online e aggiornato</div>
+          </div>
+
+          <div class="dashboard-grid">
+            <section class="panel quick-panel">
+              <div class="panel-heading"><h2>Cosa vuoi aggiornare?</h2><span>Azioni rapide</span></div>
+              <div class="quick-actions">
+                <button type="button" data-action-view="results"><span class="quick-icon">＋</span><span><strong>Aggiungi un risultato</strong><small>Gara, disciplina, categoria e medaglia</small></span><span aria-hidden="true">›</span></button>
+                <button type="button" data-action-view="photos"><span class="quick-icon">▧</span><span><strong>Carica nuove foto</strong><small>Ottimizzazione automatica prima dell’upload</small></span><span aria-hidden="true">›</span></button>
+                <button type="button" data-action-view="videos"><span class="quick-icon">▷</span><span><strong>Aggiungi un video YouTube</strong><small>Incolla il link e completa i dettagli</small></span><span aria-hidden="true">›</span></button>
+                <button type="button" data-action-view="profile"><span class="quick-icon">✎</span><span><strong>Modifica i testi</strong><small>Profilo e contenuti principali</small></span><span aria-hidden="true">›</span></button>
+              </div>
+            </section>
+
+            <aside class="panel content-health">
+              <div class="panel-heading"><h2>Stato contenuti</h2><span>In tempo reale</span></div>
+              <dl><div><dt>Risultati pubblicati</dt><dd id="count-results">—</dd></div><div><dt>Foto archiviate</dt><dd id="count-photos">—</dd></div><div><dt>Video YouTube</dt><dd id="count-videos">—</dd></div></dl>
+              <div class="privacy-note"><strong>Controllo privacy attivo</strong><p>La console rimuove i metadati delle foto e segnala i contenuti sensibili prima della pubblicazione.</p></div>
+            </aside>
+
+            <section class="panel recent-panel">
+              <div class="panel-heading"><h2>Bozze e modifiche</h2><span id="draft-count">Nessuna modifica</span></div>
+              <div class="empty-state" id="draft-empty"><strong>Tutto aggiornato</strong><p>Le nuove modifiche appariranno qui prima della pubblicazione.</p></div>
+              <ul class="change-list" id="change-list" hidden></ul>
+            </section>
+          </div>
+        </section>
+
+        <section class="admin-view" id="view-profile" data-title="Profilo e testi">
+          <div class="page-intro compact"><div><p class="eyebrow">Contenuti</p><h1>Profilo e testi</h1><p>Modifica solo i contenuti testuali. La grafica del sito non cambia.</p></div></div>
+          <form class="editor-layout" id="profile-form">
+            <section class="panel form-panel">
+              <div class="form-grid two-columns">
+                <label>Nome<input name="name" required /></label>
+                <label>Categoria<input name="category" /></label>
+                <label>Società sportiva<input name="club" /></label>
+                <label>Maestro<input name="coach" /></label>
+                <label>Disciplina<input name="discipline" /></label>
+                <label>Anno di inizio<input name="startedIn" type="number" min="2000" max="2100" /></label>
+              </div>
+              <label>Presentazione<textarea name="summary" rows="6" maxlength="700"></textarea><small class="field-hint">Testo breve, professionale e verificabile.</small></label>
+              <label>Origine della passione<textarea name="origin" rows="5" maxlength="700"></textarea></label>
+              <div class="save-row"><span class="autosave-status">Salvataggio automatico in bozza</span><button class="button button-secondary" type="submit">Salva bozza</button></div>
+            </section>
+            <aside class="panel preview-card"><span class="preview-kicker">Anteprima contenuto</span><h2 id="profile-preview-name">Arianna Milano</h2><p id="profile-preview-summary"></p><dl><div><dt>Disciplina</dt><dd id="profile-preview-discipline"></dd></div><div><dt>Categoria</dt><dd id="profile-preview-category"></dd></div></dl></aside>
+          </form>
+        </section>
+
+        <section class="admin-view" id="view-results" data-title="Risultati">
+          <div class="page-intro compact"><div><p class="eyebrow">Palmarès</p><h1>Risultati</h1><p>Aggiungi competizioni e medaglie. Le statistiche vengono ricalcolate automaticamente.</p></div><button class="button button-primary" id="add-result" type="button">Aggiungi risultato</button></div>
+          <section class="panel">
+            <div class="filter-row"><label>Cerca<input id="result-search" type="search" placeholder="Competizione o luogo" /></label><label>Anno<select id="result-year-filter"><option value="">Tutti gli anni</option></select></label></div>
+            <div class="responsive-table"><table><thead><tr><th>Anno</th><th>Competizione</th><th>Luogo</th><th>Risultati</th><th><span class="sr-only">Azioni</span></th></tr></thead><tbody id="results-table"></tbody></table></div>
+            <div class="empty-state" id="results-empty" hidden><strong>Nessun risultato</strong><p>Modifica i filtri oppure aggiungi una competizione.</p></div>
+          </section>
+        </section>
+
+        <section class="admin-view" id="view-photos" data-title="Foto">
+          <div class="page-intro compact"><div><p class="eyebrow">Media</p><h1>Foto</h1><p>Carica immagini ottimizzate e complete di testo alternativo.</p></div></div>
+          <section class="panel upload-panel">
+            <input id="photo-input" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden />
+            <button class="upload-drop" id="photo-select" type="button"><span aria-hidden="true">＋</span><strong>Seleziona le foto</strong><small>JPG, PNG o WebP · ridimensionamento e rimozione metadati automatici</small></button>
+            <p class="privacy-inline">Prima di pubblicare verifica che non siano visibili indirizzi, scuola, documenti o minori senza autorizzazione.</p>
+          </section>
+          <section class="media-grid" id="photos-grid"></section>
+          <div class="empty-state panel" id="photos-empty"><strong>Nessuna foto pubblicata</strong><p>Le immagini non visibili e i placeholder non vengono conteggiati.</p></div>
+        </section>
+
+        <section class="admin-view" id="view-videos" data-title="Video">
+          <div class="page-intro compact"><div><p class="eyebrow">Media</p><h1>Video YouTube</h1><p>Aggiungi un video attraverso il suo link pubblico.</p></div><button class="button button-primary" id="add-video" type="button">Aggiungi video</button></div>
+          <section class="panel media-list" id="videos-list"></section>
+          <div class="empty-state panel" id="videos-empty" hidden><strong>Nessun video</strong><p>Aggiungi il primo link YouTube.</p></div>
+        </section>
+
+        <section class="admin-view" id="view-stats" data-title="Statistiche">
+          <div class="page-intro compact"><div><p class="eyebrow">Dati aggregati</p><h1>Statistiche</h1><p>I valori vengono calcolati dai risultati, così non devi inserirli due volte.</p></div></div>
+          <section class="stats-grid" id="stats-grid"></section>
+          <div class="panel info-panel"><strong>Come funzionano</strong><p>Medaglie e competizioni vengono aggiornate ogni volta che modifichi i risultati. Gli anni di pratica dipendono dall’anno di inizio indicato nel Profilo.</p></div>
+        </section>
+
+        <section class="admin-view" id="view-history" data-title="Cronologia">
+          <div class="page-intro compact"><div><p class="eyebrow">Controllo</p><h1>Cronologia pubblicazioni</h1><p>Consulta le ultime modifiche inviate al sito.</p></div></div>
+          <section class="panel"><ul class="history-list" id="history-list"><li class="empty-state"><strong>Cronologia non ancora disponibile</strong><p>Le pubblicazioni effettuate dalla console appariranno qui.</p></li></ul></section>
+        </section>
+      </main>
+
+      <nav class="mobile-bottom" aria-label="Navigazione mobile">
+        <button type="button" data-view="dashboard" aria-current="page">⌂<span>Home</span></button>
+        <button type="button" data-view="results">♜<span>Risultati</span></button>
+        <button type="button" id="mobile-add">＋<span>Aggiungi</span></button>
+        <button type="button" data-view="photos">▧<span>Media</span></button>
+      </nav>
+    </div>
+
+    <dialog id="result-dialog">
+      <form method="dialog" id="result-form" class="dialog-form">
+        <header><div><p class="eyebrow">Risultati</p><h2 id="result-dialog-title">Aggiungi risultato</h2></div><button class="icon-button" value="cancel" aria-label="Chiudi">×</button></header>
+        <input type="hidden" name="yearIndex" /><input type="hidden" name="competitionIndex" />
+        <div class="form-grid two-columns"><label>Anno<input name="year" type="number" min="2000" max="2100" required /></label><label>Luogo<input name="place" /></label></div>
+        <label>Competizione<input name="event" required /></label>
+        <fieldset><legend>Medaglie e discipline</legend><div id="result-lines"></div><button class="text-button" id="add-result-line" type="button">＋ Aggiungi disciplina</button></fieldset>
+        <footer><button class="button button-secondary" value="cancel">Annulla</button><button class="button button-primary" id="save-result" value="default">Salva in bozza</button></footer>
+      </form>
+    </dialog>
+
+    <dialog id="video-dialog">
+      <form method="dialog" id="video-form" class="dialog-form">
+        <header><div><p class="eyebrow">Video</p><h2>Aggiungi video YouTube</h2></div><button class="icon-button" value="cancel" aria-label="Chiudi">×</button></header>
+        <label>Link YouTube<input name="urlYouTube" type="url" placeholder="https://youtube.com/…" required /></label>
+        <label>Titolo<input name="titolo" required /></label>
+        <div class="form-grid two-columns"><label>Data<input name="data" type="date" /></label><label>Categoria<select name="categoria"><option value="gara">Gara</option><option value="allenamento">Allenamento</option><option value="evento">Evento</option></select></label></div>
+        <label>Dettaglio<input name="dettaglio" placeholder="Gara · Sora (FR)" /></label>
+        <label class="check-label"><input name="inEvidenza" type="checkbox" /> Mostra tra i contenuti in evidenza</label>
+        <footer><button class="button button-secondary" value="cancel">Annulla</button><button class="button button-primary" id="save-video" value="default">Salva in bozza</button></footer>
+      </form>
+    </dialog>
+
+    <dialog id="photo-dialog">
+      <form method="dialog" id="photo-form" class="dialog-form">
+        <header><div><p class="eyebrow">Nuova foto</p><h2>Completa le informazioni</h2></div><button class="icon-button" value="cancel" aria-label="Chiudi">×</button></header>
+        <img id="photo-preview" alt="Anteprima della foto selezionata" />
+        <label>Titolo<input name="titolo" required /></label>
+        <label>Testo alternativo<textarea name="testoAlternativo" rows="3" required></textarea><small class="field-hint">Descrivi ciò che è importante nell’immagine.</small></label>
+        <div class="form-grid two-columns"><label>Anno<input name="anno" type="number" min="2000" max="2100" /></label><label>Tipo<select name="categoria"><option value="gara">Gara</option><option value="allenamento">Allenamento</option><option value="podio">Podio</option><option value="ritratto">Ritratto</option><option value="evento">Evento</option></select></label></div>
+        <label>Dettaglio<input name="dettaglio" placeholder="Allenamento · Casoria" /></label>
+        <label class="check-label"><input name="privacyConfirmed" type="checkbox" required /> Ho verificato privacy e autorizzazioni delle persone ritratte.</label>
+        <footer><button class="button button-secondary" value="cancel">Annulla</button><button class="button button-primary" id="save-photo" value="default">Carica e salva</button></footer>
+      </form>
+    </dialog>
+
+    <dialog id="publish-dialog">
+      <form method="dialog" class="dialog-form">
+        <header><div><p class="eyebrow">Pubblicazione</p><h2>Controlla le modifiche</h2></div><button class="icon-button" value="cancel" aria-label="Chiudi">×</button></header>
+        <p>Il sito pubblico verrà aggiornato solo dopo il completamento della verifica automatica.</p>
+        <ul class="change-list" id="publish-change-list"></ul>
+        <footer><button class="button button-secondary" value="cancel">Torna a modificare</button><button class="button button-primary" id="confirm-publish" value="default">Conferma e pubblica</button></footer>
+      </form>
+    </dialog>
+
+    <script>
+      import netlifyIdentity from "netlify-identity-widget";
+      import "../scripts/admin.js";
+      netlifyIdentity.init({ APIUrl: `${window.location.origin}/.netlify/identity` });
+      window.ariannaIdentity = netlifyIdentity;
+      window.dispatchEvent(new CustomEvent("arianna:identity-ready"));
+    </script>
+  </body>
+</html>

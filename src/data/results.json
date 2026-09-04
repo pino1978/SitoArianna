@@ -2,10 +2,34 @@
   "statsArePlaceholders": false,
   "statsNote": "Statistiche aggiornate sulla base del palmarès verificato dal 2022 al 2026.",
   "heroStats": [
-    { "id": "years", "value": "5", "label": "anni di pratica", "icon": "stat-years.svg", "isPlaceholder": false },
-    { "id": "competitions", "value": "28", "label": "gare disputate", "icon": "stat-trophy.svg", "isPlaceholder": false },
-    { "id": "medals", "value": "16", "label": "medaglie vinte", "icon": "stat-medal-silver.svg", "isPlaceholder": false },
-    { "id": "gold", "value": "14", "label": "medaglie d'oro", "icon": "stat-medal.svg", "isPlaceholder": false }
+    {
+      "id": "years",
+      "value": "5",
+      "label": "anni di pratica",
+      "icon": "stat-years.svg",
+      "isPlaceholder": false
+    },
+    {
+      "id": "competitions",
+      "value": "12",
+      "label": "competizioni",
+      "icon": "stat-trophy.svg",
+      "isPlaceholder": false
+    },
+    {
+      "id": "medals",
+      "value": "16",
+      "label": "medaglie vinte",
+      "icon": "stat-medal-silver.svg",
+      "isPlaceholder": false
+    },
+    {
+      "id": "gold",
+      "value": "14",
+      "label": "medaglie d'oro",
+      "icon": "stat-medal.svg",
+      "isPlaceholder": false
+    }
   ],
   "medalSummary": {
     "gold": 14,
@@ -16,118 +40,186 @@
   "resultsByYear": [
     {
       "year": 2022,
-      "totals": { "gold": 3, "silver": 0, "bronze": 0 },
+      "totals": {
+        "gold": 3,
+        "silver": 0,
+        "bronze": 0
+      },
       "competitions": [
         {
           "event": "Palacasoria",
           "place": "Casoria (NA)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" },
-            { "discipline": "Chambara", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            },
+            {
+              "discipline": "Chambara",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "FIWuK – Scuola Regionale Campana Alta Specializzazione",
           "place": "Campania",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         }
       ]
     },
     {
       "year": 2023,
-      "totals": { "gold": 0, "silver": 1, "bronze": 0 },
+      "totals": {
+        "gold": 0,
+        "silver": 1,
+        "bronze": 0
+      },
       "competitions": [
         {
           "event": "2° Trofeo Giovanile di Taolu Wushu",
           "place": "",
           "results": [
-            { "discipline": "Taolu", "medal": "silver" }
+            {
+              "discipline": "Taolu",
+              "medal": "silver"
+            }
           ]
         }
       ]
     },
     {
       "year": 2024,
-      "totals": { "gold": 2, "silver": 0, "bronze": 0 },
+      "totals": {
+        "gold": 2,
+        "silver": 0,
+        "bronze": 0
+      },
       "competitions": [
         {
           "event": "Xanda Prestige",
           "place": "Quarto (NA)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "20° World Open Championship C.K.A.",
           "place": "Perugia",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         }
       ]
     },
     {
       "year": 2025,
-      "totals": { "gold": 4, "silver": 1, "bronze": 0 },
+      "totals": {
+        "gold": 4,
+        "silver": 1,
+        "bronze": 0
+      },
       "competitions": [
         {
           "event": "Arti Marziali CSEN",
           "place": "",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "21° World Championship & Cup C.K.A.",
           "place": "Perugia",
           "results": [
-            { "discipline": "Tui Shou – Piedi fissi", "medal": "silver" }
+            {
+              "discipline": "Tui Shou – Piedi fissi",
+              "medal": "silver"
+            }
           ]
         },
         {
           "event": "Champion Cup",
           "place": "Sora (FR)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" },
-            { "discipline": "Tui Shou – Piedi mobili", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            },
+            {
+              "discipline": "Tui Shou – Piedi mobili",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "One to One Tournament",
           "place": "Giugliano (NA)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         }
       ]
     },
     {
       "year": 2026,
-      "totals": { "gold": 5, "silver": 0, "bronze": 0 },
+      "totals": {
+        "gold": 5,
+        "silver": 0,
+        "bronze": 0
+      },
       "competitions": [
         {
           "event": "Champion Cup",
           "place": "Sora (FR)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "22° World Championship & Cup C.K.A.",
           "place": "Perugia",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" },
-            { "discipline": "Chambara", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            },
+            {
+              "discipline": "Chambara",
+              "medal": "gold"
+            }
           ]
         },
         {
           "event": "One to One",
           "place": "Giugliano (NA)",
           "results": [
-            { "discipline": "Sanda", "medal": "gold" },
-            { "discipline": "Sanda", "medal": "gold" }
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            },
+            {
+              "discipline": "Sanda",
+              "medal": "gold"
+            }
           ]
         }
       ]

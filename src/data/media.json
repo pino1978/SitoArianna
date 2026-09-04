@@ -1,5 +1,18 @@
 [
   {
+    "id": "foto-1788526818634",
+    "tipo": "foto",
+    "titolo": "Perugia 2026",
+    "dettaglio": "",
+    "anno": 2026,
+    "categoria": "gara",
+    "url": "https://pub-38e4b14ae7e746e9907ca89d181c2fd9.r2.dev/media/2026/altro/1788526815940-perugia-2026.webp",
+    "testoAlternativo": "Perugia 2026",
+    "inEvidenza": false,
+    "visibile": true,
+    "isPlaceholder": false
+  },
+  {
     "id": "sora-2026-01",
     "tipo": "video",
     "titolo": "Champion Cup 2026",

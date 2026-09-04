@@ -5,6 +5,21 @@ import HighlightsStrip from "../components/HighlightsStrip.astro";
 import ProfileFeature from "../components/ProfileFeature.astro";
 ---
 <BaseLayout>
+  <script is:inline>
+    (() => {
+      const hash = window.location.hash || "";
+      const isIdentityCallback =
+        hash.startsWith("#recovery_token=") ||
+        hash.startsWith("#invite_token=") ||
+        hash.startsWith("#confirmation_token=") ||
+        hash.startsWith("#access_token=") ||
+        hash.startsWith("#error=");
+
+      if (isIdentityCallback) {
+        window.location.replace(`/admin/${hash}`);
+      }
+    })();
+  </script>
   <main id="main">
     <Hero />
     <HighlightsStrip />

@@ -1,6 +1,6 @@
 @media (max-width: 640px) {
   .hero {
-    min-height: 695px;
+    min-height: 712px;
     padding-bottom: 0;
     background-size: auto 58%;
     background-position: 46% 28%;
@@ -106,63 +106,24 @@
   .hero-cta { display: none; }
 
   .hero-copy .stats-strip {
-    position: absolute;
-    top: 598px;
-    left: 0;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    width: calc(100vw - 36px);
-    margin: 0;
-    padding: 12px 0 11px;
+    top: 598px !important;
     border-top: 1px solid rgba(216, 161, 58, 0.62);
     border-bottom: 1px solid rgba(216, 161, 58, 0.24);
-    background: rgba(5, 5, 5, 0.74);
+    background: rgba(5, 5, 5, 0.78);
     backdrop-filter: blur(10px);
   }
 
   .hero-copy .stats-strip::after { display: none; }
 
-  .hero-copy .stats-strip li {
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-    align-content: center;
-    min-height: 62px;
-    margin: 0;
-    padding: 0 5px;
-    text-align: center;
-  }
-
   .hero-copy .stats-strip li::after {
     display: block;
     top: 5px;
     right: 0;
-    height: 50px;
-    background: linear-gradient(180deg, transparent, rgba(216, 161, 58, 0.38), transparent);
+    height: 72px;
+    background: linear-gradient(180deg, transparent, rgba(216, 161, 58, 0.34), transparent);
   }
 
   .hero-copy .stats-strip li:last-child::after { display: none; }
-
-  .hero-copy .stats-strip strong {
-    grid-column: 1;
-    grid-row: 1;
-    color: var(--gold-bright);
-    font-size: 1.48rem;
-    line-height: 1;
-  }
-
-  .hero-copy .stats-strip span {
-    grid-column: 1;
-    grid-row: 2;
-    width: auto;
-    margin-top: 6px;
-    font-size: 0.44rem;
-    line-height: 1.14;
-    letter-spacing: 0.06em;
-  }
-
-  .hero-copy .stats-strip img { display: none; }
 
   /* Su mobile i valori sono ridondanti: gli highlights seguono subito le statistiche. */
   .hero-values { display: none !important; }
@@ -170,7 +131,7 @@
 
 @media (max-width: 390px) {
   .hero {
-    min-height: 672px;
+    min-height: 692px;
     background-size: auto 56%;
     background-position: 44% 28%;
   }
@@ -183,5 +144,5 @@
     font-size: 1.38rem;
   }
 
-  .hero-copy .stats-strip { top: 578px; }
+  .hero-copy .stats-strip { top: 578px !important; }
 }

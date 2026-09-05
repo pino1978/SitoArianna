@@ -24,16 +24,29 @@ const {
 } = Astro.props;
 const resolvedTitle = seo?.title || title;
 const resolvedDescription = seo?.description || description;
-const canonicalURL = new URL(Astro.url.pathname, Astro.site || "https://www.ariannamilano.it");
-const socialImage = new URL("/images/hero-home.jpg", Astro.site || "https://www.ariannamilano.it");
+const siteURL = Astro.site || new URL("https://www.ariannamilano.it");
+const canonicalURL = new URL(Astro.url.pathname, siteURL);
+const socialImage = new URL("/images/hero-home.jpg", siteURL);
 const athleteSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": "https://www.ariannamilano.it/#arianna-milano",
   name: "Arianna Milano",
   url: "https://www.ariannamilano.it/",
-  description: resolvedDescription,
-  knowsAbout: ["Sanda", "Kung Fu", "Sanda Light", "arti marziali", "competizioni Sanda"],
+  description: "Giovane atleta agonista italiana di Sanda e Kung Fu. Il sito ufficiale raccoglie profilo sportivo, palmarès, competizioni, foto e video.",
+  jobTitle: "Atleta di Sanda",
+  knowsAbout: ["Sanda", "Kung Fu", "Sanda Light", "Wushu", "competizioni Sanda", "arti marziali cinesi"],
   sameAs: ["https://www.youtube.com/@arianna.milano"]
+};
+const webSiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://www.ariannamilano.it/#website",
+  url: "https://www.ariannamilano.it/",
+  name: "Arianna Milano",
+  description: "Sito ufficiale e portfolio sportivo di Arianna Milano, atleta agonista di Sanda.",
+  inLanguage: "it-IT",
+  about: { "@id": "https://www.ariannamilano.it/#arianna-milano" }
 };
 ---
 <!doctype html>
@@ -43,6 +56,7 @@ const athleteSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={resolvedDescription} />
     <meta name="robots" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
+    <meta name="googlebot" content={noindex ? "noindex,nofollow" : "index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"} />
     <link rel="canonical" href={canonicalURL} />
     <meta property="og:locale" content="it_IT" />
     <meta property="og:type" content="website" />
@@ -51,12 +65,14 @@ const athleteSchema = {
     <meta property="og:description" content={resolvedDescription} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content="Arianna Milano · atleta di Sanda" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={resolvedTitle} />
     <meta name="twitter:description" content={resolvedDescription} />
     <meta name="twitter:image" content={socialImage} />
     <meta name="theme-color" content="#080706" />
     <script type="application/ld+json" set:html={JSON.stringify(athleteSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)}></script>
     <title>{resolvedTitle}</title>
   </head>
   <body class="site-locked">
@@ -70,119 +86,24 @@ const athleteSchema = {
       const managedCopyRoot = document.querySelector('#managed-site-copy');
       const managedCopy = managedCopyRoot ? JSON.parse(managedCopyRoot.textContent || '{}') : {};
       const normalize = (value = '') => String(value).replace(/\s+/g, ' ').trim();
-      const setText = (selector, value) => {
-        const el = document.querySelector(selector);
-        if (!el || value == null || normalize(el.textContent) === normalize(value)) return;
-        el.textContent = value;
-      };
-      const setOwnText = (selector, value, index = 0) => {
-        const el = document.querySelector(selector);
-        if (!el || value == null) return;
-        const nodes = [...el.childNodes].filter(node => node.nodeType === Node.TEXT_NODE);
-        const node = nodes[index];
-        if (node && normalize(node.nodeValue) !== normalize(value)) node.nodeValue = value;
-      };
-      const setList = (selector, values = []) => {
-        document.querySelectorAll(selector).forEach((el, index) => {
-          if (values[index] != null && normalize(el.textContent) !== normalize(values[index])) el.textContent = values[index];
-        });
-      };
+      const setText = (selector, value) => { const el = document.querySelector(selector); if (!el || value == null || normalize(el.textContent) === normalize(value)) return; el.textContent = value; };
+      const setOwnText = (selector, value, index = 0) => { const el = document.querySelector(selector); if (!el || value == null) return; const nodes = [...el.childNodes].filter(node => node.nodeType === Node.TEXT_NODE); const node = nodes[index]; if (node && normalize(node.nodeValue) !== normalize(value)) node.nodeValue = value; };
       const applyManagedCopy = () => {
         const path = location.pathname.endsWith('/') ? location.pathname : `${location.pathname}/`;
-        if (path === '/') {
-          const h = managedCopy.home;
-          if (!h) return;
-          setText('.highlights-strip .section-head p', h.highlights?.kicker);
-          setText('#highlights-title', h.highlights?.title);
-          document.querySelectorAll('.media-cta').forEach(el => { if (h.highlights?.cta) setOwnTextNodeLabel(el, h.highlights.cta); });
-        }
-        if (path === '/profilo/') {
-          const p = managedCopy.profilePage;
-          if (!p) return;
-          setOwnText('#profile-title', p.hero?.titleLine1); setText('#profile-title em', p.hero?.titleLine2); setOwnText('.profile-hero__quote', p.hero?.quote);
-          setText('.journey .section-index', p.journey?.kicker); setOwnText('#journey-title', p.journey?.titleLine1); setOwnText('#journey-title', p.journey?.titleLine2, 1);
-          const journeyParagraphs=document.querySelectorAll('.journey__copy p'); if(journeyParagraphs[0]&&p.journey?.paragraph1&&normalize(journeyParagraphs[0].textContent)!==normalize(p.journey.paragraph1))journeyParagraphs[0].textContent=p.journey.paragraph1;if(journeyParagraphs[1]&&p.journey?.paragraph2&&normalize(journeyParagraphs[1].textContent)!==normalize(p.journey.paragraph2))journeyParagraphs[1].textContent=p.journey.paragraph2;
-          setText('.values .section-index', p.values?.kicker); document.querySelectorAll('.value-card').forEach((card,index)=>{const item=p.values?.items?.[index];if(!item)return;setTextIn(card,'h3',item.title);setTextIn(card,'p',item.text)});
-          const bands=document.querySelectorAll('.story-band'); if(bands[0]){setTextIn(bands[0],'.section-index',p.coach?.kicker);setOwnTextIn(bands[0],'h2',p.coach?.titleLine1);setOwnTextIn(bands[0],'h2',p.coach?.titleLine2,1);setTextIn(bands[0],'p:not(.section-index)',p.coach?.paragraph)} if(bands[1]){setTextIn(bands[1],'.section-index',p.training?.kicker);setOwnTextIn(bands[1],'h2',p.training?.titleLine1);setOwnTextIn(bands[1],'h2',p.training?.titleLine2,1);const ps=bands[1].querySelectorAll('p:not(.section-index)');if(ps[0]&&p.training?.paragraph1)ps[0].textContent=p.training.paragraph1;if(ps[1]&&p.training?.paragraph2)ps[1].textContent=p.training.paragraph2}
-          setText('.objective__eyebrow',p.objective?.kicker);setOwnText('#objective-title',p.objective?.titleLine1);setOwnText('#objective-title',p.objective?.titleLine2,1);setOwnText('#objective-title',p.objective?.titleLine3,2);setText('.objective__copy>p:not(.objective__eyebrow)',p.objective?.paragraph);const objectiveLink=document.querySelector('.objective__copy a');if(objectiveLink&&p.objective?.cta)setOwnTextNodeLabel(objectiveLink,p.objective.cta);
-        }
-        if (path === '/ying/') {
-          const y=managedCopy.yingPage;if(!y)return;
-          setText('.hero__identity>.eyebrow',y.hero?.kicker);setText('.wordmark>p',y.hero?.meaning);setText('.hero__claim',y.hero?.claim);setText('.hero__intro p',y.hero?.intro);
-          setText('.meaning__visual span',y.meaning?.imageCaption);setText('.meaning__copy>.eyebrow',y.meaning?.kicker);setOwnText('#meaning-title',y.meaning?.titleLine1);setText('#meaning-title em',y.meaning?.titleLine2);const mp=document.querySelectorAll('.meaning__copy>p:not(.eyebrow)');if(mp[0]&&y.meaning?.paragraph1)mp[0].textContent=y.meaning.paragraph1;if(mp[1]&&y.meaning?.paragraph2)mp[1].textContent=y.meaning.paragraph2;
-          setText('.choice__copy>.eyebrow',y.choice?.kicker);setOwnText('#choice-title',y.choice?.titleLine1);setText('#choice-title em',y.choice?.titleLine2);const cp=document.querySelectorAll('.choice__copy>p:not(.eyebrow)');if(cp[0]&&y.choice?.paragraph1)cp[0].textContent=y.choice.paragraph1;if(cp[1]&&y.choice?.paragraph2)cp[1].textContent=y.choice.paragraph2;
-          setText('.journey__copy>.eyebrow',y.journey?.kicker);setText('#journey-title',y.journey?.title);setText('.journey__copy>p:last-child',y.journey?.paragraph);
-        }
-        if (path === '/risultati/') {
-          const r=managedCopy.resultsPage;if(!r)return;setText('.page-hero .eyebrow',r.hero?.kicker);setText('.page-hero h1',r.hero?.title);setText('.page-hero>div>p:last-child',r.hero?.intro);setText('.results-content .section-heading .eyebrow',r.archive?.kicker);setText('.results-content .section-heading h2',r.archive?.title);setText('.results-content .section-heading>p:last-child',r.archive?.intro);setText('.result-timeline>.eyebrow',r.timeline?.kicker);setText('.result-timeline>h2',r.timeline?.title);document.querySelectorAll('.timeline-card').forEach((card,index)=>{const item=r.timeline?.items?.[index];if(!item)return;setTextIn(card,'span',item.period);setTextIn(card,'p',item.text)});
-        }
-        if (path === '/media/') {
-          const m=managedCopy.mediaPage;if(!m)return;setText('.page-hero .eyebrow',m.hero?.kicker);setText('.page-hero h1',m.hero?.title);setText('.page-hero>div>p:last-child',m.hero?.intro);const heads=document.querySelectorAll('.section-heading');if(heads[0]){setTextIn(heads[0],'.eyebrow',m.gallery?.kicker);setTextIn(heads[0],'h2',m.gallery?.title);setTextIn(heads[0],'p:last-child',m.gallery?.intro)}if(heads[1]){setTextIn(heads[1],'.eyebrow',m.video?.kicker);setTextIn(heads[1],'h2',m.video?.title);setTextIn(heads[1],'p:last-child',m.video?.intro)}
-        }
+        if (path === '/') { const h=managedCopy.home;if(!h)return;setText('.highlights-strip .section-head p',h.highlights?.kicker);setText('#highlights-title',h.highlights?.title);document.querySelectorAll('.media-cta').forEach(el=>{if(h.highlights?.cta)setOwnTextNodeLabel(el,h.highlights.cta);}); }
+        if (path === '/profilo/') { const p=managedCopy.profilePage;if(!p)return;setOwnText('#profile-title',p.hero?.titleLine1);setText('#profile-title em',p.hero?.titleLine2);setOwnText('.profile-hero__quote',p.hero?.quote);setText('.journey .section-index',p.journey?.kicker);setOwnText('#journey-title',p.journey?.titleLine1);setOwnText('#journey-title',p.journey?.titleLine2,1);const journeyParagraphs=document.querySelectorAll('.journey__copy p');if(journeyParagraphs[0]&&p.journey?.paragraph1)journeyParagraphs[0].textContent=p.journey.paragraph1;if(journeyParagraphs[1]&&p.journey?.paragraph2)journeyParagraphs[1].textContent=p.journey.paragraph2;setText('.values .section-index',p.values?.kicker);document.querySelectorAll('.value-card').forEach((card,index)=>{const item=p.values?.items?.[index];if(!item)return;setTextIn(card,'h3',item.title);setTextIn(card,'p',item.text)});const bands=document.querySelectorAll('.story-band');if(bands[0]){setTextIn(bands[0],'.section-index',p.coach?.kicker);setOwnTextIn(bands[0],'h2',p.coach?.titleLine1);setOwnTextIn(bands[0],'h2',p.coach?.titleLine2,1);setTextIn(bands[0],'p:not(.section-index)',p.coach?.paragraph)}if(bands[1]){setTextIn(bands[1],'.section-index',p.training?.kicker);setOwnTextIn(bands[1],'h2',p.training?.titleLine1);setOwnTextIn(bands[1],'h2',p.training?.titleLine2,1);const ps=bands[1].querySelectorAll('p:not(.section-index)');if(ps[0]&&p.training?.paragraph1)ps[0].textContent=p.training.paragraph1;if(ps[1]&&p.training?.paragraph2)ps[1].textContent=p.training.paragraph2}setText('.objective__eyebrow',p.objective?.kicker);setOwnText('#objective-title',p.objective?.titleLine1);setOwnText('#objective-title',p.objective?.titleLine2,1);setOwnText('#objective-title',p.objective?.titleLine3,2);setText('.objective__copy>p:not(.objective__eyebrow)',p.objective?.paragraph);const objectiveLink=document.querySelector('.objective__copy a');if(objectiveLink&&p.objective?.cta)setOwnTextNodeLabel(objectiveLink,p.objective.cta); }
+        if (path === '/ying/') { const y=managedCopy.yingPage;if(!y)return;setText('.hero__identity>.eyebrow',y.hero?.kicker);setText('.wordmark>p',y.hero?.meaning);setText('.hero__claim',y.hero?.claim);setText('.hero__intro p',y.hero?.intro);setText('.meaning__visual span',y.meaning?.imageCaption);setText('.meaning__copy>.eyebrow',y.meaning?.kicker);setOwnText('#meaning-title',y.meaning?.titleLine1);setText('#meaning-title em',y.meaning?.titleLine2);const mp=document.querySelectorAll('.meaning__copy>p:not(.eyebrow)');if(mp[0]&&y.meaning?.paragraph1)mp[0].textContent=y.meaning.paragraph1;if(mp[1]&&y.meaning?.paragraph2)mp[1].textContent=y.meaning.paragraph2;setText('.choice__copy>.eyebrow',y.choice?.kicker);setOwnText('#choice-title',y.choice?.titleLine1);setText('#choice-title em',y.choice?.titleLine2);const cp=document.querySelectorAll('.choice__copy>p:not(.eyebrow)');if(cp[0]&&y.choice?.paragraph1)cp[0].textContent=y.choice.paragraph1;if(cp[1]&&y.choice?.paragraph2)cp[1].textContent=y.choice.paragraph2;setText('.journey__copy>.eyebrow',y.journey?.kicker);setText('#journey-title',y.journey?.title);setText('.journey__copy>p:last-child',y.journey?.paragraph); }
+        if (path === '/risultati/') { const r=managedCopy.resultsPage;if(!r)return;setText('.page-hero .eyebrow',r.hero?.kicker);setText('.page-hero h1',r.hero?.title);setText('.page-hero>div>p:last-child',r.hero?.intro);setText('.results-content .section-heading .eyebrow',r.archive?.kicker);setText('.results-content .section-heading h2',r.archive?.title);setText('.results-content .section-heading>p:last-child',r.archive?.intro);setText('.result-timeline>.eyebrow',r.timeline?.kicker);setText('.result-timeline>h2',r.timeline?.title);document.querySelectorAll('.timeline-card').forEach((card,index)=>{const item=r.timeline?.items?.[index];if(!item)return;setTextIn(card,'span',item.period);setTextIn(card,'p',item.text)}); }
+        if (path === '/media/') { const m=managedCopy.mediaPage;if(!m)return;setText('.page-hero .eyebrow',m.hero?.kicker);setText('.page-hero h1',m.hero?.title);setText('.page-hero>div>p:last-child',m.hero?.intro);const heads=document.querySelectorAll('.section-heading');if(heads[0]){setTextIn(heads[0],'.eyebrow',m.gallery?.kicker);setTextIn(heads[0],'h2',m.gallery?.title);setTextIn(heads[0],'p:last-child',m.gallery?.intro)}if(heads[1]){setTextIn(heads[1],'.eyebrow',m.video?.kicker);setTextIn(heads[1],'h2',m.video?.title);setTextIn(heads[1],'p:last-child',m.video?.intro)} }
       };
       function setTextIn(root,selector,value){const el=root.querySelector(selector);if(el&&value!=null&&normalize(el.textContent)!==normalize(value))el.textContent=value}
       function setOwnTextIn(root,selector,value,index=0){const el=root.querySelector(selector);if(!el||value==null)return;const nodes=[...el.childNodes].filter(node=>node.nodeType===Node.TEXT_NODE);const node=nodes[index];if(node&&normalize(node.nodeValue)!==normalize(value))node.nodeValue=value}
       function setOwnTextNodeLabel(el,value){const node=[...el.childNodes].find(n=>n.nodeType===Node.TEXT_NODE&&normalize(n.nodeValue));if(node&&normalize(node.nodeValue)!==normalize(value))node.nodeValue=`${value} `}
-
-      applyManagedCopy();
-      document.addEventListener('astro:page-load',applyManagedCopy);
-
-      const lockInteractiveContent = () => {
-        document.querySelectorAll("a:not([data-interactive])").forEach((link) => {
-          if (link.closest(".highlights-strip, .glightbox-container")) return;
-          link.removeAttribute("href");
-          link.setAttribute("aria-disabled", "true");
-          link.setAttribute("tabindex", "-1");
-        });
-
-        document.querySelectorAll("video:not([data-interactive]), iframe:not([data-interactive]), audio:not([data-interactive])").forEach((media) => {
-          if (media.closest(".highlights-strip, .glightbox-container")) return;
-          if (media instanceof HTMLMediaElement) {
-            media.pause();
-            media.controls = false;
-          }
-          media.setAttribute("aria-disabled", "true");
-          media.setAttribute("tabindex", "-1");
-          media.style.pointerEvents = "none";
-        });
-
-        document.querySelectorAll("button:not([data-interactive])").forEach((button) => {
-          if (button.closest(".highlights-strip, .glightbox-container")) return;
-          button.disabled = true;
-          button.setAttribute("aria-disabled", "true");
-          button.setAttribute("tabindex", "-1");
-        });
-      };
-
-      lockInteractiveContent();
-      document.addEventListener("astro:page-load", lockInteractiveContent);
+      applyManagedCopy();document.addEventListener('astro:page-load',applyManagedCopy);
+      const lockInteractiveContent=()=>{document.querySelectorAll("a:not([data-interactive])").forEach(link=>{if(link.closest(".highlights-strip, .glightbox-container"))return;link.removeAttribute("href");link.setAttribute("aria-disabled","true");link.setAttribute("tabindex","-1");});document.querySelectorAll("video:not([data-interactive]), iframe:not([data-interactive]), audio:not([data-interactive])").forEach(media=>{if(media.closest(".highlights-strip, .glightbox-container"))return;if(media instanceof HTMLMediaElement){media.pause();media.controls=false;}media.setAttribute("aria-disabled","true");media.setAttribute("tabindex","-1");media.style.pointerEvents="none";});document.querySelectorAll("button:not([data-interactive])").forEach(button=>{if(button.closest(".highlights-strip, .glightbox-container"))return;button.disabled=true;button.setAttribute("aria-disabled","true");button.setAttribute("tabindex","-1");});};lockInteractiveContent();document.addEventListener("astro:page-load",lockInteractiveContent);
     </script>
   </body>
 </html>
-
 <style is:global>
-  .site-locked a:not([data-interactive]):not(.glightbox-container *),
-  .site-locked button:not([data-interactive]):not(.glightbox-container *),
-  .site-locked video:not([data-interactive]):not(.glightbox-container *),
-  .site-locked iframe:not([data-interactive]):not(.glightbox-container *),
-  .site-locked audio:not([data-interactive]):not(.glightbox-container *) {
-    pointer-events: none !important;
-    cursor: default !important;
-  }
-
-  .site-locked .highlights-strip a,
-  .site-locked .highlights-strip button,
-  .site-locked .highlights-strip iframe,
-  .site-locked .glightbox-container,
-  .site-locked .glightbox-container *,
-  .site-locked [data-interactive] {
-    pointer-events: auto !important;
-  }
-
-  .site-locked .highlights-strip a,
-  .site-locked .highlights-strip button,
-  .site-locked .glightbox-container button,
-  .site-locked [data-interactive]:is(a,button) {
-    cursor: pointer !important;
-  }
+.site-locked a:not([data-interactive]):not(.glightbox-container *),.site-locked button:not([data-interactive]):not(.glightbox-container *),.site-locked video:not([data-interactive]):not(.glightbox-container *),.site-locked iframe:not([data-interactive]):not(.glightbox-container *),.site-locked audio:not([data-interactive]):not(.glightbox-container *){pointer-events:none!important;cursor:default!important}.site-locked .highlights-strip a,.site-locked .highlights-strip button,.site-locked .highlights-strip iframe,.site-locked .glightbox-container,.site-locked .glightbox-container *,.site-locked [data-interactive]{pointer-events:auto!important}.site-locked .highlights-strip a,.site-locked .highlights-strip button,.site-locked .glightbox-container button,.site-locked [data-interactive]:is(a,button){cursor:pointer!important}
 </style>

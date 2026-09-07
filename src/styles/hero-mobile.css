@@ -106,7 +106,7 @@
   .hero-cta { display: none; }
 
   .hero-copy .stats-strip {
-    top: 598px !important;
+    top: 512px !important;
     border-top: 1px solid rgba(216, 161, 58, 0.62);
     border-bottom: 1px solid rgba(216, 161, 58, 0.24);
     background: rgba(5, 5, 5, 0.78);
@@ -144,5 +144,5 @@
     font-size: 1.38rem;
   }
 
-  .hero-copy .stats-strip { top: 578px !important; }
+  .hero-copy .stats-strip { top: 492px !important; }
 }

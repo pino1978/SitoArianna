@@ -1,6 +1,6 @@
 @media (max-width: 640px) {
   .hero {
-    min-height: 712px;
+    min-height: 632px;
     padding-bottom: 0;
     background-size: auto 58%;
     background-position: 46% 28%;
@@ -125,13 +125,12 @@
 
   .hero-copy .stats-strip li:last-child::after { display: none; }
 
-  /* Su mobile i valori sono ridondanti: gli highlights seguono subito le statistiche. */
   .hero-values { display: none !important; }
 }
 
 @media (max-width: 390px) {
   .hero {
-    min-height: 692px;
+    min-height: 612px;
     background-size: auto 56%;
     background-position: 44% 28%;
   }

@@ -1,7 +1,10 @@
+---
+import logo from "../assets/svg/logo-arianna-milano.svg";
+---
 <footer class="site-footer" id="footer" aria-label="Piè di pagina">
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="/" data-interactive aria-label="Arianna Milano, torna alla home">
-      <span>Arianna</span><strong>Milano</strong>
+      <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
     </a>
 
     <p class="site-footer__legal">© 2026 Arianna Milano <span>— Tutti i diritti riservati</span></p>
@@ -12,9 +15,10 @@
   .site-footer{position:relative;isolation:isolate;overflow:hidden;padding:0 clamp(22px,4vw,64px);border-top:1px solid rgba(196,154,84,.34);background:#020202;color:#f4f0e8}
   .site-footer:before{position:absolute;inset:0;background:linear-gradient(100deg,rgba(131,20,16,.18),transparent 18%,transparent 82%,rgba(131,20,16,.16));content:"";pointer-events:none}
   .site-footer__inner{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;width:min(1460px,100%);min-height:88px;margin:auto}
-  .site-footer__brand{display:inline-flex;flex-direction:column;align-items:flex-start;gap:.22rem;width:max-content;color:#f4f0e8;font:500 clamp(calc(.86rem - 2px),calc(1.1vw - 1px),calc(1.05rem - 2px))/.92 var(--font-ui,sans-serif);letter-spacing:.14em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
-  .site-footer__brand strong{color:#d52c24;font-size:clamp(.53rem,.682vw,.65rem);font-weight:700;letter-spacing:.3em}
+  .site-footer__brand{display:block;width:118px;color:#f4f0e8;text-decoration:none}
+  .site-footer__brand img{display:block;width:118px;height:auto;opacity:.92}
   .site-footer__legal{margin:0;color:rgba(244,240,232,.52);font:600 .61rem/1.5 var(--font-ui,sans-serif);letter-spacing:.05em;text-align:right;white-space:nowrap}
   .site-footer__legal span{color:rgba(244,240,232,.34)}
-  @media(max-width:760px){.site-footer{padding:18px 20px}.site-footer__inner{grid-template-columns:1fr;gap:12px;min-height:0;text-align:center}.site-footer__brand{align-items:center;justify-self:center}.site-footer__legal{text-align:center}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
+  @media(max-width:760px){.site-footer{padding:18px 20px}.site-footer__inner{grid-template-columns:1fr;gap:12px;min-height:0;text-align:center}.site-footer__brand{justify-self:center;width:108px}.site-footer__brand img{width:108px}.site-footer__legal{text-align:center}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
+  @media(max-width:390px){.site-footer__legal{font-size:.52rem;letter-spacing:.015em}}
 </style>

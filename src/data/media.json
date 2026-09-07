@@ -113,7 +113,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 47.4,
+    "highlightY": 4.1,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788537452",

@@ -11,6 +11,14 @@
   status = 301
   force = true
 
+# Backward-compatible target for the social image currently referenced
+# by Open Graph/Twitter metadata.
+[[redirects]]
+  from = "/images/hero-home.jpg"
+  to = "/images/ying-eagle-hero.webp"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/admin"
   [headers.values]

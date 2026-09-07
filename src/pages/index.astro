@@ -29,16 +29,9 @@ import ProfileFeature from "../components/ProfileFeature.astro";
     <ProfileFeature />
     <section class="athlete-hub" aria-labelledby="athlete-hub-title">
       <div class="athlete-hub__inner">
-        <div class="athlete-hub__copy">
-          <p class="athlete-hub__eyebrow">Portfolio ufficiale</p>
-          <h2 id="athlete-hub-title">Arianna Milano<br /><em>Sanda athlete.</em></h2>
-          <p>Arianna Milano è una giovane atleta agonista di Sanda e Kung Fu. Gareggia nel Sanda Light e costruisce il proprio percorso sportivo con ASD Kasoria Kombat &amp; Fly, nell'ambito delle competizioni CSEN.</p>
-        </div>
-        <nav class="athlete-hub__links" aria-label="Esplora il portfolio di Arianna Milano">
-          <a href="/profilo/" data-interactive><span>01</span><strong>Profilo atleta</strong><small>Percorso, allenamento e crescita sportiva</small></a>
-          <a href="/risultati/" data-interactive><span>02</span><strong>Palmarès</strong><small>Competizioni, risultati e medaglie</small></a>
-          <a href="/media/" data-interactive><span>03</span><strong>Media</strong><small>Foto e video dal tatami</small></a>
-        </nav>
+        <p class="athlete-hub__eyebrow">Portfolio ufficiale</p>
+        <h2 id="athlete-hub-title">Arianna Milano<br /><em>Sanda athlete.</em></h2>
+        <p>Arianna Milano è una giovane atleta agonista di Sanda e Kung Fu. Gareggia nel Sanda Light e costruisce il proprio percorso sportivo con ASD Kasoria Kombat &amp; Fly, nell'ambito delle competizioni CSEN. Scopri il suo <a href="/profilo/" data-interactive>profilo sportivo</a>, il <a href="/risultati/" data-interactive>palmarès</a> e la raccolta <a href="/media/" data-interactive>foto e video</a>.</p>
       </div>
     </section>
   </main>
@@ -48,17 +41,13 @@ import ProfileFeature from "../components/ProfileFeature.astro";
   .home-page{display:block;margin:0;padding:0;background:#080706}
   .home-page>section{margin-block:0!important}
   .home-page .hero,.home-page .hero-values,.home-page .highlights-strip,.home-page .profile-feature{margin-top:0!important;margin-bottom:0!important}
-  .athlete-hub{border-top:1px solid rgba(185,134,50,.28);background:radial-gradient(circle at 14% 28%,rgba(185,134,50,.09),transparent 28%),#060606;color:#f5f0e7}
-  .athlete-hub__inner{display:grid;grid-template-columns:minmax(0,.9fr) minmax(480px,1.1fr);gap:clamp(44px,7vw,110px);align-items:center;width:min(1320px,calc(100% - 80px));margin:auto;padding:clamp(64px,7vw,96px) 0}
+  .athlete-hub{border-top:1px solid rgba(185,134,50,.22);background:radial-gradient(circle at 14% 28%,rgba(185,134,50,.07),transparent 30%),#060606;color:#f5f0e7}
+  .athlete-hub__inner{width:min(850px,calc(100% - 80px));margin:auto;padding:clamp(54px,6vw,78px) 0}
   .athlete-hub__eyebrow{margin:0 0 14px;color:var(--gold-bright);font:800 .64rem/1.2 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}
-  .athlete-hub h2{margin:0 0 24px;font:900 clamp(2.8rem,4.7vw,5.1rem)/.9 var(--font-display);letter-spacing:-.025em;text-transform:uppercase}
+  .athlete-hub h2{margin:0 0 22px;font:900 clamp(2.6rem,4.4vw,4.6rem)/.9 var(--font-display);letter-spacing:-.025em;text-transform:uppercase}
   .athlete-hub h2 em{color:var(--gold-bright);font-style:normal}
-  .athlete-hub__copy>p:last-child{max-width:600px;margin:0;color:rgba(245,240,231,.7);font-size:.96rem;line-height:1.7}
-  .athlete-hub__links{display:grid;border-top:1px solid rgba(185,134,50,.3)}
-  .athlete-hub__links a{display:grid;grid-template-columns:42px minmax(120px,.65fr) 1fr;gap:18px;align-items:center;padding:23px 4px;border-bottom:1px solid rgba(185,134,50,.22);color:#f5f0e7;text-decoration:none;transition:padding .2s ease,background .2s ease}
-  .athlete-hub__links a:hover,.athlete-hub__links a:focus-visible{padding-left:12px;background:rgba(185,134,50,.045)}
-  .athlete-hub__links span{color:var(--gold-bright);font:800 .6rem var(--font-ui);letter-spacing:.12em}
-  .athlete-hub__links strong{font:800 1rem var(--font-display);letter-spacing:.04em;text-transform:uppercase}
-  .athlete-hub__links small{color:rgba(245,240,231,.52);font:.76rem/1.45 var(--font-body)}
-  @media(max-width:900px){.athlete-hub__inner{grid-template-columns:1fr;width:calc(100% - 44px);gap:42px;padding:58px 0}.athlete-hub__links a{grid-template-columns:32px 1fr}.athlete-hub__links small{grid-column:2}}
+  .athlete-hub__inner>p:last-child{max-width:760px;margin:0;color:rgba(245,240,231,.7);font-size:.96rem;line-height:1.72}
+  .athlete-hub__inner>p:last-child a{color:#e3bd73;text-decoration:none;border-bottom:1px solid rgba(227,189,115,.38)}
+  .athlete-hub__inner>p:last-child a:hover,.athlete-hub__inner>p:last-child a:focus-visible{color:#fff;border-bottom-color:#e3bd73}
+  @media(max-width:900px){.athlete-hub__inner{width:calc(100% - 44px);padding:48px 0 52px}.athlete-hub h2{font-size:clamp(2.25rem,11vw,3.4rem)}.athlete-hub__inner>p:last-child{font-size:.92rem;line-height:1.65}}
 </style>

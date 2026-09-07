@@ -68,6 +68,17 @@ const profilePageSchema = {
   isPartOf: { "@id": "https://www.ariannamilano.it/#website" },
   mainEntity: { "@id": "https://www.ariannamilano.it/#arianna-milano" }
 };
+const breadcrumbNames = { "/profilo/": "Profilo atleta", "/risultati/": "Palmarès", "/media/": "Media", "/ying/": "Yīng" };
+const breadcrumbName = breadcrumbNames[pathname];
+const breadcrumbSchema = breadcrumbName ? {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "@id": `${canonicalURL.href}#breadcrumb`,
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Arianna Milano", item: "https://www.ariannamilano.it/" },
+    { "@type": "ListItem", position: 2, name: breadcrumbName, item: canonicalURL.href }
+  ]
+} : null;
 ---
 <!doctype html>
 <html lang="it">
@@ -94,6 +105,7 @@ const profilePageSchema = {
     <script type="application/ld+json" set:html={JSON.stringify(athleteSchema)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)}></script>
     {pathname === "/" && <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)}></script>}
+    {breadcrumbSchema && <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>}
     <title>{resolvedTitle}</title>
   </head>
   <body class="site-locked">

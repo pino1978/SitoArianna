@@ -3,6 +3,14 @@
   publish = "dist"
   functions = "netlify/functions"
 
+# Keep a single public hostname. This prevents the default Netlify domain
+# from becoming a duplicate crawl/indexing candidate.
+[[redirects]]
+  from = "https://sitoarianna.netlify.app/*"
+  to = "https://www.ariannamilano.it/:splat"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/admin"
   [headers.values]
@@ -17,4 +25,3 @@
   [headers.values]
     Cache-Control = "no-store"
     X-Content-Type-Options = "nosniff"
-

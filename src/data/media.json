@@ -1,5 +1,18 @@
 [
   {
+    "id": "foto-1788789081881",
+    "tipo": "foto",
+    "titolo": "Perugia 2026",
+    "dettaglio": "",
+    "anno": 2026,
+    "categoria": "gara",
+    "url": "https://pub-38e4b14ae7e746e9907ca89d181c2fd9.r2.dev/media/2026/gara/1788789080166-perugia-2026.webp",
+    "testoAlternativo": "Gara Perugia Maggio 2026",
+    "inEvidenza": true,
+    "visibile": true,
+    "isPlaceholder": false
+  },
+  {
     "id": "foto-1788788960489",
     "tipo": "foto",
     "titolo": "Allenamento",

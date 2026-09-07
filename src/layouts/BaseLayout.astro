@@ -37,7 +37,10 @@ const athleteSchema = {
   jobTitle: "Atleta di Sanda",
   nationality: { "@type": "Country", name: "Italia" },
   birthPlace: { "@type": "Place", name: "Napoli, Italia" },
-  memberOf: { "@type": "SportsOrganization", name: "ASD Kasoria Kombat & Fly" },
+  memberOf: [
+    { "@type": "SportsOrganization", name: "ASD Kasoria Kombat & Fly" },
+    { "@type": "Organization", name: "CSEN", alternateName: "Centro Sportivo Educativo Nazionale" }
+  ],
   knowsAbout: ["Sanda", "Kung Fu", "Sanda Light", "Wushu", "competizioni Sanda", "arti marziali cinesi"],
   sameAs: ["https://www.youtube.com/@arianna.milano"]
 };

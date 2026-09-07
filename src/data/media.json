@@ -10,7 +10,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 44.6,
+    "highlightY": 13.7,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788802119",
@@ -23,7 +26,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 48.7,
+    "highlightY": 36.1,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788762504",
@@ -36,7 +42,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 48.9,
+    "highlightY": 31.4,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788730329",
@@ -49,7 +58,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 48.7,
+    "highlightY": 36.7,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788709152",
@@ -229,5 +241,31 @@
     "inEvidenza": false,
     "visibile": false,
     "isPlaceholder": true
+  },
+  {
+    "id": "foto-1788558268754",
+    "tipo": "foto",
+    "titolo": "Gara Perugia Maggio 2026",
+    "dettaglio": "",
+    "anno": 2026,
+    "categoria": "gara",
+    "url": "https://pub-38e4b14ae7e746e9907ca89d181c2fd9.r2.dev/media/2026/gara/1788558267821-gara-perugia-maggio-2026.webp",
+    "testoAlternativo": "Gara Perugia Maggio 2026",
+    "inEvidenza": true,
+    "visibile": true,
+    "isPlaceholder": false
+  },
+  {
+    "id": "foto-1788558227280",
+    "tipo": "foto",
+    "titolo": "Gara Perugia Maggio 2026",
+    "dettaglio": "",
+    "anno": 2026,
+    "categoria": "gara",
+    "url": "https://pub-38e4b14ae7e746e9907ca89d181c2fd9.r2.dev/media/2026/gara/1788558225411-gara-perugia-maggio-2026.webp",
+    "testoAlternativo": "Gara Perugia Maggio 2026",
+    "inEvidenza": true,
+    "visibile": true,
+    "isPlaceholder": false
   }
 ]

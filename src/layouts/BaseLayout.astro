@@ -32,7 +32,9 @@ const athleteSchema = {
   "@type": "Person",
   "@id": "https://www.ariannamilano.it/#arianna-milano",
   name: "Arianna Milano",
+  alternateName: "Yīng",
   url: "https://www.ariannamilano.it/",
+  mainEntityOfPage: { "@id": "https://www.ariannamilano.it/#profile-page" },
   description: "Giovane atleta agonista italiana di Sanda e Kung Fu. Il sito ufficiale raccoglie profilo sportivo, palmarès, competizioni, foto e video.",
   jobTitle: "Atleta di Sanda",
   nationality: { "@type": "Country", name: "Italia" },
@@ -53,6 +55,18 @@ const webSiteSchema = {
   description: "Sito ufficiale e portfolio sportivo di Arianna Milano, atleta agonista di Sanda.",
   inLanguage: "it-IT",
   about: { "@id": "https://www.ariannamilano.it/#arianna-milano" }
+};
+const profilePageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  "@id": "https://www.ariannamilano.it/#profile-page",
+  url: "https://www.ariannamilano.it/",
+  name: "Arianna Milano | Atleta Sanda e Kung Fu",
+  headline: "Arianna Milano · Atleta di Sanda e Kung Fu",
+  description: "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda e Kung Fu.",
+  inLanguage: "it-IT",
+  isPartOf: { "@id": "https://www.ariannamilano.it/#website" },
+  mainEntity: { "@id": "https://www.ariannamilano.it/#arianna-milano" }
 };
 ---
 <!doctype html>
@@ -79,6 +93,7 @@ const webSiteSchema = {
     <meta name="theme-color" content="#080706" />
     <script type="application/ld+json" set:html={JSON.stringify(athleteSchema)}></script>
     <script type="application/ld+json" set:html={JSON.stringify(webSiteSchema)}></script>
+    {pathname === "/" && <script type="application/ld+json" set:html={JSON.stringify(profilePageSchema)}></script>}
     <title>{resolvedTitle}</title>
   </head>
   <body class="site-locked">

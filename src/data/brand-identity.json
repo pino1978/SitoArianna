@@ -1,0 +1,291 @@
+{
+  "version": "1.0.0",
+  "status": "approved-direction-for-reconstruction",
+  "updatedAt": "2026-09-08",
+  "brandOwner": "Arianna Milano",
+  "sportIdentity": "YĪNG",
+  "concept": {
+    "name": "Eagle Essence × Strike Typography",
+    "summary": "Premium athlete identity combining a refined eagle symbol with dynamic YĪNG lettering and Arianna Milano as the personal-brand signature.",
+    "approvedReference": "latest approved concept board: eagle symbol + strike-style YĪNG + ARIANNA MILANO",
+    "designIntent": [
+      "professional athlete brand first",
+      "eagle symbolism second",
+      "no Chinese ideogram in the logo system",
+      "premium sports-luxury aesthetic",
+      "recognizable at favicon scale",
+      "reproducible without generative reinterpretation"
+    ]
+  },
+  "brandHierarchy": {
+    "primaryIdentity": "Arianna Milano",
+    "sportSignature": "YĪNG",
+    "symbol": "stylized eagle head + abstract wing",
+    "rules": [
+      "Arianna Milano remains the personal brand.",
+      "YĪNG functions as the sport identity/signature.",
+      "The eagle symbol can stand alone only in icon-scale applications.",
+      "Never replace YĪNG with YING in final production assets.",
+      "Never add the Chinese ideogram to this logo family."
+    ]
+  },
+  "palette": {
+    "deepBlack": "#090909",
+    "charcoal": "#151515",
+    "warmIvory": "#F2ECE1",
+    "satinGold": "#C9A56A",
+    "softGold": "#D8BC88",
+    "darkRed": "#7C1717",
+    "brightRedAccent": "#B51D24"
+  },
+  "symbol": {
+    "subject": "eagle",
+    "construction": "three abstract swept wing strokes flowing into a compact eagle head profile",
+    "orientation": "facing right",
+    "style": "geometric-calligraphic hybrid",
+    "visualWeight": "medium-light",
+    "wingStrokeCount": 3,
+    "wingShape": "long tapered aerodynamic feathers, upward sweep, no feather clutter",
+    "head": {
+      "shape": "minimal curved crown and beak profile",
+      "beak": "short, sharp, slightly downward hook",
+      "eye": "single restrained red almond-shaped accent",
+      "neck": "one open sweeping curve; avoid enclosed mascot silhouette"
+    },
+    "color": {
+      "primary": "#C9A56A",
+      "highlight": "#D8BC88",
+      "shadowIntent": "subtle darker-gold depth only in large-format versions",
+      "eye": "#B51D24"
+    },
+    "forbidden": [
+      "photorealistic eagle",
+      "full eagle body",
+      "shield",
+      "circle around the main logo",
+      "esports mascot geometry",
+      "aggressive open beak",
+      "talons",
+      "crowns",
+      "Chinese characters",
+      "excessive feather detail"
+    ]
+  },
+  "wordmark": {
+    "text": "YĪNG",
+    "unicode": ["Y", "Ī", "N", "G"],
+    "style": "dynamic strike brush lettering",
+    "slant": "forward/right",
+    "strokeCharacter": "sharp tapered brush cuts with controlled athletic energy",
+    "baseline": "slightly rising",
+    "tracking": "tight because lettering is custom-drawn",
+    "color": "#C9A56A",
+    "redAccents": {
+      "enabled": true,
+      "color": "#B51D24",
+      "usage": "two or three narrow slash accents crossing or extending from selected YĪNG strokes",
+      "maxVisualSharePercent": 12,
+      "rule": "red supports motion; it must never dominate the gold wordmark"
+    },
+    "macron": {
+      "character": "Ī",
+      "mandatory": true,
+      "construction": "clear horizontal macron centered over I",
+      "rule": "must remain legible at all non-favicon sizes"
+    },
+    "forbidden": [
+      "YING without macron",
+      "graffiti appearance",
+      "illegible brush lettering",
+      "flame shapes",
+      "excessive red",
+      "Chinese characters"
+    ]
+  },
+  "nameplate": {
+    "text": "ARIANNA MILANO",
+    "case": "uppercase",
+    "style": "clean premium geometric sans-serif",
+    "weight": 400,
+    "trackingEm": 0.34,
+    "color": "#F2ECE1",
+    "alignment": "center",
+    "role": "personal-brand attribution beneath YĪNG",
+    "relativeWidthToWordmarkPercent": 72
+  },
+  "lockups": {
+    "primary": {
+      "id": "full-logo",
+      "elements": ["eagle-symbol", "YĪNG-wordmark", "ARIANNA-MILANO-nameplate"],
+      "layout": "vertical",
+      "symbolPosition": "above and visually integrated with upper area of YĪNG",
+      "wordmarkPosition": "center",
+      "nameplatePosition": "below",
+      "symbolToWordmarkGapPercentOfWordmarkHeight": 6,
+      "wordmarkToNameplateGapPercentOfWordmarkHeight": 20,
+      "clearSpaceRule": "minimum clear space equals the height of the Y stroke terminal"
+    },
+    "secondary": {
+      "id": "sport-signature",
+      "elements": ["eagle-symbol", "YĪNG-wordmark"],
+      "layout": "compact vertical/overlap",
+      "usage": ["social avatar large", "video end card", "media graphics", "merchandise"]
+    },
+    "icon": {
+      "id": "eagle-icon",
+      "elements": ["eagle-symbol"],
+      "usage": ["favicon", "touch icon", "app icon small", "UI mark"],
+      "rule": "remove tiny internal details below 32px"
+    }
+  },
+  "responsiveLogo": {
+    "16px": {
+      "variant": "eagle-icon",
+      "eyeRed": false,
+      "gradient": false,
+      "strokeSimplification": "maximum",
+      "minimumStrokePx": 1.5
+    },
+    "32px": {
+      "variant": "eagle-icon",
+      "eyeRed": true,
+      "gradient": false,
+      "strokeSimplification": "high"
+    },
+    "64px": {
+      "variant": "eagle-icon",
+      "eyeRed": true,
+      "gradient": false,
+      "strokeSimplification": "medium"
+    },
+    "180px": {
+      "variant": "sport-signature or eagle-icon depending on context",
+      "eyeRed": true,
+      "gradient": "optional satin-gold depth"
+    },
+    "192px": {
+      "variant": "sport-signature",
+      "eyeRed": true,
+      "gradient": "optional"
+    },
+    "512px": {
+      "variant": "sport-signature",
+      "eyeRed": true,
+      "gradient": "allowed but restrained"
+    },
+    "large": {
+      "variant": "full-logo",
+      "eyeRed": true,
+      "gradient": "restrained metallic satin treatment allowed"
+    }
+  },
+  "iconContainer": {
+    "mainLogoHasContainer": false,
+    "faviconBackground": "#090909",
+    "appIconShape": "rounded square supplied by OS/app context, not part of core mark",
+    "cornerRadiusPercentForPreviewOnly": 20,
+    "rule": "never draw a permanent circle or badge around the main symbol"
+  },
+  "compositionRatios": {
+    "fullLogo": {
+      "canvasAspect": "1:1.08",
+      "symbolWidthPercent": 64,
+      "wordmarkWidthPercent": 78,
+      "nameplateWidthPercent": 56,
+      "topPaddingPercent": 8,
+      "bottomPaddingPercent": 9
+    },
+    "sportSignature": {
+      "canvasAspect": "1:1",
+      "symbolWidthPercent": 62,
+      "wordmarkWidthPercent": 74
+    },
+    "icon": {
+      "canvasAspect": "1:1",
+      "symbolWidthPercent": 72,
+      "symbolHeightPercent": 58,
+      "opticalCenterXPercent": 50,
+      "opticalCenterYPercent": 49
+    }
+  },
+  "surfaceTreatment": {
+    "vectorMaster": "flat solid colors only",
+    "digitalPremiumVariant": "optional subtle satin-gold gradient and micro-highlight",
+    "texture": "never bake photographic texture into the vector master",
+    "shadow": "none in master; optional 1-2% soft black depth only in presentation mockups",
+    "outline": "none"
+  },
+  "accessibility": {
+    "darkBackgroundPreferred": true,
+    "lightBackgroundVariant": {
+      "symbol": "#151515",
+      "wordmark": "#151515",
+      "redAccent": "#7C1717",
+      "nameplate": "#151515"
+    },
+    "monochromeDark": "#090909",
+    "monochromeLight": "#F2ECE1",
+    "minimumReadableWordmarkWidthPx": 92,
+    "belowMinimumUse": "eagle-icon only"
+  },
+  "productionAssets": {
+    "vector": [
+      "logo-arianna-ying-full.svg",
+      "logo-arianna-ying-signature.svg",
+      "logo-arianna-ying-icon.svg"
+    ],
+    "raster": [
+      "favicon-16x16.png",
+      "favicon-32x32.png",
+      "apple-touch-icon.png",
+      "icon-192.png",
+      "icon-512.png"
+    ],
+    "ico": "favicon.ico"
+  },
+  "reconstruction": {
+    "method": "deterministic vector reconstruction from this specification; AI may be used only to explore shape language, never as the final production geometry",
+    "masterCoordinateSystem": {
+      "width": 1000,
+      "height": 1000,
+      "units": "normalized SVG user units"
+    },
+    "workflow": [
+      "Reconstruct eagle as clean Bézier vector paths.",
+      "Reconstruct YĪNG as custom vector lettering, preserving the macron over Ī.",
+      "Create red slash accents as separate vector paths.",
+      "Typeset ARIANNA MILANO as editable text during construction, then outline only for distribution master if needed.",
+      "Create icon, signature and full-logo lockups from the same source paths.",
+      "Generate monochrome and light-background variants.",
+      "Export exact-size raster assets from the vector master.",
+      "Validate readability at 16, 32, 64, 180, 192 and 512 px."
+    ]
+  },
+  "generationPrompt": {
+    "purpose": "visual reconstruction reference only",
+    "prompt": "Premium contemporary athlete logo identity on a pure black background. Create a refined abstract eagle symbol facing right: exactly three long aerodynamic gold wing strokes, flowing into a minimal elegant eagle head with a short hooked beak, open neck curve and one tiny restrained red eye. Below/integrated with it, custom dynamic strike-brush lettering spelling exactly YĪNG with a clearly visible macron over the I, satin gold with only two or three narrow deep-red motion slashes. Beneath, clean widely tracked uppercase ARIANNA MILANO in warm ivory. Luxury professional athlete branding, modern Olympic/Nike-level restraint, dynamic but elegant, no badge, no circle, no shield, no Chinese ideogram, no full bird body, no talons, no mascot/esports look, no flames, no extra words, no gradients that reduce legibility. The eagle must feel proprietary and minimal; the wordmark must remain readable. Black, satin gold, warm ivory, restrained dark red only.",
+    "negativePrompt": "Chinese characters, 鹰, 鷹, circle, badge, shield, full eagle, talons, open aggressive beak, esports mascot, sports team crest, flames, graffiti, excessive red, excessive gold glow, 3D chrome, bevel, unreadable YING, missing macron, YING without Ī, extra text, slogan, crown, stars"
+  },
+  "qualityGate": {
+    "mustPass": [
+      "The final wordmark reads exactly YĪNG.",
+      "The macron over Ī is visually clear.",
+      "The eagle remains recognizable at 32px.",
+      "The 16px favicon works without relying on the red eye.",
+      "The symbol is not enclosed by a circle.",
+      "The mark does not resemble an esports/team crest.",
+      "Red occupies no more than approximately 12% of the primary mark.",
+      "Arianna Milano is present in the full lockup and absent from favicon.",
+      "No Chinese ideogram is present.",
+      "All variants originate from one vector master."
+    ],
+    "rejectIf": [
+      "YING is used instead of YĪNG",
+      "eagle is too literal or aggressive",
+      "fine feather detail disappears at small sizes",
+      "red dominates the composition",
+      "circle becomes part of the permanent mark",
+      "brand reads as martial-arts school rather than athlete identity"
+    ]
+  }
+}

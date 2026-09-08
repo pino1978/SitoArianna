@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "status": "approved-assets-archive",
+  "updatedAt": "2026-09-08",
+  "brand": "Arianna Milano / YĪNG",
+  "approvedDirection": "Eagle Essence × Strike Typography",
+  "approvedSymbol": "gold eagle with red eye, no circle, no Chinese ideogram",
+  "sources": {
+    "userProvided": [
+      "logoarianna_trasparente.svg",
+      "logoarianna.svg",
+      "logoarianna.png",
+      "logoarianna.jpg",
+      "eagle-reference-lowres.png"
+    ],
+    "created": [
+      "approved-eagle-symbol-reference.webp",
+      "favicon.ico",
+      "apple-touch-icon.png",
+      "icon-192.png",
+      "icon-512.png",
+      "site.webmanifest"
+    ]
+  },
+  "usage": {
+    "favicon": "approved eagle symbol only",
+    "appIcon": "approved eagle symbol only on deep black background",
+    "fullLogo": "eagle + YĪNG + ARIANNA MILANO",
+    "extendedLockup": "full logo + DISCIPLINA · DETERMINAZIONE · CRESCITA"
+  },
+  "rules": {
+    "wordmark": "YĪNG",
+    "macron": "U+012A",
+    "primaryBackground": "#0A0A0A",
+    "gold": "#D4AF7C",
+    "red": "#8B0000",
+    "ivory": "#F5F2E9",
+    "noChineseIdeogram": true,
+    "noCircle": true
+  }
+}

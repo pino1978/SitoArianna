@@ -1,0 +1,21 @@
+{
+  "version": "2.0.0",
+  "status": "approved-master",
+  "master": "ying-eagle-master.png",
+  "source": "a_clean_graphic_vector_style_image_on_a_transparen.png",
+  "rule": "Do not alter eagle geometry, proportions, metallic-gold treatment or red eye.",
+  "background": {
+    "master": "transparent",
+    "faviconAndAppIcons": "#080706"
+  },
+  "derived": [
+    "favicon.ico",
+    "ying-icon-16.png",
+    "ying-icon-32.png",
+    "ying-icon-48.png",
+    "ying-icon-64.png",
+    "ying-icon-180.png",
+    "ying-icon-192.png",
+    "ying-icon-512.png"
+  ]
+}

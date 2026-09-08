@@ -1,0 +1,25 @@
+{
+  "archive": "Arianna Milano / Yīng brand assets",
+  "date": "2026-09-08",
+  "status": "approved-direction-plus-source-material",
+  "authoritativeSources": [
+    "logoarianna_trasparente.svg",
+    "logoarianna.svg",
+    "approved standalone eagle master"
+  ],
+  "includedOfflineArchive": "arianna-brand-archive-2026-09-08.zip",
+  "notes": [
+    "The user-supplied vector logo files are preserved as authoritative sources for the complete logo.",
+    "The approved standalone eagle is preserved separately and used for favicon/app icon derivatives.",
+    "Favicon and app icon derivatives are generated without altering the approved visual identity.",
+    "Legacy deterministic SVG attempts are not authoritative and must not replace the approved source artwork."
+  ],
+  "siteAssets": {
+    "favicon": "/favicon.ico",
+    "svgFavicon": "/favicon.svg",
+    "appleTouchIcon": "/apple-touch-icon.png",
+    "icon192": "/icons/icon-192.png",
+    "icon512": "/icons/icon-512.svg",
+    "manifest": "/site.webmanifest"
+  }
+}

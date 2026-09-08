@@ -1,0 +1,63 @@
+{
+  "version": "1.0.0",
+  "status": "approved-layout-pending-final-glyph-overlay",
+  "updatedAt": "2026-09-08",
+  "canvas": {"width": 1200, "height": 630},
+  "safeArea": {"left": 72, "right": 72, "top": 48, "bottom": 48},
+  "block": {
+    "anchor": "left",
+    "xPercent": 6.5,
+    "yPercent": 18.5,
+    "verticalShiftPercentFromApprovedDraft": -1.5,
+    "alignment": "left",
+    "maxWidthPercent": 35,
+    "renderMethod": "post-production overlay only"
+  },
+  "lines": [
+    {
+      "text": "ARIANNA",
+      "role": "name-line-1",
+      "case": "uppercase",
+      "color": "#F2ECE1",
+      "weight": 400,
+      "tracking": "wide"
+    },
+    {
+      "text": "MILANO",
+      "role": "name-line-2",
+      "case": "uppercase",
+      "color": "#C9A56A",
+      "weight": 700,
+      "tracking": "moderate"
+    },
+    {
+      "text": "SANDA ATHLETE",
+      "role": "sport-line",
+      "case": "uppercase",
+      "color": "#F2ECE1",
+      "weight": 500,
+      "tracking": "very-wide",
+      "decorativeRules": true
+    },
+    {
+      "text": "YĪNG · 鹰",
+      "role": "identity-line",
+      "color": "#C9A56A",
+      "weight": 500,
+      "tracking": "wide",
+      "exactGlyphRequired": "鹰"
+    }
+  ],
+  "fontGuidance": {
+    "familyIntent": "premium modern geometric sans-serif consistent with site identity",
+    "note": "Final font must be taken from project typography or a metrically compatible fallback; do not use AI-generated lettering."
+  },
+  "qualityChecks": [
+    "text block is raised only about 1.5% from previous approved placement",
+    "all copy remains inside OG safe area",
+    "exact simplified Chinese ideogram is 鹰",
+    "no AI-generated substitute glyphs",
+    "MILANO remains the strongest typographic emphasis",
+    "typography never overlaps athlete silhouette"
+  ]
+}

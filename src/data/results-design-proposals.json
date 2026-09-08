@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "createdAt": "2026-09-08",
+  "page": "/risultati/",
+  "purpose": "Sei direzioni UI riproducibili per trasformare la pagina Risultati in uno scouting dossier premium, mantenendo results.json come unica fonte dati.",
+  "shared": {
+    "audience": ["selezionatori", "federazioni", "allenatori", "organizzatori", "societa sportive", "sponsor futuri"],
+    "principles": ["lettura immediata del valore agonistico", "filtri rapidi", "mobile first", "WCAG 2.2", "nessuna estetica da blog", "oro usato con moderazione"],
+    "filters": ["anno", "disciplina", "medaglia"],
+    "optionalFilters": ["competizione", "luogo"],
+    "summaryMetrics": ["competizioni", "medaglie", "ori", "argenti", "anni di attivita"],
+    "dataSource": "src/data/results.json",
+    "palette": {"ink":"#080706","ivory":"#F5F0E7","gold":"#B98632","darkRed":"#7E1916"}
+  },
+  "proposals": [
+    {
+      "id": "01-scouting-dossier",
+      "name": "Scouting Dossier",
+      "recommended": true,
+      "concept": "Profilo agonistico editoriale: in apertura una scheda sintetica da selezionatore, poi highlights e archivio filtrabile.",
+      "hero": "Titolo PALMARES a sinistra; a destra Performance Snapshot con 5 KPI e una riga 'ultimo aggiornamento'. Fondo nero con grande 2026 ghosted e linea oro sottile.",
+      "summary": "Una dashboard asimmetrica 60/40, non quattro box uguali. Numero totale medaglie dominante; ori, competizioni e anni come metriche secondarie.",
+      "filtersUI": "Barra sticky sotto il recap con chip Tutti/2026/2025..., select Disciplina e Medaglia, contatore risultati e Reset.",
+      "resultsLayout": "Competition cards orizzontali: anno/data sul rail, evento e luogo al centro, risultati/medaglie a destra. Highlight internazionali con bordo oro.",
+      "mobile": "Snapshot a due colonne; filtri orizzontali scrollabili; card evento verticali.",
+      "strength": "Migliore equilibrio tra credibilita sportiva, velocita di scouting e crescita futura dei dati."
+    },
+    {
+      "id": "02-performance-command-center",
+      "name": "Performance Command Center",
+      "recommended": false,
+      "concept": "Dashboard sportiva contemporanea, piu analitica e data-driven.",
+      "hero": "Hero compatta con PALMARES + record sintetico; subito sotto pannello scuro a griglia con KPI.",
+      "summary": "Medal split visuale, progressione annuale 2022-2026 e discipline principali; niente grafici decorativi senza dato utile.",
+      "filtersUI": "Control bar stile dashboard: Anno, Disciplina, Medaglia, Luogo; stato filtri sempre visibile.",
+      "resultsLayout": "Tabella premium desktop con righe espandibili; cards su mobile.",
+      "mobile": "KPI carousel controllato, filtri bottom-sheet, risultati card.",
+      "strength": "Massima densita informativa; ideale quando il palmares diventera molto piu ampio.",
+      "risk": "Con 12 competizioni attuali puo apparire leggermente sovradimensionata."
+    },
+    {
+      "id": "03-championship-editorial",
+      "name": "Championship Editorial",
+      "recommended": false,
+      "concept": "Look da magazine sportivo luxury, con forte gerarchia tipografica e risultati raccontati come milestones.",
+      "hero": "Grande numero 16 e parola MEDAGLIE sovrapposta; PALMARES piu piccolo; texture scura e accento rosso.",
+      "summary": "Tre record editoriali: 14 ORI / 5 ANNI / 12 COMPETIZIONI, separati da filetti sottili.",
+      "filtersUI": "Tabs editoriali per anno + filtro disciplina in dropdown minimale.",
+      "resultsLayout": "Timeline verticale molto visuale con anno enorme sul fondo e schede competizione alternate.",
+      "mobile": "Anno come section marker full-width; cards una sotto l'altra.",
+      "strength": "Impatto emozionale e branding molto forte.",
+      "risk": "Meno efficiente dello Scouting Dossier per chi deve confrontare rapidamente molti risultati."
+    },
+    {
+      "id": "04-medal-archive",
+      "name": "Medal Archive",
+      "recommended": false,
+      "concept": "Archivio istituzionale premium, vicino a federazioni e profili olimpici.",
+      "hero": "Titolo sobrio, sottotitolo, badge ATLETA SANDA e riepilogo record in una singola riga.",
+      "summary": "Medagliere come tabella compatta Oro/Argento/Bronzo/Totale con percentuale ori calcolabile dai dati.",
+      "filtersUI": "Filtri a sinistra desktop; toolbar superiore su tablet/mobile.",
+      "resultsLayout": "Archivio cronologico strutturato: Competizione, luogo, disciplina, piazzamento; separatori netti e zero decorazione superflua.",
+      "mobile": "Filtri collapsible e schede compatte.",
+      "strength": "Massima autorevolezza e leggibilita istituzionale.",
+      "risk": "Meno distintiva dal punto di vista emozionale."
+    },
+    {
+      "id": "05-road-to-next-level",
+      "name": "Road to Next Level",
+      "recommended": false,
+      "concept": "Il palmares come traiettoria di crescita, con enfasi sulla progressione annuale.",
+      "hero": "PALMARES + claim 'Ogni gara aggiunge esperienza.' e asse temporale 2022—2026.",
+      "summary": "Progress strip per anno con conteggio medaglie e competizioni; 2026 evidenziato.",
+      "filtersUI": "Anno selezionabile direttamente sulla progress strip; filtri Disciplina e Medaglia secondari.",
+      "resultsLayout": "Timeline continua con nodi per competizione e medaglie agganciate ai nodi.",
+      "mobile": "Timeline verticale con anno sticky.",
+      "strength": "Comunica molto bene crescita e potenziale di una giovane atleta.",
+      "risk": "Richiede attenzione per non sembrare una timeline narrativa anziche un dossier agonistico."
+    },
+    {
+      "id": "06-arena-cards",
+      "name": "Arena Cards",
+      "recommended": false,
+      "concept": "Approccio piu visuale, ispirato alle fight cards: ogni competizione diventa una card di performance.",
+      "hero": "Titolo enorme con fascia diagonale molto sottile dark-red; KPI integrati sul bordo inferiore.",
+      "summary": "Top 3 highlights in cards prioritarie; sotto medagliere compatto.",
+      "filtersUI": "Chip grandi per anno e disciplina, progettati anche per touch.",
+      "resultsLayout": "Grid 2 colonne desktop di competition cards con anno, luogo, discipline e medaglie; 1 colonna mobile.",
+      "mobile": "Esperienza quasi da fight-card feed, ma senza infinite scroll.",
+      "strength": "Molto riconoscibile e sportiva, ottima se in futuro ogni gara avra foto e video.",
+      "risk": "Piu vicina all'entertainment; va mantenuta elegante per non perdere autorevolezza."
+    }
+  ],
+  "decision": {
+    "preferred": "01-scouting-dossier",
+    "reason": "La pagina e strategica per valutatori sportivi: deve permettere in pochi secondi di capire volume, qualita e progressione dei risultati e poi approfondire con filtri."
+  }
+}

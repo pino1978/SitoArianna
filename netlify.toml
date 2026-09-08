@@ -12,10 +12,11 @@
   force = true
 
 # Backward-compatible target for the social image currently referenced
-# by Open Graph/Twitter metadata.
+# by Open Graph/Twitter metadata. The metadata still points to the legacy
+# URL, which now resolves to the approved 1200x630 Arianna OG artwork.
 [[redirects]]
   from = "/images/hero-home.jpg"
-  to = "/images/ying-eagle-hero.webp"
+  to = "/images/og-arianna-milano.jpg"
   status = 301
   force = true
 

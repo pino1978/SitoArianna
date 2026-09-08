@@ -20,7 +20,12 @@ const medalName = {gold:"Oro",silver:"Argento",bronze:"Bronzo"};
     <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-inner">
-      <h1>Risultati</h1>
+      <div class="hero-copy-wrap">
+        <span class="hero-kicker">Palmarès agonistico</span>
+        <h1>Risultati</h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+        <p>Competizioni, piazzamenti e medaglie. Una lettura immediata della crescita agonistica di Arianna.</p>
+      </div>
     </div>
   </section>
 
@@ -82,12 +87,16 @@ if(root){
 <style>
 :global(body){background:#030404}
 .palmares{--gold:#d4a64d;--gold2:#f0c875;color:#f4efe7;background:#030404;min-height:100vh}
-.hero{position:relative;height:265px;overflow:hidden;background:#050606}
+.hero{position:relative;height:330px;overflow:hidden;background:#050606}
 .hero :global(header){position:relative;z-index:20}
-.hero-bg{position:absolute;inset:0;background:url('/images/results-hero-arena.jpg?v=1') 42% center/cover no-repeat}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,4,4,.92) 0%,rgba(3,4,4,.68) 28%,rgba(3,4,4,.18) 62%,rgba(3,4,4,.14)),linear-gradient(0deg,rgba(3,4,4,.78) 0%,transparent 50%)}
-.hero-inner{position:relative;z-index:5;max-width:1180px;height:185px;margin:auto;padding:18px 24px 0;display:flex;align-items:center}
-.hero h1{margin:0;font:650 clamp(2.8rem,5vw,5rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;color:var(--gold2);text-shadow:0 2px 24px rgba(0,0,0,.65)}
+.hero-bg{position:absolute;inset:0;background:url('/images/results-hero-arena.jpg?v=3') 42% center/cover no-repeat,linear-gradient(115deg,#0c0d0e 0%,#16100d 52%,#050606 100%)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,4,4,.90) 0%,rgba(3,4,4,.67) 31%,rgba(3,4,4,.18) 67%,rgba(3,4,4,.16)),linear-gradient(0deg,rgba(3,4,4,.74) 0%,transparent 55%)}
+.hero-inner{position:relative;z-index:5;max-width:1180px;height:250px;margin:auto;padding:20px 24px 18px;display:flex;align-items:center}
+.hero-copy-wrap{max-width:610px}
+.hero-kicker{display:block;margin-bottom:10px;color:#d8b66e;font:700 .72rem/1 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}
+.hero h1{margin:0;font:650 clamp(3rem,5.2vw,5.3rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;color:var(--gold2);text-shadow:0 2px 24px rgba(0,0,0,.65)}
+.hero-rule{width:54px;height:1px;margin:18px 0 14px;background:linear-gradient(90deg,var(--gold2),transparent)}
+.hero p{max-width:540px;margin:0;color:#ddd6ca;font:400 1rem/1.55 var(--font-ui);letter-spacing:.005em;text-wrap:balance}
 .content{max-width:1180px;margin:0 auto;padding:0 24px 32px;position:relative;z-index:10}
 .home-stats{margin:0}
 .home-stats :global(.stats-strip){margin:0!important}
@@ -112,8 +121,8 @@ if(root){
 [hidden]{display:none!important}
 
 @media(max-width:820px){
-  .hero{height:245px}
-  .hero-inner{height:165px;padding-top:12px}
+  .hero{height:315px}
+  .hero-inner{height:235px;padding:18px 20px 18px}
   .content{padding-inline:14px}
   .filters{grid-template-columns:1fr}
   .year-tabs{overflow-x:auto}
@@ -122,18 +131,22 @@ if(root){
   .table-wrap{overflow-x:auto}.table-head,.result-row{min-width:930px}
 }
 @media(max-width:640px){
-  .hero{height:420px}
-  .hero-bg{background-position:31% center}
-  .hero-shade{background:linear-gradient(0deg,rgba(3,4,4,.94) 0%,rgba(3,4,4,.30) 58%,rgba(3,4,4,.50) 100%)}
-  .hero-inner{height:340px;padding:0 18px 30px;align-items:flex-end}
-  .hero h1{font-size:3rem}
+  .hero{height:320px}
+  .hero-bg{background-position:34% center}
+  .hero-shade{background:linear-gradient(90deg,rgba(3,4,4,.80) 0%,rgba(3,4,4,.42) 58%,rgba(3,4,4,.18) 100%),linear-gradient(0deg,rgba(3,4,4,.88) 0%,rgba(3,4,4,.16) 58%,rgba(3,4,4,.36) 100%)}
+  .hero-inner{height:240px;padding:34px 18px 16px;align-items:center}
+  .hero-copy-wrap{max-width:330px}
+  .hero-kicker{margin-bottom:8px;font-size:.66rem}
+  .hero h1{font-size:2.95rem}
+  .hero-rule{margin:14px 0 11px;width:46px}
+  .hero p{max-width:300px;font-size:.88rem;line-height:1.45}
   .home-stats{position:relative;height:110px}
 }
 @media(max-width:520px){
-  .hero{height:440px}
-  .hero-bg{background-position:29% center}
-  .hero-inner{height:360px;padding:0 18px 26px;align-items:flex-end}
-  .hero h1{font-size:2.75rem}
+  .hero{height:315px}
+  .hero-bg{background-position:32% center}
+  .hero-inner{height:235px;padding:30px 18px 14px;align-items:center}
+  .hero h1{font-size:2.8rem}
   .selects{display:grid;grid-template-columns:1fr 1fr}.selects select:last-child{grid-column:1/-1}
   .result-row{font-size:.92rem}
 }

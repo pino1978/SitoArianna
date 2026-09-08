@@ -84,10 +84,10 @@ if(root){
 .palmares{--gold:#d4a64d;--gold2:#f0c875;color:#f4efe7;background:#030404;min-height:100vh}
 .hero{position:relative;height:265px;overflow:hidden;background:#050606}
 .hero :global(header){position:relative;z-index:20}
-.hero-bg{position:absolute;inset:0;background:url('/images/results-hero-tatami.svg?v=2') center 58%/cover no-repeat}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,4,4,.94) 0%,rgba(3,4,4,.74) 30%,rgba(3,4,4,.18) 62%,rgba(3,4,4,.16)),linear-gradient(0deg,rgba(3,4,4,.72) 0%,transparent 42%)}
+.hero-bg{position:absolute;inset:0;background:url('/images/results-hero-arena.jpg?v=1') 42% center/cover no-repeat}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,4,4,.92) 0%,rgba(3,4,4,.68) 28%,rgba(3,4,4,.18) 62%,rgba(3,4,4,.14)),linear-gradient(0deg,rgba(3,4,4,.78) 0%,transparent 50%)}
 .hero-inner{position:relative;z-index:5;max-width:1180px;height:185px;margin:auto;padding:18px 24px 0;display:flex;align-items:center}
-.hero h1{margin:0;font:650 clamp(2.8rem,5vw,5rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;color:var(--gold2)}
+.hero h1{margin:0;font:650 clamp(2.8rem,5vw,5rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;color:var(--gold2);text-shadow:0 2px 24px rgba(0,0,0,.65)}
 .content{max-width:1180px;margin:0 auto;padding:0 24px 32px;position:relative;z-index:10}
 .home-stats{margin:0}
 .home-stats :global(.stats-strip){margin:0!important}
@@ -122,15 +122,17 @@ if(root){
   .table-wrap{overflow-x:auto}.table-head,.result-row{min-width:930px}
 }
 @media(max-width:640px){
-  .hero{height:225px}
-  .hero-bg{background-position:43% 52%}
-  .hero-inner{height:145px;padding:0 18px 20px;align-items:flex-end}
+  .hero{height:360px}
+  .hero-bg{background-position:34% center}
+  .hero-shade{background:linear-gradient(0deg,rgba(3,4,4,.92) 0%,rgba(3,4,4,.30) 58%,rgba(3,4,4,.52) 100%)}
+  .hero-inner{height:280px;padding:0 18px 34px;align-items:flex-end}
   .hero h1{font-size:3rem}
   .home-stats{position:relative;height:110px}
 }
 @media(max-width:520px){
-  .hero{height:215px}
-  .hero-inner{height:140px;padding-bottom:16px}
+  .hero{height:390px}
+  .hero-bg{background-position:30% center}
+  .hero-inner{height:310px;padding:0 18px 28px;align-items:flex-end}
   .hero h1{font-size:2.75rem}
   .selects{display:grid;grid-template-columns:1fr 1fr}.selects select:last-child{grid-column:1/-1}
   .result-row{font-size:.92rem}

@@ -2,19 +2,149 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import results from "../data/results.json";
-const years=[...results.resultsByYear].map(x=>x.year).sort((a,b)=>b-a);
-const disciplines=[...new Set(results.resultsByYear.flatMap(y=>y.competitions.flatMap(c=>c.results.map(r=>r.discipline))))].sort();
-const rows=results.resultsByYear.flatMap(y=>y.competitions.flatMap(c=>c.results.map((r,i)=>({year:y.year,event:c.event,place:c.place||"—",discipline:r.discipline,medal:r.medal,key:`${y.year}-${c.event}-${i}`})))).sort((a,b)=>b.year-a.year);
-const medalName={gold:"Oro",silver:"Argento",bronze:"Bronzo"};
+
+const years = [...results.resultsByYear].map((x) => x.year).sort((a, b) => b - a);
+const disciplines = [...new Set(results.resultsByYear.flatMap((y) => y.competitions.flatMap((c) => c.results.map((r) => r.discipline))))].sort();
+const rows = results.resultsByYear
+  .flatMap((y) => y.competitions.flatMap((c) => c.results.map((r, i) => ({
+    year: y.year,
+    event: c.event,
+    place: c.place || "—",
+    discipline: r.discipline,
+    medal: r.medal,
+    key: `${y.year}-${c.event}-${i}`
+  }))))
+  .sort((a, b) => b.year - a.year);
+const medalName = { gold: "Oro", silver: "Argento", bronze: "Bronzo" };
 ---
+
 <BaseLayout title="Palmarès Preview | Arianna Milano" description="Anteprima privata della nuova pagina risultati." noindex={true}>
-<main id="main" class="palmares"><section class="hero"><Header/><div class="tatami" aria-hidden="true"><div class="mat m1"></div><div class="mat m2"></div><div class="mat m3"></div><div class="mat m4"></div><div class="backwall"></div></div><div class="hero-shade"></div><div class="hero-inner"><div class="hero-copy"><p class="overline">Palmarès</p><h1>Il mio<br/><span>percorso</span></h1><p class="lead">Disciplina. Costanza. Crescita.<br/>Ogni gara è un passo avanti.</p></div><blockquote>“Il tatami non mente mai.”</blockquote></div></section>
-<section class="content"><div class="stats"><div class="stat"><i>◉</i><strong>{results.medalSummary.total}</strong><span>Medaglie totali</span><b></b></div><div class="stat"><i>♛</i><strong>{results.medalSummary.gold}</strong><span>Ori</span><b></b></div><div class="stat"><i>▣</i><strong>{results.heroStats.find(x=>x.id==="competitions")?.value}</strong><span>Competizioni</span><b></b></div><div class="stat"><i>▥</i><strong>{results.heroStats.find(x=>x.id==="years")?.value}</strong><span>Anni di attività</span><b></b></div></div>
-<div class="filters"><div class="year-tabs"><button class="active" data-year="all">Tutti</button>{years.map(y=><button data-year={y}>{y}</button>)}</div><div class="selects"><select data-discipline aria-label="Disciplina"><option value="all">Disciplina</option>{disciplines.map(d=><option value={d}>{d}</option>)}</select><select data-medal aria-label="Medaglia"><option value="all">Medaglia</option><option value="gold">Oro</option><option value="silver">Argento</option><option value="bronze">Bronzo</option></select><select data-place aria-label="Luogo"><option value="all">Luogo</option>{[...new Set(rows.map(r=>r.place).filter(p=>p!=="—"))].sort().map(p=><option value={p}>{p}</option>)}</select></div><button class="reset" data-reset>↻&nbsp; Reset</button></div>
-<div class="table-wrap"><div class="table-head"><span>Anno</span><span>Competizione</span><span>Luogo</span><span>Disciplina</span><span>Risultato</span><span>Medaglia</span><span>Note</span><span></span></div><div class="table-body">{rows.map(r=><div class="result-row" data-row data-year={r.year} data-discipline={r.discipline} data-medal={r.medal} data-place={r.place}><span>{r.year}</span><strong>{r.event}</strong><span>{r.place}</span><span>{r.discipline}</span><span>1°</span><span class:list={["medal",r.medal]}><i></i>{medalName[r.medal]||r.medal}</span><span>—</span><span class="arrow">→</span></div>)}</div></div><div class="below">Mostrati <b data-count>{rows.length}</b> risultati</div></section></main>
-<script>const root=document.querySelector('.palmares');if(root){const tabs=[...root.querySelectorAll('[data-year]')],d=root.querySelector('[data-discipline]'),m=root.querySelector('[data-medal]'),p=root.querySelector('[data-place]'),reset=root.querySelector('[data-reset]'),count=root.querySelector('[data-count]');let year='all';const apply=()=>{let n=0;root.querySelectorAll('[data-row]').forEach(r=>{const show=(year==='all'||r.dataset.year===year)&&(d.value==='all'||r.dataset.discipline===d.value)&&(m.value==='all'||r.dataset.medal===m.value)&&(p.value==='all'||r.dataset.place===p.value);r.hidden=!show;if(show)n++});count.textContent=n;tabs.forEach(t=>t.classList.toggle('active',t.dataset.year===year))};tabs.forEach(t=>t.addEventListener('click',()=>{year=t.dataset.year;apply()}));[d,m,p].forEach(x=>x.addEventListener('change',apply));reset.addEventListener('click',()=>{year='all';d.value=m.value=p.value='all';apply()})}</script>
-<style>
-:global(body){background:#030404}.palmares{--gold:#d4a64d;--gold2:#f0c875;color:#f4efe7;background:#030404;min-height:100vh}.hero{position:relative;height:360px;overflow:hidden;background:#050606}.hero :global(header){position:relative;z-index:20}.tatami{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#080a0b 0 38%,#0b0d0e 39% 100%);perspective:700px}.backwall{position:absolute;left:45%;right:4%;top:50px;height:150px;background:repeating-linear-gradient(90deg,#080909 0 75px,#111313 76px,#080909 78px);box-shadow:inset 0 -30px 45px #000}.mat{position:absolute;bottom:-92px;height:230px;transform:rotateX(62deg);transform-origin:bottom;background:#111516;border:1px solid #282b2c;box-shadow:inset 0 0 45px #000}.m1{left:34%;width:31%}.m2{left:64%;width:31%}.m3{left:47%;width:48%;height:110px;background:#351314;border-color:#561d1d}.m4{left:58%;width:36%;height:82px;background:#541819;border-color:#772323}.hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,#030404 0%,rgba(3,4,4,.96) 27%,rgba(3,4,4,.34) 60%,rgba(3,4,4,.3)),linear-gradient(0deg,#030404 0%,transparent 24%)}.hero-inner{position:relative;z-index:5;max-width:1180px;height:260px;margin:auto;padding:35px 24px 0}.hero-copy{width:58%}.overline{display:flex;align-items:center;gap:16px;margin:0 0 10px;color:#d8c7a8;font:600 .9rem var(--font-display);letter-spacing:.26em;text-transform:uppercase}.overline:before{content:"";width:18px;height:1px;background:var(--gold)}.hero h1{margin:0;font:650 clamp(2.8rem,5vw,5rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase}.hero h1 span{color:var(--gold2)}.lead{margin:18px 0 0;color:#eee8de;font-size:1rem;line-height:1.45}.hero blockquote{position:absolute;right:24px;bottom:24px;margin:0;color:#ddd1bf;font:italic 1rem var(--font-display)}.content{max-width:1180px;margin:-4px auto 0;padding:0 24px 32px;position:relative;z-index:10}.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #313638;border-radius:6px;background:linear-gradient(#101314,#090b0c);box-shadow:0 14px 30px #000}.stat{position:relative;display:flex;min-height:132px;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid #292d2e}.stat:last-child{border:0}.stat i{color:var(--gold2);font-style:normal;font-size:1.55rem}.stat strong{margin:2px 0;color:var(--gold2);font:600 2.7rem var(--font-display)}.stat span{font:700 .7rem var(--font-display);letter-spacing:.06em;text-transform:uppercase}.stat b{position:absolute;bottom:15px;width:36px;height:2px;background:#a51b1b}.filters{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:20px 0 16px}.year-tabs,.selects{display:flex;gap:5px}.filters button,.filters select{height:44px;border:1px solid #15191a;border-radius:5px;background:#111516;color:#d5d0c8;padding:0 17px;font:600 .75rem var(--font-ui);cursor:pointer}.year-tabs button.active{border-color:#e0b45e;background:linear-gradient(#f3cd7c,#d9a94f);color:#090909}.selects{justify-content:center}.selects select{min-width:130px}.reset{border-color:#4a4030!important;background:#050606!important;color:#e4b75e!important}.table-wrap{border:1px solid #171b1c;border-radius:6px;overflow:hidden;background:#080a0b}.table-head,.result-row{display:grid;grid-template-columns:.75fr 1.65fr .85fr 1.1fr .62fr .85fr .45fr 32px;gap:14px;align-items:center}.table-head{min-height:46px;padding:0 15px;border-bottom:1px solid #242829;color:#9da09f;font:700 .65rem var(--font-ui);letter-spacing:.06em;text-transform:uppercase}.result-row{min-height:56px;padding:0 15px;border-bottom:1px solid #171a1b;color:#d4d2cd;font-size:.84rem;line-height:1.25}.result-row:nth-child(even){background:#0b0e0f}.result-row strong{color:#f0ede7;font-size:.86rem;font-weight:650}.medal{display:flex;align-items:center;gap:8px;font-weight:650}.medal i{width:16px;height:16px;border-radius:50%;background:#777}.medal.gold{color:#e8b854}.medal.gold i{background:radial-gradient(circle at 35% 30%,#f7d989,#b98227)}.medal.silver{color:#d2d2d2}.medal.silver i{background:radial-gradient(circle at 35% 30%,#fff,#8d9295)}.arrow{display:grid;width:26px;height:26px;place-items:center;border:1px solid #a67c2c;border-radius:50%;color:#e6b653}.below{padding:18px 0 0;color:#777b7a;font-size:.75rem}[hidden]{display:none!important}
-@media(max-width:820px){.hero{height:390px}.hero-inner{padding-top:30px}.hero-copy{width:82%}.hero blockquote{display:none}.content{padding-inline:14px}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid #292d2e}.filters{grid-template-columns:1fr}.year-tabs{overflow-x:auto}.selects{justify-content:stretch}.selects select{min-width:0;width:100%}.reset{justify-self:start}.table-wrap{overflow-x:auto}.table-head,.result-row{min-width:930px}}
-@media(max-width:520px){.hero{height:350px}.hero h1{font-size:3.1rem}.hero-copy{width:100%}.lead{font-size:.9rem}.stats{margin-top:-10px}.stat{min-height:112px}.stat strong{font-size:2.2rem}.stat span{font-size:.62rem}.selects{display:grid;grid-template-columns:1fr 1fr}.selects select:last-child{grid-column:1/-1}.result-row{font-size:.9rem}}
-</style></BaseLayout>
+  <main id="main" class="palmares">
+    <section class="hero" aria-labelledby="results2-title">
+      <Header />
+      <div class="hero-bg" aria-hidden="true"></div>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1 id="results2-title">Il mio<br/><span>percorso</span></h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="content" aria-label="Timeline risultati">
+      <div class="stats">
+        <div class="stat"><i>◉</i><strong>{results.medalSummary.total}</strong><span>Medaglie totali</span><b></b></div>
+        <div class="stat"><i>♛</i><strong>{results.medalSummary.gold}</strong><span>Ori</span><b></b></div>
+        <div class="stat"><i>▣</i><strong>{results.heroStats.find((x) => x.id === "competitions")?.value}</strong><span>Competizioni</span><b></b></div>
+        <div class="stat"><i>▥</i><strong>{results.heroStats.find((x) => x.id === "years")?.value}</strong><span>Anni di attività</span><b></b></div>
+      </div>
+
+      <div class="filters">
+        <div class="year-tabs" role="group" aria-label="Filtra per anno">
+          <button class="active" data-year="all" aria-pressed="true">Tutti</button>
+          {years.map((y) => <button data-year={y} aria-pressed="false">{y}</button>)}
+        </div>
+        <div class="selects">
+          <select data-discipline aria-label="Disciplina">
+            <option value="all">Disciplina</option>
+            {disciplines.map((d) => <option value={d}>{d}</option>)}
+          </select>
+          <select data-medal aria-label="Medaglia">
+            <option value="all">Medaglia</option>
+            <option value="gold">Oro</option>
+            <option value="silver">Argento</option>
+            <option value="bronze">Bronzo</option>
+          </select>
+          <select data-place aria-label="Luogo">
+            <option value="all">Luogo</option>
+            {[...new Set(rows.map((r) => r.place).filter((p) => p !== "—"))].sort().map((p) => <option value={p}>{p}</option>)}
+          </select>
+        </div>
+        <button class="reset" data-reset>↻&nbsp; Reset</button>
+      </div>
+
+      <div class="table-wrap">
+        <div class="table-head">
+          <span>Anno</span><span>Competizione</span><span>Luogo</span><span>Disciplina</span><span>Risultato</span><span>Medaglia</span><span>Note</span><span></span>
+        </div>
+        <div class="table-body">
+          {rows.map((r) => (
+            <div class="result-row" data-row data-year={r.year} data-discipline={r.discipline} data-medal={r.medal} data-place={r.place}>
+              <span>{r.year}</span>
+              <strong>{r.event}</strong>
+              <span>{r.place}</span>
+              <span>{r.discipline}</span>
+              <span>1°</span>
+              <span class:list={["medal", r.medal]}><i></i>{medalName[r.medal] || r.medal}</span>
+              <span>—</span>
+              <span class="arrow">→</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div class="below">Mostrati <b data-count>{rows.length}</b> risultati</div>
+    </section>
+  </main>
+
+  <script>
+    const root = document.querySelector('.palmares');
+    if (root) {
+      const tabs = [...root.querySelectorAll('[data-year]')];
+      const d = root.querySelector('[data-discipline]');
+      const m = root.querySelector('[data-medal]');
+      const p = root.querySelector('[data-place]');
+      const reset = root.querySelector('[data-reset]');
+      const count = root.querySelector('[data-count]');
+      let year = 'all';
+
+      const apply = () => {
+        let n = 0;
+        root.querySelectorAll('[data-row]').forEach((r) => {
+          const show =
+            (year === 'all' || r.dataset.year === year) &&
+            (d.value === 'all' || r.dataset.discipline === d.value) &&
+            (m.value === 'all' || r.dataset.medal === m.value) &&
+            (p.value === 'all' || r.dataset.place === p.value);
+          r.hidden = !show;
+          if (show) n++;
+        });
+        count.textContent = n;
+        tabs.forEach((t) => {
+          const active = t.dataset.year === year;
+          t.classList.toggle('active', active);
+          t.setAttribute('aria-pressed', String(active));
+        });
+      };
+
+      tabs.forEach((t) => t.addEventListener('click', () => { year = t.dataset.year; apply(); }));
+      [d, m, p].forEach((x) => x.addEventListener('change', apply));
+      reset.addEventListener('click', () => { year = 'all'; d.value = m.value = p.value = 'all'; apply(); });
+    }
+  </script>
+
+  <style>
+    :global(body){background:#030404}
+    .palmares{--gold:#d4a64d;--gold2:#f0c875;color:#f4efe7;background:#030404;min-height:100vh}
+    .hero{position:relative;height:300px;overflow:hidden;background:#050606}
+    .hero :global(header){position:relative;z-index:20}
+    .hero-bg{position:absolute;inset:0;background-image:url('/images/results-hero-tatami.svg');background-size:cover;background-position:center 56%;background-repeat:no-repeat;transform:scale(1.01)}
+    .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,4,4,.98) 0%,rgba(3,4,4,.88) 24%,rgba(3,4,4,.48) 48%,rgba(3,4,4,.16) 74%,rgba(3,4,4,.06) 100%),linear-gradient(0deg,#030404 0%,rgba(3,4,4,.15) 26%,transparent 58%)}
+    .hero-inner{position:relative;z-index:5;max-width:1180px;height:210px;margin:auto;padding:28px 24px 0;display:flex;align-items:center}
+    .hero-copy{width:60%}
+    .hero h1{margin:0;font:650 clamp(2.9rem,5.1vw,5.15rem)/.84 var(--font-display);letter-spacing:-.025em;text-transform:uppercase;text-shadow:0 2px 24px rgba(0,0,0,.36)}
+    .hero h1 span{color:var(--gold2)}
+
+    .content{max-width:1180px;margin:0 auto;padding:0 24px 30px;position:relative;z-index:10}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #313638;border-radius:6px;background:linear-gradient(#101314,#090b0c);box-shadow:0 14px 30px #000}
+    .stat{position:relative;display:flex;min-height:128px;flex-direction:column;align-items:center;justify-content:center;border-right:1px solid #292d2e}
+    .stat:last-child{border:0}.stat i{color:var(--gold2);font-style:normal;font-size:1.55rem}.stat strong{margin:2px 0;color:var(--gold2);font:600 2.7rem var(--font-display)}.stat span{font:700 .7rem var(--font-display);letter-spacing:.06em;text-transform:uppercase}.stat b{position:absolute;bottom:15px;width:36px;height:2px;background:#a51b1b}
+
+    .filters{display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;padding:18px 0 14px}
+    .year-tabs,.selects{display:flex;gap:5px}.filters button,.filters select{height:44px;border:1px solid #15191a;border-radius:5px;background:#111516;color:#d5d0c8;padding:0 17px;font:600 .78rem var(--font-ui);cursor:pointer}.year-tabs button.active{border-color:#e0b45e;background:linear-gradient(#f3cd7c,#d9a94f);color:#090909}.selects{justify-content:center}.selects select{min-width:130px}.reset{border-color:#4a4030!important;background:#050606!important;color:#e4b75e!important}
+
+    .table-wrap{border:1px solid #171b1c;border-radius:6px;overflow:hidden;background:#080a0b}.table-head,.result-row{display:grid;grid-template-columns:.75fr 1.65fr .85fr 1.1fr .62fr .85fr .45fr 32px;gap:14px;align-items:center}.table-head{min-height:48px;padding:0 15px;border-bottom:1px solid #242829;color:#a8aaa9;font:700 .72rem var(--font-ui);letter-spacing:.055em;text-transform:uppercase}.result-row{min-height:60px;padding:0 15px;border-bottom:1px solid #171a1b;color:#dedbd5;font-size:.92rem;line-height:1.25}.result-row:nth-child(even){background:#0b0e0f}.result-row strong{color:#f3efe8;font-size:.95rem;font-weight:650}.medal{display:flex;align-items:center;gap:8px;font-weight:650}.medal i{width:17px;height:17px;border-radius:50%;background:#777}.medal.gold{color:#e8b854}.medal.gold i{background:radial-gradient(circle at 35% 30%,#f7d989,#b98227)}.medal.silver{color:#d2d2d2}.medal.silver i{background:radial-gradient(circle at 35% 30%,#fff,#8d9295)}.arrow{display:grid;width:27px;height:27px;place-items:center;border:1px solid #a67c2c;border-radius:50%;color:#e6b653}.below{padding:16px 0 0;color:#777b7a;font-size:.78rem}[hidden]{display:none!important}
+
+    @media(max-width:820px){.hero{height:280px}.hero-inner{height:190px;padding:24px 16px 0}.hero-copy{width:78%}.hero-bg{background-position:62% 52%}.content{padding-inline:14px}.stats{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid #292d2e}.filters{grid-template-columns:1fr}.year-tabs{overflow-x:auto}.selects{justify-content:stretch}.selects select{min-width:0;width:100%}.reset{justify-self:start}.table-wrap{overflow-x:auto}.table-head,.result-row{min-width:950px}}
+    @media(max-width:520px){.hero{height:250px}.hero-inner{height:160px;padding-top:18px}.hero h1{font-size:3.05rem}.hero-copy{width:100%}.hero-bg{background-position:68% 55%}.stat{min-height:108px}.stat strong{font-size:2.2rem}.stat span{font-size:.62rem}.selects{display:grid;grid-template-columns:1fr 1fr}.selects select:last-child{grid-column:1/-1}.result-row{font-size:.94rem}}
+  </style>
+</BaseLayout>

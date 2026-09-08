@@ -43,8 +43,8 @@
     "inEvidenza": true,
     "visibile": true,
     "isPlaceholder": false,
-    "highlightX": 48.9,
-    "highlightY": 31.4,
+    "highlightX": 50.5,
+    "highlightY": 30.3,
     "highlightZoom": 1
   },
   {
@@ -74,7 +74,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 48.9,
+    "highlightY": 10,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788691239",
@@ -87,7 +90,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 49.5,
+    "highlightY": 42.6,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788657531",
@@ -100,7 +106,10 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 50,
+    "highlightY": 39.1,
+    "highlightZoom": 1
   },
   {
     "id": "foto-1788788636400",
@@ -168,7 +177,10 @@
     "testoAlternativo": "Perugia 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 47.6,
+    "highlightY": 20.9,
+    "highlightZoom": 1
   },
   {
     "id": "sora-2026-01",
@@ -269,6 +281,9 @@
     "testoAlternativo": "Gara Perugia Maggio 2026",
     "inEvidenza": true,
     "visibile": true,
-    "isPlaceholder": false
+    "isPlaceholder": false,
+    "highlightX": 47.4,
+    "highlightY": 8,
+    "highlightZoom": 1
   }
 ]

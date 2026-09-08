@@ -1,0 +1,1 @@
+Approved Yīng eagle v2 source and derivatives prepared on 2026-09-08. Favicon/app-icon derivatives must preserve the approved eagle geometry and black background treatment.

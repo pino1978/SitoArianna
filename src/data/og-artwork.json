@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "status": "approved-master",
+  "updatedAt": "2026-09-08",
+  "canvas": {"width": 1200, "height": 630, "aspectRatio": "1.9047619:1"},
+  "master": {
+    "concept": "Ying Wing Athlete",
+    "approvedImageGenerationId": "73b14487-4ed4-40ba-9149-78f1692cc9cc",
+    "sourceAssetTarget": "/images/og-arianna-milano-artwork.png",
+    "freezeArtwork": true
+  },
+  "athlete": {
+    "position": "center-right",
+    "view": "rear three-quarter",
+    "scale": "approved as-is",
+    "headroom": "approved as-is",
+    "pose": "calm ready stance",
+    "hair": "dark ponytail",
+    "clothing": "plain black Sanda top and black shorts with restrained dark-red waistband/details",
+    "gloves": "plain dark-red gloves, no branding",
+    "backText": null,
+    "shortsText": null
+  },
+  "wing": {
+    "side": "right",
+    "scale": "approved as-is",
+    "definition": "defined feathers, realistic-to-ink transition",
+    "style": "black, warm ivory and satin-gold ink-brush",
+    "blend": "integrated into smoky charcoal background"
+  },
+  "largeIdeogram": {
+    "text": "鹰",
+    "role": "secondary identity mark",
+    "size": "approved as-is",
+    "renderMethod": "post-production vector/text overlay",
+    "note": "Never rely on AI-generated glyph for final export."
+  },
+  "palette": {
+    "deepBlack": "#090909",
+    "charcoal": "#151515",
+    "warmIvory": "#F2ECE1",
+    "satinGold": "#C9A56A",
+    "darkRed": "#7C1717",
+    "softGoldGlow": "#D8BC88"
+  },
+  "background": {
+    "texture": "subtle paper, ink and sports-campaign grain",
+    "goldAccents": "restrained",
+    "redAccents": "lower-right diagonal strokes",
+    "lighting": "warm rim light with deep controlled shadows",
+    "negativeSpace": "left area preserved for typography"
+  },
+  "generation": {
+    "generateText": false,
+    "prompt": "Wide cinematic premium sports-branding artwork for a young female Sanda athlete, seen from behind, centered and slightly right, calm ready stance, dark ponytail, plain black Sanda top, plain black shorts with restrained dark-red waistband/details, plain dark-red gloves with no logos or lettering. Deep black and charcoal environment, subtle paper and ink texture, warm satin-gold rim light defining hair and shoulders. On the right, one large eagle wing only, with clearly defined feathers transitioning into expressive black, warm-ivory and satin-gold Chinese ink brush textures, naturally integrated into the darkness. Minimal deep-red ink strokes near the lower-right edge, restrained gold particles, luxury contemporary athlete campaign, disciplined and elegant. Preserve strong negative space on the left for typography. No text, no Chinese characters, no logos, no brands, no writing on clothing, no symbols on shorts.",
+    "negativePrompt": "adult-looking athlete, bodybuilder physique, sexualized pose, logos, WEISING, text, letters, numbers, Chinese characters, ideogram on clothing, full eagle, eagle head, mountains, temples, fantasy armor, flames, excessive smoke, excessive red, excessive gold, clutter, cartoon, anime, malformed hands, extra limbs"
+  }
+}

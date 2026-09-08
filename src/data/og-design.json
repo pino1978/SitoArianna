@@ -1,166 +1,39 @@
 {
-  "version": "1.0.0",
-  "status": "working-approved-direction",
+  "version": "1.1.0",
+  "status": "approved-master-spec",
   "updatedAt": "2026-09-08",
   "assetType": "open-graph",
   "canvas": {
     "width": 1200,
     "height": 630,
     "aspectRatio": "1.9047619:1",
-    "safeArea": {
-      "left": 72,
-      "right": 72,
-      "top": 48,
-      "bottom": 48
-    }
+    "safeArea": {"left": 72, "right": 72, "top": 48, "bottom": 48}
   },
   "concept": {
     "name": "Ying Wing Athlete",
-    "description": "Premium sports-luxury Open Graph artwork with a young female Sanda athlete seen from behind, a defined eagle wing on the right, restrained gold/red ink accents and exact Arianna Milano / Sanda Athlete / Ying identity copy.",
-    "visualReferences": [
-      "site eagle artwork: black/ivory/red/gold ink aesthetic",
-      "Ying hero artwork: dark background, satin gold, eagle/wing symbolism",
-      "approved mixed concept: rear-view athlete + wing + restrained typography"
-    ]
+    "description": "Approved Open Graph direction: rear-view young Sanda athlete, defined eagle wing on right, black/ivory/satin-gold/dark-red site language, exact Arianna Milano identity typography."
   },
-  "palette": {
-    "deepBlack": "#090909",
-    "charcoal": "#151515",
-    "warmIvory": "#F2ECE1",
-    "satinGold": "#C9A56A",
-    "darkRed": "#7C1717",
-    "softGoldGlow": "#D8BC88"
+  "sources": {
+    "artworkSpec": "./og-artwork.json",
+    "typographySpec": "./og-typography.json"
   },
-  "composition": {
-    "athlete": {
-      "anchor": "center",
-      "xPercent": 50,
-      "yPercent": 50,
-      "scalePercent": 89,
-      "verticalShiftPercent": -5,
-      "pose": "rear-view, centered, calm ready stance, arms relaxed but prepared",
-      "ageRead": "young adolescent athlete, visually age-appropriate",
-      "hair": "dark ponytail",
-      "clothing": "plain black Sanda top and black shorts with restrained dark-red waistband/details",
-      "gloves": "plain dark-red Sanda gloves, no visible brand or lettering",
-      "backText": null,
-      "shortsText": null,
-      "notes": "No WEISING branding. No ideogram on clothing. Keep silhouette clean and credible. Reduce empty headroom by moving athlete upward rather than enlarging excessively."
-    },
-    "wing": {
-      "side": "right",
-      "xPercent": 78,
-      "yPercent": 40,
-      "scalePercent": 88,
-      "rotationDeg": -4,
-      "definition": "high feather definition with ink-brush edges",
-      "opacityPercent": 90,
-      "blendModeIntent": "integrated into background, not pasted-on",
-      "notes": "Wing should be approximately 12% smaller than the previous approved draft. Keep feather definition, but athlete must remain the primary subject."
-    },
-    "largeIdeogram": {
-      "text": "鹰",
-      "xPercent": 89,
-      "yPercent": 52,
-      "scalePercent": 100,
-      "color": "#C9A56A",
-      "opacityPercent": 92,
-      "renderMethod": "vector/text overlay after AI artwork generation",
-      "notes": "Do not let the image generator invent the ideogram. Use exact simplified Chinese 鹰, consistent with the site identity."
-    },
-    "background": {
-      "base": "deep black / charcoal",
-      "texture": "subtle paper, ink and sports-campaign grain",
-      "goldAccents": "restrained",
-      "redAccents": "minimal diagonal ink strokes concentrated on lower-right/right edge",
-      "negativeSpace": "preserve left zone for typography"
-    }
+  "master": {
+    "approvedGenerationId": "73b14487-4ed4-40ba-9149-78f1692cc9cc",
+    "artworkTarget": "/images/og-arianna-milano-artwork.png",
+    "finalCompositeTarget": "/images/og-arianna-milano.png",
+    "finalCompositeStatus": "pending-binary-asset-and-post-production",
+    "freezeArtwork": true
   },
-  "typography": {
-    "renderMethod": "post-production overlay, not AI-generated text",
-    "block": {
-      "xPercent": 6.5,
-      "yPercent": 35,
-      "verticalShiftPxFromPreviousDraft": -36,
-      "alignment": "left",
-      "maxWidthPercent": 35
-    },
-    "lines": [
-      {
-        "text": "ARIANNA",
-        "role": "name-line-1",
-        "case": "uppercase",
-        "color": "#F2ECE1",
-        "tracking": "wide",
-        "weight": 400
-      },
-      {
-        "text": "MILANO",
-        "role": "name-line-2",
-        "case": "uppercase",
-        "color": "#C9A56A",
-        "tracking": "moderate",
-        "weight": 700
-      },
-      {
-        "text": "SANDA ATHLETE",
-        "role": "sport-line",
-        "case": "uppercase",
-        "color": "#F2ECE1",
-        "tracking": "very-wide",
-        "weight": 500,
-        "decorativeRules": true
-      },
-      {
-        "text": "YĪNG · 鹰",
-        "role": "identity-line",
-        "case": "mixed",
-        "color": "#C9A56A",
-        "tracking": "wide",
-        "weight": 500
-      }
-    ],
-    "notes": "Use the same premium modern sans-serif family as the site where possible. Exact ideogram is 鹰."
+  "publication": {
+    "ogImageUrl": "https://www.ariannamilano.it/images/og-arianna-milano.png",
+    "twitterImageUrl": "https://www.ariannamilano.it/images/og-arianna-milano.png",
+    "activationRule": "Do not switch production metadata until the final 1200x630 composite exists at finalCompositeTarget and contains the exact glyph 鹰."
   },
-  "aiArtwork": {
-    "generateText": false,
-    "prompt": "Wide cinematic premium sports-branding artwork for a young female Sanda athlete, seen from behind, centered and slightly raised in frame, calm ready stance, dark ponytail, plain black Sanda top and plain black shorts with restrained dark-red details, plain dark-red gloves with absolutely no logos or lettering. Deep black and charcoal environment, subtle paper and ink texture, warm satin-gold rim light defining hair and shoulders. On the right, one large eagle wing only, not a full eagle, with clearly defined realistic feathers transitioning into expressive black, warm-ivory and satin-gold Chinese ink brush textures, roughly 12 percent smaller than in the prior draft, integrated naturally into the darkness. Minimal deep-red ink strokes near the lower-right edge, restrained gold particles, luxury contemporary athlete campaign, Nike/Red-Bull/Olympic athlete portfolio level, disciplined, elegant, cinematic, strong negative space on the left for typography. No text anywhere in the image, no Chinese characters, no logos, no brands, no writing on clothing, no symbols on shorts.",
-    "negativePrompt": "adult-looking athlete, bodybuilder physique, sexualized pose, exposed branding, WEISING logo, text, letters, numbers, Chinese characters, ideogram on clothing, full eagle, eagle head, giant bird, mountains, temples, fantasy armor, flames, excessive smoke, excessive red, excessive gold, clutter, childlike graphics, cartoon, anime, low-detail feathers, malformed hands, extra limbs, duplicate gloves",
-    "style": "cinematic realistic sports campaign blended with refined Chinese ink-art textures",
-    "lighting": "warm rim light, deep controlled shadows, no bright arena floodlights",
-    "camera": "rear three-quarter/rear view, eye-level to slightly low, medium-wide",
-    "depthOfField": "moderate, subject and wing readable"
-  },
-  "postProduction": {
-    "steps": [
-      "Generate artwork without any text or ideograms.",
-      "Crop/fit to 1200x630 while preserving athlete center and full readable wing on right.",
-      "Apply exact typography block on left.",
-      "Overlay exact simplified ideogram 鹰 on right at specified position.",
-      "Check all text and key visual elements remain inside safe area.",
-      "Export optimized social image in WebP and PNG/JPEG fallback as needed."
-    ]
-  },
-  "qualityChecks": {
-    "mustHave": [
-      "athlete clearly reads as a young Sanda athlete",
-      "athlete remains primary subject",
-      "wing is defined but subordinate",
-      "no brand on gloves",
-      "no text on back",
-      "no ideogram on shorts",
-      "exact ideogram is 鹰",
-      "typography sits slightly higher than previous draft",
-      "reduced empty space above athlete head",
-      "premium black/ivory/gold/dark-red visual language consistent with site"
-    ],
-    "rejectIf": [
-      "wing dominates the athlete",
-      "full eagle appears",
-      "AI-generated text is visible",
-      "wrong/traditional ideogram 鷹 appears instead of 鹰",
-      "athlete appears adult",
-      "commercial logos appear on gear"
-    ]
+  "qualityGate": {
+    "artworkApproved": true,
+    "typographyLayoutApproved": true,
+    "exactIdeogramPendingPostProduction": true,
+    "binaryAssetInRepository": false,
+    "productionMetadataActivated": false
   }
 }

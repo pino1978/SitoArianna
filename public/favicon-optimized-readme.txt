@@ -1,0 +1,1 @@
+favicon optimization pending binary replacement

@@ -54,3 +54,10 @@
   .mobile-nav{padding-top:82px!important;padding-left:20px!important;padding-right:20px!important}
   .mobile-nav__inner>a{min-height:54px!important;padding:9px 0!important;font-size:clamp(1.3rem,5.8vw,1.65rem)!important}
 }
+
+/* RESULTS MOBILE — keep stats in normal document flow so filters never overlap them */
+@media(max-width:640px){
+  .palmares .home-stats{display:block!important;height:auto!important;min-height:112px!important;margin:0!important;padding:0!important;overflow:visible!important}
+  .palmares .home-stats .stats-strip{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%!important;min-height:112px!important;margin:0!important;padding:12px 0 10px!important;transform:none!important}
+  .palmares .filters{clear:both!important;margin-top:8px!important}
+}

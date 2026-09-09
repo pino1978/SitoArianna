@@ -19,11 +19,6 @@ function youtubeId(url = "") {
   const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
   return match?.[1] ?? "";
 }
-function displayDate(value) {
-  if (!value) return "";
-  const [year, month, day] = value.split("-");
-  return `${day}/${month}/${year}`;
-}
 function eventLabel(item) {
   const detail = item.dettaglio || "";
   const parts = detail.split("·").map((part) => part.trim()).filter(Boolean);
@@ -32,7 +27,6 @@ function eventLabel(item) {
 function itemYear(item) {
   return String(item.anno || item.data?.slice(0, 4) || "");
 }
-
 const photos = media.filter((item) => item.tipo === "foto" && item.visibile && !item.isPlaceholder && photoUrl(item));
 const videos = media.filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube));
 const visibleMedia = [
@@ -44,7 +38,6 @@ const events = [...new Set(visibleMedia.map(eventLabel).filter(Boolean))].sort((
 const primaryVideo = videos[0] || null;
 const secondaryItems = [videos[1], photos[0]].filter(Boolean);
 ---
-
 <BaseLayout title={copy.seo.title} description={copy.seo.description}>
   <main id="main" class="media-page">
     <section class="media-hero">
@@ -60,46 +53,28 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
     {(primaryVideo || secondaryItems.length > 0) && (
       <section class="featured media-shell" aria-labelledby="featured-title">
         <div class="section-row">
-          <div>
-            <p class="eyebrow">In evidenza</p>
-            <h2 id="featured-title">Il movimento prima di tutto.</h2>
-          </div>
+          <div><p class="eyebrow">In evidenza</p><h2 id="featured-title">Il movimento prima di tutto.</h2></div>
           <a href="#archivio" data-interactive>Esplora l’archivio <span aria-hidden="true">→</span></a>
         </div>
-
         <div class="featured-grid">
           {primaryVideo && (() => {
             const id = youtubeId(primaryVideo.urlYouTube);
-            return (
-              <button class="featured-main media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={primaryVideo.titolo} data-detail={primaryVideo.dettaglio || ""} data-date={primaryVideo.data || ""}>
-                <img src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`} alt="" loading="eager" decoding="async" />
-                <span class="shade"></span>
-                <span class="play" aria-hidden="true">▶</span>
-                <span class="featured-copy">
-                  <small>{primaryVideo.anno || ""} · Video</small>
-                  <strong>{primaryVideo.titolo}</strong>
-                  {primaryVideo.dettaglio && <span>{primaryVideo.dettaglio}</span>}
-                </span>
-              </button>
-            );
+            return <button class="featured-main media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={primaryVideo.titolo} data-detail={primaryVideo.dettaglio || ""} data-date={primaryVideo.data || ""}>
+              <img src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`} alt="" loading="eager" decoding="async" />
+              <span class="shade"></span><span class="play" aria-hidden="true">▶</span>
+              <span class="featured-copy"><small>{primaryVideo.anno || ""} · Video</small><strong>{primaryVideo.titolo}</strong>{primaryVideo.dettaglio && <span>{primaryVideo.dettaglio}</span>}</span>
+            </button>;
           })()}
-
           <div class="featured-side">
             {secondaryItems.map((item) => {
               const isVideo = item.tipo === "video";
               const id = isVideo ? youtubeId(item.urlYouTube) : "";
               const src = isVideo ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : photoUrl(item);
-              return (
-                <button class="featured-small media-trigger" type="button" data-interactive data-media-type={isVideo ? "video" : "foto"} data-youtube-id={id || undefined} data-image={!isVideo ? src : undefined} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""}>
-                  <img src={src} alt={isVideo ? "" : (item.testoAlternativo || item.titolo)} loading="lazy" decoding="async" />
-                  <span class="shade"></span>
-                  {isVideo && <span class="play play--small" aria-hidden="true">▶</span>}
-                  <span class="featured-copy featured-copy--small">
-                    <small>{item.anno || ""} · {isVideo ? "Video" : "Foto"}</small>
-                    <strong>{item.titolo}</strong>
-                  </span>
-                </button>
-              );
+              return <button class="featured-small media-trigger" type="button" data-interactive data-media-type={isVideo ? "video" : "foto"} data-youtube-id={id || undefined} data-image={!isVideo ? src : undefined} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""}>
+                <img src={src} alt={isVideo ? "" : (item.testoAlternativo || item.titolo)} loading="lazy" decoding="async" />
+                <span class="shade"></span>{isVideo && <span class="play play--small" aria-hidden="true">▶</span>}
+                <span class="featured-copy featured-copy--small"><small>{item.anno || ""} · {isVideo ? "Video" : "Foto"}</small><strong>{item.titolo}</strong></span>
+              </button>;
             })}
           </div>
         </div>
@@ -108,14 +83,7 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
 
     <section class="archive" id="archivio" aria-labelledby="archive-title">
       <div class="media-shell">
-        <div class="section-row archive-heading">
-          <div>
-            <p class="eyebrow">Archivio</p>
-            <h2 id="archive-title">Foto & video</h2>
-            <p>{copy.gallery.intro}</p>
-          </div>
-        </div>
-
+        <div class="section-row archive-heading"><div><p class="eyebrow">Archivio</p><h2 id="archive-title">Foto & video</h2><p>{copy.gallery.intro}</p></div></div>
         <div class="filter-bar" aria-label="Filtri media">
           <div class="filter-types" role="group" aria-label="Tipo di contenuto">
             <button type="button" data-interactive data-type-filter="tutti" aria-pressed="true">Tutti</button>
@@ -123,184 +91,86 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
             <button type="button" data-interactive data-type-filter="foto" aria-pressed="false">Foto</button>
           </div>
           <div class="filter-selects">
-            <label>
-              <span class="sr-only">Anno</span>
-              <select data-year-filter data-interactive>
-                <option value="tutti">Anno</option>
-                {years.map((year) => <option value={year}>{year}</option>)}
-              </select>
-            </label>
-            <label>
-              <span class="sr-only">Evento</span>
-              <select data-event-filter data-interactive>
-                <option value="tutti">Evento</option>
-                {events.map((event) => <option value={event}>{event}</option>)}
-              </select>
-            </label>
+            <label><span class="sr-only">Anno</span><select data-year-filter data-interactive><option value="tutti">Anno</option>{years.map((year) => <option value={year}>{year}</option>)}</select></label>
+            <label><span class="sr-only">Evento</span><select data-event-filter data-interactive><option value="tutti">Evento</option>{events.map((event) => <option value={event}>{event}</option>)}</select></label>
           </div>
         </div>
-
-        {visibleMedia.length > 0 ? (
-          <div class="editorial-grid" data-media-grid>
-            {visibleMedia.map((item, index) => {
-              const isVideo = item.mediaType === "video";
-              const id = isVideo ? youtubeId(item.urlYouTube) : "";
-              const event = eventLabel(item);
-              return (
-                <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-event={event}>
-                  {isVideo ? (
-                    <button class="media-card__button media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""} aria-label={`Apri video: ${item.titolo}`}>
-                      <span class="media-card__visual media-card__visual--video">
-                        <img src={item.thumb} alt="" loading="lazy" decoding="async" />
-                        <span class="shade"></span>
-                        <span class="play" aria-hidden="true">▶</span>
-                      </span>
-                      <span class="media-card__copy">
-                        <small>{itemYear(item)} · Video</small>
-                        <strong>{item.titolo}</strong>
-                        <span>{event}</span>
-                      </span>
-                    </button>
-                  ) : (
-                    <a class="media-card__button pswp-link" href={item.mediaUrl} data-pswp-width="1600" data-pswp-height="1200" data-cropped="true" data-title={item.titolo} data-detail={item.dettaglio || ""} data-year={itemYear(item)} data-event={event} data-interactive>
-                      <span class="media-card__visual">
-                        <img src={item.thumb} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" />
-                        <span class="shade"></span>
-                      </span>
-                      <span class="media-card__copy">
-                        <small>{itemYear(item)} · Foto</small>
-                        <strong>{item.titolo}</strong>
-                        <span>{event}</span>
-                      </span>
-                    </a>
-                  )}
-                </article>
-              );
-            })}
-          </div>
-        ) : (
-          <div class="media-empty"><strong>Archivio in preparazione</strong><p>I contenuti verranno pubblicati qui appena disponibili.</p></div>
-        )}
-      </div>
-    </section>
-
-    <section class="media-next">
-      <div class="media-shell media-next__inner">
-        <div><p class="eyebrow">Continua a esplorare</p><h2>Dietro ogni immagine c’è un percorso.</h2></div>
-        <nav aria-label="Continua a esplorare">
-          <a href="/profilo/" data-interactive><span>Profilo atleta</span><strong>Scopri il mio percorso</strong><b aria-hidden="true">→</b></a>
-          <a href="/risultati/" data-interactive><span>Risultati agonistici</span><strong>Tutti i risultati</strong><b aria-hidden="true">→</b></a>
-        </nav>
+        {visibleMedia.length > 0 ? <div class="editorial-grid" data-media-grid>
+          {visibleMedia.map((item, index) => {
+            const isVideo = item.mediaType === "video";
+            const id = isVideo ? youtubeId(item.urlYouTube) : "";
+            const event = eventLabel(item);
+            return <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-event={event}>
+              {isVideo ? <button class="media-card__button media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""} aria-label={`Apri video: ${item.titolo}`}>
+                <span class="media-card__visual media-card__visual--video"><img src={item.thumb} alt="" loading="lazy" decoding="async" /><span class="shade"></span><span class="play" aria-hidden="true">▶</span></span>
+                <span class="media-card__copy"><small>{itemYear(item)} · Video</small><strong>{item.titolo}</strong><span>{event}</span></span>
+              </button> : <a class="media-card__button" href={item.mediaUrl} target="_blank" rel="noopener" data-interactive>
+                <span class="media-card__visual"><img src={item.thumb} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" /><span class="shade"></span></span>
+                <span class="media-card__copy"><small>{itemYear(item)} · Foto</small><strong>{item.titolo}</strong><span>{event}</span></span>
+              </a>}
+            </article>;
+          })}
+        </div> : <div class="media-empty"><strong>Archivio in preparazione</strong><p>I contenuti verranno pubblicati qui appena disponibili.</p></div>}
       </div>
     </section>
   </main>
 
-  <dialog class="video-viewer" id="video-viewer" aria-label="Riproduzione video">
-    <div class="video-viewer__frame">
+  <div class="video-viewer" id="video-viewer" hidden aria-hidden="true">
+    <div class="video-viewer__backdrop" data-video-close></div>
+    <div class="video-viewer__panel" role="dialog" aria-modal="true" aria-label="Riproduzione video">
       <button class="viewer-close" type="button" data-interactive data-video-close aria-label="Chiudi video">×</button>
       <div class="video-viewer__player" data-video-player></div>
-      <aside class="video-viewer__meta">
-        <p class="eyebrow">Video</p>
-        <h2 data-video-title></h2>
-        <p data-video-detail></p>
-        <time data-video-date></time>
-      </aside>
+      <aside class="video-viewer__meta"><p class="eyebrow">Video</p><h2 data-video-title></h2><p data-video-detail></p><time data-video-date></time></aside>
     </div>
-  </dialog>
+  </div>
 
   <script>
-    import PhotoSwipeLightbox from 'photoswipe/lightbox';
-    import 'photoswipe/style.css';
-
     const typeButtons = Array.from(document.querySelectorAll('[data-type-filter]'));
     const yearSelect = document.querySelector('[data-year-filter]');
     const eventSelect = document.querySelector('[data-event-filter]');
     const cards = Array.from(document.querySelectorAll('[data-media-grid] .media-card'));
     let activeType = 'tutti';
-
     const applyFilters = () => {
       const year = yearSelect instanceof HTMLSelectElement ? yearSelect.value : 'tutti';
       const event = eventSelect instanceof HTMLSelectElement ? eventSelect.value : 'tutti';
       cards.forEach((card) => {
-        const typeOk = activeType === 'tutti' || card.getAttribute('data-media-type') === activeType;
-        const yearOk = year === 'tutti' || card.getAttribute('data-year') === year;
-        const eventOk = event === 'tutti' || card.getAttribute('data-event') === event;
-        card.hidden = !(typeOk && yearOk && eventOk);
+        const show=(activeType==='tutti'||card.getAttribute('data-media-type')===activeType)&&(year==='tutti'||card.getAttribute('data-year')===year)&&(event==='tutti'||card.getAttribute('data-event')===event);
+        card.hidden=!show;
       });
     };
+    typeButtons.forEach((button)=>button.addEventListener('click',()=>{activeType=button.getAttribute('data-type-filter')||'tutti';typeButtons.forEach((item)=>item.setAttribute('aria-pressed',String(item===button)));applyFilters();}));
+    yearSelect?.addEventListener('change',applyFilters); eventSelect?.addEventListener('change',applyFilters);
 
-    typeButtons.forEach((button) => button.addEventListener('click', () => {
-      activeType = button.getAttribute('data-type-filter') || 'tutti';
-      typeButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
-      applyFilters();
-    }));
-    yearSelect?.addEventListener('change', applyFilters);
-    eventSelect?.addEventListener('change', applyFilters);
-
-    const lightbox = new PhotoSwipeLightbox({
-      gallery: '[data-media-grid]',
-      children: 'a.pswp-link:not([hidden])',
-      pswpModule: () => import('photoswipe'),
-      bgOpacity: 0.97,
-      wheelToZoom: true,
-      padding: { top: 42, bottom: 72, left: 42, right: 42 }
-    });
-    lightbox.on('uiRegister', () => {
-      lightbox.pswp?.ui?.registerElement({
-        name: 'caption',
-        order: 9,
-        isButton: false,
-        appendTo: 'root',
-        html: '',
-        onInit: (el, pswp) => {
-          pswp.on('change', () => {
-            const data = pswp.currSlide?.data?.element;
-            if (!(data instanceof HTMLElement)) return;
-            const title = data.dataset.title || '';
-            const detail = data.dataset.detail || '';
-            const year = data.dataset.year || '';
-            const event = data.dataset.event || '';
-            el.innerHTML = `<div class="pswp-caption-inner"><small>${year}${event ? ` · ${event}` : ''}</small><strong>${title}</strong>${detail ? `<span>${detail}</span>` : ''}</div>`;
-          });
-        }
-      });
-    });
-    lightbox.init();
-
-    const dialog = document.querySelector('#video-viewer');
-    const player = dialog?.querySelector('[data-video-player]');
-    const videoTitle = dialog?.querySelector('[data-video-title]');
-    const videoDetail = dialog?.querySelector('[data-video-detail]');
-    const videoDate = dialog?.querySelector('[data-video-date]');
-
-    const closeVideo = () => {
-      if (player) player.innerHTML = '';
-      if (dialog instanceof HTMLDialogElement && dialog.open) dialog.close();
+    const viewer=document.querySelector('#video-viewer');
+    const panel=viewer?.querySelector('.video-viewer__panel');
+    const player=viewer?.querySelector('[data-video-player]');
+    const titleEl=viewer?.querySelector('[data-video-title]');
+    const detailEl=viewer?.querySelector('[data-video-detail]');
+    const dateEl=viewer?.querySelector('[data-video-date]');
+    const triggers=Array.from(document.querySelectorAll('.media-trigger[data-media-type="video"]'));
+    let currentIndex=0;
+    const openVideo=(button)=>{
+      if(!(viewer instanceof HTMLElement)||!(player instanceof HTMLElement)||!(button instanceof HTMLElement))return;
+      const id=button.dataset.youtubeId||''; if(!id)return;
+      const title=button.dataset.title||'';
+      player.innerHTML=`<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&playsinline=1&rel=0&fs=1" title="${title.replace(/"/g,'&quot;')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>`;
+      if(titleEl)titleEl.textContent=title; if(detailEl)detailEl.textContent=button.dataset.detail||'';
+      if(dateEl instanceof HTMLTimeElement){const date=button.dataset.date||'';dateEl.dateTime=date;dateEl.textContent=date?date.split('-').reverse().join('/'):'';}
+      viewer.hidden=false; viewer.setAttribute('aria-hidden','false'); document.body.classList.add('video-open');
+      currentIndex=Math.max(0,triggers.indexOf(button)); requestAnimationFrame(()=>viewer.classList.add('is-open'));
     };
-
-    document.querySelectorAll('.media-trigger[data-media-type="video"]').forEach((button) => {
-      button.addEventListener('click', () => {
-        if (!(dialog instanceof HTMLDialogElement) || !player) return;
-        const id = button.getAttribute('data-youtube-id') || '';
-        if (!id) return;
-        const title = button.getAttribute('data-title') || '';
-        player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${title.replace(/"/g, '&quot;')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
-        if (videoTitle) videoTitle.textContent = title;
-        if (videoDetail) videoDetail.textContent = button.getAttribute('data-detail') || '';
-        const date = button.getAttribute('data-date') || '';
-        if (videoDate instanceof HTMLTimeElement) {
-          videoDate.dateTime = date;
-          videoDate.textContent = date ? date.split('-').reverse().join('/') : '';
-        }
-        dialog.showModal();
-      });
-    });
-    dialog?.querySelector('[data-video-close]')?.addEventListener('click', closeVideo);
-    dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeVideo(); });
-    dialog?.addEventListener('cancel', () => { if (player) player.innerHTML = ''; });
+    const closeVideo=()=>{if(!(viewer instanceof HTMLElement))return;viewer.classList.remove('is-open');document.body.classList.remove('video-open');if(player)player.innerHTML='';setTimeout(()=>{viewer.hidden=true;viewer.setAttribute('aria-hidden','true');},160);};
+    triggers.forEach((button)=>button.addEventListener('click',()=>openVideo(button)));
+    viewer?.querySelectorAll('[data-video-close]').forEach((el)=>el.addEventListener('click',closeVideo));
+    document.addEventListener('keydown',(e)=>{if(e.key==='Escape'&&!viewer?.hidden)closeVideo();});
+    let touchX=0;
+    panel?.addEventListener('touchstart',(e)=>{touchX=e.changedTouches[0]?.clientX||0;},{passive:true});
+    panel?.addEventListener('touchend',(e)=>{const end=e.changedTouches[0]?.clientX||0;const dx=end-touchX;if(Math.abs(dx)<70||triggers.length<2)return;currentIndex=(currentIndex+(dx<0?1:-1)+triggers.length)%triggers.length;openVideo(triggers[currentIndex]);},{passive:true});
   </script>
 
   <style>
-    :global(.pswp__bg){background:#020202!important}.media-page{background:#060504;color:#f3ede2}.media-shell{width:min(1180px,calc(100% - 56px));margin-inline:auto}.eyebrow{margin:0;color:var(--gold-bright);font-family:var(--font-ui);font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.media-hero{position:relative;min-height:390px;padding-top:118px;background:radial-gradient(circle at 78% 20%,rgba(181,138,60,.14),transparent 28%),linear-gradient(180deg,#090807 0%,#060504 100%);overflow:hidden}.media-hero:after{content:"";position:absolute;inset:auto 0 0;height:110px;background:linear-gradient(transparent,#060504);pointer-events:none}.media-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}.media-hero__inner{position:relative;z-index:1;padding:54px 0 74px}.media-hero h1,.featured h2,.archive h2,.media-next h2{font-family:var(--font-display);text-transform:uppercase;line-height:.92}.media-hero h1{margin:10px 0 4px;font-size:clamp(4.4rem,9vw,8rem)}.media-hero__claim{margin:0;color:#d6ad61;font-family:var(--font-display);font-size:clamp(1.6rem,2.7vw,2.8rem);line-height:1}.media-hero__intro{max-width:560px;margin:18px 0 0;color:#c8c0b4;font-size:1rem;line-height:1.7}.featured{padding:68px 0 92px}.section-row{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:26px}.section-row h2{max-width:680px;margin:8px 0 0;font-size:clamp(2.3rem,4.8vw,4.8rem)}.section-row>a{color:#d4a64d;text-decoration:none;font-family:var(--font-ui);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.featured-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(300px,1fr);gap:14px;min-height:540px}.featured-main,.featured-small{position:relative;overflow:hidden;border:1px solid rgba(181,138,60,.24);padding:0;background:#0a0908;color:#fff;text-align:left;cursor:pointer}.featured-main img,.featured-small img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease,filter .28s ease}.featured-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.featured-main:hover img,.featured-small:hover img,.featured-main:focus-visible img,.featured-small:focus-visible img{transform:scale(1.03);filter:brightness(.9)}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.86) 100%)}.play{position:absolute;left:50%;top:50%;display:grid;width:70px;height:70px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.88);border-radius:50%;background:rgba(0,0,0,.38);font-size:1.15rem;padding-left:4px}.play--small{width:48px;height:48px;font-size:.82rem}.featured-copy{position:absolute;left:26px;right:26px;bottom:24px;display:grid;gap:6px}.featured-copy small,.media-card__copy small{color:#d4a64d;font:700 .64rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.featured-copy strong{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.6rem);line-height:.95;text-transform:uppercase}.featured-copy span{color:#d7d0c4;font-size:.85rem}.featured-copy--small{left:18px;bottom:16px}.featured-copy--small strong{font-size:1.08rem}.archive{padding:86px 0 98px;background:#0b0a09}.archive-heading{margin-bottom:32px}.archive-heading p:last-child{max-width:620px;color:#b9b1a5;line-height:1.65}.filter-bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0 20px;border-top:1px solid rgba(181,138,60,.18)}.filter-types,.filter-selects{display:flex;gap:8px}.filter-types button,.filter-selects select{min-height:42px;border:1px solid rgba(242,235,221,.2);background:#0b0a09;color:#f2ebdd;padding:0 16px;font:700 .65rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.filter-types button{border-radius:999px;cursor:pointer}.filter-types button[aria-pressed="true"]{border-color:#c99b4c;background:#c99b4c;color:#080706}.filter-selects select{min-width:128px;cursor:pointer}.editorial-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.media-card{grid-column:span 4;min-height:360px}.media-card--wide{grid-column:span 8}.media-card--portrait{grid-column:span 4}.media-card[hidden]{display:none}.media-card__button{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;border:0;padding:0;background:#080706;color:#fff;text-decoration:none;text-align:left;cursor:pointer}.media-card__visual{position:relative;display:block;min-height:280px;overflow:hidden;background:#111}.media-card--wide .media-card__visual{min-height:390px}.media-card__visual img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease,filter .25s ease}.media-card__button:hover img,.media-card__button:focus-visible img{transform:scale(1.03);filter:brightness(.91)}.media-card__copy{display:grid;gap:5px;padding:15px 17px 18px;border-top:1px solid rgba(181,138,60,.15)}.media-card__copy strong{font-family:var(--font-display);font-size:1.05rem;line-height:1;text-transform:uppercase}.media-card__copy>span{color:#aaa296;font-size:.75rem}.media-empty{padding:60px;border:1px solid rgba(181,138,60,.2);text-align:center}.media-next{padding:78px 0 90px;background:#060504}.media-next__inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:end}.media-next h2{margin:9px 0 0;font-size:clamp(2.25rem,4vw,4rem)}.media-next nav{display:grid;grid-template-columns:1fr 1fr;gap:12px}.media-next nav a{position:relative;display:grid;gap:8px;min-height:136px;padding:23px;border:1px solid rgba(181,138,60,.24);color:#f2ebdd;text-decoration:none}.media-next nav span{color:#b6ada0;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.media-next nav strong{font-family:var(--font-display);font-size:1.25rem;text-transform:uppercase}.media-next nav b{position:absolute;right:20px;bottom:20px;color:#d4a64d}.video-viewer{width:min(1380px,calc(100vw - 40px));max-width:none;border:0;padding:0;background:#020202;color:#fff}.video-viewer::backdrop{background:rgba(0,0,0,.96)}.video-viewer__frame{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;min-height:min(80vh,820px)}.video-viewer__player{display:grid;place-items:center;background:#000}.video-viewer__player iframe{width:100%;aspect-ratio:16/9;border:0}.video-viewer__meta{display:flex;flex-direction:column;justify-content:center;padding:42px 30px;border-left:1px solid rgba(181,138,60,.2)}.video-viewer__meta h2{margin:10px 0 12px;font-family:var(--font-display);font-size:2rem;line-height:.95;text-transform:uppercase}.video-viewer__meta p:not(.eyebrow){color:#c7bfb3;line-height:1.55}.video-viewer__meta time{margin-top:14px;color:#d4a64d;font-size:.75rem}.viewer-close{position:absolute;z-index:3;right:14px;top:14px;width:44px;height:44px;border:1px solid rgba(255,255,255,.32);border-radius:50%;background:rgba(0,0,0,.62);color:#fff;font-size:1.5rem;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}:global(.pswp-caption){position:absolute;left:0;right:0;bottom:0;z-index:20;padding:0 24px 18px;pointer-events:none}:global(.pswp-caption-inner){display:grid;gap:4px;width:min(780px,calc(100% - 20px));margin:auto;color:#fff;text-align:center}:global(.pswp-caption-inner small){color:#d4a64d;font:700 .65rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}:global(.pswp-caption-inner strong){font-family:var(--font-display);font-size:1.2rem;text-transform:uppercase}:global(.pswp-caption-inner span){color:#c9c1b7;font-size:.78rem}@media(max-width:900px){.media-shell{width:min(100% - 32px,1180px)}.media-hero{min-height:330px;padding-top:92px}.media-hero__inner{padding:40px 0 58px}.featured{padding:48px 0 70px}.section-row{align-items:start}.featured-grid{grid-template-columns:1fr;min-height:0}.featured-main{aspect-ratio:16/9}.featured-side{grid-template-columns:1fr 1fr;grid-template-rows:none}.featured-small{aspect-ratio:4/5}.editorial-grid{grid-template-columns:repeat(2,1fr);gap:10px}.media-card,.media-card--wide,.media-card--portrait{grid-column:span 1;min-height:0}.media-card[data-media-type="video"]{grid-column:1/-1}.media-card__visual,.media-card--wide .media-card__visual{min-height:0;aspect-ratio:4/5}.media-card[data-media-type="video"] .media-card__visual{aspect-ratio:16/9}.media-next__inner{grid-template-columns:1fr;gap:28px}.video-viewer__frame{grid-template-columns:1fr;min-height:0}.video-viewer__meta{border-left:0;border-top:1px solid rgba(181,138,60,.2);padding:26px 22px}.filter-bar{position:sticky;top:72px;background:#0b0a09}.filter-selects{width:100%}.filter-selects label{flex:1}.filter-selects select{width:100%}}@media(max-width:640px){.media-shell{width:calc(100% - 28px)}.media-hero{min-height:300px}.media-hero h1{font-size:clamp(3.7rem,20vw,5.6rem)}.media-hero__claim{font-size:1.65rem}.section-row{display:block}.section-row>a{display:inline-block;margin-top:14px}.featured-grid{gap:10px}.featured-side{gap:10px}.featured-copy{left:16px;right:16px;bottom:15px}.featured-copy strong{font-size:1.25rem}.play{width:58px;height:58px}.archive{padding:62px 0 72px}.filter-bar{top:62px;flex-direction:column;align-items:stretch;padding:10px 0 14px}.filter-types{display:grid;grid-template-columns:repeat(3,1fr)}.filter-types button{padding:0 10px}.filter-selects{display:grid;grid-template-columns:1fr 1fr}.editorial-grid{gap:8px}.media-card__copy{padding:11px 10px 13px}.media-card__copy strong{font-size:.88rem}.media-card__copy>span{font-size:.68rem}.media-next{padding:58px 0 72px}.media-next nav{grid-template-columns:1fr}.video-viewer{width:100vw;height:100dvh}.video-viewer__frame{min-height:100dvh;align-content:center}.video-viewer__player iframe{width:100%}.video-viewer__meta{padding:22px 18px 30px}.video-viewer__meta h2{font-size:1.55rem}}
+    .media-page{background:#060504;color:#f3ede2}.media-shell{width:min(1180px,calc(100% - 56px));margin-inline:auto}.eyebrow{margin:0;color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.media-hero{position:relative;min-height:390px;padding-top:118px;background:radial-gradient(circle at 78% 20%,rgba(181,138,60,.14),transparent 28%),linear-gradient(180deg,#090807,#060504);overflow:hidden}.media-hero__inner{padding:54px 0 74px}.media-hero h1,.featured h2,.archive h2{font-family:var(--font-display);text-transform:uppercase;line-height:.92}.media-hero h1{margin:10px 0 4px;font-size:clamp(4.4rem,9vw,8rem)}.media-hero__claim{margin:0;color:#d6ad61;font-family:var(--font-display);font-size:clamp(1.6rem,2.7vw,2.8rem)}.media-hero__intro{max-width:560px;color:#c8c0b4;line-height:1.7}.featured{padding:68px 0 92px}.section-row{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:26px}.section-row h2{margin:8px 0 0;font-size:clamp(2.3rem,4.8vw,4.8rem)}.section-row>a{color:#d4a64d;font:700 .7rem/1 var(--font-ui);text-transform:uppercase}.featured-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(300px,1fr);gap:14px;min-height:540px}.featured-main,.featured-small{position:relative;overflow:hidden;border:1px solid rgba(181,138,60,.24);padding:0;background:#0a0908;color:#fff;text-align:left;cursor:pointer}.featured-main img,.featured-small img{width:100%;height:100%;object-fit:cover}.featured-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.86))}.play{position:absolute;left:50%;top:50%;display:grid;width:70px;height:70px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.88);border-radius:50%;background:rgba(0,0,0,.38)}.play--small{width:48px;height:48px}.featured-copy{position:absolute;left:26px;right:26px;bottom:24px;display:grid;gap:6px}.featured-copy small,.media-card__copy small{color:#d4a64d;font:700 .64rem/1 var(--font-ui);text-transform:uppercase}.featured-copy strong{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.6rem);text-transform:uppercase}.featured-copy--small{left:18px;bottom:16px}.archive{padding:86px 0 98px;background:#0b0a09}.archive-heading p:last-child{max-width:620px;color:#b9b1a5}.filter-bar{display:flex;justify-content:space-between;gap:18px;padding:14px 0 20px;border-top:1px solid rgba(181,138,60,.18)}.filter-types,.filter-selects{display:flex;gap:8px}.filter-types button,.filter-selects select{min-height:42px;border:1px solid rgba(242,235,221,.2);background:#0b0a09;color:#f2ebdd;padding:0 16px;font:700 .65rem/1 var(--font-ui);text-transform:uppercase}.filter-types button[aria-pressed="true"]{border-color:#c99b4c;background:#c99b4c;color:#080706}.editorial-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.media-card{grid-column:span 4;min-height:360px}.media-card--wide{grid-column:span 8}.media-card[hidden]{display:none}.media-card__button{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;border:0;padding:0;background:#080706;color:#fff;text-align:left}.media-card__visual{position:relative;display:block;min-height:280px;overflow:hidden}.media-card--wide .media-card__visual{min-height:390px}.media-card__visual img{width:100%;height:100%;object-fit:cover}.media-card__copy{display:grid;gap:5px;padding:15px 17px 18px}.media-card__copy strong{font-family:var(--font-display);font-size:1.05rem;text-transform:uppercase}.media-card__copy>span{color:#aaa296;font-size:.75rem}.media-empty{padding:60px;text-align:center}.video-viewer[hidden]{display:none!important}.video-viewer{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;opacity:0;transition:opacity .16s ease}.video-viewer.is-open{opacity:1}.video-viewer__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.96)}.video-viewer__panel{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 320px;width:min(1460px,calc(100vw - 28px));max-height:calc(100dvh - 28px);background:#020202;box-shadow:0 20px 70px #000;overflow:auto}.video-viewer__player{display:grid;place-items:center;background:#000}.video-viewer__player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.video-viewer__meta{display:flex;flex-direction:column;justify-content:center;padding:42px 30px;border-left:1px solid rgba(181,138,60,.2)}.video-viewer__meta h2{margin:10px 0 12px;font-family:var(--font-display);font-size:2rem;text-transform:uppercase}.video-viewer__meta time{color:#d4a64d}.viewer-close{position:fixed;z-index:20002;right:18px;top:18px;width:52px;height:52px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:#070707;color:#fff;font-size:1.8rem;cursor:pointer}.video-open{overflow:hidden!important}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    @media(max-width:900px){.media-shell{width:calc(100% - 32px)}.featured-grid{grid-template-columns:1fr;min-height:0}.featured-main{aspect-ratio:16/9}.featured-side{grid-template-columns:1fr 1fr;grid-template-rows:none}.featured-small{aspect-ratio:4/5}.editorial-grid{grid-template-columns:repeat(2,1fr)}.media-card,.media-card--wide,.media-card--portrait{grid-column:span 1;min-height:0}.media-card[data-media-type="video"]{grid-column:1/-1}.media-card__visual,.media-card--wide .media-card__visual{min-height:0;aspect-ratio:4/5}.media-card[data-media-type="video"] .media-card__visual{aspect-ratio:16/9}.video-viewer__panel{grid-template-columns:1fr}.video-viewer__meta{border-left:0;border-top:1px solid rgba(181,138,60,.2);padding:22px}}
+    @media(max-width:640px){.media-shell{width:calc(100% - 28px)}.featured{padding:48px 0 70px}.section-row{display:block}.featured-grid{gap:10px}.featured-side{gap:10px}.archive{padding:62px 0 72px}.filter-bar{flex-direction:column}.filter-types{display:grid;grid-template-columns:repeat(3,1fr)}.filter-selects{display:grid;grid-template-columns:1fr 1fr}.filter-selects select{width:100%}.editorial-grid{gap:8px}.video-viewer{place-items:start center}.video-viewer__panel{width:100vw;max-height:100dvh;min-height:100dvh;overflow-y:auto;padding-top:82px}.video-viewer__player{width:100vw}.video-viewer__player iframe{width:100vw!important;height:auto!important;aspect-ratio:16/9!important}.video-viewer__meta{padding:22px 22px 40px}.viewer-close{top:14px;right:14px;width:54px;height:54px}.play{width:58px;height:58px}}
   </style>
 </BaseLayout>

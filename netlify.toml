@@ -20,6 +20,13 @@
   status = 301
   force = true
 
+# Results is actively being refined: avoid serving a stale HTML document
+# from browser/CDN caches while the layout is under adjustment.
+[[headers]]
+  for = "/risultati/*"
+  [headers.values]
+    Cache-Control = "no-store, max-age=0, must-revalidate"
+
 [[headers]]
   for = "/admin"
   [headers.values]

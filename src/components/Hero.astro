@@ -109,8 +109,9 @@ const copy = profile.content.home.hero;
       height: 100%;
       gap: 0;
       animation: challengeTickerLoop 18s linear infinite;
-      transform: translate3d(0, 0, 0);
+      transform: translate3d(-50%, 0, 0);
       will-change: transform;
+      backface-visibility: hidden;
     }
 
     .challenge-ticker__image {
@@ -130,8 +131,8 @@ const copy = profile.content.home.hero;
   }
 
   @keyframes challengeTickerLoop {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-50%, 0, 0); }
+    from { transform: translate3d(-50%, 0, 0); }
+    to { transform: translate3d(0, 0, 0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -142,6 +143,7 @@ const copy = profile.content.home.hero;
     .challenge-ticker::-webkit-scrollbar { display: none; }
     .challenge-ticker__track {
       animation: none;
+      transform: translate3d(0, 0, 0);
       will-change: auto;
     }
     .challenge-ticker__image:nth-child(2) { display: none; }

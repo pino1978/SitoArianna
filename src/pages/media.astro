@@ -3,15 +3,304 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import media from "../data/media.json";
 import profile from "../data/profile.json";
-const copy=profile.content.mediaPage;const imageModules=import.meta.glob("../assets/images/*.{png,jpg,jpeg,webp}",{eager:true});function localImage(fileName){if(!fileName)return null;return imageModules[`../assets/images/${fileName}`]?.default??null}function photoUrl(item){if(item.url)return item.url;const image=localImage(item.immagine);return image?.src??""}function youtubeId(url=""){const match=url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);return match?.[1]??""}function displayDate(value){if(!value)return"";const[year,month,day]=value.split("-");return`${day}/${month}/${year}`}const photos=media.filter(item=>item.tipo==="foto"&&item.visibile&&!item.isPlaceholder&&photoUrl(item));const videos=media.filter(item=>item.tipo==="video"&&item.visibile&&youtubeId(item.urlYouTube));const categories=[["tutti","Tutti"],["allenamento","Allenamenti"],["gara","Gare"],["podio","Podi"],["ritratto","Ritratti"],["evento","Eventi"]];
+
+const copy = profile.content.mediaPage;
+const imageModules = import.meta.glob("../assets/images/*.{png,jpg,jpeg,webp}", { eager: true });
+function localImage(fileName) {
+  if (!fileName) return null;
+  return imageModules[`../assets/images/${fileName}`]?.default ?? null;
+}
+function photoUrl(item) {
+  if (item.url) return item.url;
+  const image = localImage(item.immagine);
+  return image?.src ?? "";
+}
+function youtubeId(url = "") {
+  const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
+  return match?.[1] ?? "";
+}
+function displayDate(value) {
+  if (!value) return "";
+  const [year, month, day] = value.split("-");
+  return `${day}/${month}/${year}`;
+}
+function eventLabel(item) {
+  const detail = item.dettaglio || "";
+  const parts = detail.split("·").map((part) => part.trim()).filter(Boolean);
+  return parts.at(-1) || item.titolo || "Evento";
+}
+function itemYear(item) {
+  return String(item.anno || item.data?.slice(0, 4) || "");
+}
+
+const photos = media.filter((item) => item.tipo === "foto" && item.visibile && !item.isPlaceholder && photoUrl(item));
+const videos = media.filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube));
+const visibleMedia = [
+  ...videos.map((item) => ({ ...item, mediaType: "video", mediaUrl: item.urlYouTube, thumb: `https://i.ytimg.com/vi/${youtubeId(item.urlYouTube)}/hqdefault.jpg` })),
+  ...photos.map((item) => ({ ...item, mediaType: "foto", mediaUrl: photoUrl(item), thumb: photoUrl(item) }))
+];
+const years = [...new Set(visibleMedia.map(itemYear).filter(Boolean))].sort((a, b) => Number(b) - Number(a));
+const events = [...new Set(visibleMedia.map(eventLabel).filter(Boolean))].sort((a, b) => a.localeCompare(b, "it"));
+const primaryVideo = videos[0] || null;
+const secondaryItems = [videos[1], photos[0]].filter(Boolean);
 ---
+
 <BaseLayout title={copy.seo.title} description={copy.seo.description}>
-<main id="main" class="media-page"><section class="page-hero"><Header /><div><p class="eyebrow">{copy.hero.kicker}</p><h1>{copy.hero.title}</h1><p>{copy.hero.intro}</p></div></section>
-<section class="media-content" aria-labelledby="gallery-title"><div class="section-heading"><p class="eyebrow">{copy.gallery.kicker}</p><h2 id="gallery-title">{copy.gallery.title}</h2><p>{copy.gallery.intro}</p></div>{photos.length>0?(<><div class="filters" aria-label="Filtri gallery">{categories.map(([value,label],index)=><button type="button" data-filter={value} aria-pressed={index===0?"true":"false"}>{label}</button>)}</div><div class="gallery-grid" data-gallery-grid>{photos.map(item=><article data-category={item.categoria||"evento"}><button class="gallery-open" type="button" data-interactive data-image={photoUrl(item)} data-title={item.titolo} data-detail={item.dettaglio||""} aria-label={`Apri foto: ${item.titolo}`}><span class="gallery-image"><img src={photoUrl(item)} alt={item.testoAlternativo||item.titolo} loading="lazy" decoding="async" /></span><div><span>{item.anno||""}</span><h3>{item.titolo}</h3>{item.dettaglio&&<p>{item.dettaglio}</p>}</div></button></article>)}</div></>):(<div class="media-empty"><strong>Gallery in preparazione</strong><p>Le fotografie selezionate verranno pubblicate qui dalla console.</p></div>)}</section>
-<section class="video-section" aria-labelledby="video-title"><div class="section-heading"><p class="eyebrow">{copy.video.kicker}</p><h2 id="video-title">{copy.video.title}</h2><p>{copy.video.intro}</p></div>{videos.length>0?(<div class="video-grid">{videos.map(item=>{const id=youtubeId(item.urlYouTube);return <article class="video-card"><a href={item.urlYouTube} target="_blank" rel="noopener" data-interactive aria-label={`Apri su YouTube: ${item.titolo}`}><span class="video-thumb"><img src={`https://i.ytimg.com/vi/${id}/hqdefault.jpg`} alt="" loading="lazy" /><i aria-hidden="true">▶</i></span><span class="video-copy"><strong>{item.titolo}</strong>{item.dettaglio&&<span>{item.dettaglio}</span>}{item.data&&<time datetime={item.data}>{displayDate(item.data)}</time>}</span></a></article>})}</div>):(<div class="media-empty media-empty--dark"><strong>Nessun video pubblicato</strong><p>I video YouTube verranno aggiunti dalla console.</p></div>)}</section></main>
-<dialog class="photo-lightbox" id="photo-lightbox"><button class="photo-lightbox__close" type="button" data-lightbox-close aria-label="Chiudi">×</button><figure><img id="lightbox-image" alt="" /><figcaption><strong id="lightbox-title"></strong><span id="lightbox-detail"></span></figcaption></figure></dialog>
-<script>const filters=Array.from(document.querySelectorAll('[data-filter]'));const cards=Array.from(document.querySelectorAll('[data-gallery-grid] > article'));filters.forEach(button=>button.addEventListener('click',()=>{const value=button.getAttribute('data-filter')||'tutti';filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));cards.forEach(card=>{card.hidden=value!=='tutti'&&card.getAttribute('data-category')!==value})}));const dialog=document.querySelector('#photo-lightbox'),image=document.querySelector('#lightbox-image'),title=document.querySelector('#lightbox-title'),detail=document.querySelector('#lightbox-detail');document.querySelectorAll('.gallery-open').forEach(button=>button.addEventListener('click',()=>{if(!(dialog instanceof HTMLDialogElement)||!(image instanceof HTMLImageElement))return;image.src=button.getAttribute('data-image')||'';image.alt=button.getAttribute('data-title')||'';if(title)title.textContent=button.getAttribute('data-title')||'';if(detail)detail.textContent=button.getAttribute('data-detail')||'';dialog.showModal()}));document.querySelector('[data-lightbox-close]')?.addEventListener('click',()=>dialog instanceof HTMLDialogElement&&dialog.close());dialog?.addEventListener('click',event=>{if(event.target===dialog&&dialog instanceof HTMLDialogElement)dialog.close()});</script>
-<style>
-.media-page{background:#080706;color:#f5f0e7}.page-hero{min-height:430px;padding:150px max(28px,calc((100vw - 1160px)/2)) 70px;background:radial-gradient(circle at 80% 18%,rgba(185,134,50,.18),transparent 30%),linear-gradient(135deg,#080706,#17130f);position:relative}.page-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}h1,h2,h3{font-family:var(--font-display);text-transform:uppercase;line-height:.95}.page-hero h1{font-size:clamp(3rem,8vw,7rem);margin:.2em 0}.page-hero>div>p:last-child{max-width:620px;font-size:1.15rem}.eyebrow{color:var(--gold-bright);font-family:var(--font-ui);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}.media-content,.video-section{padding:90px max(28px,calc((100vw - 1160px)/2))}.media-content{background:var(--ivory);color:var(--ink)}.section-heading{max-width:760px;margin-bottom:36px}.section-heading h2{font-size:clamp(2.2rem,5vw,4.8rem);margin:.2em 0}.section-heading>p:last-child{line-height:1.7}.filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}.filters button{border:1px solid rgba(8,7,6,.25);background:transparent;padding:10px 15px;font:inherit;text-transform:uppercase;font-size:.68rem;letter-spacing:.1em;cursor:pointer}.filters button[aria-pressed="true"]{background:#080706;color:#f5f0e7}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.gallery-grid article{position:relative;overflow:hidden;background:#0b0a09}.gallery-grid article[hidden]{display:none}.gallery-open{display:grid;grid-template-rows:minmax(310px,1fr) auto;position:relative;width:100%;height:100%;padding:0;border:0;background:#0b0a09;color:inherit;text-align:left;cursor:pointer}.gallery-image{display:grid;place-items:center;min-height:310px;background:#0b0a09;overflow:hidden}.gallery-grid img{display:block;width:100%;height:100%;max-height:460px;object-fit:contain;opacity:1;transition:.25s}.gallery-open:hover img,.gallery-open:focus-visible img{transform:scale(1.012)}.gallery-grid article div{position:static;padding:16px 20px 18px;background:#0b0a09;color:#fff}.gallery-grid span{font-size:.7rem;color:var(--gold-bright)}.gallery-grid h3{margin:6px 0 0;font-size:1.25rem}.gallery-grid p{margin:6px 0 0;color:#d7d0c4;font-size:.78rem}.video-section{background:#0d0c0b}.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.video-card{border:1px solid rgba(185,134,50,.3);background:#090807}.video-card a{display:block;color:inherit;text-decoration:none}.video-thumb{position:relative;display:block;aspect-ratio:16/9;overflow:hidden;background:#000}.video-thumb img{width:100%;height:100%;object-fit:cover;opacity:.82}.video-thumb i{position:absolute;left:50%;top:50%;display:grid;width:54px;height:54px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.8);border-radius:50%;background:rgba(0,0,0,.44);font-style:normal}.video-copy{display:grid;gap:5px;padding:16px}.video-copy strong{font-family:var(--font-display);font-size:1rem;text-transform:uppercase}.video-copy>span{color:#c8c0b5;font-size:.78rem}.video-copy time{color:var(--gold-bright);font-size:.72rem}.media-empty{padding:42px;border:1px solid rgba(8,7,6,.16);text-align:center}.media-empty strong{font-family:var(--font-display);text-transform:uppercase}.media-empty p{margin:8px 0 0;color:#70695f}.media-empty--dark{border-color:rgba(185,134,50,.25)}.media-empty--dark p{color:#aaa}.photo-lightbox{width:min(1100px,calc(100vw - 32px));max-width:none;border:0;padding:0;background:#050505;color:#fff}.photo-lightbox::backdrop{background:rgba(0,0,0,.92)}.photo-lightbox figure{margin:0;display:grid}.photo-lightbox img{display:block;max-width:100%;max-height:82vh;margin:auto;object-fit:contain}.photo-lightbox figcaption{display:grid;gap:5px;padding:16px 20px}.photo-lightbox figcaption strong{font-family:var(--font-display);text-transform:uppercase}.photo-lightbox figcaption span{color:#bbb}.photo-lightbox__close{position:absolute;z-index:2;right:12px;top:12px;width:44px;height:44px;border:1px solid rgba(255,255,255,.35);border-radius:50%;background:rgba(0,0,0,.7);color:#fff;font-size:1.5rem;cursor:pointer}@media(max-width:800px){.gallery-grid,.video-grid{grid-template-columns:1fr}.gallery-image{min-height:0}.gallery-grid img{height:auto;max-height:none}.media-content,.video-section{padding:64px 18px}.page-hero{padding-left:18px;padding-right:18px}}
-</style>
+  <main id="main" class="media-page">
+    <section class="media-hero">
+      <Header />
+      <div class="media-shell media-hero__inner">
+        <p class="eyebrow">{copy.hero.kicker}</p>
+        <h1>Media</h1>
+        <p class="media-hero__claim">Allenamenti. Gare. Momenti.</p>
+        <p class="media-hero__intro">Immagini e video che raccontano il percorso sportivo, dentro e fuori dal tatami.</p>
+      </div>
+    </section>
+
+    {(primaryVideo || secondaryItems.length > 0) && (
+      <section class="featured media-shell" aria-labelledby="featured-title">
+        <div class="section-row">
+          <div>
+            <p class="eyebrow">In evidenza</p>
+            <h2 id="featured-title">Il movimento prima di tutto.</h2>
+          </div>
+          <a href="#archivio" data-interactive>Esplora l’archivio <span aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="featured-grid">
+          {primaryVideo && (() => {
+            const id = youtubeId(primaryVideo.urlYouTube);
+            return (
+              <button class="featured-main media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={primaryVideo.titolo} data-detail={primaryVideo.dettaglio || ""} data-date={primaryVideo.data || ""}>
+                <img src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`} alt="" loading="eager" decoding="async" />
+                <span class="shade"></span>
+                <span class="play" aria-hidden="true">▶</span>
+                <span class="featured-copy">
+                  <small>{primaryVideo.anno || ""} · Video</small>
+                  <strong>{primaryVideo.titolo}</strong>
+                  {primaryVideo.dettaglio && <span>{primaryVideo.dettaglio}</span>}
+                </span>
+              </button>
+            );
+          })()}
+
+          <div class="featured-side">
+            {secondaryItems.map((item) => {
+              const isVideo = item.tipo === "video";
+              const id = isVideo ? youtubeId(item.urlYouTube) : "";
+              const src = isVideo ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : photoUrl(item);
+              return (
+                <button class="featured-small media-trigger" type="button" data-interactive data-media-type={isVideo ? "video" : "foto"} data-youtube-id={id || undefined} data-image={!isVideo ? src : undefined} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""}>
+                  <img src={src} alt={isVideo ? "" : (item.testoAlternativo || item.titolo)} loading="lazy" decoding="async" />
+                  <span class="shade"></span>
+                  {isVideo && <span class="play play--small" aria-hidden="true">▶</span>}
+                  <span class="featured-copy featured-copy--small">
+                    <small>{item.anno || ""} · {isVideo ? "Video" : "Foto"}</small>
+                    <strong>{item.titolo}</strong>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="archive" id="archivio" aria-labelledby="archive-title">
+      <div class="media-shell">
+        <div class="section-row archive-heading">
+          <div>
+            <p class="eyebrow">Archivio</p>
+            <h2 id="archive-title">Foto & video</h2>
+            <p>{copy.gallery.intro}</p>
+          </div>
+        </div>
+
+        <div class="filter-bar" aria-label="Filtri media">
+          <div class="filter-types" role="group" aria-label="Tipo di contenuto">
+            <button type="button" data-interactive data-type-filter="tutti" aria-pressed="true">Tutti</button>
+            <button type="button" data-interactive data-type-filter="video" aria-pressed="false">Video</button>
+            <button type="button" data-interactive data-type-filter="foto" aria-pressed="false">Foto</button>
+          </div>
+          <div class="filter-selects">
+            <label>
+              <span class="sr-only">Anno</span>
+              <select data-year-filter data-interactive>
+                <option value="tutti">Anno</option>
+                {years.map((year) => <option value={year}>{year}</option>)}
+              </select>
+            </label>
+            <label>
+              <span class="sr-only">Evento</span>
+              <select data-event-filter data-interactive>
+                <option value="tutti">Evento</option>
+                {events.map((event) => <option value={event}>{event}</option>)}
+              </select>
+            </label>
+          </div>
+        </div>
+
+        {visibleMedia.length > 0 ? (
+          <div class="editorial-grid" data-media-grid>
+            {visibleMedia.map((item, index) => {
+              const isVideo = item.mediaType === "video";
+              const id = isVideo ? youtubeId(item.urlYouTube) : "";
+              const event = eventLabel(item);
+              return (
+                <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-event={event}>
+                  {isVideo ? (
+                    <button class="media-card__button media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""} aria-label={`Apri video: ${item.titolo}`}>
+                      <span class="media-card__visual media-card__visual--video">
+                        <img src={item.thumb} alt="" loading="lazy" decoding="async" />
+                        <span class="shade"></span>
+                        <span class="play" aria-hidden="true">▶</span>
+                      </span>
+                      <span class="media-card__copy">
+                        <small>{itemYear(item)} · Video</small>
+                        <strong>{item.titolo}</strong>
+                        <span>{event}</span>
+                      </span>
+                    </button>
+                  ) : (
+                    <a class="media-card__button pswp-link" href={item.mediaUrl} data-pswp-width="1600" data-pswp-height="1200" data-cropped="true" data-title={item.titolo} data-detail={item.dettaglio || ""} data-year={itemYear(item)} data-event={event} data-interactive>
+                      <span class="media-card__visual">
+                        <img src={item.thumb} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" />
+                        <span class="shade"></span>
+                      </span>
+                      <span class="media-card__copy">
+                        <small>{itemYear(item)} · Foto</small>
+                        <strong>{item.titolo}</strong>
+                        <span>{event}</span>
+                      </span>
+                    </a>
+                  )}
+                </article>
+              );
+            })}
+          </div>
+        ) : (
+          <div class="media-empty"><strong>Archivio in preparazione</strong><p>I contenuti verranno pubblicati qui appena disponibili.</p></div>
+        )}
+      </div>
+    </section>
+
+    <section class="media-next">
+      <div class="media-shell media-next__inner">
+        <div><p class="eyebrow">Continua a esplorare</p><h2>Dietro ogni immagine c’è un percorso.</h2></div>
+        <nav aria-label="Continua a esplorare">
+          <a href="/profilo/" data-interactive><span>Profilo atleta</span><strong>Scopri il mio percorso</strong><b aria-hidden="true">→</b></a>
+          <a href="/risultati/" data-interactive><span>Risultati agonistici</span><strong>Tutti i risultati</strong><b aria-hidden="true">→</b></a>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="video-viewer" id="video-viewer" aria-label="Riproduzione video">
+    <div class="video-viewer__frame">
+      <button class="viewer-close" type="button" data-interactive data-video-close aria-label="Chiudi video">×</button>
+      <div class="video-viewer__player" data-video-player></div>
+      <aside class="video-viewer__meta">
+        <p class="eyebrow">Video</p>
+        <h2 data-video-title></h2>
+        <p data-video-detail></p>
+        <time data-video-date></time>
+      </aside>
+    </div>
+  </dialog>
+
+  <script>
+    import PhotoSwipeLightbox from 'photoswipe/lightbox';
+    import 'photoswipe/style.css';
+
+    const typeButtons = Array.from(document.querySelectorAll('[data-type-filter]'));
+    const yearSelect = document.querySelector('[data-year-filter]');
+    const eventSelect = document.querySelector('[data-event-filter]');
+    const cards = Array.from(document.querySelectorAll('[data-media-grid] .media-card'));
+    let activeType = 'tutti';
+
+    const applyFilters = () => {
+      const year = yearSelect instanceof HTMLSelectElement ? yearSelect.value : 'tutti';
+      const event = eventSelect instanceof HTMLSelectElement ? eventSelect.value : 'tutti';
+      cards.forEach((card) => {
+        const typeOk = activeType === 'tutti' || card.getAttribute('data-media-type') === activeType;
+        const yearOk = year === 'tutti' || card.getAttribute('data-year') === year;
+        const eventOk = event === 'tutti' || card.getAttribute('data-event') === event;
+        card.hidden = !(typeOk && yearOk && eventOk);
+      });
+    };
+
+    typeButtons.forEach((button) => button.addEventListener('click', () => {
+      activeType = button.getAttribute('data-type-filter') || 'tutti';
+      typeButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      applyFilters();
+    }));
+    yearSelect?.addEventListener('change', applyFilters);
+    eventSelect?.addEventListener('change', applyFilters);
+
+    const lightbox = new PhotoSwipeLightbox({
+      gallery: '[data-media-grid]',
+      children: 'a.pswp-link:not([hidden])',
+      pswpModule: () => import('photoswipe'),
+      bgOpacity: 0.97,
+      wheelToZoom: true,
+      padding: { top: 42, bottom: 72, left: 42, right: 42 }
+    });
+    lightbox.on('uiRegister', () => {
+      lightbox.pswp?.ui?.registerElement({
+        name: 'caption',
+        order: 9,
+        isButton: false,
+        appendTo: 'root',
+        html: '',
+        onInit: (el, pswp) => {
+          pswp.on('change', () => {
+            const data = pswp.currSlide?.data?.element;
+            if (!(data instanceof HTMLElement)) return;
+            const title = data.dataset.title || '';
+            const detail = data.dataset.detail || '';
+            const year = data.dataset.year || '';
+            const event = data.dataset.event || '';
+            el.innerHTML = `<div class="pswp-caption-inner"><small>${year}${event ? ` · ${event}` : ''}</small><strong>${title}</strong>${detail ? `<span>${detail}</span>` : ''}</div>`;
+          });
+        }
+      });
+    });
+    lightbox.init();
+
+    const dialog = document.querySelector('#video-viewer');
+    const player = dialog?.querySelector('[data-video-player]');
+    const videoTitle = dialog?.querySelector('[data-video-title]');
+    const videoDetail = dialog?.querySelector('[data-video-detail]');
+    const videoDate = dialog?.querySelector('[data-video-date]');
+
+    const closeVideo = () => {
+      if (player) player.innerHTML = '';
+      if (dialog instanceof HTMLDialogElement && dialog.open) dialog.close();
+    };
+
+    document.querySelectorAll('.media-trigger[data-media-type="video"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        if (!(dialog instanceof HTMLDialogElement) || !player) return;
+        const id = button.getAttribute('data-youtube-id') || '';
+        if (!id) return;
+        const title = button.getAttribute('data-title') || '';
+        player.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0" title="${title.replace(/"/g, '&quot;')}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+        if (videoTitle) videoTitle.textContent = title;
+        if (videoDetail) videoDetail.textContent = button.getAttribute('data-detail') || '';
+        const date = button.getAttribute('data-date') || '';
+        if (videoDate instanceof HTMLTimeElement) {
+          videoDate.dateTime = date;
+          videoDate.textContent = date ? date.split('-').reverse().join('/') : '';
+        }
+        dialog.showModal();
+      });
+    });
+    dialog?.querySelector('[data-video-close]')?.addEventListener('click', closeVideo);
+    dialog?.addEventListener('click', (event) => { if (event.target === dialog) closeVideo(); });
+    dialog?.addEventListener('cancel', () => { if (player) player.innerHTML = ''; });
+  </script>
+
+  <style>
+    :global(.pswp__bg){background:#020202!important}.media-page{background:#060504;color:#f3ede2}.media-shell{width:min(1180px,calc(100% - 56px));margin-inline:auto}.eyebrow{margin:0;color:var(--gold-bright);font-family:var(--font-ui);font-size:.68rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}.media-hero{position:relative;min-height:390px;padding-top:118px;background:radial-gradient(circle at 78% 20%,rgba(181,138,60,.14),transparent 28%),linear-gradient(180deg,#090807 0%,#060504 100%);overflow:hidden}.media-hero:after{content:"";position:absolute;inset:auto 0 0;height:110px;background:linear-gradient(transparent,#060504);pointer-events:none}.media-hero .site-header{position:absolute;top:0;left:50%;transform:translateX(-50%)}.media-hero__inner{position:relative;z-index:1;padding:54px 0 74px}.media-hero h1,.featured h2,.archive h2,.media-next h2{font-family:var(--font-display);text-transform:uppercase;line-height:.92}.media-hero h1{margin:10px 0 4px;font-size:clamp(4.4rem,9vw,8rem)}.media-hero__claim{margin:0;color:#d6ad61;font-family:var(--font-display);font-size:clamp(1.6rem,2.7vw,2.8rem);line-height:1}.media-hero__intro{max-width:560px;margin:18px 0 0;color:#c8c0b4;font-size:1rem;line-height:1.7}.featured{padding:68px 0 92px}.section-row{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:26px}.section-row h2{max-width:680px;margin:8px 0 0;font-size:clamp(2.3rem,4.8vw,4.8rem)}.section-row>a{color:#d4a64d;text-decoration:none;font-family:var(--font-ui);font-size:.7rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase}.featured-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(300px,1fr);gap:14px;min-height:540px}.featured-main,.featured-small{position:relative;overflow:hidden;border:1px solid rgba(181,138,60,.24);padding:0;background:#0a0908;color:#fff;text-align:left;cursor:pointer}.featured-main img,.featured-small img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease,filter .28s ease}.featured-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.featured-main:hover img,.featured-small:hover img,.featured-main:focus-visible img,.featured-small:focus-visible img{transform:scale(1.03);filter:brightness(.9)}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.86) 100%)}.play{position:absolute;left:50%;top:50%;display:grid;width:70px;height:70px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.88);border-radius:50%;background:rgba(0,0,0,.38);font-size:1.15rem;padding-left:4px}.play--small{width:48px;height:48px;font-size:.82rem}.featured-copy{position:absolute;left:26px;right:26px;bottom:24px;display:grid;gap:6px}.featured-copy small,.media-card__copy small{color:#d4a64d;font:700 .64rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.featured-copy strong{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.6rem);line-height:.95;text-transform:uppercase}.featured-copy span{color:#d7d0c4;font-size:.85rem}.featured-copy--small{left:18px;bottom:16px}.featured-copy--small strong{font-size:1.08rem}.archive{padding:86px 0 98px;background:#0b0a09}.archive-heading{margin-bottom:32px}.archive-heading p:last-child{max-width:620px;color:#b9b1a5;line-height:1.65}.filter-bar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:14px 0 20px;border-top:1px solid rgba(181,138,60,.18)}.filter-types,.filter-selects{display:flex;gap:8px}.filter-types button,.filter-selects select{min-height:42px;border:1px solid rgba(242,235,221,.2);background:#0b0a09;color:#f2ebdd;padding:0 16px;font:700 .65rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.filter-types button{border-radius:999px;cursor:pointer}.filter-types button[aria-pressed="true"]{border-color:#c99b4c;background:#c99b4c;color:#080706}.filter-selects select{min-width:128px;cursor:pointer}.editorial-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.media-card{grid-column:span 4;min-height:360px}.media-card--wide{grid-column:span 8}.media-card--portrait{grid-column:span 4}.media-card[hidden]{display:none}.media-card__button{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;border:0;padding:0;background:#080706;color:#fff;text-decoration:none;text-align:left;cursor:pointer}.media-card__visual{position:relative;display:block;min-height:280px;overflow:hidden;background:#111}.media-card--wide .media-card__visual{min-height:390px}.media-card__visual img{width:100%;height:100%;object-fit:cover;transition:transform .25s ease,filter .25s ease}.media-card__button:hover img,.media-card__button:focus-visible img{transform:scale(1.03);filter:brightness(.91)}.media-card__copy{display:grid;gap:5px;padding:15px 17px 18px;border-top:1px solid rgba(181,138,60,.15)}.media-card__copy strong{font-family:var(--font-display);font-size:1.05rem;line-height:1;text-transform:uppercase}.media-card__copy>span{color:#aaa296;font-size:.75rem}.media-empty{padding:60px;border:1px solid rgba(181,138,60,.2);text-align:center}.media-next{padding:78px 0 90px;background:#060504}.media-next__inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:end}.media-next h2{margin:9px 0 0;font-size:clamp(2.25rem,4vw,4rem)}.media-next nav{display:grid;grid-template-columns:1fr 1fr;gap:12px}.media-next nav a{position:relative;display:grid;gap:8px;min-height:136px;padding:23px;border:1px solid rgba(181,138,60,.24);color:#f2ebdd;text-decoration:none}.media-next nav span{color:#b6ada0;font-size:.72rem;text-transform:uppercase;letter-spacing:.08em}.media-next nav strong{font-family:var(--font-display);font-size:1.25rem;text-transform:uppercase}.media-next nav b{position:absolute;right:20px;bottom:20px;color:#d4a64d}.video-viewer{width:min(1380px,calc(100vw - 40px));max-width:none;border:0;padding:0;background:#020202;color:#fff}.video-viewer::backdrop{background:rgba(0,0,0,.96)}.video-viewer__frame{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;min-height:min(80vh,820px)}.video-viewer__player{display:grid;place-items:center;background:#000}.video-viewer__player iframe{width:100%;aspect-ratio:16/9;border:0}.video-viewer__meta{display:flex;flex-direction:column;justify-content:center;padding:42px 30px;border-left:1px solid rgba(181,138,60,.2)}.video-viewer__meta h2{margin:10px 0 12px;font-family:var(--font-display);font-size:2rem;line-height:.95;text-transform:uppercase}.video-viewer__meta p:not(.eyebrow){color:#c7bfb3;line-height:1.55}.video-viewer__meta time{margin-top:14px;color:#d4a64d;font-size:.75rem}.viewer-close{position:absolute;z-index:3;right:14px;top:14px;width:44px;height:44px;border:1px solid rgba(255,255,255,.32);border-radius:50%;background:rgba(0,0,0,.62);color:#fff;font-size:1.5rem;cursor:pointer}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}:global(.pswp-caption){position:absolute;left:0;right:0;bottom:0;z-index:20;padding:0 24px 18px;pointer-events:none}:global(.pswp-caption-inner){display:grid;gap:4px;width:min(780px,calc(100% - 20px));margin:auto;color:#fff;text-align:center}:global(.pswp-caption-inner small){color:#d4a64d;font:700 .65rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}:global(.pswp-caption-inner strong){font-family:var(--font-display);font-size:1.2rem;text-transform:uppercase}:global(.pswp-caption-inner span){color:#c9c1b7;font-size:.78rem}@media(max-width:900px){.media-shell{width:min(100% - 32px,1180px)}.media-hero{min-height:330px;padding-top:92px}.media-hero__inner{padding:40px 0 58px}.featured{padding:48px 0 70px}.section-row{align-items:start}.featured-grid{grid-template-columns:1fr;min-height:0}.featured-main{aspect-ratio:16/9}.featured-side{grid-template-columns:1fr 1fr;grid-template-rows:none}.featured-small{aspect-ratio:4/5}.editorial-grid{grid-template-columns:repeat(2,1fr);gap:10px}.media-card,.media-card--wide,.media-card--portrait{grid-column:span 1;min-height:0}.media-card[data-media-type="video"]{grid-column:1/-1}.media-card__visual,.media-card--wide .media-card__visual{min-height:0;aspect-ratio:4/5}.media-card[data-media-type="video"] .media-card__visual{aspect-ratio:16/9}.media-next__inner{grid-template-columns:1fr;gap:28px}.video-viewer__frame{grid-template-columns:1fr;min-height:0}.video-viewer__meta{border-left:0;border-top:1px solid rgba(181,138,60,.2);padding:26px 22px}.filter-bar{position:sticky;top:72px;background:#0b0a09}.filter-selects{width:100%}.filter-selects label{flex:1}.filter-selects select{width:100%}}@media(max-width:640px){.media-shell{width:calc(100% - 28px)}.media-hero{min-height:300px}.media-hero h1{font-size:clamp(3.7rem,20vw,5.6rem)}.media-hero__claim{font-size:1.65rem}.section-row{display:block}.section-row>a{display:inline-block;margin-top:14px}.featured-grid{gap:10px}.featured-side{gap:10px}.featured-copy{left:16px;right:16px;bottom:15px}.featured-copy strong{font-size:1.25rem}.play{width:58px;height:58px}.archive{padding:62px 0 72px}.filter-bar{top:62px;flex-direction:column;align-items:stretch;padding:10px 0 14px}.filter-types{display:grid;grid-template-columns:repeat(3,1fr)}.filter-types button{padding:0 10px}.filter-selects{display:grid;grid-template-columns:1fr 1fr}.editorial-grid{gap:8px}.media-card__copy{padding:11px 10px 13px}.media-card__copy strong{font-size:.88rem}.media-card__copy>span{font-size:.68rem}.media-next{padding:58px 0 72px}.media-next nav{grid-template-columns:1fr}.video-viewer{width:100vw;height:100dvh}.video-viewer__frame{min-height:100dvh;align-content:center}.video-viewer__player iframe{width:100%}.video-viewer__meta{padding:22px 18px 30px}.video-viewer__meta h2{font-size:1.55rem}}
+  </style>
 </BaseLayout>

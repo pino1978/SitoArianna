@@ -1,11 +1,22 @@
 ---
 import logo from "../assets/svg/logo-arianna-milano.svg";
+const footerNav = [
+  { href: "/", label: "Home" },
+  { href: "/profilo/", label: "Profilo atleta" },
+  { href: "/risultati/", label: "Risultati" },
+  { href: "/media/", label: "Media" },
+  { href: "/ying/", label: "Yīng" }
+];
 ---
 <footer class="site-footer" id="footer" aria-label="Piè di pagina">
   <div class="site-footer__inner">
     <a class="site-footer__brand" href="/" data-interactive aria-label="Arianna Milano, torna alla home">
       <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
     </a>
+
+    <nav class="site-footer__nav" aria-label="Navigazione secondaria">
+      {footerNav.map(item => <a href={item.href} data-interactive>{item.label}</a>)}
+    </nav>
 
     <p class="site-footer__legal">© 2026 Arianna Milano <span>— Tutti i diritti riservati</span></p>
   </div>
@@ -14,11 +25,14 @@ import logo from "../assets/svg/logo-arianna-milano.svg";
 <style>
   .site-footer{position:relative;isolation:isolate;overflow:hidden;padding:0 clamp(22px,4vw,64px);border-top:1px solid rgba(196,154,84,.34);background:#020202;color:#f4f0e8}
   .site-footer:before{position:absolute;inset:0;background:linear-gradient(100deg,rgba(131,20,16,.18),transparent 18%,transparent 82%,rgba(131,20,16,.16));content:"";pointer-events:none}
-  .site-footer__inner{position:relative;display:grid;grid-template-columns:1fr auto;align-items:center;gap:32px;width:min(1460px,100%);min-height:88px;margin:auto}
+  .site-footer__inner{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:32px;width:min(1460px,100%);min-height:88px;margin:auto}
   .site-footer__brand{display:block;width:118px;color:#f4f0e8;text-decoration:none}
   .site-footer__brand img{display:block;width:118px;height:auto;opacity:.92}
+  .site-footer__nav{display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,28px);min-width:0}
+  .site-footer__nav a{position:relative;color:rgba(244,240,232,.58);font:700 .58rem/1.2 var(--font-ui,sans-serif);letter-spacing:.09em;text-decoration:none;text-transform:uppercase;transition:color .2s ease}
+  .site-footer__nav a:hover,.site-footer__nav a:focus-visible{color:#d4a64d}
   .site-footer__legal{margin:0;color:rgba(244,240,232,.52);font:600 .61rem/1.5 var(--font-ui,sans-serif);letter-spacing:.05em;text-align:right;white-space:nowrap}
   .site-footer__legal span{color:rgba(244,240,232,.34)}
-  @media(max-width:760px){.site-footer{padding:18px 20px}.site-footer__inner{grid-template-columns:1fr;gap:12px;min-height:0;text-align:center}.site-footer__brand{justify-self:center;width:108px}.site-footer__brand img{width:108px}.site-footer__legal{text-align:center}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
-  @media(max-width:390px){.site-footer__legal{font-size:.52rem;letter-spacing:.015em}}
+  @media(max-width:900px){.site-footer{padding:18px 20px}.site-footer__inner{grid-template-columns:1fr;gap:14px;min-height:0;text-align:center}.site-footer__brand{justify-self:center;width:108px}.site-footer__brand img{width:108px}.site-footer__nav{flex-wrap:wrap;gap:10px 18px}.site-footer__legal{text-align:center}.site-footer:before{background:linear-gradient(180deg,rgba(131,20,16,.12),transparent 38%)}}
+  @media(max-width:390px){.site-footer__nav{gap:9px 14px}.site-footer__nav a{font-size:.53rem}.site-footer__legal{font-size:.52rem;letter-spacing:.015em}}
 </style>

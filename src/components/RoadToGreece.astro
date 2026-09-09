@@ -1,0 +1,32 @@
+<section class="road-greece" aria-labelledby="road-greece-title">
+  <a class="road-greece__link" href="/grecia/" data-interactive aria-label="Scopri Road to Greece 2026">
+    <div class="road-greece__copy">
+      <p class="road-greece__eyebrow">Next international challenge</p>
+      <h2 id="road-greece-title"><span>Road to</span> Greece</h2>
+      <p class="road-greece__meta">Nafplio · Novembre 2026</p>
+      <p class="road-greece__claim">Il prossimo passo è oltre il confine.</p>
+      <span class="road-greece__cta">Scopri la sfida <span aria-hidden="true">→</span></span>
+    </div>
+    <div class="road-greece__route" aria-hidden="true">
+      <span>ITA</span><i></i><b>→</b><i></i><span>GRE</span>
+    </div>
+    <div class="road-greece__year" aria-hidden="true">2026</div>
+  </a>
+</section>
+
+<style>
+.road-greece{position:relative;overflow:hidden;border-top:1px solid rgba(185,134,50,.32);border-bottom:1px solid rgba(185,134,50,.32);background:radial-gradient(circle at 82% 38%,rgba(117,22,24,.23),transparent 31%),linear-gradient(108deg,#070707 0%,#0c0d0e 56%,#11100d 100%);color:#f5f1e8}
+.road-greece::before{position:absolute;inset:0;background:linear-gradient(90deg,transparent 0 68%,rgba(185,134,50,.055));content:"";pointer-events:none}
+.road-greece__link{position:relative;display:grid;min-height:250px;grid-template-columns:minmax(0,1fr) auto;align-items:center;padding:34px clamp(28px,6.4vw,104px);color:inherit;text-decoration:none}
+.road-greece__copy{position:relative;z-index:2;max-width:650px}
+.road-greece__eyebrow{margin:0 0 8px;color:#cda85e;font:800 .62rem var(--font-ui);letter-spacing:.23em;text-transform:uppercase}
+.road-greece h2{margin:0;font:800 clamp(2.2rem,4.8vw,4.9rem)/.9 var(--font-display);letter-spacing:-.035em;text-transform:uppercase}.road-greece h2 span{font-weight:400;color:#f5f1e8}
+.road-greece__meta{margin:12px 0 0;color:#d8d2c7;font:700 .78rem var(--font-ui);letter-spacing:.12em;text-transform:uppercase}
+.road-greece__claim{margin:17px 0 19px;color:#f5f1e8;font:400 clamp(1rem,1.35vw,1.28rem)/1.35 var(--font-display);font-style:italic}
+.road-greece__cta{display:inline-flex;align-items:center;gap:14px;border-bottom:1px solid #a82028;padding:0 0 5px;font:800 .68rem var(--font-ui);letter-spacing:.14em;text-transform:uppercase}.road-greece__cta span{color:#cda85e;font-size:1rem;transition:transform .2s}.road-greece__link:hover .road-greece__cta span{transform:translateX(5px)}
+.road-greece__route{position:absolute;z-index:2;right:clamp(28px,6.4vw,104px);bottom:34px;display:flex;align-items:center;gap:9px;color:#c9c2b6;font:800 .56rem var(--font-ui);letter-spacing:.14em}.road-greece__route i{display:block;width:42px;height:1px;background:linear-gradient(90deg,#7f161d,#cda85e)}.road-greece__route b{color:#cda85e;font-size:1rem;font-weight:400}
+.road-greece__year{position:absolute;right:clamp(18px,4vw,60px);top:50%;transform:translateY(-54%);color:transparent;-webkit-text-stroke:1px rgba(205,168,94,.14);font:900 clamp(7rem,15vw,14rem)/1 var(--font-display);letter-spacing:-.06em;pointer-events:none;user-select:none}
+.road-greece__link:focus-visible{outline:2px solid #cda85e;outline-offset:-4px}
+@media(max-width:640px){.road-greece__link{min-height:310px;display:block;padding:30px 18px 66px}.road-greece__copy{max-width:94%}.road-greece__eyebrow{font-size:.55rem}.road-greece h2{font-size:clamp(2.45rem,13vw,3.7rem);line-height:.91}.road-greece__meta{margin-top:10px;font-size:.66rem}.road-greece__claim{max-width:270px;margin:19px 0 20px;font-size:1.08rem}.road-greece__year{right:-18px;top:51%;font-size:8.5rem;-webkit-text-stroke-color:rgba(205,168,94,.1)}.road-greece__route{right:18px;bottom:24px}.road-greece__route i{width:24px}.road-greece__cta{font-size:.62rem}}
+@media(prefers-reduced-motion:reduce){.road-greece__cta span{transition:none}}
+</style>

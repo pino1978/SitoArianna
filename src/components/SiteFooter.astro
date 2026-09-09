@@ -16,7 +16,8 @@ const pageMeta = {
   "/profilo/": { type: "ProfilePage", name: "Profilo atleta Sanda e Kung Fu | Arianna Milano", description: "Profilo sportivo di Arianna Milano: percorso nel Sanda e Kung Fu, allenamento, guida tecnica e crescita agonistica sul tatami." },
   "/risultati/": { type: "CollectionPage", name: "Risultati Sanda | Arianna Milano", description: "Risultati agonistici di Arianna Milano: competizioni di Sanda, piazzamenti, medaglie e percorso sportivo anno dopo anno." },
   "/media/": { type: "CollectionPage", name: "Foto e video Sanda | Arianna Milano", description: "Foto e video di Arianna Milano tra allenamenti, competizioni, incontri e momenti del suo percorso agonistico nel Sanda." },
-  "/ying/": { type: "WebPage", name: "Yīng 鹰 | Il nome sportivo di Arianna Milano", description: "Yīng 鹰 significa aquila: il significato del nome sportivo scelto da Arianna Milano e i valori che porta con sé sul tatami." }
+  "/ying/": { type: "WebPage", name: "Yīng 鹰 | Il nome sportivo di Arianna Milano", description: "Yīng 鹰 significa aquila: il significato del nome sportivo scelto da Arianna Milano e i valori che porta con sé sul tatami." },
+  "/grecia/": { type: "WebPage", name: "Road to Greece 2026 | Arianna Milano", description: "Il percorso di Arianna Milano verso la prossima sfida internazionale di Sanda a Nafplio, Grecia." }
 };
 const currentMeta = pageMeta[pathname];
 const pageSchema = currentMeta ? {
@@ -46,7 +47,6 @@ const videoSchemas = pathname === "/media/" ? media
       thumbnailUrl: [`https://i.ytimg.com/vi/${id}/hqdefault.jpg`],
       uploadDate: item.data ? `${item.data}T12:00:00+02:00` : undefined,
       embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
-      contentUrl: item.urlYouTube,
       inLanguage: "it-IT",
       isFamilyFriendly: true,
       about: { "@id": `${SITE}/#arianna-milano` },

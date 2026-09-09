@@ -1,7 +1,6 @@
 import media from "../data/media.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import profileImage from "../assets/images/Ying_profile.png";
-import yingHomeImage from "../assets/images/ying-placeholder.png";
 import profileHero from "../assets/images/profile-hero-arrival-desktop-v1.webp";
 import profileJourney from "../assets/images/profile-journey-context-v1.webp";
 import profileGuide from "../assets/images/profile-guide-real-v1.webp";
@@ -9,7 +8,6 @@ import profileTraining from "../assets/images/profile-training-context-v1.webp";
 import profileObjective from "../assets/images/profile-objective-context-v1.webp";
 import yingHero from "../assets/images/ying-hero-wide.png";
 import yingPortrait from "../assets/images/Ying_profile.png";
-import yingPreparation from "../assets/images/discipline-placeholder.png";
 import yingPanorama from "../assets/images/ying_panoramica.png";
 
 const SITE = "https://www.ariannamilano.it";
@@ -63,8 +61,7 @@ const entries = [
     loc: `${SITE}/`,
     images: [
       { loc: assetPath(heroImage), title: "Arianna Milano · atleta di Sanda e Kung Fu", caption: "Hero del sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda." },
-      { loc: assetPath(profileImage), title: "Arianna Milano", caption: "Ritratto sportivo di Arianna Milano." },
-      { loc: assetPath(yingHomeImage), title: "Yīng · Aquila", caption: "L'aquila, simbolo del nome sportivo Yīng di Arianna Milano." }
+      { loc: assetPath(profileImage), title: "Arianna Milano", caption: "Ritratto sportivo di Arianna Milano." }
     ],
     videos: visibleVideos.filter((item) => item.inEvidenza)
   },
@@ -98,7 +95,6 @@ const entries = [
     images: [
       { loc: assetPath(yingHero), title: "Yīng · Aquila", caption: "Yīng, il nome sportivo scelto da Arianna Milano." },
       { loc: assetPath(yingPortrait), title: "Arianna Milano · Yīng", caption: "Arianna Milano osserva il tatami prima dell'allenamento di Sanda." },
-      { loc: assetPath(yingPreparation), title: "Preparazione al Sanda", caption: "Preparazione prima dell'allenamento di Sanda." },
       { loc: assetPath(yingPanorama), title: "Essere Yīng", caption: "L'aquila come simbolo di attenzione, crescita e determinazione." }
     ]
   }

@@ -1,5 +1,6 @@
 ---
 import logo from "../assets/svg/logo-arianna-milano.svg";
+import media from "../data/media.json";
 const footerNav = [
   { href: "/", label: "Home" },
   { href: "/profilo/", label: "Profilo atleta" },
@@ -7,6 +8,51 @@ const footerNav = [
   { href: "/media/", label: "Media" },
   { href: "/ying/", label: "Yīng" }
 ];
+
+const SITE = "https://www.ariannamilano.it";
+const pathname = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const pageMeta = {
+  "/": { type: "ProfilePage", name: "Arianna Milano | Atleta Sanda e Kung Fu", description: "Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda e Kung Fu. Profilo sportivo, risultati, competizioni, foto e video." },
+  "/profilo/": { type: "ProfilePage", name: "Profilo atleta Sanda e Kung Fu | Arianna Milano", description: "Profilo sportivo di Arianna Milano: percorso nel Sanda e Kung Fu, allenamento, guida tecnica e crescita agonistica sul tatami." },
+  "/risultati/": { type: "CollectionPage", name: "Risultati Sanda | Arianna Milano", description: "Risultati agonistici di Arianna Milano: competizioni di Sanda, piazzamenti, medaglie e percorso sportivo anno dopo anno." },
+  "/media/": { type: "CollectionPage", name: "Foto e video Sanda | Arianna Milano", description: "Foto e video di Arianna Milano tra allenamenti, competizioni, incontri e momenti del suo percorso agonistico nel Sanda." },
+  "/ying/": { type: "WebPage", name: "Yīng 鹰 | Il nome sportivo di Arianna Milano", description: "Yīng 鹰 significa aquila: il significato del nome sportivo scelto da Arianna Milano e i valori che porta con sé sul tatami." }
+};
+const currentMeta = pageMeta[pathname];
+const pageSchema = currentMeta ? {
+  "@context": "https://schema.org",
+  "@type": currentMeta.type,
+  "@id": `${SITE}${pathname === "/" ? "/" : pathname}#webpage`,
+  url: `${SITE}${pathname === "/" ? "/" : pathname}`,
+  name: currentMeta.name,
+  description: currentMeta.description,
+  inLanguage: "it-IT",
+  isPartOf: { "@id": `${SITE}/#website` },
+  about: { "@id": `${SITE}/#arianna-milano` },
+  breadcrumb: pathname === "/" ? undefined : { "@id": `${SITE}${pathname}#breadcrumb` }
+} : null;
+
+const youtubeId = (url = "") => url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)?.[1] || "";
+const videoSchemas = pathname === "/media/" ? media
+  .filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube))
+  .map((item) => {
+    const id = youtubeId(item.urlYouTube);
+    return {
+      "@context": "https://schema.org",
+      "@type": "VideoObject",
+      "@id": `${SITE}/media/#video-${id}`,
+      name: item.titolo || "Video Sanda di Arianna Milano",
+      description: [item.titolo, item.dettaglio, "Video del percorso agonistico di Arianna Milano nel Sanda."].filter(Boolean).join(" · "),
+      thumbnailUrl: [`https://i.ytimg.com/vi/${id}/hqdefault.jpg`],
+      uploadDate: item.data ? `${item.data}T12:00:00+02:00` : undefined,
+      embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
+      contentUrl: item.urlYouTube,
+      inLanguage: "it-IT",
+      isFamilyFriendly: true,
+      about: { "@id": `${SITE}/#arianna-milano` },
+      isPartOf: { "@id": `${SITE}/media/#webpage` }
+    };
+  }) : [];
 ---
 <footer class="site-footer" id="footer" aria-label="Piè di pagina">
   <div class="site-footer__inner">
@@ -21,6 +67,8 @@ const footerNav = [
     <p class="site-footer__legal">© 2026 Arianna Milano <span>— Tutti i diritti riservati</span></p>
   </div>
 </footer>
+{pageSchema && <script type="application/ld+json" set:html={JSON.stringify(pageSchema)}></script>}
+{videoSchemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>)}
 
 <style>
   .site-footer{position:relative;isolation:isolate;overflow:hidden;padding:0 clamp(22px,4vw,64px);border-top:1px solid rgba(196,154,84,.34);background:#020202;color:#f4f0e8}

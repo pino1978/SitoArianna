@@ -38,3 +38,19 @@
 
 @media(max-width:1000px){.palmares-page .palmares-hero__inner{padding-top:100px}.palmares-page .timeline-section,.palmares-page .medal-board{padding-top:58px;padding-bottom:58px}.palmares-page .detail-image .medal-photo{min-height:260px}}
 @media(max-width:700px){.palmares-page .palmares-hero__inner{padding-top:92px}.palmares-page .back-home{margin-bottom:26px}.palmares-page .recap-groups{margin-top:18px}.palmares-page .timeline-section,.palmares-page .medal-board{padding-top:48px;padding-bottom:48px}.palmares-page .timeline-year{margin-bottom:18px}.palmares-page .timeline-event{padding:10px 8px}.palmares-page .detail-image .medal-photo{min-height:240px}.palmares-page .medal-card{min-height:210px}}
+
+/* MOBILE NAV — hard reset to avoid overlapping labels on real Android browsers */
+@media(max-width:1000px){
+  .mobile-nav{padding-top:88px!important;overflow-y:auto!important;overscroll-behavior:contain!important}
+  .mobile-nav__inner{display:flex!important;flex-direction:column!important;width:100%!important;max-width:520px!important;margin:0 auto!important}
+  .mobile-nav__top{flex:0 0 auto!important;min-height:58px!important;margin:0 0 8px!important;padding:0!important}
+  .mobile-nav__inner>a{position:relative!important;display:grid!important;grid-template-columns:34px minmax(0,1fr)!important;align-items:center!important;width:100%!important;min-height:58px!important;margin:0!important;padding:10px 0!important;line-height:1.05!important;white-space:nowrap!important;transform:none!important;inset:auto!important}
+  .mobile-nav__inner>a span{position:static!important;display:block!important;align-self:center!important;line-height:1!important;transform:none!important}
+  .mobile-nav__inner>a:not(:first-of-type){margin-top:0!important}
+  .mobile-nav__footer{flex:0 0 auto!important;margin-top:18px!important}
+  body.nav-open{overflow:hidden!important}
+}
+@media(max-width:390px){
+  .mobile-nav{padding-top:82px!important;padding-left:20px!important;padding-right:20px!important}
+  .mobile-nav__inner>a{min-height:54px!important;padding:9px 0!important;font-size:clamp(1.3rem,5.8vw,1.65rem)!important}
+}

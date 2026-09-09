@@ -97,6 +97,9 @@ const entries = [
       { loc: assetPath(yingPortrait), title: "Arianna Milano · Yīng", caption: "Arianna Milano osserva il tatami prima dell'allenamento di Sanda." },
       { loc: assetPath(yingPanorama), title: "Essere Yīng", caption: "L'aquila come simbolo di attenzione, crescita e determinazione." }
     ]
+  },
+  {
+    loc: `${SITE}/grecia/`
   }
 ];
 

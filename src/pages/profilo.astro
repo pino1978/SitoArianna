@@ -14,101 +14,19 @@ const copy = profile.content.profilePage;
 <BaseLayout title="Profilo atleta | Arianna Milano" description="Il percorso sportivo di Arianna Milano, giovane atleta agonista di Kung Fu Sanda.">
   <main class="profile-page" id="main">
     <Header />
-
     <section class="profile-hero" aria-labelledby="profile-title">
       <div class="profile-hero__wash" aria-hidden="true"></div>
-      <picture class="profile-hero__picture">
-        <source media="(max-width: 620px)" srcset={heroContextMobile.src} />
-        <img class="profile-hero__context" src={heroContext.src} alt="Arianna entra in palestra con la borsa sportiva" width={heroContext.width} height={heroContext.height} />
-      </picture>
-      <div class="profile-hero__copy">
-        <h1 id="profile-title">{copy.hero.titleLine1}<br /><em>{copy.hero.titleLine2}</em></h1>
-        <blockquote class="lead profile-hero__quote">{copy.hero.quote}<span class="profile-hero__quote-close" aria-hidden="true">”</span></blockquote>
-      </div>
+      <picture class="profile-hero__picture"><source media="(max-width: 620px)" srcset={heroContextMobile.src} /><img class="profile-hero__context" src={heroContext.src} alt="Arianna entra in palestra con la borsa sportiva" width={heroContext.width} height={heroContext.height} /></picture>
+      <div class="profile-hero__copy"><h1 id="profile-title">{copy.hero.titleLine1}<br /><em>{copy.hero.titleLine2}</em></h1><blockquote class="lead profile-hero__quote">{copy.hero.quote}<span class="profile-hero__quote-close" aria-hidden="true">”</span></blockquote></div>
     </section>
-
-    <section class="journey section-shell" aria-labelledby="journey-title">
-      <p class="section-index">{copy.journey.kicker}</p>
-      <div class="journey__grid">
-        <figure class="photo-frame"><img src={journeyContext.src} alt="Preparazione delle fasce prima dell’allenamento" width={journeyContext.width} height={journeyContext.height} /></figure>
-        <div class="journey__copy">
-          <h2 id="journey-title">{copy.journey.titleLine1}<br />{copy.journey.titleLine2}</h2>
-          <span class="gold-rule" aria-hidden="true"></span>
-          <p>{copy.journey.paragraph1}</p>
-          <p>{copy.journey.paragraph2}</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="story-band story-band--coach section-shell" aria-labelledby="coach-title">
-      <div class="story-band__copy">
-        <p class="section-index">{copy.coach.kicker}</p>
-        <h2 id="coach-title">{copy.coach.titleLine1}<br />{copy.coach.titleLine2}</h2>
-        <p>{copy.coach.paragraph}</p>
-      </div>
-      <figure class="story-band__visual story-band__visual--guide"><img src={guidePhoto.src} alt="Il maestro Eduardo Mazzara prepara Arianna prima di un incontro" width={guidePhoto.width} height={guidePhoto.height} /></figure>
-    </section>
-
-    <section class="story-band story-band--training section-shell" aria-labelledby="training-title">
-      <div class="story-band__copy">
-        <p class="section-index">{copy.training.kicker}</p>
-        <h2 id="training-title">{copy.training.titleLine1}<br />{copy.training.titleLine2}</h2>
-        <p>{copy.training.paragraph1}</p>
-        <p>{copy.training.paragraph2}</p>
-      </div>
-      <figure class="story-band__visual"><img src={trainingContext.src} alt="Allenamento con i colpitori" width={trainingContext.width} height={trainingContext.height} /></figure>
-    </section>
-
-    <section class="objective" aria-labelledby="objective-title">
-      <div class="objective__texture" aria-hidden="true"></div>
-      <img class="objective__context" src={objectiveContext.src} alt="Giovane atleta davanti al tatami di gara" width={objectiveContext.width} height={objectiveContext.height} />
-      <div class="objective__copy">
-        <p class="objective__eyebrow">{copy.objective.kicker}</p>
-        <h2 id="objective-title">{copy.objective.titleLine1}<br />{copy.objective.titleLine2}<br />{copy.objective.titleLine3}</h2>
-        <p>{copy.objective.paragraph}</p>
-        <a href="/risultati/" data-interactive>{copy.objective.cta} <span aria-hidden="true">→</span></a>
-      </div>
-    </section>
+    <section class="journey section-shell" aria-labelledby="journey-title"><p class="section-index">{copy.journey.kicker}</p><div class="journey__grid"><figure class="photo-frame"><img src={journeyContext.src} alt="Preparazione delle fasce prima dell’allenamento" width={journeyContext.width} height={journeyContext.height} /></figure><div class="journey__copy"><h2 id="journey-title">{copy.journey.titleLine1}<br />{copy.journey.titleLine2}</h2><span class="gold-rule" aria-hidden="true"></span><p>{copy.journey.paragraph1}</p><p>{copy.journey.paragraph2}</p></div></div></section>
+    <section class="story-band story-band--coach section-shell" aria-labelledby="coach-title"><div class="story-band__copy"><p class="section-index">{copy.coach.kicker}</p><h2 id="coach-title">{copy.coach.titleLine1}<br />{copy.coach.titleLine2}</h2><p>{copy.coach.paragraph}</p></div><figure class="story-band__visual story-band__visual--guide"><img src={guidePhoto.src} alt="Il maestro Eduardo Mazzara prepara Arianna prima di un incontro" width={guidePhoto.width} height={guidePhoto.height} /></figure></section>
+    <section class="story-band story-band--training section-shell" aria-labelledby="training-title"><div class="story-band__copy"><p class="section-index">{copy.training.kicker}</p><h2 id="training-title">{copy.training.titleLine1}<br />{copy.training.titleLine2}</h2><p>{copy.training.paragraph1}</p><p>{copy.training.paragraph2}</p></div><figure class="story-band__visual"><img src={trainingContext.src} alt="Allenamento con i colpitori" width={trainingContext.width} height={trainingContext.height} /></figure></section>
+    <section class="objective section-shell" aria-labelledby="objective-title"><figure class="objective__visual"><img class="objective__context" src={objectiveContext.src} alt="Giovane atleta davanti al tatami di gara" width={objectiveContext.width} height={objectiveContext.height} /></figure><div class="objective__copy"><p class="objective__eyebrow">{copy.objective.kicker}</p><h2 id="objective-title">{copy.objective.titleLine1}<br />{copy.objective.titleLine2}<br />{copy.objective.titleLine3}</h2><p>{copy.objective.paragraph}</p><a href="/risultati/" data-interactive>{copy.objective.cta} <span aria-hidden="true">→</span></a></div></section>
   </main>
 </BaseLayout>
-
 <style>
-:global(body){background:#050504}
-.profile-page{--gold:#b58a3c;--ivory:#f2ebdd;min-height:100vh;background:#050504;color:var(--ivory);overflow:hidden}
-.profile-hero{position:relative;display:flex;align-items:center;height:clamp(480px,48vw,610px);min-height:0;overflow:hidden;border-bottom:1px solid rgba(181,138,60,.20);isolation:isolate}
-.profile-hero__picture{position:absolute;z-index:-3;inset:0}
-.profile-hero__context{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:saturate(.9) contrast(1.04) brightness(.84)}
-.profile-hero__wash{position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.97) 0%,rgba(5,5,4,.86) 40%,rgba(5,5,4,.28) 76%,rgba(0,0,0,.28) 100%)}
-.profile-hero__copy,.section-shell{width:min(1180px,calc(100% - 64px));margin-inline:auto}
-.profile-hero__copy{transform:translateY(48px)}
-.profile-hero h1,.journey h2,.story-band h2,.objective h2{margin:0;font-family:var(--font-display);font-weight:900;line-height:.94;letter-spacing:-.035em;text-transform:uppercase}
-.profile-hero h1{max-width:570px;font-size:clamp(3.25rem,5.1vw,5.1rem)}
-.profile-hero h1 em{color:transparent;-webkit-text-stroke:1px rgba(181,138,60,.85);font-style:normal}
-.lead{max-width:550px;margin:22px 0 0;color:rgba(242,235,221,.78);font-size:.98rem;line-height:1.58}
-.profile-hero__quote-close{margin-left:4px;color:var(--gold);font-family:Georgia,serif;font-size:1.45em}
-.section-index,.objective__eyebrow{margin:0 0 14px;color:var(--gold);font:800 .68rem/1.2 var(--font-ui);letter-spacing:.17em;text-transform:uppercase}
-.journey{padding:42px 0}
-.journey__grid{display:grid;grid-template-columns:minmax(350px,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}
-.photo-frame,.story-band__visual{position:relative;margin:0;overflow:hidden;border:0;background:#050504}
-.photo-frame::after,.story-band__visual::after{position:absolute;inset:0;content:"";pointer-events:none}
-.photo-frame::after,.story-band--training .story-band__visual::after{background:linear-gradient(90deg,transparent 0%,transparent 78%,#050504 100%)}
-.story-band--coach .story-band__visual::after{background:linear-gradient(270deg,transparent 0%,transparent 78%,#050504 100%)}
-.photo-frame{height:470px}
-.photo-frame img,.story-band__visual img{width:100%;height:100%;object-fit:cover;filter:sepia(.08) saturate(.82) contrast(1.04) brightness(.9)}
-.journey h2,.story-band h2{font-size:clamp(2.8rem,4.2vw,4.25rem)}
-.gold-rule{display:block;width:54px;height:2px;margin:22px 0;background:var(--gold)}
-.journey p,.story-band p,.objective p{color:rgba(242,235,221,.76);font-size:1rem;line-height:1.62}
-.story-band{display:grid;grid-template-columns:minmax(0,.82fr) minmax(440px,1.18fr);gap:54px;align-items:center;padding:44px 0;border-top:1px solid rgba(181,138,60,.10)}
-.story-band--coach .story-band__copy{order:1}.story-band--coach .story-band__visual{order:2}
-.story-band--training .story-band__copy{order:2}.story-band--training .story-band__visual{order:1}
-.story-band__copy{padding:0 8px}.story-band h2{margin-bottom:20px}.story-band__visual{height:420px}
-.story-band__visual--guide{width:min(100%,540px);height:520px;justify-self:end;aspect-ratio:auto}.story-band__visual--guide img{object-position:center 34%}
-.story-band--coach .story-band__copy{padding-right:10px}.story-band--coach .story-band__copy p:last-child{max-width:480px}
-.objective{position:relative;display:flex;align-items:center;height:500px;min-height:0;padding:44px max(32px,calc((100vw - 1180px)/2));overflow:hidden;border-top:1px solid rgba(181,138,60,.20);isolation:isolate}
-.objective__texture{position:absolute;z-index:-1;inset:0;background:linear-gradient(90deg,rgba(5,5,4,.98) 0%,rgba(5,5,4,.88) 48%,rgba(5,5,4,.34) 100%)}
-.objective__context{position:absolute;z-index:-3;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.75) contrast(1.06) brightness(.68)}
-.objective__copy{max-width:600px}.objective h2{font-size:clamp(2.35rem,3.35vw,3.4rem);line-height:.96}.objective p{max-width:540px}
-.objective a{display:inline-flex;align-items:center;gap:14px;margin-top:16px;padding:14px 18px;border:1px solid rgba(181,138,60,.62);color:var(--gold);font:800 .68rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
-@media(max-width:900px){.profile-hero__copy,.section-shell{width:calc(100% - 36px)}.profile-hero{height:560px}.profile-hero__copy{transform:translateY(42px)}.profile-hero__context{object-position:center 12%}.journey__grid,.story-band{grid-template-columns:1fr;gap:28px}.story-band--coach .story-band__copy,.story-band--coach .story-band__visual,.story-band--training .story-band__copy,.story-band--training .story-band__visual{order:initial}.story-band__visual--guide{justify-self:stretch;width:100%;height:460px}.photo-frame::after,.story-band__visual::after{background:linear-gradient(180deg,transparent 0%,transparent 82%,#050504 100%)}.objective{height:540px}}
-@media(max-width:620px){.profile-hero{height:510px;align-items:flex-end}.profile-hero__copy{padding:0 0 30px;transform:none}.profile-hero h1{font-size:clamp(2.8rem,12.5vw,3.9rem)}.profile-hero__context{object-position:center top}.lead{font-size:.92rem;line-height:1.52}.journey,.story-band{padding:30px 0}.photo-frame{height:380px}.story-band__visual,.story-band__visual--guide{height:360px}.journey h2,.story-band h2{font-size:clamp(2.25rem,10vw,3.35rem)}.journey p,.story-band p,.objective p{font-size:.95rem;line-height:1.56}.objective{height:520px;min-height:0;align-items:flex-end;padding:40px 18px}.objective h2{font-size:clamp(2.05rem,9vw,2.8rem);line-height:.98}}
+:global(body){background:#050504}.profile-page{--gold:#b58a3c;--ivory:#f2ebdd;min-height:100vh;background:#050504;color:var(--ivory);overflow:hidden}.profile-hero{position:relative;display:flex;align-items:flex-start;height:clamp(480px,48vw,610px);min-height:0;overflow:hidden;border-bottom:1px solid rgba(181,138,60,.20);isolation:isolate}.profile-hero__picture{position:absolute;z-index:-3;inset:0}.profile-hero__context{width:100%;height:100%;object-fit:cover;object-position:center 18%;filter:saturate(.9) contrast(1.04) brightness(.84)}.profile-hero__wash{position:absolute;z-index:-2;inset:0;background:linear-gradient(90deg,rgba(3,3,3,.97) 0%,rgba(5,5,4,.86) 40%,rgba(5,5,4,.28) 76%,rgba(0,0,0,.28) 100%)}.profile-hero__copy,.section-shell{width:min(1180px,calc(100% - 64px));margin-inline:auto}.profile-hero__copy{margin-top:50px;padding-top:0}.profile-hero h1,.journey h2,.story-band h2,.objective h2{margin:0;font-family:var(--font-display);font-weight:900;line-height:.94;letter-spacing:-.035em;text-transform:uppercase}.profile-hero h1{max-width:570px;font-size:clamp(3.25rem,5.1vw,5.1rem)}.profile-hero h1 em{color:transparent;-webkit-text-stroke:1px rgba(181,138,60,.85);font-style:normal}.lead{max-width:550px;margin:22px 0 0;color:rgba(242,235,221,.78);font-size:.98rem;line-height:1.58}.profile-hero__quote-close{margin-left:4px;color:var(--gold);font-family:Georgia,serif;font-size:1.45em}.section-index,.objective__eyebrow{margin:0 0 14px;color:var(--gold);font:800 .68rem/1.2 var(--font-ui);letter-spacing:.17em;text-transform:uppercase}.journey{padding:42px 0}.journey__grid{display:grid;grid-template-columns:minmax(350px,.9fr) minmax(0,1.1fr);gap:48px;align-items:center}.photo-frame,.story-band__visual,.objective__visual{position:relative;margin:0;overflow:hidden;border:0;background:#050504}.photo-frame::after,.story-band__visual::after,.objective__visual::after{position:absolute;inset:0;content:"";pointer-events:none}.photo-frame::after,.story-band--training .story-band__visual::after,.objective__visual::after{background:linear-gradient(90deg,transparent 0%,transparent 78%,#050504 100%)}.story-band--coach .story-band__visual::after{background:linear-gradient(270deg,transparent 0%,transparent 78%,#050504 100%)}.photo-frame{height:470px}.photo-frame img,.story-band__visual img,.objective__visual img{width:100%;height:100%;object-fit:cover;filter:sepia(.08) saturate(.82) contrast(1.04) brightness(.9)}.journey h2,.story-band h2{font-size:clamp(2.8rem,4.2vw,4.25rem)}.gold-rule{display:block;width:54px;height:2px;margin:22px 0;background:var(--gold)}.journey p,.story-band p,.objective p{color:rgba(242,235,221,.76);font-size:1rem;line-height:1.62}.story-band{display:grid;grid-template-columns:minmax(0,.82fr) minmax(440px,1.18fr);gap:54px;align-items:center;padding:44px 0;border-top:1px solid rgba(181,138,60,.10)}.story-band--coach .story-band__copy{order:1}.story-band--coach .story-band__visual{order:2}.story-band--training .story-band__copy{order:2}.story-band--training .story-band__visual{order:1}.story-band__copy{padding:0 8px}.story-band h2{margin-bottom:20px}.story-band__visual{height:420px}.story-band__visual--guide{width:min(100%,540px);height:520px;justify-self:end}.story-band__visual--guide img{object-position:center 34%}.story-band--coach .story-band__copy{padding-right:10px}.story-band--coach .story-band__copy p:last-child{max-width:500px}.objective{display:grid;grid-template-columns:minmax(440px,1.08fr) minmax(0,.92fr);gap:54px;align-items:center;padding:44px 0;border-top:1px solid rgba(181,138,60,.10)}.objective__visual{height:420px}.objective__context{object-position:center}.objective__copy{max-width:560px}.objective h2{font-size:clamp(2.35rem,3.35vw,3.4rem);line-height:.96}.objective p{max-width:520px}.objective a{display:inline-flex;align-items:center;gap:14px;margin-top:16px;padding:14px 18px;border:1px solid rgba(181,138,60,.62);color:var(--gold);font:800 .68rem/1 var(--font-ui);letter-spacing:.14em;text-transform:uppercase}
+@media(max-width:900px){.profile-hero__copy,.section-shell{width:calc(100% - 36px)}.profile-hero{height:560px}.profile-hero__copy{margin-top:50px}.profile-hero__context{object-position:center 12%}.journey__grid,.story-band,.objective{grid-template-columns:1fr;gap:28px}.story-band--coach .story-band__copy,.story-band--coach .story-band__visual,.story-band--training .story-band__copy,.story-band--training .story-band__visual{order:initial}.story-band__visual--guide{justify-self:stretch;width:100%;height:460px}.photo-frame::after,.story-band__visual::after,.objective__visual::after{background:linear-gradient(180deg,transparent 0%,transparent 82%,#050504 100%)}.objective__visual{height:400px}}
+@media(max-width:620px){.profile-hero{height:510px}.profile-hero__copy{margin-top:50px}.profile-hero h1{font-size:clamp(2.8rem,12.5vw,3.9rem)}.profile-hero__context{object-position:center top}.lead{font-size:.92rem;line-height:1.52}.journey,.story-band,.objective{padding:30px 0}.photo-frame{height:380px}.story-band__visual,.story-band__visual--guide,.objective__visual{height:360px}.journey h2,.story-band h2{font-size:clamp(2.25rem,10vw,3.35rem)}.journey p,.story-band p,.objective p{font-size:.95rem;line-height:1.56}.objective h2{font-size:clamp(2.05rem,9vw,2.8rem);line-height:.98}}
 </style>

@@ -40,7 +40,7 @@ const imageNode = ({ loc, title, caption }) => loc ? `
 const videoNode = (item) => {
   const id = youtubeId(item.urlYouTube);
   if (!id) return "";
-  const thumbnail = `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+  const thumbnail = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
   const player = `https://www.youtube.com/embed/${id}`;
   const description = [item.titolo, item.dettaglio, "Video del percorso agonistico di Arianna Milano nel Sanda."].filter(Boolean).join(" · ");
   return `

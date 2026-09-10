@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import media from "../../../data/media.json";
+
+export function getStaticPaths() {
+  return media
+    .filter((item) => item.tipo === "foto" && item.visibile && !item.isPlaceholder && item.url)
+    .map((item) => ({ params: { id: item.id }, props: { item } }));
+}
+
+const { item } = Astro.props;
+const title = `${item.titolo} | Foto Arianna Milano Sanda`;
+const description = item.testoAlternativo || [item.titolo, item.dettaglio, "Foto del percorso agonistico di Arianna Milano nel Sanda e Kung Fu."].filter(Boolean).join(" · ");
+const canonical = `https://www.ariannamilano.it/media/foto/${item.id}/`;
+const imageSchema = {
+  "@context": "https://schema.org",
+  "@type": "ImageObject",
+  "@id": `${canonical}#image`,
+  name: item.titolo,
+  caption: description,
+  description,
+  contentUrl: item.url,
+  url: canonical,
+  representativeOfPage: true,
+  inLanguage: "it-IT",
+  about: { "@id": "https://www.ariannamilano.it/#arianna-milano" },
+  creator: { "@type": "Person", "@id": "https://www.ariannamilano.it/#arianna-milano", name: "Arianna Milano" }
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(imageSchema)}></script>
+  <main id="main" class="photo-page">
+    <Header />
+    <article class="photo-shell">
+      <p class="eyebrow">Foto · {item.anno}</p>
+      <h1>{item.titolo}</h1>
+      {item.dettaglio && <p class="photo-detail">{item.dettaglio}</p>}
+      <figure>
+        <img src={item.url} alt={item.testoAlternativo || item.titolo} loading="eager" decoding="async" />
+        <figcaption>{description}</figcaption>
+      </figure>
+      <a class="back-link" href="/media/" data-interactive>← Torna a foto e video</a>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .photo-page{min-height:100vh;background:#060504;color:#f3ede2;padding-top:118px}.photo-shell{width:min(980px,calc(100% - 40px));margin:0 auto;padding:54px 0 90px}.eyebrow{margin:0;color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.photo-shell h1{margin:12px 0 8px;font-family:var(--font-display);font-size:clamp(2.6rem,6vw,5.8rem);line-height:.95;text-transform:uppercase}.photo-detail,figcaption{color:#c8c0b4;line-height:1.7}.photo-shell figure{margin:34px 0 0}.photo-shell img{display:block;width:100%;max-height:78vh;object-fit:contain;background:#000;border:1px solid rgba(216,161,58,.3);box-shadow:0 26px 70px rgba(0,0,0,.4)}figcaption{margin-top:16px}.back-link{display:inline-block;margin-top:28px;color:#d4a64d;font:800 .72rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}@media(max-width:640px){.photo-page{padding-top:86px}.photo-shell{padding-top:36px}.photo-shell figure{margin-top:24px}}
+</style>

@@ -27,10 +27,26 @@
   [headers.values]
     Cache-Control = "no-store, max-age=0, must-revalidate"
 
+# Admin console must always load the current HTML. Astro emits hashed JS/CSS
+# assets, so once the latest HTML is fetched the browser automatically requests
+# the correct versioned assets for that deploy.
 [[headers]]
   for = "/admin"
   [headers.values]
-    Cache-Control = "no-store"
+    Cache-Control = "no-store, no-cache, max-age=0, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, max-age=0, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
     X-Robots-Tag = "noindex, nofollow, noarchive"
     X-Frame-Options = "DENY"
     Referrer-Policy = "no-referrer"
@@ -39,5 +55,7 @@
 [[headers]]
   for = "/.netlify/functions/admin-*"
   [headers.values]
-    Cache-Control = "no-store"
+    Cache-Control = "no-store, no-cache, max-age=0, must-revalidate"
+    Pragma = "no-cache"
+    Expires = "0"
     X-Content-Type-Options = "nosniff"

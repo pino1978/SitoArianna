@@ -10,7 +10,10 @@ function youtubeId(url = "") {
 
 export function getStaticPaths() {
   return media
-    .filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube))
+    .filter((item) => {
+      if (item.tipo !== "video" || !item.visibile || !item.urlYouTube) return false;
+      return /(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/.test(item.urlYouTube);
+    })
     .map((item) => ({ params: { id: item.id }, props: { item } }));
 }
 

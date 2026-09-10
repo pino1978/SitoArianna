@@ -1,0 +1,1 @@
+admin.astro currently imports admin-media-v2.js; activate v3 by importing admin-media-v3.js after it.

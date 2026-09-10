@@ -98,7 +98,7 @@ body.site-locked #video-viewer .video-viewer__meta{position:relative!important;z
     box-shadow:none!important;
   }
   body .premium-header .nav-toggle span{left:8px!important;width:17px!important}
-  body .premium-header .nav-toggle b{left:32px!important;font-size:.56rem!important;letter-spacing:.08em!important}
+  body .premium-header .nav-toggle b{left:32px!important;font-size:11px!important;letter-spacing:.08em!important}
 
   body.nav-open .mobile-nav .mobile-nav__inner>a,
   body .mobile-nav .mobile-nav__inner>a{

@@ -65,9 +65,51 @@
     }
   };
 
+  const initMobileNav = () => {
+    const nav = document.querySelector('.mobile-nav');
+    if (!(nav instanceof HTMLElement)) return;
+
+    nav.classList.add('mobile-nav--compact');
+    nav.querySelectorAll('.mobile-nav__inner > a').forEach((link) => {
+      const number = link.querySelector(':scope > span');
+      if (number) number.remove();
+    });
+
+    document.querySelectorAll('.language-picker,.language-trigger,.language-options,.mobile-language-options,.mobile-language-options button,[data-language-code],[data-language-flag]').forEach((el) => {
+      el.classList.add('notranslate');
+      el.setAttribute('translate', 'no');
+    });
+
+    if (!document.getElementById('mobile-nav-compact-style')) {
+      const style = document.createElement('style');
+      style.id = 'mobile-nav-compact-style';
+      style.textContent = `
+        @media (max-width:1000px) {
+          .mobile-nav.mobile-nav--compact { padding: 82px 26px 24px !important; }
+          .mobile-nav--compact .mobile-nav__inner { max-width: 520px !important; }
+          .mobile-nav--compact .mobile-nav__top { min-height: 52px !important; margin-bottom: 4px !important; }
+          .mobile-nav--compact .mobile-nav__inner > a {
+            display:flex !important;
+            grid-template-columns:none !important;
+            align-items:center !important;
+            min-height:58px !important;
+            padding:0 !important;
+            font-size:clamp(1.22rem,5.6vw,1.62rem) !important;
+            line-height:1 !important;
+            letter-spacing:.005em !important;
+          }
+          .mobile-nav--compact .mobile-nav__footer { gap:10px !important; margin-top:14px !important; padding-top:2px !important; }
+          .mobile-nav--compact .mobile-language-options button { min-height:44px !important; padding:8px 12px !important; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+  };
+
   const init = () => {
     initPalmares();
     initMedia();
+    initMobileNav();
   };
 
   if (document.readyState === 'loading') {

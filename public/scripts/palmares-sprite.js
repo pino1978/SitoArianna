@@ -57,7 +57,7 @@
     if (hero instanceof HTMLElement && heroPhoto instanceof HTMLImageElement) {
       const src = heroPhoto.currentSrc || heroPhoto.getAttribute('src');
       if (src) {
-        hero.style.backgroundImage = `linear-gradient(90deg,rgba(6,5,4,.92) 0%,rgba(6,5,4,.74) 48%,rgba(6,5,4,.42) 100%),linear-gradient(180deg,rgba(6,5,4,.18),rgba(6,5,4,.8)),url("${src}")`;
+        hero.style.backgroundImage = `linear-gradient(90deg,rgba(6,5,4,.62) 0%,rgba(6,5,4,.44) 48%,rgba(6,5,4,.24) 100%),linear-gradient(180deg,rgba(6,5,4,.08),rgba(6,5,4,.56)),url("${src}")`;
         hero.style.backgroundSize = 'cover';
         hero.style.backgroundPosition = 'center 34%';
         hero.style.backgroundRepeat = 'no-repeat';

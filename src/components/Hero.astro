@@ -6,6 +6,7 @@ import profile from "../data/profile.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
+import challengeTickerImage from "../assets/images/ticker-greece.jpg";
 
 const showHeroStats = true;
 const copy = profile.content.home.hero;
@@ -28,6 +29,17 @@ const copy = profile.content.home.hero;
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
     <p class="hero-affiliation">ASD Kasoria Kombat &amp; Fly · CSEN</p>
 
+    <a class="challenge-ticker" href="/grecia/" aria-label="Scopri Road to Greece 2026: 18th Palamidio Martial Arts Championship, Nafplio, Grecia, novembre 2026" data-interactive>
+      <img class="challenge-ticker__image" src={challengeTickerImage.src} alt="" aria-hidden="true" width={challengeTickerImage.width} height={challengeTickerImage.height} decoding="async" />
+      <span class="challenge-ticker__shade" aria-hidden="true"></span>
+      <span class="challenge-ticker__content">
+        <span class="challenge-ticker__eyebrow">Prossima sfida internazionale</span>
+        <strong>Road to Greece 2026</strong>
+        <span class="challenge-ticker__meta">18th Palamidio · Nafplio</span>
+      </span>
+      <span class="challenge-ticker__arrow" aria-hidden="true">→</span>
+    </a>
+
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
 
@@ -42,7 +54,9 @@ const copy = profile.content.home.hero;
 
 <style>
   .hero-upper-signature,
-  .hero-values { display: none; }
+  .hero-values,
+  .challenge-ticker { display: none; }
+
   .hero-identity {
     margin: 0 0 14px;
     color: rgba(245, 240, 231, .82);
@@ -50,6 +64,7 @@ const copy = profile.content.home.hero;
     letter-spacing: .16em;
     text-transform: uppercase;
   }
+
   .hero-affiliation {
     margin: 12px 0 0;
     color: rgba(245, 240, 231, .58);
@@ -64,19 +79,174 @@ const copy = profile.content.home.hero;
   }
 
   @media (max-width: 640px) {
+    .hero {
+      min-height: 704px !important;
+    }
+
     .hero-title-image { display: none; }
     .hero-upper-signature,
     .hero-values { display: block; }
+
     .hero-identity {
       max-width: 320px;
       margin-bottom: 10px;
       font-size: .58rem;
       letter-spacing: .12em;
     }
+
     .hero-affiliation {
       margin-top: 8px;
       font-size: .5rem;
       letter-spacing: .09em;
     }
+
+    .challenge-ticker {
+      position: absolute;
+      z-index: 6;
+      top: 496px;
+      left: -18px;
+      display: flex;
+      align-items: center;
+      width: 100vw;
+      height: 74px;
+      overflow: hidden;
+      border-top: 1px solid rgba(216, 161, 58, .82);
+      border-bottom: 1px solid rgba(216, 161, 58, .58);
+      background: #050505;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, .42);
+      color: #f4efe5;
+      text-decoration: none;
+      isolation: isolate;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .challenge-ticker__image {
+      position: absolute;
+      z-index: -3;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: .58;
+      filter: saturate(.82) contrast(1.05) brightness(.72);
+    }
+
+    .challenge-ticker__shade {
+      position: absolute;
+      z-index: -2;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(3,3,3,.88) 0%, rgba(3,3,3,.62) 58%, rgba(3,3,3,.36) 100%);
+    }
+
+    .challenge-ticker__content {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+      padding: 0 54px 0 18px;
+      text-shadow: 0 2px 12px rgba(0,0,0,.72);
+    }
+
+    .challenge-ticker__eyebrow {
+      color: #d8a13a;
+      font: 800 .54rem/1 var(--font-ui);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+
+    .challenge-ticker__content strong {
+      overflow: hidden;
+      color: #f4efe5;
+      font: 900 .98rem/1.05 var(--font-display);
+      letter-spacing: .025em;
+      text-overflow: ellipsis;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .challenge-ticker__meta {
+      color: rgba(244,239,229,.78);
+      font: 800 .58rem/1 var(--font-ui);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .challenge-ticker__arrow {
+      position: absolute;
+      z-index: 3;
+      right: 18px;
+      top: 50%;
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(216,161,58,.62);
+      border-radius: 50%;
+      color: #d8a13a;
+      font: 400 1.05rem/1 var(--font-ui);
+      transform: translateY(-50%);
+      background: rgba(0,0,0,.28);
+    }
+
+    .challenge-ticker::after {
+      content: "";
+      position: absolute;
+      z-index: 4;
+      top: -55%;
+      bottom: -55%;
+      left: -58%;
+      width: 28%;
+      pointer-events: none;
+      background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.02) 24%, rgba(255,245,216,.2) 48%, rgba(255,255,255,.06) 66%, transparent 100%);
+      filter: blur(3px);
+      transform: skewX(-14deg) translate3d(0,0,0);
+      animation: challengeLightSweep 6.4s linear infinite;
+      will-change: transform, opacity;
+    }
+
+    .challenge-ticker:focus-visible {
+      outline: 2px solid #d8a13a;
+      outline-offset: 3px;
+    }
+
+    :global(.hero-copy .stats-strip) {
+      top: 572px !important;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .hero { min-height: 684px !important; }
+
+    .challenge-ticker {
+      top: 478px;
+      height: 72px;
+    }
+
+    .challenge-ticker__content {
+      padding-left: 15px;
+      padding-right: 50px;
+    }
+
+    .challenge-ticker__content strong { font-size: .91rem; }
+    .challenge-ticker__eyebrow { font-size: .5rem; }
+    .challenge-ticker__meta { font-size: .54rem; }
+    .challenge-ticker__arrow { right: 14px; width: 28px; height: 28px; }
+
+    :global(.hero-copy .stats-strip) {
+      top: 552px !important;
+    }
+  }
+
+  @keyframes challengeLightSweep {
+    0%, 8% { transform: skewX(-14deg) translate3d(0,0,0); opacity: 0; }
+    14% { opacity: .72; }
+    48% { transform: skewX(-14deg) translate3d(570vw,0,0); opacity: .72; }
+    54%, 100% { transform: skewX(-14deg) translate3d(570vw,0,0); opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .challenge-ticker::after { display: none; }
   }
 </style>

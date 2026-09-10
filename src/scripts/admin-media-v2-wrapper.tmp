@@ -1,0 +1,2 @@
+import './admin-media-v2-legacy.js';
+import './admin-media-v3.js';

@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import media from "../data/media.json";
+import events from "../data/events.json";
 import profile from "../data/profile.json";
 
 const copy = profile.content.mediaPage;
@@ -19,22 +20,70 @@ function youtubeId(url = "") {
   const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
   return match?.[1] ?? "";
 }
-function eventLabel(item) {
-  const detail = item.dettaglio || "";
-  const parts = detail.split("·").map((part) => part.trim()).filter(Boolean);
-  return parts.at(-1) || item.titolo || "Evento";
-}
 function itemYear(item) {
   return String(item.anno || item.data?.slice(0, 4) || "");
+}
+function normalized(value = "") {
+  return String(value).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, " ").trim();
+}
+function mediaCategory(item) {
+  return item.categoria === "podio" ? "gara" : (item.categoria || "altro");
+}
+function mediaMoment(item) {
+  if (item.momento) return item.momento;
+  if (item.categoria === "podio") return "podio";
+  return "";
+}
+function inferCompetitionId(item) {
+  if (item.competitionId && events.some((entry) => entry.id === item.competitionId)) return item.competitionId;
+  if (mediaCategory(item) !== "gara") return "";
+  const haystack = normalized(`${item.titolo || ""} ${item.dettaglio || ""}`);
+  const direct = events.find((entry) => haystack.includes(normalized(entry.name)));
+  if (direct) return direct.id;
+  if (/world .*championship|c k a/.test(haystack)) return events.find((entry) => entry.id === "cka-world-championship-cup")?.id || "";
+  if (/champion cup/.test(haystack)) return events.find((entry) => entry.id === "champion-cup")?.id || "";
+  if (/one to one/.test(haystack)) return events.find((entry) => entry.id === "one-to-one")?.id || "";
+  if (/xanda prestige/.test(haystack)) return events.find((entry) => entry.id === "xanda-prestige")?.id || "";
+  return "";
+}
+function competitionName(id = "") {
+  return events.find((entry) => entry.id === id)?.name || "";
+}
+function placeLabel(item) {
+  if (item.competitionId && item.editionId) {
+    const competition = events.find((entry) => entry.id === item.competitionId);
+    const edition = competition?.editions?.find((entry) => entry.id === item.editionId);
+    if (edition) {
+      return [edition.city, edition.province ? `(${edition.province})` : "", edition.country && edition.country !== "Italia" ? edition.country : ""].filter(Boolean).join(" ").replace(/\s+\(/, " (");
+    }
+  }
+  const detail = item.dettaglio || "";
+  const parts = detail.split("·").map((part) => part.trim()).filter(Boolean);
+  return parts.at(-1) || "";
 }
 const photos = media.filter((item) => item.tipo === "foto" && item.visibile && !item.isPlaceholder && photoUrl(item));
 const videos = media.filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube));
 const visibleMedia = [
   ...videos.map((item) => ({ ...item, mediaType: "video", mediaUrl: item.urlYouTube, thumb: `https://i.ytimg.com/vi/${youtubeId(item.urlYouTube)}/hqdefault.jpg` })),
   ...photos.map((item) => ({ ...item, mediaType: "foto", mediaUrl: photoUrl(item), thumb: photoUrl(item) }))
-];
+].map((item) => ({
+  ...item,
+  filterCategory: mediaCategory(item),
+  filterMoment: mediaMoment(item),
+  filterCompetitionId: inferCompetitionId(item)
+}));
 const years = [...new Set(visibleMedia.map(itemYear).filter(Boolean))].sort((a, b) => Number(b) - Number(a));
-const events = [...new Set(visibleMedia.map(eventLabel).filter(Boolean))].sort((a, b) => a.localeCompare(b, "it"));
+const categories = [
+  ["gara", "Gara"],
+  ["allenamento", "Allenamento"],
+  ["evento", "Evento"],
+  ["ritratto", "Ritratto"],
+  ["altro", "Altro"]
+].filter(([value]) => visibleMedia.some((item) => item.filterCategory === value));
+const competitionIds = [...new Set(visibleMedia.filter((item) => item.filterCategory === "gara").map((item) => item.filterCompetitionId).filter(Boolean))];
+const competitions = events.filter((entry) => competitionIds.includes(entry.id)).sort((a, b) => a.name.localeCompare(b.name, "it"));
+const momentLabels = { azione: "Azione", podio: "Podio", premiazione: "Premiazione", preparazione: "Preparazione", altro: "Altro" };
+const moments = [...new Set(visibleMedia.filter((item) => item.filterCategory === "gara").map((item) => item.filterMoment).filter(Boolean))].map((value) => [value, momentLabels[value] || value]).sort((a, b) => a[1].localeCompare(b[1], "it"));
 const primaryVideo = videos[0] || null;
 const secondaryItems = [videos[1], photos[0]].filter(Boolean);
 ---
@@ -87,30 +136,35 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
         <div class="filter-bar" aria-label="Filtri media">
           <div class="filter-types" role="group" aria-label="Tipo di contenuto">
             <button type="button" data-interactive data-type-filter="tutti" aria-pressed="true">Tutti</button>
-            <button type="button" data-interactive data-type-filter="video" aria-pressed="false">Video</button>
             <button type="button" data-interactive data-type-filter="foto" aria-pressed="false">Foto</button>
+            <button type="button" data-interactive data-type-filter="video" aria-pressed="false">Video</button>
           </div>
-          <div class="filter-selects">
-            <label><span class="sr-only">Anno</span><select data-year-filter data-interactive><option value="tutti">Anno</option>{years.map((year) => <option value={year}>{year}</option>)}</select></label>
-            <label><span class="sr-only">Evento</span><select data-event-filter data-interactive><option value="tutti">Evento</option>{events.map((event) => <option value={event}>{event}</option>)}</select></label>
+          <button class="filter-toggle" type="button" data-filter-toggle aria-expanded="false" aria-controls="media-filter-options">Filtri <span aria-hidden="true">＋</span></button>
+          <div class="filter-selects" id="media-filter-options" data-filter-options>
+            <label><span class="filter-label">Anno</span><select data-year-filter data-interactive><option value="tutti">Tutti</option>{years.map((year) => <option value={year}>{year}</option>)}</select></label>
+            <label><span class="filter-label">Tipologia</span><select data-category-filter data-interactive><option value="tutti">Tutte</option>{categories.map(([value, label]) => <option value={value}>{label}</option>)}</select></label>
+            <label data-race-filter hidden><span class="filter-label">Competizione</span><select data-competition-filter data-interactive><option value="tutti">Tutte</option>{competitions.map((competition) => <option value={competition.id}>{competition.name}</option>)}</select></label>
+            {moments.length > 0 && <label data-race-filter hidden><span class="filter-label">Momento</span><select data-moment-filter data-interactive><option value="tutti">Tutti</option>{moments.map(([value, label]) => <option value={value}>{label}</option>)}</select></label>}
           </div>
         </div>
         {visibleMedia.length > 0 ? <div class="editorial-grid" data-media-grid>
           {visibleMedia.map((item, index) => {
             const isVideo = item.mediaType === "video";
             const id = isVideo ? youtubeId(item.urlYouTube) : "";
-            const event = eventLabel(item);
-            return <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-event={event}>
+            const place = placeLabel(item);
+            const competition = competitionName(item.filterCompetitionId);
+            return <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-category={item.filterCategory} data-competition={item.filterCompetitionId} data-moment={item.filterMoment}>
               {isVideo ? <button class="media-card__button media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""} aria-label={`Apri video: ${item.titolo}`}>
                 <span class="media-card__visual media-card__visual--video"><img src={item.thumb} alt="" loading="lazy" decoding="async" /><span class="shade"></span><span class="play" aria-hidden="true">▶</span></span>
-                <span class="media-card__copy"><small>{itemYear(item)} · Video</small><strong>{item.titolo}</strong><span>{event}</span></span>
+                <span class="media-card__copy"><small>{itemYear(item)} · Video</small><strong>{item.titolo}</strong><span>{competition || place}</span></span>
               </button> : <a class="media-card__button" href={item.mediaUrl} target="_blank" rel="noopener" data-interactive>
                 <span class="media-card__visual"><img src={item.thumb} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" /><span class="shade"></span></span>
-                <span class="media-card__copy"><small>{itemYear(item)} · Foto</small><strong>{item.titolo}</strong><span>{event}</span></span>
+                <span class="media-card__copy"><small>{itemYear(item)} · Foto</small><strong>{item.titolo}</strong><span>{competition || place}</span></span>
               </a>}
             </article>;
           })}
         </div> : <div class="media-empty"><strong>Archivio in preparazione</strong><p>I contenuti verranno pubblicati qui appena disponibili.</p></div>}
+        <div class="media-empty" data-filter-empty hidden><strong>Nessun contenuto trovato</strong><p>Modifica uno o più filtri per ampliare la ricerca.</p></div>
       </div>
     </section>
   </main>
@@ -127,19 +181,57 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
   <script>
     const typeButtons = Array.from(document.querySelectorAll('[data-type-filter]'));
     const yearSelect = document.querySelector('[data-year-filter]');
-    const eventSelect = document.querySelector('[data-event-filter]');
+    const categorySelect = document.querySelector('[data-category-filter]');
+    const competitionSelect = document.querySelector('[data-competition-filter]');
+    const momentSelect = document.querySelector('[data-moment-filter]');
+    const raceFilters = Array.from(document.querySelectorAll('[data-race-filter]'));
     const cards = Array.from(document.querySelectorAll('[data-media-grid] .media-card'));
+    const filterEmpty = document.querySelector('[data-filter-empty]');
+    const filterToggle = document.querySelector('[data-filter-toggle]');
+    const filterOptions = document.querySelector('[data-filter-options]');
     let activeType = 'tutti';
-    const applyFilters = () => {
-      const year = yearSelect instanceof HTMLSelectElement ? yearSelect.value : 'tutti';
-      const event = eventSelect instanceof HTMLSelectElement ? eventSelect.value : 'tutti';
-      cards.forEach((card) => {
-        const show=(activeType==='tutti'||card.getAttribute('data-media-type')===activeType)&&(year==='tutti'||card.getAttribute('data-year')===year)&&(event==='tutti'||card.getAttribute('data-event')===event);
-        card.hidden=!show;
-      });
+
+    const updateRaceFilters = () => {
+      const isRace = categorySelect instanceof HTMLSelectElement && categorySelect.value === 'gara';
+      raceFilters.forEach((field) => { if (field instanceof HTMLElement) field.hidden = !isRace; });
+      if (!isRace) {
+        if (competitionSelect instanceof HTMLSelectElement) competitionSelect.value = 'tutti';
+        if (momentSelect instanceof HTMLSelectElement) momentSelect.value = 'tutti';
+      }
     };
-    typeButtons.forEach((button)=>button.addEventListener('click',()=>{activeType=button.getAttribute('data-type-filter')||'tutti';typeButtons.forEach((item)=>item.setAttribute('aria-pressed',String(item===button)));applyFilters();}));
-    yearSelect?.addEventListener('change',applyFilters); eventSelect?.addEventListener('change',applyFilters);
+    const applyFilters = () => {
+      updateRaceFilters();
+      const year = yearSelect instanceof HTMLSelectElement ? yearSelect.value : 'tutti';
+      const category = categorySelect instanceof HTMLSelectElement ? categorySelect.value : 'tutti';
+      const competition = competitionSelect instanceof HTMLSelectElement ? competitionSelect.value : 'tutti';
+      const moment = momentSelect instanceof HTMLSelectElement ? momentSelect.value : 'tutti';
+      let visibleCount = 0;
+      cards.forEach((card) => {
+        const show =
+          (activeType === 'tutti' || card.getAttribute('data-media-type') === activeType) &&
+          (year === 'tutti' || card.getAttribute('data-year') === year) &&
+          (category === 'tutti' || card.getAttribute('data-category') === category) &&
+          (category !== 'gara' || competition === 'tutti' || card.getAttribute('data-competition') === competition) &&
+          (category !== 'gara' || moment === 'tutti' || card.getAttribute('data-moment') === moment);
+        card.hidden = !show;
+        if (show) visibleCount += 1;
+      });
+      if (filterEmpty instanceof HTMLElement) filterEmpty.hidden = visibleCount !== 0;
+    };
+    typeButtons.forEach((button) => button.addEventListener('click', () => {
+      activeType = button.getAttribute('data-type-filter') || 'tutti';
+      typeButtons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      applyFilters();
+    }));
+    [yearSelect, categorySelect, competitionSelect, momentSelect].forEach((control) => control?.addEventListener('change', applyFilters));
+    filterToggle?.addEventListener('click', () => {
+      if (!(filterToggle instanceof HTMLButtonElement) || !(filterOptions instanceof HTMLElement)) return;
+      const open = filterToggle.getAttribute('aria-expanded') === 'true';
+      filterToggle.setAttribute('aria-expanded', String(!open));
+      filterOptions.classList.toggle('is-open', !open);
+      const icon = filterToggle.querySelector('span'); if (icon) icon.textContent = open ? '＋' : '−';
+    });
+    applyFilters();
 
     const viewer=document.querySelector('#video-viewer');
     const panel=viewer?.querySelector('.video-viewer__panel');
@@ -169,8 +261,8 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
   </script>
 
   <style>
-    .media-page{background:#060504;color:#f3ede2}.media-shell{width:min(1180px,calc(100% - 56px));margin-inline:auto}.eyebrow{margin:0;color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.media-hero{position:relative;min-height:390px;padding-top:118px;background:radial-gradient(circle at 78% 20%,rgba(181,138,60,.14),transparent 28%),linear-gradient(180deg,#090807,#060504);overflow:hidden}.media-hero__inner{padding:54px 0 74px}.media-hero h1,.featured h2,.archive h2{font-family:var(--font-display);text-transform:uppercase;line-height:.92}.media-hero h1{margin:10px 0 4px;font-size:clamp(4.4rem,9vw,8rem)}.media-hero__claim{margin:0;color:#d6ad61;font-family:var(--font-display);font-size:clamp(1.6rem,2.7vw,2.8rem)}.media-hero__intro{max-width:560px;color:#c8c0b4;line-height:1.7}.featured{padding:68px 0 92px}.section-row{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:26px}.section-row h2{margin:8px 0 0;font-size:clamp(2.3rem,4.8vw,4.8rem)}.section-row>a{color:#d4a64d;font:700 .7rem/1 var(--font-ui);text-transform:uppercase}.featured-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(300px,1fr);gap:14px;min-height:540px}.featured-main,.featured-small{position:relative;overflow:hidden;border:1px solid rgba(181,138,60,.24);padding:0;background:#0a0908;color:#fff;text-align:left;cursor:pointer}.featured-main img,.featured-small img{width:100%;height:100%;object-fit:cover}.featured-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 42%,rgba(0,0,0,.86))}.play{position:absolute;left:50%;top:50%;display:grid;width:70px;height:70px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.88);border-radius:50%;background:rgba(0,0,0,.38)}.play--small{width:48px;height:48px}.featured-copy{position:absolute;left:26px;right:26px;bottom:24px;display:grid;gap:6px}.featured-copy small,.media-card__copy small{color:#d4a64d;font:700 .64rem/1 var(--font-ui);text-transform:uppercase}.featured-copy strong{font-family:var(--font-display);font-size:clamp(1.5rem,2.5vw,2.6rem);text-transform:uppercase}.featured-copy--small{left:18px;bottom:16px}.archive{padding:86px 0 98px;background:#0b0a09}.archive-heading p:last-child{max-width:620px;color:#b9b1a5}.filter-bar{display:flex;justify-content:space-between;gap:18px;padding:14px 0 20px;border-top:1px solid rgba(181,138,60,.18)}.filter-types,.filter-selects{display:flex;gap:8px}.filter-types button,.filter-selects select{min-height:42px;border:1px solid rgba(242,235,221,.2);background:#0b0a09;color:#f2ebdd;padding:0 16px;font:700 .65rem/1 var(--font-ui);text-transform:uppercase}.filter-types button[aria-pressed="true"]{border-color:#c99b4c;background:#c99b4c;color:#080706}.editorial-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.media-card{grid-column:span 4;min-height:360px}.media-card--wide{grid-column:span 8}.media-card[hidden]{display:none}.media-card__button{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;border:0;padding:0;background:#080706;color:#fff;text-align:left}.media-card__visual{position:relative;display:block;min-height:280px;overflow:hidden}.media-card--wide .media-card__visual{min-height:390px}.media-card__visual img{width:100%;height:100%;object-fit:cover}.media-card__copy{display:grid;gap:5px;padding:15px 17px 18px}.media-card__copy strong{font-family:var(--font-display);font-size:1.05rem;text-transform:uppercase}.media-card__copy>span{color:#aaa296;font-size:.75rem}.media-empty{padding:60px;text-align:center}.video-viewer[hidden]{display:none!important}.video-viewer{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;opacity:0;transition:opacity .16s ease}.video-viewer.is-open{opacity:1}.video-viewer__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.96)}.video-viewer__panel{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 320px;width:min(1460px,calc(100vw - 28px));max-height:calc(100dvh - 28px);background:#020202;box-shadow:0 20px 70px #000;overflow:auto}.video-viewer__player{display:grid;place-items:center;background:#000}.video-viewer__player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.video-viewer__meta{display:flex;flex-direction:column;justify-content:center;padding:42px 30px;border-left:1px solid rgba(181,138,60,.2)}.video-viewer__meta h2{margin:10px 0 12px;font-family:var(--font-display);font-size:2rem;text-transform:uppercase}.video-viewer__meta time{color:#d4a64d}.viewer-close{position:fixed;z-index:20002;right:18px;top:18px;width:52px;height:52px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:#070707;color:#fff;font-size:1.8rem;cursor:pointer}.video-open{overflow:hidden!important}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-    @media(max-width:900px){.media-shell{width:calc(100% - 32px)}.featured-grid{grid-template-columns:1fr;min-height:0}.featured-main{aspect-ratio:16/9}.featured-side{grid-template-columns:1fr 1fr;grid-template-rows:none}.featured-small{aspect-ratio:4/5}.editorial-grid{grid-template-columns:repeat(2,1fr)}.media-card,.media-card--wide,.media-card--portrait{grid-column:span 1;min-height:0}.media-card[data-media-type="video"]{grid-column:1/-1}.media-card__visual,.media-card--wide .media-card__visual{min-height:0;aspect-ratio:4/5}.media-card[data-media-type="video"] .media-card__visual{aspect-ratio:16/9}.video-viewer__panel{grid-template-columns:1fr}.video-viewer__meta{border-left:0;border-top:1px solid rgba(181,138,60,.2);padding:22px}}
-    @media(max-width:640px){.media-shell{width:calc(100% - 28px)}.featured{padding:48px 0 70px}.section-row{display:block}.featured-grid{gap:10px}.featured-side{gap:10px}.archive{padding:62px 0 72px}.filter-bar{flex-direction:column}.filter-types{display:grid;grid-template-columns:repeat(3,1fr)}.filter-selects{display:grid;grid-template-columns:1fr 1fr}.filter-selects select{width:100%}.editorial-grid{gap:8px}.video-viewer{place-items:start center}.video-viewer__panel{width:100vw;max-height:100dvh;min-height:100dvh;overflow-y:auto;padding-top:82px}.video-viewer__player{width:100vw}.video-viewer__player iframe{width:100vw!important;height:auto!important;aspect-ratio:16/9!important}.video-viewer__meta{padding:22px 22px 40px}.viewer-close{top:14px;right:14px;width:54px;height:54px}.play{width:58px;height:58px}}
+    .media-page{background:#060504;color:#f3ede2}.media-shell{width:min(1180px,calc(100% - 56px));margin-inline:auto}.eyebrow{margin:0;color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.media-hero{position:relative;min-height:390px;padding-top:118px;background:radial-gradient(circle at 78% 20%,rgba(181,138,60,.14),transparent 28%),linear-gradient(180deg,#090807,#060504);overflow:hidden}.media-hero__inner{padding:54px 0 74px}.media-hero h1,.featured h2,.archive h2{font-family:var(--font-display);text-transform:uppercase;line-height:.92}.media-hero h1{margin:10px 0 4px;font-size:clamp(4.4rem,9vw,8rem)}.media-hero__claim{margin:0;color:#d6ad61;font-family:var(--font-display);font-size:clamp(1.6rem,2.7vw,2.8rem)}.media-hero__intro{max-width:560px;color:#c8c0b4;line-height:1.7}.featured{padding:68px 0 92px}.section-row{display:flex;align-items:end;justify-content:space-between;gap:32px;margin-bottom:26px}.section-row h2{margin:8px 0 0;font-size:clamp(2.3rem,4.8vw,4.8rem)}.section-row>a{color:#d4a64d;font:700 .7rem/1 var(--font-ui);text-transform:uppercase}.featured-grid{display:grid;grid-template-columns:minmax(0,1.85fr) minmax(300px,1fr);gap:14px;min-height:540px}.featured-main,.featured-small{position:relative;overflow:hidden;border:1px solid rgba(181,138,60,.24);padding:0;background:#0a0908;color:#fff;text-align:left;cursor:pointer}.featured-main img,.featured-small img{width:100%;height:100%;object-fit:cover}.featured-side{display:grid;grid-template-rows:1fr 1fr;gap:14px}.shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.02) 38%,rgba(0,0,0,.88))}.play{position:absolute;left:50%;top:50%;display:grid;width:70px;height:70px;place-items:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.88);border-radius:50%;background:rgba(0,0,0,.38)}.play--small{width:48px;height:48px}.featured-copy{position:absolute;left:26px;right:26px;bottom:24px;display:grid;gap:6px}.featured-copy small,.media-card__copy small{color:#d4a64d;font:700 .64rem/1 var(--font-ui);text-transform:uppercase}.featured-copy strong{font-family:var(--font-display);font-size:clamp(1.35rem,2vw,2.25rem);line-height:1.02;text-transform:uppercase;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.featured-copy>span{font-size:.95rem}.featured-copy--small{left:18px;right:18px;bottom:16px}.featured-copy--small strong{font-size:clamp(1rem,1.55vw,1.55rem);-webkit-line-clamp:3}.archive{padding:86px 0 98px;background:#0b0a09}.archive-heading p:last-child{max-width:620px;color:#b9b1a5}.filter-bar{display:grid;grid-template-columns:auto 1fr;align-items:end;gap:18px;padding:14px 0 24px;border-top:1px solid rgba(181,138,60,.18)}.filter-types{display:flex;gap:8px}.filter-selects{display:grid;grid-template-columns:repeat(4,minmax(150px,1fr));gap:8px}.filter-selects label[hidden]{display:none}.filter-label{display:block;margin:0 0 7px;color:#9f978b;font:700 .58rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.filter-types button,.filter-selects select,.filter-toggle{min-height:42px;border:1px solid rgba(242,235,221,.2);background:#0b0a09;color:#f2ebdd;padding:0 16px;font:700 .65rem/1 var(--font-ui);text-transform:uppercase}.filter-types button[aria-pressed="true"]{border-color:#c99b4c;background:#c99b4c;color:#080706}.filter-selects select{width:100%}.filter-toggle{display:none;justify-content:space-between;align-items:center;width:100%}.editorial-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}.media-card{grid-column:span 4;min-height:360px}.media-card--wide{grid-column:span 8}.media-card[hidden]{display:none}.media-card__button{display:grid;grid-template-rows:minmax(0,1fr) auto;width:100%;height:100%;border:0;padding:0;background:#080706;color:#fff;text-align:left}.media-card__visual{position:relative;display:block;min-height:280px;overflow:hidden}.media-card--wide .media-card__visual{min-height:390px}.media-card__visual img{width:100%;height:100%;object-fit:cover}.media-card__copy{display:grid;gap:5px;padding:15px 17px 18px}.media-card__copy strong{font-family:var(--font-display);font-size:1.05rem;text-transform:uppercase}.media-card__copy>span{color:#aaa296;font-size:.75rem}.media-empty{padding:60px;text-align:center}.video-viewer[hidden]{display:none!important}.video-viewer{position:fixed;inset:0;z-index:20000;display:grid;place-items:center;opacity:0;transition:opacity .16s ease}.video-viewer.is-open{opacity:1}.video-viewer__backdrop{position:absolute;inset:0;background:rgba(0,0,0,.96)}.video-viewer__panel{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1fr) 320px;width:min(1460px,calc(100vw - 28px));max-height:calc(100dvh - 28px);background:#020202;box-shadow:0 20px 70px #000;overflow:auto}.video-viewer__player{display:grid;place-items:center;background:#000}.video-viewer__player iframe{display:block;width:100%;aspect-ratio:16/9;border:0}.video-viewer__meta{display:flex;flex-direction:column;justify-content:center;padding:42px 30px;border-left:1px solid rgba(181,138,60,.2)}.video-viewer__meta h2{margin:10px 0 12px;font-family:var(--font-display);font-size:2rem;text-transform:uppercase}.video-viewer__meta time{color:#d4a64d}.viewer-close{position:fixed;z-index:20002;right:18px;top:18px;width:52px;height:52px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:#070707;color:#fff;font-size:1.8rem;cursor:pointer}.video-open{overflow:hidden!important}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
+    @media(max-width:900px){.media-shell{width:calc(100% - 32px)}.featured-grid{grid-template-columns:1fr;min-height:0}.featured-main{aspect-ratio:16/9}.featured-side{grid-template-columns:1fr 1fr;grid-template-rows:none}.featured-small{aspect-ratio:4/5}.filter-bar{grid-template-columns:1fr}.filter-selects{grid-template-columns:repeat(2,1fr)}.editorial-grid{grid-template-columns:repeat(2,1fr)}.media-card,.media-card--wide,.media-card--portrait{grid-column:span 1;min-height:0}.media-card[data-media-type="video"]{grid-column:1/-1}.media-card__visual,.media-card--wide .media-card__visual{min-height:0;aspect-ratio:4/5}.media-card[data-media-type="video"] .media-card__visual{aspect-ratio:16/9}.video-viewer__panel{grid-template-columns:1fr}.video-viewer__meta{border-left:0;border-top:1px solid rgba(181,138,60,.2);padding:22px}}
+    @media(max-width:640px){.media-shell{width:calc(100% - 28px)}.featured{padding:48px 0 70px}.section-row{display:block}.section-row h2{font-size:clamp(2rem,10vw,3rem)}.section-row>a{display:inline-block;margin-top:12px}.featured-grid{gap:10px}.featured-side{gap:10px}.featured-copy{left:18px;right:18px;bottom:18px}.featured-copy strong{font-size:clamp(1.35rem,6.6vw,1.9rem);line-height:1}.featured-copy>span{font-size:.82rem}.featured-copy--small{left:12px;right:12px;bottom:12px}.featured-copy--small strong{font-size:clamp(.95rem,4.8vw,1.3rem);line-height:1.02;-webkit-line-clamp:3}.featured-copy small{font-size:.58rem}.archive{padding:62px 0 72px}.filter-bar{display:flex;flex-direction:column;align-items:stretch}.filter-types{display:grid;grid-template-columns:repeat(3,1fr)}.filter-toggle{display:flex}.filter-selects{display:none;grid-template-columns:1fr;gap:12px;padding:14px;border:1px solid rgba(181,138,60,.16);background:#080706}.filter-selects.is-open{display:grid}.editorial-grid{gap:8px}.media-card__copy strong{font-size:.92rem}.video-viewer{place-items:start center}.video-viewer__panel{width:100vw;max-height:100dvh;min-height:100dvh;overflow-y:auto;padding-top:82px}.video-viewer__player{width:100vw}.video-viewer__player iframe{width:100vw!important;height:auto!important;aspect-ratio:16/9!important}.video-viewer__meta{padding:22px 22px 40px}.viewer-close{top:14px;right:14px;width:54px;height:54px}.play{width:58px;height:58px}}
   </style>
 </BaseLayout>

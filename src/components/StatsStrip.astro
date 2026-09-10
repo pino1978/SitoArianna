@@ -19,7 +19,7 @@ function iconFor(fileName) {
     ))}
   </ul>
 
-  <a class="stats-palmares" href="/risultati/" aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
+  <a class="stats-palmares" href="/risultati/" data-interactive aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
     <span class="stats-palmares__label">Esplora il palmarès</span>
     <span class="stats-palmares__arrow" aria-hidden="true">→</span>
     <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
@@ -27,9 +27,7 @@ function iconFor(fileName) {
 </div>
 
 <style>
-  .stats-block {
-    width: 100%;
-  }
+  .stats-block { width: 100%; }
 
   .stats-palmares {
     display: grid;
@@ -68,9 +66,7 @@ function iconFor(fileName) {
   }
 
   .stats-palmares:hover .stats-palmares__arrow,
-  .stats-palmares:focus-visible .stats-palmares__arrow {
-    transform: translateX(6px);
-  }
+  .stats-palmares:focus-visible .stats-palmares__arrow { transform: translateX(6px); }
 
   .stats-palmares:focus-visible {
     outline: 2px solid var(--gold-bright);
@@ -78,25 +74,34 @@ function iconFor(fileName) {
   }
 
   @media (max-width: 640px) {
-    .stats-block {
-      position: relative;
+    :global(.hero) { min-height: 724px !important; }
+
+    :global(.hero-copy) .stats-block {
+      position: absolute;
+      top: 548px;
+      left: 0;
       width: calc(100vw - 36px);
     }
 
     .stats-strip,
-    .hero-copy .stats-strip {
-      position: absolute !important;
-      left: 0 !important;
+    :global(.hero-copy) .stats-strip {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
       right: auto !important;
       display: grid !important;
       grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
       gap: 0 !important;
-      width: calc(100vw - 36px) !important;
+      width: 100% !important;
       max-width: none !important;
       margin: 0 !important;
       padding: 12px 0 10px !important;
       transform: none !important;
       box-sizing: border-box !important;
+      border-top: 1px solid rgba(216, 161, 58, 0.62);
+      border-bottom: 1px solid rgba(216, 161, 58, 0.24);
+      background: rgba(5, 5, 5, 0.78);
+      backdrop-filter: blur(10px);
     }
 
     .stats-strip li {
@@ -114,9 +119,7 @@ function iconFor(fileName) {
       text-align: center;
     }
 
-    .stats-strip li::after {
-      right: 0;
-    }
+    .stats-strip li::after { right: 0; }
 
     .stats-strip img {
       display: block !important;
@@ -155,13 +158,13 @@ function iconFor(fileName) {
     }
 
     .stats-palmares {
-      position: absolute;
-      top: 112px;
-      left: 0;
+      position: relative;
       grid-template-columns: auto auto;
       justify-content: start;
-      width: calc(100vw - 36px);
+      width: 100%;
+      margin: 0;
       padding: 14px 0 13px;
+      background: rgba(5, 5, 5, .9);
     }
 
     .stats-palmares__label {
@@ -169,14 +172,15 @@ function iconFor(fileName) {
       letter-spacing: .14em;
     }
 
-    .stats-palmares__meta {
-      display: none;
-    }
+    .stats-palmares__meta { display: none; }
+  }
+
+  @media (max-width: 390px) {
+    :global(.hero) { min-height: 704px !important; }
+    :global(.hero-copy) .stats-block { top: 528px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .stats-palmares__arrow {
-      transition: none;
-    }
+    .stats-palmares__arrow { transition: none; }
   }
 </style>

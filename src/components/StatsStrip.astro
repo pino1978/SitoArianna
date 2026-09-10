@@ -8,18 +8,81 @@ function iconFor(fileName) {
   return iconModule?.default?.src ?? iconModule?.default ?? iconModule?.src ?? "";
 }
 ---
-<ul class="stats-strip" aria-label="Statistiche sportive sintetiche">
-  {stats.map((stat) => (
-    <li>
-      <img src={iconFor(stat.icon)} alt="" aria-hidden="true" width="32" height="32" />
-      <strong>{stat.value}</strong>
-      <span>{stat.label}</span>
-    </li>
-  ))}
-</ul>
+<div class="stats-block">
+  <ul class="stats-strip" aria-label="Statistiche sportive sintetiche">
+    {stats.map((stat) => (
+      <li>
+        <img src={iconFor(stat.icon)} alt="" aria-hidden="true" width="32" height="32" />
+        <strong>{stat.value}</strong>
+        <span>{stat.label}</span>
+      </li>
+    ))}
+  </ul>
+
+  <a class="stats-palmares" href="/risultati/" aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
+    <span class="stats-palmares__label">Esplora il palmarès</span>
+    <span class="stats-palmares__arrow" aria-hidden="true">→</span>
+    <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
+  </a>
+</div>
 
 <style>
+  .stats-block {
+    width: 100%;
+  }
+
+  .stats-palmares {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 17px 0 16px;
+    border-top: 1px solid rgba(201, 155, 76, .58);
+    border-bottom: 1px solid rgba(201, 155, 76, .24);
+    color: var(--gold-bright);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    text-transform: uppercase;
+  }
+
+  .stats-palmares__label {
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+
+  .stats-palmares__arrow {
+    display: inline-block;
+    font-size: 1.15rem;
+    line-height: 1;
+    transition: transform .22s ease;
+  }
+
+  .stats-palmares__meta {
+    justify-self: end;
+    color: rgba(243, 237, 226, .54);
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: .13em;
+  }
+
+  .stats-palmares:hover .stats-palmares__arrow,
+  .stats-palmares:focus-visible .stats-palmares__arrow {
+    transform: translateX(6px);
+  }
+
+  .stats-palmares:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 4px;
+  }
+
   @media (max-width: 640px) {
+    .stats-block {
+      position: relative;
+      width: calc(100vw - 36px);
+    }
+
     .stats-strip,
     .hero-copy .stats-strip {
       position: absolute !important;
@@ -89,6 +152,31 @@ function iconFor(fileName) {
       line-height: 1.12 !important;
       text-align: center;
       white-space: normal;
+    }
+
+    .stats-palmares {
+      position: absolute;
+      top: 112px;
+      left: 0;
+      grid-template-columns: auto auto;
+      justify-content: start;
+      width: calc(100vw - 36px);
+      padding: 14px 0 13px;
+    }
+
+    .stats-palmares__label {
+      font-size: .66rem;
+      letter-spacing: .14em;
+    }
+
+    .stats-palmares__meta {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stats-palmares__arrow {
+      transition: none;
     }
   }
 </style>

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import media from "../../../data/media.json";
+
+function youtubeId(url = "") {
+  const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
+  return match?.[1] ?? "";
+}
+
+export function getStaticPaths() {
+  return media
+    .filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube))
+    .map((item) => ({ params: { id: item.id }, props: { item, videoId: youtubeId(item.urlYouTube) } }));
+}
+
+const { item, videoId } = Astro.props;
+const title = `${item.titolo} | Video Sanda Arianna Milano`;
+const description = [item.titolo, item.dettaglio, "Video del percorso agonistico di Arianna Milano nel Sanda e Kung Fu."].filter(Boolean).join(" · ");
+const canonical = `https://www.ariannamilano.it/media/video/${item.id}/`;
+const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "@id": `${canonical}#video`,
+  name: item.titolo,
+  description,
+  thumbnailUrl: [thumbnailUrl],
+  uploadDate: item.data || `${item.anno}-01-01`,
+  embedUrl: `https://www.youtube.com/embed/${videoId}`,
+  contentUrl: item.urlYouTube,
+  url: canonical,
+  inLanguage: "it-IT",
+  isFamilyFriendly: true,
+  about: { "@id": "https://www.ariannamilano.it/#arianna-milano" },
+  creator: { "@type": "Person", "@id": "https://www.ariannamilano.it/#arianna-milano", name: "Arianna Milano" }
+};
+---
+<BaseLayout title={title} description={description}>
+  <script type="application/ld+json" set:html={JSON.stringify(videoSchema)}></script>
+  <main id="main" class="watch-page">
+    <Header />
+    <article class="watch-shell">
+      <p class="eyebrow">Video · {item.anno}</p>
+      <h1>{item.titolo}</h1>
+      {item.dettaglio && <p class="watch-detail">{item.dettaglio}</p>}
+      <div class="watch-player">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}?rel=0&playsinline=1`}
+          title={item.titolo}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"
+          allowfullscreen
+          loading="eager"
+          data-interactive
+        ></iframe>
+      </div>
+      <p class="watch-description">{description}</p>
+      <a class="back-link" href="/media/" data-interactive>← Torna a foto e video</a>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .watch-page{min-height:100vh;background:#060504;color:#f3ede2;padding-top:118px}.watch-shell{width:min(980px,calc(100% - 40px));margin:0 auto;padding:54px 0 90px}.eyebrow{margin:0;color:var(--gold-bright);font:800 .68rem/1 var(--font-ui);letter-spacing:.16em;text-transform:uppercase}.watch-shell h1{margin:12px 0 8px;font-family:var(--font-display);font-size:clamp(2.6rem,6vw,5.8rem);line-height:.95;text-transform:uppercase}.watch-detail,.watch-description{color:#c8c0b4;line-height:1.7}.watch-player{position:relative;width:100%;aspect-ratio:16/9;margin:34px 0 24px;overflow:hidden;border:1px solid rgba(216,161,58,.3);background:#000;box-shadow:0 26px 70px rgba(0,0,0,.4)}.watch-player iframe{position:absolute;inset:0;width:100%;height:100%;border:0}.watch-description{max-width:760px}.back-link{display:inline-block;margin-top:28px;color:#d4a64d;font:800 .72rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}@media(max-width:640px){.watch-page{padding-top:86px}.watch-shell{padding-top:36px}.watch-player{margin-top:24px;aspect-ratio:9/16;max-height:76vh}}
+</style>

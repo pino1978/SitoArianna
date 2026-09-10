@@ -1,122 +1,155 @@
 [
   {
-    "id": "palacasoria-2022",
+    "id": "palacasoria",
     "name": "Palacasoria",
-    "edition": "",
-    "year": 2022,
-    "city": "Casoria",
-    "province": "NA",
-    "country": "Italia",
-    "organization": ""
+    "organization": "",
+    "editions": [
+      {
+        "id": "2022",
+        "edition": "",
+        "year": 2022,
+        "city": "Casoria",
+        "province": "NA",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "fiwuk-alta-specializzazione-2022",
+    "id": "fiwuk-alta-specializzazione",
     "name": "FIWuK – Scuola Regionale Campana Alta Specializzazione",
-    "edition": "",
-    "year": 2022,
-    "city": "",
-    "province": "Campania",
-    "country": "Italia",
-    "organization": "FIWuK"
+    "organization": "FIWuK",
+    "editions": [
+      {
+        "id": "2022",
+        "edition": "",
+        "year": 2022,
+        "city": "",
+        "province": "Campania",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "trofeo-giovanile-taolu-wushu-2023",
+    "id": "trofeo-giovanile-taolu-wushu",
     "name": "Trofeo Giovanile di Taolu Wushu",
-    "edition": "2°",
-    "year": 2023,
-    "city": "",
-    "province": "",
-    "country": "Italia",
-    "organization": ""
+    "organization": "",
+    "editions": [
+      {
+        "id": "2023-2",
+        "edition": "2°",
+        "year": 2023,
+        "city": "",
+        "province": "",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "xanda-prestige-2024",
+    "id": "xanda-prestige",
     "name": "Xanda Prestige",
-    "edition": "",
-    "year": 2024,
-    "city": "Quarto",
-    "province": "NA",
-    "country": "Italia",
-    "organization": ""
+    "organization": "",
+    "editions": [
+      {
+        "id": "2024",
+        "edition": "",
+        "year": 2024,
+        "city": "Quarto",
+        "province": "NA",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "world-open-cka-2024",
-    "name": "World Open Championship C.K.A.",
-    "edition": "20°",
-    "year": 2024,
-    "city": "Perugia",
-    "province": "PG",
-    "country": "Italia",
-    "organization": "C.K.A."
+    "id": "cka-world-championship-cup",
+    "name": "World Championship & Cup C.K.A.",
+    "organization": "C.K.A.",
+    "editions": [
+      {
+        "id": "2024-20",
+        "edition": "20°",
+        "year": 2024,
+        "city": "Perugia",
+        "province": "PG",
+        "country": "Italia",
+        "officialName": "World Open Championship C.K.A."
+      },
+      {
+        "id": "2025-21",
+        "edition": "21°",
+        "year": 2025,
+        "city": "Perugia",
+        "province": "PG",
+        "country": "Italia"
+      },
+      {
+        "id": "2026-22",
+        "edition": "22°",
+        "year": 2026,
+        "city": "Perugia",
+        "province": "PG",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "arti-marziali-csen-2025",
+    "id": "arti-marziali-csen",
     "name": "Arti Marziali CSEN",
-    "edition": "",
-    "year": 2025,
-    "city": "",
-    "province": "",
-    "country": "Italia",
-    "organization": "CSEN"
+    "organization": "CSEN",
+    "editions": [
+      {
+        "id": "2025",
+        "edition": "",
+        "year": 2025,
+        "city": "",
+        "province": "",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "world-championship-cup-cka-2025",
-    "name": "World Championship & Cup C.K.A.",
-    "edition": "21°",
-    "year": 2025,
-    "city": "Perugia",
-    "province": "PG",
-    "country": "Italia",
-    "organization": "C.K.A."
-  },
-  {
-    "id": "champion-cup-2025",
+    "id": "champion-cup",
     "name": "Champion Cup",
-    "edition": "",
-    "year": 2025,
-    "city": "Sora",
-    "province": "FR",
-    "country": "Italia",
-    "organization": ""
+    "organization": "",
+    "editions": [
+      {
+        "id": "2025",
+        "edition": "",
+        "year": 2025,
+        "city": "Sora",
+        "province": "FR",
+        "country": "Italia"
+      },
+      {
+        "id": "2026",
+        "edition": "",
+        "year": 2026,
+        "city": "Sora",
+        "province": "FR",
+        "country": "Italia"
+      }
+    ]
   },
   {
-    "id": "one-to-one-2025",
+    "id": "one-to-one",
     "name": "One to One",
-    "edition": "",
-    "year": 2025,
-    "city": "Giugliano",
-    "province": "NA",
-    "country": "Italia",
-    "organization": ""
-  },
-  {
-    "id": "champion-cup-2026",
-    "name": "Champion Cup",
-    "edition": "",
-    "year": 2026,
-    "city": "Sora",
-    "province": "FR",
-    "country": "Italia",
-    "organization": ""
-  },
-  {
-    "id": "world-championship-cup-cka-2026",
-    "name": "World Championship & Cup C.K.A.",
-    "edition": "22°",
-    "year": 2026,
-    "city": "Perugia",
-    "province": "PG",
-    "country": "Italia",
-    "organization": "C.K.A."
-  },
-  {
-    "id": "one-to-one-2026",
-    "name": "One to One",
-    "edition": "",
-    "year": 2026,
-    "city": "Giugliano",
-    "province": "NA",
-    "country": "Italia",
-    "organization": ""
+    "organization": "",
+    "editions": [
+      {
+        "id": "2025",
+        "edition": "",
+        "year": 2025,
+        "city": "Giugliano",
+        "province": "NA",
+        "country": "Italia"
+      },
+      {
+        "id": "2026",
+        "edition": "",
+        "year": 2026,
+        "city": "Giugliano",
+        "province": "NA",
+        "country": "Italia"
+      }
+    ]
   }
 ]

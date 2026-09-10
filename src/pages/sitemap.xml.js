@@ -90,6 +90,18 @@ const entries = [
     })),
     videos: visibleVideos
   },
+  ...visiblePhotos.map((item) => ({
+    loc: `${SITE}/media/foto/${item.id}/`,
+    images: [{
+      loc: item.url,
+      title: item.titolo || "Foto Sanda di Arianna Milano",
+      caption: item.testoAlternativo || [item.titolo, item.dettaglio, "Arianna Milano"].filter(Boolean).join(" · ")
+    }]
+  })),
+  ...visibleVideos.map((item) => ({
+    loc: `${SITE}/media/video/${item.id}/`,
+    videos: [item]
+  })),
   {
     loc: `${SITE}/ying/`,
     images: [

@@ -11,10 +11,11 @@ function youtubeId(url = "") {
 export function getStaticPaths() {
   return media
     .filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube))
-    .map((item) => ({ params: { id: item.id }, props: { item, videoId: youtubeId(item.urlYouTube) } }));
+    .map((item) => ({ params: { id: item.id }, props: { item } }));
 }
 
-const { item, videoId } = Astro.props;
+const { item } = Astro.props;
+const videoId = youtubeId(item.urlYouTube);
 const title = `${item.titolo} | Video Sanda Arianna Milano`;
 const description = [item.titolo, item.dettaglio, "Video del percorso agonistico di Arianna Milano nel Sanda e Kung Fu."].filter(Boolean).join(" · ");
 const canonical = `https://www.ariannamilano.it/media/video/${item.id}/`;

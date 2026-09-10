@@ -29,9 +29,20 @@ const copy = profile.content.home.hero;
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
     <p class="hero-affiliation">ASD Kasoria Kombat &amp; Fly · CSEN</p>
 
-    <div class="challenge-ticker" aria-label="Prossima sfida internazionale: 18th Palamidio Martial Arts Championship, Nafplio, Grecia, novembre 2026">
-      <img class="challenge-ticker__image" src={challengeTickerImage.src} alt="" width={challengeTickerImage.width} height={challengeTickerImage.height} decoding="async" />
-    </div>
+    <a
+      class="challenge-ticker"
+      href="/grecia/"
+      aria-label="Scopri la prossima sfida internazionale di Arianna: 18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026"
+    >
+      <img
+        class="challenge-ticker__image"
+        src={challengeTickerImage.src}
+        alt=""
+        width={challengeTickerImage.width}
+        height={challengeTickerImage.height}
+        decoding="async"
+      />
+    </a>
 
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
@@ -47,8 +58,8 @@ const copy = profile.content.home.hero;
 
 <style>
   .hero-upper-signature,
-  .hero-values,
-  .challenge-ticker { display: none; }
+  .hero-values { display: none; }
+
   .hero-identity {
     margin: 0 0 14px;
     color: rgba(245, 240, 231, .82);
@@ -56,6 +67,7 @@ const copy = profile.content.home.hero;
     letter-spacing: .16em;
     text-transform: uppercase;
   }
+
   .hero-affiliation {
     margin: 12px 0 0;
     color: rgba(245, 240, 231, .58);
@@ -64,21 +76,99 @@ const copy = profile.content.home.hero;
     text-transform: uppercase;
   }
 
+  .challenge-ticker {
+    position: relative;
+    z-index: 5;
+    display: block;
+    width: min(1120px, calc(100vw - 96px));
+    aspect-ratio: 1600 / 216;
+    margin: 20px 0 0 0;
+    overflow: hidden;
+    background: transparent;
+    box-shadow: none;
+    isolation: isolate;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 1.5%, #000 98.5%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 1.5%, #000 98.5%, transparent 100%);
+    animation: challengeReveal .72s cubic-bezier(.2,.72,.2,1) .2s both;
+    transition: filter 260ms ease, transform 260ms ease;
+  }
+
+  .challenge-ticker::before,
+  .challenge-ticker::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .challenge-ticker::before {
+    z-index: 2;
+    inset: 0;
+    border-top: 1px solid rgba(216, 161, 58, .52);
+    border-bottom: 1px solid rgba(216, 161, 58, .34);
+    background: linear-gradient(180deg, rgba(255,255,255,.035), transparent 26%, transparent 72%, rgba(0,0,0,.18));
+  }
+
+  .challenge-ticker::after {
+    z-index: 3;
+    top: -55%;
+    bottom: -55%;
+    left: -22%;
+    width: 12%;
+    opacity: 0;
+    background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.02) 24%, rgba(255,238,188,.25) 50%, rgba(255,255,255,.06) 68%, transparent 100%);
+    filter: blur(2px);
+    transform: skewX(-14deg) translate3d(0,0,0);
+    animation: challengeLightSweep 1.55s cubic-bezier(.22,.7,.22,1) .95s 1 both;
+  }
+
+  .challenge-ticker__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: filter 260ms ease, transform 400ms cubic-bezier(.2,.72,.2,1);
+  }
+
+  .challenge-ticker:hover,
+  .challenge-ticker:focus-visible {
+    filter: brightness(1.06) contrast(1.03);
+    transform: translateY(-1px);
+  }
+
+  .challenge-ticker:hover .challenge-ticker__image,
+  .challenge-ticker:focus-visible .challenge-ticker__image {
+    transform: scale(1.003);
+  }
+
+  .hero-copy .stats-strip {
+    margin-top: 22px;
+  }
+
   @media (min-width: 1001px) {
-    .hero { min-height: clamp(610px, 78vh, 760px); padding-bottom: 56px; }
-    .hero-subcopy { margin-top: 84px; }
+    .hero { min-height: clamp(670px, 82vh, 800px); padding-bottom: 48px; }
+    .hero-subcopy { margin-top: 70px; }
+  }
+
+  @media (max-width: 1000px) and (min-width: 641px) {
+    .challenge-ticker {
+      width: calc(100vw - 56px);
+      margin-top: 18px;
+    }
   }
 
   @media (max-width: 640px) {
     .hero-title-image { display: none; }
     .hero-upper-signature,
     .hero-values { display: block; }
+
     .hero-identity {
       max-width: 320px;
       margin-bottom: 10px;
       font-size: .58rem;
       letter-spacing: .12em;
     }
+
     .hero-affiliation {
       margin-top: 8px;
       font-size: .5rem;
@@ -90,38 +180,26 @@ const copy = profile.content.home.hero;
       z-index: 5;
       top: 496px;
       left: -18px;
-      display: block;
       width: 100vw;
       height: 50px;
-      overflow: hidden;
-      border-top: 1px solid rgba(216, 161, 58, .78);
-      border-bottom: 1px solid rgba(216, 161, 58, .54);
-      background: #050505;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, .34);
+      aspect-ratio: auto;
+      margin: 0;
+      -webkit-mask-image: none;
+      mask-image: none;
     }
 
-    .challenge-ticker__image {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+    .challenge-ticker::before {
+      border-top-color: rgba(216, 161, 58, .64);
+      border-bottom-color: rgba(216, 161, 58, .42);
     }
 
     .challenge-ticker::after {
-      content: "";
-      position: absolute;
-      z-index: 2;
-      top: -45%;
-      bottom: -45%;
-      left: -55%;
-      width: 34%;
-      pointer-events: none;
-      background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.03) 28%, rgba(255,244,210,.22) 49%, rgba(255,255,255,.07) 64%, transparent 100%);
-      filter: blur(2px);
-      transform: skewX(-14deg) translate3d(0,0,0);
-      animation: challengeLightSweep 2.8s ease-in-out infinite;
-      will-change: transform, opacity;
+      left: -34%;
+      width: 22%;
+    }
+
+    .hero-copy .stats-strip {
+      margin-top: 34px;
     }
   }
 
@@ -132,14 +210,25 @@ const copy = profile.content.home.hero;
     }
   }
 
+  @keyframes challengeReveal {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
   @keyframes challengeLightSweep {
-    0%, 5% { transform: skewX(-14deg) translate3d(0,0,0); opacity: 0; }
-    10% { opacity: .85; }
-    34% { transform: skewX(-14deg) translate3d(455vw,0,0); opacity: .85; }
-    39%, 100% { transform: skewX(-14deg) translate3d(455vw,0,0); opacity: 0; }
+    0% { opacity: 0; transform: skewX(-14deg) translate3d(0,0,0); }
+    12% { opacity: .85; }
+    78% { opacity: .85; }
+    100% { opacity: 0; transform: skewX(-14deg) translate3d(1050%,0,0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .challenge-ticker::after { display: none; }
+    .challenge-ticker,
+    .challenge-ticker::after,
+    .challenge-ticker__image {
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+    }
   }
 </style>

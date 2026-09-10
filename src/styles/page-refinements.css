@@ -80,3 +80,31 @@ body.site-locked #video-viewer .video-viewer__meta{position:relative!important;z
   body.site-locked #video-viewer .video-viewer__player{width:min(1200px,calc(100vw - 80px))!important;margin:70px auto 0!important}
   body.site-locked #video-viewer .video-viewer__meta{width:min(1200px,calc(100vw - 80px))!important;margin:0 auto!important}
 }
+
+/* MOBILE NAV — final premium scale and fixed-size toggle */
+@media(max-width:1000px){
+  .premium-header .nav-toggle{
+    width:82px!important;
+    min-width:82px!important;
+    height:42px!important;
+    min-height:42px!important;
+    border:0!important;
+    background:transparent!important;
+    backdrop-filter:none!important;
+    box-shadow:none!important;
+  }
+  .premium-header .nav-toggle span{left:8px!important;width:17px!important}
+  .premium-header .nav-toggle b{left:32px!important;font-size:.52rem!important;letter-spacing:.08em!important}
+  .mobile-nav__inner>a{
+    display:flex!important;
+    grid-template-columns:none!important;
+    min-height:56px!important;
+    padding:0!important;
+    font-size:1.35rem!important;
+    font-weight:700!important;
+    line-height:1!important;
+  }
+}
+@media(max-width:390px){
+  .mobile-nav__inner>a{min-height:54px!important;padding:0!important;font-size:1.32rem!important}
+}

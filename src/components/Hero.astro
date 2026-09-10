@@ -6,7 +6,6 @@ import profile from "../data/profile.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
-import challengeTickerImage from "../assets/images/ticker-greece.jpg";
 
 const showHeroStats = true;
 const copy = profile.content.home.hero;
@@ -29,10 +28,6 @@ const copy = profile.content.home.hero;
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
     <p class="hero-affiliation">ASD Kasoria Kombat &amp; Fly · CSEN</p>
 
-    <div class="challenge-ticker" aria-label="Prossima sfida internazionale: 18th Palamidio Martial Arts Championship, Nafplio, Grecia, novembre 2026">
-      <img class="challenge-ticker__image" src={challengeTickerImage.src} alt="" width={challengeTickerImage.width} height={challengeTickerImage.height} decoding="async" />
-    </div>
-
     {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
 
@@ -47,8 +42,7 @@ const copy = profile.content.home.hero;
 
 <style>
   .hero-upper-signature,
-  .hero-values,
-  .challenge-ticker { display: none; }
+  .hero-values { display: none; }
   .hero-identity {
     margin: 0 0 14px;
     color: rgba(245, 240, 231, .82);
@@ -84,62 +78,5 @@ const copy = profile.content.home.hero;
       font-size: .5rem;
       letter-spacing: .09em;
     }
-
-    .challenge-ticker {
-      position: absolute;
-      z-index: 5;
-      top: 496px;
-      left: -18px;
-      display: block;
-      width: 100vw;
-      height: 50px;
-      overflow: hidden;
-      border-top: 1px solid rgba(216, 161, 58, .78);
-      border-bottom: 1px solid rgba(216, 161, 58, .54);
-      background: #050505;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, .34);
-    }
-
-    .challenge-ticker__image {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    .challenge-ticker::after {
-      content: "";
-      position: absolute;
-      z-index: 2;
-      top: -45%;
-      bottom: -45%;
-      left: -55%;
-      width: 34%;
-      pointer-events: none;
-      background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,.03) 28%, rgba(255,244,210,.22) 49%, rgba(255,255,255,.07) 64%, transparent 100%);
-      filter: blur(2px);
-      transform: skewX(-14deg) translate3d(0,0,0);
-      animation: challengeLightSweep 2.8s ease-in-out infinite;
-      will-change: transform, opacity;
-    }
-  }
-
-  @media (max-width: 390px) {
-    .challenge-ticker {
-      top: 478px;
-      height: 48px;
-    }
-  }
-
-  @keyframes challengeLightSweep {
-    0%, 5% { transform: skewX(-14deg) translate3d(0,0,0); opacity: 0; }
-    10% { opacity: .85; }
-    34% { transform: skewX(-14deg) translate3d(455vw,0,0); opacity: .85; }
-    39%, 100% { transform: skewX(-14deg) translate3d(455vw,0,0); opacity: 0; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .challenge-ticker::after { display: none; }
   }
 </style>

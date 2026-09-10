@@ -108,3 +108,37 @@ body.site-locked #video-viewer .video-viewer__meta{position:relative!important;z
 @media(max-width:390px){
   .mobile-nav__inner>a{min-height:54px!important;padding:0!important;font-size:1.32rem!important}
 }
+
+/* MOBILE NAV — definitive overrides; higher specificity than component inline rules */
+@media(max-width:1000px){
+  body .premium-header .nav-toggle,
+  body.nav-open .premium-header .nav-toggle{
+    width:82px!important;
+    min-width:82px!important;
+    max-width:82px!important;
+    height:42px!important;
+    min-height:42px!important;
+    padding:0!important;
+    border:0!important;
+    outline:0!important;
+    background:transparent!important;
+    backdrop-filter:none!important;
+    box-shadow:none!important;
+  }
+  body .premium-header .nav-toggle span{left:5px!important;width:17px!important}
+  body .premium-header .nav-toggle b{left:29px!important;font-size:.50rem!important;letter-spacing:.06em!important}
+  body .mobile-nav .mobile-nav__inner>a{
+    display:flex!important;
+    grid-template-columns:none!important;
+    min-height:52px!important;
+    padding:0!important;
+    font-size:1.18rem!important;
+    font-weight:700!important;
+    line-height:1!important;
+  }
+  body .mobile-nav .mobile-nav__top{min-height:50px!important;margin-bottom:4px!important}
+  body .mobile-nav .mobile-nav__footer{margin-top:12px!important}
+}
+@media(max-width:390px){
+  body .mobile-nav .mobile-nav__inner>a{min-height:50px!important;font-size:1.16rem!important}
+}

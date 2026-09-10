@@ -1,5 +1,6 @@
 ---
 const { stats } = Astro.props;
+const showPalmaresCta = Astro.url.pathname === "/";
 const iconModules = import.meta.glob("../assets/svg/stat-*.svg", { eager: true });
 
 function iconFor(fileName) {
@@ -19,11 +20,13 @@ function iconFor(fileName) {
     ))}
   </ul>
 
-  <a class="stats-palmares" href="/risultati/" data-interactive aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
-    <span class="stats-palmares__label">Esplora il palmarès</span>
-    <span class="stats-palmares__arrow" aria-hidden="true">→</span>
-    <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
-  </a>
+  {showPalmaresCta && (
+    <a class="stats-palmares" href="/risultati/" data-interactive aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
+      <span class="stats-palmares__label">Esplora il palmarès</span>
+      <span class="stats-palmares__arrow" aria-hidden="true">→</span>
+      <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
+    </a>
+  )}
 </div>
 
 <style>
@@ -74,9 +77,9 @@ function iconFor(fileName) {
   }
 
   @media (max-width: 640px) {
-    :global(.hero) { min-height: 724px !important; }
+    :global(.home-page .hero) { min-height: 724px !important; }
 
-    :global(.hero-copy) .stats-block {
+    :global(.home-page .hero-copy) .stats-block {
       position: absolute;
       top: 548px;
       left: 0;
@@ -84,7 +87,7 @@ function iconFor(fileName) {
     }
 
     .stats-strip,
-    :global(.hero-copy) .stats-strip {
+    :global(.home-page .hero-copy) .stats-strip {
       position: relative !important;
       top: auto !important;
       left: auto !important;
@@ -176,8 +179,8 @@ function iconFor(fileName) {
   }
 
   @media (max-width: 390px) {
-    :global(.hero) { min-height: 704px !important; }
-    :global(.hero-copy) .stats-block { top: 528px; }
+    :global(.home-page .hero) { min-height: 704px !important; }
+    :global(.home-page .hero-copy) .stats-block { top: 528px; }
   }
 
   @media (prefers-reduced-motion: reduce) {

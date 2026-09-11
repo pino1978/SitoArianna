@@ -16,216 +16,34 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
 ---
 <section class="road-to-greece" aria-label="Road to Greece">
   <div class="road-to-greece__media">
-    <img
-      class="road-to-greece__image road-to-greece__image--desktop"
-      src={desktopSrc}
-      alt="Prossima sfida internazionale: Sanda, 18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026."
-      width="1024"
-      height="208"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-    />
-
-    <img
-      class="road-to-greece__image road-to-greece__image--mobile"
-      src={mobileSrc}
-      alt="18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026."
-      width="768"
-      height="224"
-      loading="eager"
-      decoding="async"
-    />
-
+    <img class="road-to-greece__image road-to-greece__image--desktop" src={desktopSrc} alt="Prossima sfida internazionale: Sanda, 18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026." width="1024" height="208" loading="eager" fetchpriority="high" decoding="async" />
+    <img class="road-to-greece__image road-to-greece__image--mobile" src={mobileSrc} alt="18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026." width="768" height="224" loading="eager" decoding="async" />
+    <span class="road-to-greece__sweep" aria-hidden="true"></span>
     <div class="road-to-greece__cta-wrap">
       <a class="road-to-greece__cta" href="/road-to-greece/" aria-label="Scopri Road to Greece">
         <span>ROAD TO<br />GREECE</span>
-        <svg viewBox="0 0 32 20" aria-hidden="true" focusable="false">
-          <path d="M1 10h27M20 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
+        <svg viewBox="0 0 32 20" aria-hidden="true" focusable="false"><path d="M1 10h27M20 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
       </a>
     </div>
   </div>
 </section>
 
 <style>
-  .road-to-greece {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    background: #080706;
-    overflow: hidden;
-  }
-
-  .road-to-greece__media {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    isolation: isolate;
-    background: #080706;
-  }
-
-  .road-to-greece__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    margin: 0;
-  }
-
-  .road-to-greece__image--mobile {
-    display: none;
-  }
-
-  .road-to-greece__cta-wrap {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: clamp(210px, 18vw, 350px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 clamp(20px, 2.1vw, 42px) 0 clamp(48px, 4.8vw, 90px);
-    background: linear-gradient(90deg, rgba(5, 7, 9, 0) 0%, rgba(5, 7, 9, 0.72) 34%, rgba(5, 7, 9, 0.96) 72%);
-    clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  .road-to-greece__cta-wrap::before {
-    content: "";
-    position: absolute;
-    left: 23%;
-    top: -8%;
-    width: 1px;
-    height: 116%;
-    background: linear-gradient(180deg, transparent 0%, rgba(199, 162, 92, 0.95) 18%, rgba(199, 162, 92, 0.95) 82%, transparent 100%);
-    transform: rotate(10deg);
-    transform-origin: center;
-  }
-
-  .road-to-greece__cta {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(12px, 1.1vw, 22px);
-    min-height: 54px;
-    padding: 12px 18px;
-    color: #0a0908;
-    background: linear-gradient(135deg, #e0bd73 0%, #c79e50 52%, #e3c27b 100%);
-    border: 1px solid rgba(255, 244, 218, 0.28);
-    text-decoration: none;
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.26);
-    transition: transform 180ms ease, filter 180ms ease, box-shadow 180ms ease;
-  }
-
-  .road-to-greece__cta span {
-    font: 800 clamp(0.82rem, 0.84vw, 1rem) / 1.02 "Arial Narrow", "Roboto Condensed", Arial, sans-serif;
-    letter-spacing: 0.08em;
-    white-space: nowrap;
-  }
-
-  .road-to-greece__cta svg {
-    width: clamp(24px, 1.6vw, 31px);
-    height: auto;
-    flex: 0 0 auto;
-    transition: transform 180ms ease;
-  }
-
-  .road-to-greece__cta:hover,
-  .road-to-greece__cta:focus-visible {
-    filter: brightness(1.06);
-    transform: translateY(-1px);
-    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.34);
-  }
-
-  .road-to-greece__cta:hover svg,
-  .road-to-greece__cta:focus-visible svg {
-    transform: translateX(4px);
-  }
-
-  .road-to-greece__cta:focus-visible {
-    outline: 3px solid #fff4da;
-    outline-offset: 4px;
-  }
-
-  @media (max-width: 1100px) {
-    .road-to-greece__cta-wrap {
-      width: clamp(190px, 20vw, 250px);
-      padding-right: 18px;
-      padding-left: 46px;
-    }
-
-    .road-to-greece__cta {
-      min-height: 48px;
-      padding: 10px 14px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .road-to-greece__image--desktop {
-      display: none;
-    }
-
-    .road-to-greece__image--mobile {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .road-to-greece__cta-wrap {
-      width: 31%;
-      min-width: 112px;
-      max-width: 148px;
-      padding: 0 10px 0 22px;
-      background: linear-gradient(90deg, rgba(4, 6, 8, 0) 0%, rgba(4, 6, 8, 0.82) 27%, rgba(4, 6, 8, 0.98) 66%);
-      clip-path: polygon(19% 0, 100% 0, 100% 100%, 0 100%);
-    }
-
-    .road-to-greece__cta-wrap::before {
-      left: 20%;
-      top: -10%;
-      height: 120%;
-      transform: rotate(8deg);
-    }
-
-    .road-to-greece__cta {
-      width: 100%;
-      min-height: 44px;
-      padding: 9px 8px 9px 10px;
-      gap: 7px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    }
-
-    .road-to-greece__cta span {
-      font-size: clamp(0.62rem, 2.7vw, 0.75rem);
-      line-height: 1.03;
-      letter-spacing: 0.055em;
-    }
-
-    .road-to-greece__cta svg {
-      width: clamp(18px, 5vw, 22px);
-    }
-  }
-
-  @media (max-width: 390px) {
-    .road-to-greece__cta-wrap {
-      width: 32%;
-      min-width: 106px;
-      padding-left: 19px;
-      padding-right: 7px;
-    }
-
-    .road-to-greece__cta {
-      min-height: 42px;
-      padding-inline: 7px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .road-to-greece__cta,
-    .road-to-greece__cta svg {
-      transition: none;
-    }
-  }
+  .road-to-greece{width:100%;margin:0;padding:0;background:#080706;overflow:hidden}
+  .road-to-greece__media{position:relative;width:100%;overflow:hidden;isolation:isolate;background:#080706}
+  .road-to-greece__image{display:block;width:100%;height:auto;margin:0}.road-to-greece__image--mobile{display:none}
+  .road-to-greece__sweep{position:absolute;z-index:1;top:-35%;bottom:-35%;left:-34%;width:18%;pointer-events:none;opacity:0;transform:skewX(-18deg);background:linear-gradient(90deg,transparent 0%,rgba(255,229,174,.04) 22%,rgba(255,235,190,.22) 50%,rgba(255,229,174,.05) 78%,transparent 100%);filter:blur(5px);mix-blend-mode:screen;animation:rtg-sweep 4s ease-in-out infinite}
+  @keyframes rtg-sweep{0%,62%{left:-34%;opacity:0}66%{opacity:.62}88%{left:116%;opacity:.48}92%,100%{left:116%;opacity:0}}
+  .road-to-greece__cta-wrap{position:absolute;z-index:2;top:0;right:0;bottom:0;width:clamp(210px,18vw,350px);display:flex;align-items:center;justify-content:center;padding:0 clamp(20px,2.1vw,42px) 0 clamp(48px,4.8vw,90px);background:linear-gradient(90deg,rgba(5,7,9,0) 0%,rgba(5,7,9,.72) 34%,rgba(5,7,9,.96) 72%);clip-path:polygon(22% 0,100% 0,100% 100%,0 100%)}
+  .road-to-greece__cta-wrap::before{content:"";position:absolute;left:23%;top:-8%;width:1px;height:116%;background:linear-gradient(180deg,transparent 0%,rgba(199,162,92,.95) 18%,rgba(199,162,92,.95) 82%,transparent 100%);transform:rotate(10deg);transform-origin:center}
+  .road-to-greece__cta{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:clamp(12px,1.1vw,22px);min-height:54px;padding:12px 18px;color:#0a0908;background:linear-gradient(135deg,#e0bd73 0%,#c79e50 52%,#e3c27b 100%);border:1px solid rgba(255,244,218,.28);text-decoration:none;box-shadow:0 10px 32px rgba(0,0,0,.26);transition:transform 180ms ease,filter 180ms ease,box-shadow 180ms ease;animation:rtg-cta-glow 4s ease-in-out infinite}
+  .road-to-greece__cta::after{content:"";position:absolute;inset:-40% auto -40% -55%;width:32%;pointer-events:none;transform:skewX(-20deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.48),transparent);animation:rtg-cta-shine 4s ease-in-out infinite}
+  @keyframes rtg-cta-glow{0%,78%,100%{box-shadow:0 10px 32px rgba(0,0,0,.26)}84%{box-shadow:0 10px 32px rgba(0,0,0,.26),0 0 18px rgba(224,189,115,.34)}}
+  @keyframes rtg-cta-shine{0%,78%{left:-55%;opacity:0}82%{opacity:.65}92%{left:125%;opacity:.35}96%,100%{left:125%;opacity:0}}
+  .road-to-greece__cta span{position:relative;z-index:1;font:800 clamp(.82rem,.84vw,1rem)/1.02 "Arial Narrow","Roboto Condensed",Arial,sans-serif;letter-spacing:.08em;white-space:nowrap}.road-to-greece__cta svg{position:relative;z-index:1;width:clamp(24px,1.6vw,31px);height:auto;flex:0 0 auto;transition:transform 180ms ease}
+  .road-to-greece__cta:hover,.road-to-greece__cta:focus-visible{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 12px 36px rgba(0,0,0,.34)}.road-to-greece__cta:hover svg,.road-to-greece__cta:focus-visible svg{transform:translateX(4px)}.road-to-greece__cta:focus-visible{outline:3px solid #fff4da;outline-offset:4px}
+  @media(max-width:1100px){.road-to-greece__cta-wrap{width:clamp(190px,20vw,250px);padding-right:18px;padding-left:46px}.road-to-greece__cta{min-height:48px;padding:10px 14px}}
+  @media(max-width:767px){.road-to-greece__image--desktop{display:none}.road-to-greece__image--mobile{display:block;width:100%;height:auto}.road-to-greece__sweep{width:24%;filter:blur(4px)}.road-to-greece__cta-wrap{width:31%;min-width:112px;max-width:148px;padding:0 10px 0 22px;background:linear-gradient(90deg,rgba(4,6,8,0) 0%,rgba(4,6,8,.82) 27%,rgba(4,6,8,.98) 66%);clip-path:polygon(19% 0,100% 0,100% 100%,0 100%)}.road-to-greece__cta-wrap::before{left:20%;top:-10%;height:120%;transform:rotate(8deg)}.road-to-greece__cta{width:100%;min-height:44px;padding:9px 8px 9px 10px;gap:7px}.road-to-greece__cta span{font-size:clamp(.62rem,2.7vw,.75rem);line-height:1.03;letter-spacing:.055em}.road-to-greece__cta svg{width:clamp(18px,5vw,22px)}}
+  @media(max-width:390px){.road-to-greece__cta-wrap{width:32%;min-width:106px;padding-left:19px;padding-right:7px}.road-to-greece__cta{min-height:42px;padding-inline:7px}}
+  @media(prefers-reduced-motion:reduce){.road-to-greece__sweep,.road-to-greece__cta,.road-to-greece__cta::after{animation:none!important}.road-to-greece__cta,.road-to-greece__cta svg{transition:none}}
 </style>

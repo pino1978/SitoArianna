@@ -1,13 +1,10 @@
 ---
 import Header from "./Header.astro";
-import StatsStrip from "./StatsStrip.astro";
-import results from "../data/results.json";
 import profile from "../data/profile.json";
 import heroImage from "../assets/images/hero-ary14.png";
 import heroTitleImage from "../assets/images/hero-title-liberta.png";
 import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 
-const showHeroStats = true;
 const copy = profile.content.home.hero;
 ---
 <section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
@@ -27,8 +24,6 @@ const copy = profile.content.home.hero;
     <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
     <p class="hero-affiliation">ASD Kasoria Kombat &amp; Fly · CSEN</p>
-
-    {showHeroStats && <StatsStrip stats={results.heroStats} />}
   </div>
 
   <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />

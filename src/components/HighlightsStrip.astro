@@ -17,7 +17,7 @@ const cropStyle=(item)=>`--focus-x:${Number(item.highlightX ?? 50)}%;--focus-y:$
  const root=document.querySelector('.highlights-strip');
  if(root){
    const carousel=root.querySelector('.highlight-carousel');
-   if(carousel)new Splide(carousel,{type:'loop',perPage:3,perMove:1,gap:'10px',pagination:false,arrows:true,trimSpace:false,autoplay:true,interval:0,speed:4200,easing:'linear',pauseOnHover:true,pauseOnFocus:true,resetProgress:false,waitForTransition:false,breakpoints:{980:{perPage:2},640:{perPage:1,padding:{left:'18px',right:'12vw'}}}}).mount();
+   if(carousel)new Splide(carousel,{type:'slide',rewind:false,perPage:3,perMove:1,gap:'10px',pagination:false,arrows:true,trimSpace:true,autoplay:false,speed:520,waitForTransition:true,breakpoints:{980:{perPage:2},640:{perPage:1,padding:{left:'18px',right:'12vw'}}}}).mount();
    const viewer=root.querySelector('[data-viewer]'),dialog=root.querySelector('[data-dialog]'),stage=root.querySelector('[data-stage]'),full=root.querySelector('[data-full]');
    const allButtons=Array.from(root.querySelectorAll('.highlight-open'));
    const photoButtons=allButtons.filter(b=>b.getAttribute('data-type')==='foto');

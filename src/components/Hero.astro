@@ -7,7 +7,7 @@ import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
 
 const copy = profile.content.home.hero;
 ---
-<section class="hero" id="top" aria-labelledby="hero-title" style={`--hero-bg: url("${heroImage.src}")`}>
+<section class="hero hero--home" id="top" aria-labelledby="hero-title" data-home-hero-layout="compact-v3" style={`--hero-bg: url("${heroImage.src}")`}>
   <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
   <div class="hero-overlay hero-overlay-right" aria-hidden="true"></div>
   <div class="hero-overlay hero-overlay-bottom" aria-hidden="true"></div>
@@ -62,16 +62,43 @@ const copy = profile.content.home.hero;
     .hero-title-image { display: none; }
     .hero-upper-signature,
     .hero-values { display: block; }
-    .hero-identity {
-      max-width: 320px;
-      margin-bottom: 10px;
-      font-size: .58rem;
-      letter-spacing: .12em;
+    .hero-identity,
+    .hero-affiliation { display: none; }
+
+    .hero.hero--home {
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      padding: 0 0 22px !important;
+      background-size: auto clamp(330px, 96vw, 390px) !important;
+      background-position: 46% 0 !important;
     }
-    .hero-affiliation {
-      margin-top: 8px;
-      font-size: .5rem;
-      letter-spacing: .09em;
+
+    .hero.hero--home .hero-copy {
+      position: relative !important;
+      width: calc(100vw - 36px) !important;
+      margin: 0 18px !important;
+      padding: clamp(330px, 96vw, 390px) 0 0 !important;
+    }
+
+    .hero.hero--home .hero-subcopy {
+      position: relative !important;
+      inset: auto !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .hero.hero--home {
+      padding-bottom: 18px !important;
+      background-size: auto clamp(315px, 94vw, 365px) !important;
+      background-position: 44% 0 !important;
+    }
+
+    .hero.hero--home .hero-copy {
+      padding-top: clamp(315px, 94vw, 365px) !important;
     }
   }
 </style>

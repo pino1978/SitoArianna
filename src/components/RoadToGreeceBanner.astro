@@ -1,11 +1,27 @@
+---
+import d1 from "../data/road-to-greece/desktop-1.txt?raw";
+import d2 from "../data/road-to-greece/desktop-2.txt?raw";
+import d3 from "../data/road-to-greece/desktop-3.txt?raw";
+import d4 from "../data/road-to-greece/desktop-4.txt?raw";
+import d5 from "../data/road-to-greece/desktop-5.txt?raw";
+import d6 from "../data/road-to-greece/desktop-6.txt?raw";
+import m1 from "../data/road-to-greece/mobile-1.txt?raw";
+import m2 from "../data/road-to-greece/mobile-2.txt?raw";
+import m3 from "../data/road-to-greece/mobile-3.txt?raw";
+import m4 from "../data/road-to-greece/mobile-4.txt?raw";
+import m5 from "../data/road-to-greece/mobile-5.txt?raw";
+
+const desktopSrc = `data:image/webp;base64,${d1}${d2}${d3}${d4}${d5}${d6}`;
+const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
+---
 <section class="road-to-greece" aria-label="Road to Greece">
   <div class="road-to-greece__media">
     <img
       class="road-to-greece__image road-to-greece__image--desktop"
-      src="/images/road-to-greece-desktop.webp?v=20260911-2"
+      src={desktopSrc}
       alt="Prossima sfida internazionale: Sanda, 18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026."
-      width="1536"
-      height="312"
+      width="1024"
+      height="208"
       loading="eager"
       fetchpriority="high"
       decoding="async"
@@ -13,10 +29,10 @@
 
     <img
       class="road-to-greece__image road-to-greece__image--mobile"
-      src="/images/road-to-greece-mobile.webp?v=20260911-2"
+      src={mobileSrc}
       alt="18th Palamidio Martial Arts Championship, Nafplio, Grecia, 13–15 novembre 2026."
-      width="1536"
-      height="448"
+      width="768"
+      height="224"
       loading="eager"
       decoding="async"
     />

@@ -22,11 +22,11 @@ function iconFor(fileName) {
 
   {showPalmaresCta && (
     <a class="stats-palmares" href="/risultati/" data-interactive aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
+      <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
       <span class="stats-palmares__button">
         <span class="stats-palmares__label">Esplora il palmarès</span>
         <b class="stats-palmares__arrow" aria-hidden="true">→</b>
       </span>
-      <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
     </a>
   )}
 </div>
@@ -40,6 +40,7 @@ function iconFor(fileName) {
   .stats-palmares {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 24px;
     width: calc(100% - 42px);
     margin-top: 10px;

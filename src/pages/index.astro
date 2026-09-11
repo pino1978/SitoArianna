@@ -45,8 +45,18 @@ import results from "../data/results.json";
   .home-page .home-stats .stats-block{width:min(1120px,100%)}
 
   @media (max-width:640px){
-    .home-page .hero{min-height:auto!important}
+    .home-page .hero{
+      min-height:560px!important;
+      background-size:auto 69%!important;
+    }
     .home-page .home-stats{padding:0 18px;background:#080706}
     .home-page .home-stats .stats-block{width:100%}
+  }
+
+  @media (max-width:390px){
+    .home-page .hero{
+      min-height:540px!important;
+      background-size:auto 68%!important;
+    }
   }
 </style>

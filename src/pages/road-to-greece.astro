@@ -19,180 +19,76 @@ const ruinsMobile = `data:image/webp;base64,${ruinsMobileRaw.trim()}`;
   <main class="rtg" id="main">
     <Header />
 
-    <div class="mobile-road">
-      <section class="m-hero" aria-labelledby="m-rtg-title">
-        <h1 id="m-rtg-title" class="sr-only">Arianna al Palamidio 2026</h1>
-        <img src={heroMobile} alt="" width="360" height="180" decoding="async" fetchpriority="high" />
-      </section>
+    <section class="hero" aria-labelledby="rtg-title">
+      <h1 id="rtg-title" class="sr-only">Arianna al Palamidio 2026</h1>
+      <img src={heroMobile} alt="" width="768" height="384" decoding="async" fetchpriority="high" />
+    </section>
 
-      <section class="m-route" aria-labelledby="m-route-title">
-        <div class="m-shell m-intro">
-          <p class="m-kicker">La prossima sfida</p>
-          <h2 id="m-route-title">Da Casoria<br /><em>a Nafplio.</em></h2>
+    <section class="journey" aria-labelledby="journey-title">
+      <div class="journey__intro shell">
+        <div class="journey__copy">
+          <p class="kicker">La prossima sfida</p>
+          <h2 id="journey-title">Da Casoria<br /><em>a Nafplio.</em></h2>
           <p>{page.route.body}</p>
+          <small>{page.route.tagline}</small>
         </div>
+        <div class="journey__aside" aria-hidden="true">
+          <span>Più di una gara.</span>
+          <span>Un’esperienza che fa crescere.</span>
+        </div>
+      </div>
 
-        <figure class="m-map">
-          <img src={mapMobile} alt="Mappa stilizzata del percorso da Casoria, in Campania, a Nafplio, in Grecia." width="360" height="640" loading="eager" decoding="async" />
-        </figure>
+      <figure class="journey__map">
+        <img src={mapMobile} alt="Mappa stilizzata del percorso da Casoria a Nafplio." width="768" height="1365" loading="eager" decoding="async" />
+      </figure>
 
-        <div class="m-shell">
-          <div class="m-facts" aria-label="Dettagli gara">
-            {page.facts.map(fact => (
-              <div class="m-fact">
-                <span class={`fact__icon fact__icon--${fact.kind}`} aria-hidden="true"></span>
-                <strong>{fact.value}</strong>
-                <span>{fact.label}</span>
-              </div>
-            ))}
+      <div class="facts shell" aria-label="Dettagli gara">
+        {page.facts.map(fact => (
+          <div class="fact">
+            <span class={`fact__icon fact__icon--${fact.kind}`} aria-hidden="true"></span>
+            <strong>{fact.value}</strong>
+            <span>{fact.label}</span>
           </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="event" aria-labelledby="event-title">
+      <img class="event__ruins" src={ruinsMobile} alt="" width="959" height="1536" loading="lazy" decoding="async" aria-hidden="true" />
+      <div class="event__grid shell">
+        <div class="event__wing" aria-hidden="true">
+          <img src={wingMobile} alt="" width="1152" height="1536" loading="lazy" decoding="async" />
         </div>
-      </section>
-
-      <section class="m-wing" aria-label="Yīng, stessa passione e nuovi orizzonti">
-        <img src={wingMobile} alt="Illustrazione dell'ala simbolo di Yīng, l'Aquila." width="360" height="480" loading="lazy" decoding="async" />
-      </section>
-
-      <section class="m-event" aria-labelledby="m-event-title">
-        <img class="m-event__ruins" src={ruinsMobile} alt="" width="360" height="577" loading="lazy" decoding="async" aria-hidden="true" />
-        <div class="m-shell m-event__content">
-          <p class="m-kicker">{page.event.kicker}</p>
-          <h2 id="m-event-title">{page.event.title1}<br />{page.event.title2}</h2>
-          <p class="m-event__date"><strong>{page.event.date}</strong><br />{page.event.place}</p>
-          <p class="m-event__body">{page.event.body}</p>
-          <a class="m-cta" href={page.event.url} target="_blank" rel="noopener noreferrer" data-interactive>
+        <div class="event__copy">
+          <p class="kicker">{page.event.kicker}</p>
+          <h2 id="event-title">{page.event.title1}<br />{page.event.title2}</h2>
+          <p class="event__date"><strong>{page.event.date}</strong><br />{page.event.place}</p>
+          <p class="event__body">{page.event.body}</p>
+          <a class="cta" href={page.event.url} target="_blank" rel="noopener noreferrer" data-interactive>
             <span>{page.event.cta}</span><span aria-hidden="true">→</span>
           </a>
-
-          <blockquote class="m-quote">
-            <span aria-hidden="true">“</span>
-            <p>{page.quote.text}</p>
-            <footer>{page.quote.author}</footer>
-          </blockquote>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section class="m-closing" aria-label="Nuovi orizzonti">
-        <img src={panoramaMobile} alt="" width="360" height="540" loading="lazy" decoding="async" />
-        <div class="m-closing__shade" aria-hidden="true"></div>
-        <div class="m-closing__copy">
-          <span>BEYOND<br />LIMITS</span>
-          <div><b>NAFPLIO</b><small>Higher horizons</small></div>
-        </div>
-      </section>
-    </div>
-
-    <div class="desktop-road">
-      <section class="hero" aria-labelledby="rtg-title">
-        <div class="hero__noise" aria-hidden="true"></div>
-        <div class="hero__flag" aria-hidden="true"></div>
-        <div class="hero__brush" aria-hidden="true"></div>
-        <div class="hero__18" aria-hidden="true">18</div>
-
-        <div class="shell hero__inner">
-          <div class="hero__copy">
-            <p class="kicker kicker--light">{page.hero.kicker}</p>
-            <h1 id="rtg-title">
-              <span>{page.hero.title1}</span>
-              <em>{page.hero.title2}</em>
-              <strong>{page.hero.title3}</strong>
-            </h1>
-
-            <div class="hero__event">
-              <b>{page.hero.eventLine1}</b>
-              <span>{page.hero.eventLine2}</span>
-            </div>
-
-            <div class="hero__facts" aria-label="Informazioni principali">
-              {page.hero.facts.map((fact, i) => <><span>{fact}</span>{i < page.hero.facts.length - 1 && <i aria-hidden="true"></i>}</>)}
-              <span class="it-flag" aria-hidden="true"></span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="route" aria-labelledby="route-title">
-        <div class="shell">
-          <div class="route__top">
-            <div class="route__copy">
-              <p class="kicker">{page.route.kicker}</p>
-              <h2 id="route-title">{page.route.title1}<br /><em>{page.route.title2}</em></h2>
-              <p>{page.route.body}</p>
-              <small>{page.route.tagline}</small>
-            </div>
-
-            <div class="route__map" role="img" aria-label="Percorso simbolico da Casoria a Nafplio">
-              <svg viewBox="0 0 780 360" aria-hidden="true">
-                <path class="map-land italy" d="M154 35l41 11 20 27-6 26 17 21-7 22 22 25-12 21 15 24-17 11-18-16-12 9-14-19-20-2-5-28 14-16-17-23 11-22-14-25 2-25z"/>
-                <path class="map-land greece" d="M611 176l22-16 22 7 4 19 19 10-2 21 18 12-12 18-22-5-10 18-20-10-8 15-16-12 5-19-19-10 11-16z"/>
-                <path class="route-line" d="M208 157 C338 137 455 159 623 224"/>
-                <circle class="route-dot" cx="208" cy="157" r="8"/>
-                <circle class="route-dot" cx="623" cy="224" r="8"/>
-                <g class="plane" transform="translate(424 165) rotate(15)"><path d="M-28-3h24l15-25h7L9-3l23 3L9 4l9 25h-7L-4 6h-24l-10 10h-5l5-15-5-15h5z"/></g>
-                <text class="map-city" x="222" y="138">CASORIA</text>
-                <text class="map-country" x="222" y="159">ITALY</text>
-                <text class="map-city" x="640" y="210">NAFPLIO</text>
-                <text class="map-country" x="640" y="232">GREECE</text>
-              </svg>
-            </div>
-
-            <aside class="route__aside" aria-label="Messaggio">
-              {page.route.aside.map(line => <span>{line}</span>)}
-            </aside>
-          </div>
-
-          <div class="facts" aria-label="Dettagli gara">
-            {page.facts.map(fact => (
-              <div class="fact">
-                <span class={`fact__icon fact__icon--${fact.kind}`} aria-hidden="true"></span>
-                <strong>{fact.value}</strong>
-                <span>{fact.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section class="event" aria-labelledby="event-title">
-        <div class="shell event__grid">
-          <div class="wing-panel" aria-hidden="true">
-            <div class="wing-panel__label">Stessa passione.<br />Nuovi orizzonti.</div>
-            <svg viewBox="0 0 520 370">
-              <path class="wing-base" d="M30 320C110 302 182 250 235 181c61-80 132-118 245-139-69 44-113 84-149 131 43-31 91-51 145-62-49 33-92 68-127 105 43-22 88-34 133-37-50 27-95 58-136 94 36-12 73-17 109-13-51 18-101 47-144 80-77 59-161 51-286-20Z"/>
-              <path class="feather" d="M225 191c72-57 140-94 231-121"/><path class="feather" d="M205 219c78-46 155-72 249-82"/><path class="feather" d="M182 246c82-32 164-47 260-37"/><path class="feather" d="M151 272c78-20 153-19 233 2"/><path class="feather" d="M111 297c69-8 130 3 196 28"/>
-              <path class="wing-red" d="M42 338c72-21 139-29 205-23"/>
-            </svg>
-          </div>
-
-          <div class="event__copy">
-            <p class="kicker">{page.event.kicker}</p>
-            <h2 id="event-title">{page.event.title1}<br />{page.event.title2}</h2>
-            <p class="event__date">{page.event.date}<br /><span>{page.event.place}</span></p>
-            <p class="event__body">{page.event.body}</p>
-            <a class="cta" href={page.event.url} target="_blank" rel="noopener noreferrer" data-interactive>{page.event.cta}<span aria-hidden="true">→</span></a>
-          </div>
-
-          <blockquote class="quote">
-            <span class="quote__mark" aria-hidden="true">“</span>
-            <p>{page.quote.text}</p>
-            <footer>{page.quote.author}</footer>
-          </blockquote>
-        </div>
-      </section>
-    </div>
+    <section class="closing" aria-label="Nafplio, nuovi orizzonti">
+      <img src={panoramaMobile} alt="" width="1024" height="1536" loading="lazy" decoding="async" />
+      <div class="closing__shade" aria-hidden="true"></div>
+      <div class="closing__copy shell">
+        <span class="closing__script">Beyond<br />Limits</span>
+        <div class="closing__place"><b>NAFPLIO</b><small>Higher horizons</small></div>
+      </div>
+    </section>
   </main>
 </BaseLayout>
 
 <style>
-:global(body){background:#050708;color:#f4eee2}.rtg{--ink:#050708;--blue:#08141d;--paper:#f4eee2;--paper2:#e9dfce;--gold:#d7a52f;--gold2:#e8c35f;--gblue:#0d5eaf;--red:#8e271f;overflow:hidden;background:var(--ink)}.shell{width:min(1240px,calc(100% - 72px));margin-inline:auto}.kicker{display:flex;align-items:center;gap:14px;margin:0 0 18px;color:#374047;font:800 .66rem/1 var(--font-ui);letter-spacing:.31em;text-transform:uppercase}.kicker::before{content:"";width:38px;height:2px;background:var(--gold)}.kicker--light{color:rgba(255,255,255,.78)}
-.mobile-road{display:none}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-.hero{position:relative;min-height:660px;display:flex;align-items:flex-end;isolation:isolate;background:linear-gradient(118deg,#030506 0%,#061018 55%,#0a1922 100%)}.hero__noise{position:absolute;inset:0;z-index:-1;opacity:.65;background:repeating-linear-gradient(168deg,transparent 0 20px,rgba(255,255,255,.015) 21px 22px),radial-gradient(circle at 18% 20%,rgba(255,255,255,.04),transparent 28%)}.hero__flag{position:absolute;right:-4%;top:-12%;z-index:-3;width:min(700px,52vw);height:650px;opacity:.74;transform:rotate(-7deg);background:repeating-linear-gradient(180deg,var(--gblue) 0 48px,#f7f4ed 48px 96px);clip-path:polygon(8% 0,100% 0,100% 91%,18% 100%,0 83%,9% 67%,0 42%)}.hero__flag::before{content:"";position:absolute;left:0;top:0;width:278px;height:278px;background:var(--gblue)}.hero__flag::after{content:"";position:absolute;left:0;top:0;width:278px;height:278px;background:linear-gradient(90deg,transparent 38%,#fff 38% 58%,transparent 58%),linear-gradient(0deg,transparent 38%,#fff 38% 58%,transparent 58%)}.hero__brush{position:absolute;right:-2%;top:0;bottom:0;width:62%;z-index:-2;background:repeating-linear-gradient(155deg,transparent 0 18px,rgba(0,0,0,.2) 19px 34px),linear-gradient(105deg,transparent 3%,rgba(2,5,8,.08) 25%,rgba(2,5,8,.38) 74%,rgba(2,5,8,.08) 100%);clip-path:polygon(21% 0,100% 0,100% 100%,7% 100%,18% 76%,4% 58%,20% 38%,8% 18%)}.hero__18{position:absolute;right:14%;bottom:46px;z-index:-1;color:var(--gold);font:900 clamp(16rem,31vw,31rem)/.72 var(--font-display);letter-spacing:-.14em;transform:rotate(-8deg);text-shadow:0 0 34px rgba(215,165,47,.13)}.hero__inner{padding:145px 0 46px}.hero__copy{width:min(620px,52vw);position:relative;z-index:2}.hero h1{margin:0;text-transform:uppercase;letter-spacing:-.045em}.hero h1 span,.hero h1 em,.hero h1 strong{display:block}.hero h1 span{font:900 clamp(4.2rem,7vw,7.2rem)/.8 var(--font-display);color:#fff}.hero h1 em{margin-top:10px;font:900 clamp(3.5rem,5.7vw,5.9rem)/.82 var(--font-display);font-style:normal;color:var(--gold2)}.hero h1 strong{margin-top:9px;font:900 clamp(3rem,5vw,5rem)/.84 var(--font-display);color:#fff}.hero__event{display:grid;gap:3px;margin-top:27px;text-transform:uppercase}.hero__event b{font:900 1.62rem/1 var(--font-display);letter-spacing:.04em}.hero__event span{font:800 1rem/1.2 var(--font-ui);letter-spacing:.08em}.hero__event::after{content:"";width:215px;height:2px;margin-top:14px;background:var(--gold)}.hero__facts{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:16px;font:900 .85rem/1 var(--font-ui);letter-spacing:.09em;text-transform:uppercase}.hero__facts i{width:1px;height:18px;background:rgba(232,195,95,.7)}.it-flag{display:inline-block;width:23px;height:15px;background:linear-gradient(90deg,#169b62 0 33.33%,#fff 33.33% 66.66%,#ce2b37 66.66%)}
-.route{padding:50px 0 0;background:linear-gradient(180deg,#f7f1e7,#eee5d7);color:#111a22}.route__top{display:grid;grid-template-columns:minmax(280px,.92fr) minmax(470px,1.45fr) 145px;gap:32px;align-items:center}.route__copy h2{margin:0 0 18px;font:500 clamp(2.8rem,4.6vw,4.9rem)/.92 Georgia,serif;letter-spacing:-.04em}.route__copy h2 em{color:#b98421;font-style:italic}.route__copy>p{max-width:395px;margin:0;color:#252d32;font:400 1rem/1.5 var(--font-body)}.route__copy small{display:block;margin-top:18px;color:#5c6469;font:800 .58rem/1 var(--font-ui);letter-spacing:.19em;text-transform:uppercase}.route__map svg{display:block;width:100%;height:auto}.map-land{fill:#d7cec0;opacity:.54}.route-line{fill:none;stroke:var(--gold);stroke-width:3;stroke-dasharray:10 8}.route-dot{fill:#fff;stroke:var(--gold);stroke-width:6}.plane{fill:var(--gold)}.map-city{font:900 18px var(--font-ui);fill:#1a2228}.map-country{font:700 13px var(--font-ui);fill:#6e757a;letter-spacing:2px}.route__aside{display:grid;align-content:center;gap:8px;min-height:180px;padding-left:24px;border-left:1px solid rgba(17,26,34,.18);color:#555f66;font:800 .64rem/1.05 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}.route__aside::after{content:"";width:30px;height:2px;margin-top:10px;background:var(--gold)}.facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;border-top:1px solid rgba(17,26,34,.12);border-bottom:1px solid rgba(17,26,34,.12)}.fact{position:relative;display:grid;justify-items:center;gap:7px;padding:22px 16px 25px;text-align:center}.fact:not(:last-child)::after{content:"";position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(17,26,34,.13)}.fact__icon{width:31px;height:31px;position:relative;color:#bf861c}.fact__icon--calendar::before{content:"";position:absolute;inset:6px 2px 2px;border:3px solid currentColor;border-radius:2px}.fact__icon--calendar::after{content:"";position:absolute;left:5px;right:5px;top:11px;height:3px;background:currentColor;box-shadow:5px -8px 0 -1px currentColor,-5px -8px 0 -1px currentColor}.fact__icon--sanda::before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:currentColor;left:11px;top:0}.fact__icon--sanda::after{content:"";position:absolute;left:13px;top:10px;width:7px;height:19px;background:currentColor;transform:rotate(30deg);box-shadow:-8px 9px 0 -2px currentColor,8px 8px 0 -2px currentColor}.fact__icon--weight::before{content:"";position:absolute;left:5px;right:5px;bottom:1px;height:22px;border-radius:4px 4px 7px 7px;background:currentColor}.fact__icon--weight::after{content:"";position:absolute;left:10px;top:0;width:11px;height:8px;border:3px solid currentColor;border-bottom:0;border-radius:6px 6px 0 0}.fact__icon--pin::before{content:"";position:absolute;left:5px;top:0;width:22px;height:27px;background:currentColor;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}.fact__icon--pin::after{content:"";position:absolute;left:12px;top:7px;width:8px;height:8px;border-radius:50%;background:#f3ecdf}.fact strong{font:900 .95rem/1.1 var(--font-display);text-transform:uppercase}.fact>span:last-child{color:#657077;font:800 .56rem/1 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}
-.event{background:linear-gradient(180deg,#f2eadf,#ebe2d3);color:#101820;padding:20px 0 36px}.event__grid{display:grid;grid-template-columns:minmax(260px,.92fr) minmax(380px,1.08fr) minmax(220px,.7fr);gap:28px;align-items:stretch}.wing-panel{position:relative;min-height:320px;overflow:hidden;border-right:1px solid rgba(16,24,32,.12)}.wing-panel__label{position:absolute;z-index:2;left:0;top:25px;color:#4f5960;font:800 .64rem/1.55 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.wing-panel svg{position:absolute;left:-42px;bottom:-30px;width:118%;height:auto}.wing-base,.feather{fill:none;stroke:#676d70;stroke-linecap:round}.wing-base{stroke-width:12;opacity:.28}.feather{stroke-width:4;opacity:.22}.wing-red{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;opacity:.65}.event__copy{padding:24px 10px 10px}.event__copy h2{margin:0 0 12px;font:500 clamp(2rem,3vw,3.15rem)/.95 Georgia,serif;letter-spacing:-.035em}.event__date{margin:0 0 18px;font:900 .88rem/1.45 var(--font-ui);text-transform:uppercase}.event__date span{font-weight:700;text-transform:none}.event__body{max-width:520px;color:#414a50;font:400 .98rem/1.5 var(--font-body)}.cta{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-width:290px;margin-top:8px;padding:14px 18px;background:linear-gradient(90deg,#d3a33d,#e5bd59);color:#101820;font:900 .66rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.quote{margin:0;padding:30px 0 10px 34px;border-left:1px solid rgba(16,24,32,.12);align-self:center}.quote__mark{display:block;color:var(--gold);font:700 4.5rem/.5 Georgia,serif}.quote p{margin:12px 0 24px;font:italic 1.65rem/1.18 Georgia,serif}.quote footer{font:800 .65rem/1 var(--font-ui);letter-spacing:.28em;text-transform:uppercase}
-@media(max-width:980px) and (min-width:768px){.shell{width:calc(100% - 36px)}.hero{min-height:620px}.hero__flag{width:64vw;right:-14%}.hero__18{right:6%;opacity:.78}.hero__copy{width:64vw}.route__top{grid-template-columns:1fr}.route__aside{display:none}.route__map{order:2}.facts{grid-template-columns:repeat(2,1fr)}.fact:nth-child(2)::after{display:none}.event__grid{grid-template-columns:1fr 1fr}.wing-panel{grid-row:1 / span 2}.quote{border-left:0;border-top:1px solid rgba(16,24,32,.12);padding:25px 0 0}}
-@media(max-width:767px){
-  .desktop-road{display:none}.mobile-road{display:block;background:#f5efe5;color:#101820}.m-shell{width:calc(100% - 36px);margin-inline:auto}.m-hero{background:#030506;line-height:0}.m-hero img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover}.m-route{background:linear-gradient(180deg,#f7f1e8 0%,#f1e9dd 100%);padding:31px 0 0}.m-kicker{display:flex;align-items:center;gap:12px;margin:0 0 12px;color:#39434a;font:800 .61rem/1 var(--font-ui);letter-spacing:.27em;text-transform:uppercase}.m-kicker::before{content:"";width:32px;height:2px;background:var(--gold)}.m-intro h2{margin:0 0 15px;font:500 clamp(2.65rem,12vw,3.45rem)/.9 Georgia,serif;letter-spacing:-.045em}.m-intro h2 em{color:#b98421;font-style:italic}.m-intro>p{margin:0;color:#273137;font:400 .95rem/1.48 var(--font-body)}.m-map{margin:17px 0 0;overflow:hidden}.m-map img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:center 47%}.m-facts{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(16,24,32,.13);border-bottom:1px solid rgba(16,24,32,.13)}.m-fact{position:relative;display:grid;justify-items:center;gap:5px;min-height:132px;padding:18px 8px 16px;text-align:center}.m-fact:nth-child(odd)::after{content:"";position:absolute;right:0;top:18%;bottom:18%;width:1px;background:rgba(16,24,32,.13)}.m-fact:nth-child(-n+2){border-bottom:1px solid rgba(16,24,32,.12)}.m-fact strong{max-width:150px;font:900 .8rem/1.18 var(--font-display);text-transform:uppercase}.m-fact>span:last-child{color:#657077;font:800 .54rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}.m-wing{background:#f4eee4;line-height:0}.m-wing img{display:block;width:100%;height:auto;max-height:510px;object-fit:cover}.m-event{position:relative;isolation:isolate;overflow:hidden;background:#f2eadf;color:#101820;padding:34px 0 27px}.m-event__ruins{position:absolute;z-index:-1;right:-30%;bottom:-7%;width:88%;height:auto;opacity:.3;mix-blend-mode:multiply;pointer-events:none}.m-event__content{position:relative}.m-event h2{max-width:330px;margin:0 0 15px;font:500 clamp(2.08rem,9.6vw,2.75rem)/.96 Georgia,serif;letter-spacing:-.035em}.m-event__date{margin:0 0 17px;font:700 .83rem/1.48 var(--font-ui)}.m-event__date strong{font-weight:900;text-transform:uppercase}.m-event__body{max-width:315px;margin:0;color:#414a50;font:400 .94rem/1.5 var(--font-body)}.m-cta{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;margin-top:23px;padding:15px 17px;background:linear-gradient(90deg,#d3a33d,#e6be5b);color:#101820;text-decoration:none;font:900 .65rem/1 var(--font-ui);letter-spacing:.075em;text-transform:uppercase;box-shadow:0 9px 26px rgba(132,94,25,.12)}.m-cta:focus-visible{outline:3px solid #101820;outline-offset:3px}.m-quote{margin:32px 0 0;padding:24px 0 4px;border-top:1px solid rgba(16,24,32,.14)}.m-quote>span{display:block;color:var(--gold);font:700 4rem/.48 Georgia,serif}.m-quote p{max-width:270px;margin:12px 0 18px;font:italic 1.55rem/1.2 Georgia,serif}.m-quote footer{font:800 .61rem/1 var(--font-ui);letter-spacing:.26em;text-transform:uppercase}.m-closing{position:relative;height:285px;overflow:hidden;background:#55616a}.m-closing>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 70%}.m-closing__shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,7,9,.02),rgba(5,7,9,.08) 43%,rgba(5,7,9,.54) 100%)}.m-closing__copy{position:absolute;left:18px;right:18px;bottom:18px;display:flex;align-items:flex-end;justify-content:space-between;color:#fff;text-transform:uppercase;text-shadow:0 2px 13px rgba(0,0,0,.38)}.m-closing__copy>span{font:italic 700 1.45rem/.95 Georgia,serif}.m-closing__copy div{display:grid;text-align:right;gap:5px}.m-closing__copy b{font:900 .79rem/1 var(--font-ui);letter-spacing:.22em}.m-closing__copy small{font:700 .52rem/1 var(--font-ui);letter-spacing:.18em}.fact__icon{width:28px;height:28px;color:#bb831c}
-}
-@media(max-width:390px){.m-shell{width:calc(100% - 30px)}.m-fact{min-height:126px}.m-closing{height:260px}.m-event__ruins{right:-38%;width:100%}}
+:global(body){background:#07090a;color:#f5efe5}.rtg{--ink:#07090a;--paper:#f3ecdf;--paper2:#ece2d4;--gold:#c99427;--gold2:#e4bb55;--text:#121a21;overflow:hidden;background:var(--ink)}.shell{width:min(1180px,calc(100% - 72px));margin-inline:auto}.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.kicker{display:flex;align-items:center;gap:13px;margin:0 0 16px;color:#44505a;font:800 .62rem/1 var(--font-ui);letter-spacing:.3em;text-transform:uppercase}.kicker::before{content:"";width:38px;height:2px;background:var(--gold)}
+.hero{background:#020405}.hero img{display:block;width:100%;height:auto;max-height:690px;object-fit:cover;object-position:center}
+.journey{background:linear-gradient(180deg,#f6f0e6,#eee5d8);color:var(--text);padding:46px 0 0}.journey__intro{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:48px;align-items:end}.journey__copy h2{margin:0 0 18px;font:500 clamp(3rem,5vw,5.2rem)/.9 Georgia,serif;letter-spacing:-.045em}.journey__copy h2 em{font-style:italic;color:#b57d18}.journey__copy>p{max-width:590px;margin:0;color:#2f373d;font:400 1rem/1.55 var(--font-body)}.journey__copy small{display:block;margin-top:18px;color:#60686d;font:800 .58rem/1 var(--font-ui);letter-spacing:.19em;text-transform:uppercase}.journey__aside{display:grid;gap:8px;padding-left:24px;border-left:1px solid rgba(16,24,32,.16);color:#5d666b;font:800 .62rem/1.5 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.journey__aside::after{content:"";width:32px;height:2px;background:var(--gold);margin-top:8px}.journey__map{width:min(1120px,94vw);margin:18px auto 0;overflow:hidden}.journey__map img{display:block;width:100%;height:420px;object-fit:cover;object-position:center 48%}.facts{display:grid;grid-template-columns:repeat(3,1fr);margin-top:14px;border-top:1px solid rgba(16,24,32,.12);border-bottom:1px solid rgba(16,24,32,.12)}.fact{position:relative;display:grid;justify-items:center;gap:7px;padding:20px 14px 24px;text-align:center}.fact:not(:last-child)::after{content:"";position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(16,24,32,.13)}.fact strong{font:900 .92rem/1.1 var(--font-display);text-transform:uppercase}.fact>span:last-child{color:#687177;font:800 .54rem/1 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}.fact__icon{width:30px;height:30px;position:relative;color:#bf861c}.fact__icon--calendar::before{content:"";position:absolute;inset:6px 2px 2px;border:3px solid currentColor;border-radius:2px}.fact__icon--calendar::after{content:"";position:absolute;left:5px;right:5px;top:11px;height:3px;background:currentColor;box-shadow:5px -8px 0 -1px currentColor,-5px -8px 0 -1px currentColor}.fact__icon--weight::before{content:"";position:absolute;left:5px;right:5px;bottom:1px;height:22px;border-radius:4px 4px 7px 7px;background:currentColor}.fact__icon--weight::after{content:"";position:absolute;left:10px;top:0;width:11px;height:8px;border:3px solid currentColor;border-bottom:0;border-radius:6px 6px 0 0}.fact__icon--pin::before{content:"";position:absolute;left:5px;top:0;width:22px;height:27px;background:currentColor;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}.fact__icon--pin::after{content:"";position:absolute;left:12px;top:7px;width:8px;height:8px;border-radius:50%;background:#f3ecdf}
+.event{position:relative;background:linear-gradient(180deg,#f2eadf,#e9dfd1);color:var(--text);padding:26px 0 34px;overflow:hidden}.event__ruins{position:absolute;right:-4%;bottom:0;width:min(330px,25vw);height:100%;object-fit:cover;object-position:right center;opacity:.22;pointer-events:none}.event__grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(300px,.9fr) minmax(420px,1.1fr);gap:42px;align-items:stretch}.event__wing{min-height:360px;overflow:hidden;border-right:1px solid rgba(16,24,32,.12)}.event__wing img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%}.event__copy{padding:26px 0 20px}.event__copy h2{margin:0 0 14px;font:500 clamp(2.2rem,3.4vw,3.8rem)/.95 Georgia,serif;letter-spacing:-.035em;max-width:650px}.event__date{margin:0 0 18px;font:700 .94rem/1.45 var(--font-ui)}.event__body{max-width:560px;margin:0;color:#41494f;font:400 1rem/1.55 var(--font-body)}.cta{display:inline-flex;align-items:center;justify-content:space-between;gap:28px;min-width:310px;margin-top:20px;padding:14px 18px;background:linear-gradient(90deg,#d3a33d,#e6bd58);color:#101820;text-decoration:none;font:900 .66rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.cta:hover,.cta:focus-visible{filter:brightness(1.04)}
+.closing{position:relative;height:165px;overflow:hidden;background:#1f2b33}.closing img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 67%}.closing__shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,12,15,.22),rgba(8,12,15,0) 48%,rgba(8,12,15,.24))}.closing__copy{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;color:#141a1e}.closing__script{font:italic 2.1rem/.9 Georgia,serif;color:#10161a;transform:rotate(-8deg)}.closing__place{display:grid;gap:4px;text-align:right;letter-spacing:.2em;text-transform:uppercase}.closing__place b{font:900 .9rem/1 var(--font-ui)}.closing__place small{font:700 .55rem/1 var(--font-ui)}
+@media(max-width:767px){.shell{width:calc(100% - 32px)}.hero img{height:auto;max-height:none}.journey{padding-top:28px}.journey__intro{display:block}.journey__copy h2{font-size:3rem}.journey__copy>p{font-size:.94rem;line-height:1.5}.journey__copy small{margin-top:14px}.journey__aside{display:none}.journey__map{width:100%;margin-top:14px}.journey__map img{height:auto;max-height:520px;object-fit:cover;object-position:center 45%}.facts{grid-template-columns:repeat(3,1fr);width:100%;margin-top:0}.fact{padding:16px 6px 18px;gap:6px}.fact strong{font-size:.72rem;line-height:1.1}.fact>span:last-child{font-size:.48rem;letter-spacing:.14em}.fact__icon{transform:scale(.88)}.event{padding:0 0 24px}.event__ruins{width:42%;right:-13%;opacity:.15}.event__grid{display:block;width:100%}.event__wing{height:172px;min-height:0;border-right:0;border-bottom:1px solid rgba(16,24,32,.12)}.event__wing img{width:100%;height:100%;object-fit:cover;object-position:center 46%}.event__copy{width:calc(100% - 32px);margin-inline:auto;padding:24px 0 6px}.event__copy h2{font-size:2.25rem;line-height:.96}.event__date{font-size:.86rem}.event__body{font-size:.94rem}.cta{width:100%;min-width:0;box-sizing:border-box;margin-top:16px}.closing{height:108px}.closing img{object-position:center 72%}.closing__copy{width:calc(100% - 28px)}.closing__script{font-size:1.3rem}.closing__place b{font-size:.68rem}.closing__place small{font-size:.45rem}}
+@media(max-width:390px){.journey__copy h2{font-size:2.7rem}.facts{grid-template-columns:1fr 1fr 1fr}.fact strong{font-size:.66rem}.event__wing{height:154px}.closing{height:96px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>

@@ -23,14 +23,14 @@
   "facts": [
     {"value": "15 novembre 2026", "label": "Data", "kind": "calendar"},
     {"value": "-40 kg", "label": "Categoria", "kind": "weight"},
-    {"value": "Nafplio, Greece", "label": "Luogo", "kind": "pin"}
+    {"value": "Nafplio, Grecia", "label": "Luogo", "kind": "pin"}
   ],
   "event": {
     "kicker": "L’evento",
     "title1": "18th Palamidio",
     "title2": "Martial Arts Championship",
     "date": "13 — 15 novembre 2026",
-    "place": "Nafplio · Greece",
+    "place": "Nafplio · Grecia",
     "body": "Una manifestazione internazionale che riunisce atleti e team di diverse nazionalità, in un contesto di alto livello tecnico e sportivo.",
     "cta": "Pagina ufficiale dell’evento",
     "url": "https://smoothcomp.com/en/event/27811"

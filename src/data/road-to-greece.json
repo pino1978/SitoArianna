@@ -35,32 +35,11 @@
     "cta": "Sito ufficiale dell’evento",
     "url": "https://palamidio.gr/en"
   },
+  "quote": {"text":"","author":""},
   "visualSpec": {
     "goal": "Replica fedele del mockup approvato: stile locandina Palamidio, Arianna come focus, nessuna foto di Arianna o di Nafplio.",
-    "palette": {
-      "ink": "#050708",
-      "nightBlue": "#08141d",
-      "paper": "#f4eee2",
-      "paperDeep": "#e9dfce",
-      "palamidioGold": "#d7a52f",
-      "palamidioGoldLight": "#e8c35f",
-      "greeceBlue": "#0d5eaf",
-      "sandaRed": "#8e271f"
-    },
-    "composition": {
-      "heroRatio": "dark 36% / graphic 64%",
-      "heroGraphic": "large 18 on the right, Greek flag behind it, dry brush texture",
-      "route": "cream editorial section with abstract Italy/Greece map and dotted gold flight path",
-      "lowerLeft": "single eagle wing motif only, pale and partially cropped",
-      "density": "poster impact in hero, lighter editorial density below"
-    },
-    "rules": [
-      "Never use real photos of Arianna in this page",
-      "Never use city or fortress photography",
-      "Use only Arianna in visible copy, never surname",
-      "Do not add crowdfunding",
-      "Do not show official posters",
-      "Do not add extra sections beyond approved mockup"
-    ]
+    "palette": {"ink":"#050708","nightBlue":"#08141d","paper":"#f4eee2","paperDeep":"#e9dfce","palamidioGold":"#d7a52f","palamidioGoldLight":"#e8c35f","greeceBlue":"#0d5eaf","sandaRed":"#8e271f"},
+    "composition": {"heroRatio":"dark 36% / graphic 64%","heroGraphic":"large 18 on the right, Greek flag behind it, dry brush texture","route":"cream editorial section with abstract Italy/Greece map and dotted gold flight path","lowerLeft":"single eagle wing motif only, pale and partially cropped","density":"poster impact in hero, lighter editorial density below"},
+    "rules": ["Never use real photos of Arianna in this page","Never use city or fortress photography","Use only Arianna in visible copy, never surname","Do not add crowdfunding","Do not show official posters","Do not add extra sections beyond approved mockup"]
   }
 }

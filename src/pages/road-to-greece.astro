@@ -2,16 +2,6 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import page from "../data/road-to-greece.json";
-
-import heroDesktop from "../../road-to-greece/hero.png";
-import mapDesktop from "../../road-to-greece/map.png";
-import mapMobile from "../../road-to-greece/map_mobile.png";
-import wingDesktop from "../../road-to-greece/ying.png";
-import wingMobile from "../../road-to-greece/ying_mobile.png";
-import ruinsDesktop from "../../road-to-greece/templio.png";
-import ruinsMobile from "../../road-to-greece/templio_mobile.png";
-import panoramaDesktop from "../../road-to-greece/panorama.png";
-import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
 ---
 
 <BaseLayout title={page.seo.title} description={page.seo.description}>
@@ -22,7 +12,7 @@ import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
       <h1 id="rtg-title" class="sr-only">Arianna al Palamidio 2026</h1>
       <picture>
         <source media="(max-width: 767px)" srcset="/images/road-to-greece/hero_mobile5.png" />
-        <img src={heroDesktop.src} width={heroDesktop.width} height={heroDesktop.height} alt="" decoding="async" fetchpriority="high" />
+        <img src="/images/road-to-greece/hero.png" alt="" decoding="async" fetchpriority="high" />
       </picture>
     </section>
 
@@ -40,8 +30,8 @@ import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
       </div>
       <figure class="journey__map">
         <picture>
-          <source media="(max-width: 767px)" srcset={mapMobile.src} />
-          <img src={mapDesktop.src} width={mapDesktop.width} height={mapDesktop.height} alt="Mappa stilizzata del percorso da Casoria a Nafplio." loading="eager" decoding="async" />
+          <source media="(max-width: 767px)" srcset="/images/road-to-greece/map_mobile.png" />
+          <img src="/images/road-to-greece/map.png" alt="Mappa stilizzata del percorso da Casoria a Nafplio." loading="eager" decoding="async" />
         </picture>
       </figure>
     </section>
@@ -57,12 +47,15 @@ import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
 
     <section class="event" aria-labelledby="event-title">
       <picture class="event__ruins" aria-hidden="true">
-        <source media="(max-width: 767px)" srcset={ruinsMobile.src} />
-        <img src={ruinsDesktop.src} alt="" loading="lazy" decoding="async" />
+        <source media="(max-width: 767px)" srcset="/images/road-to-greece/templio_mobile.png" />
+        <img src="/images/road-to-greece/templio.png" alt="" loading="lazy" decoding="async" />
       </picture>
       <div class="event__grid shell">
         <div class="event__wing" aria-hidden="true">
-          <picture><source media="(max-width: 767px)" srcset={wingMobile.src} /><img src={wingDesktop.src} alt="" loading="lazy" decoding="async" /></picture>
+          <picture>
+            <source media="(max-width: 767px)" srcset="/images/road-to-greece/ying_mobile.png" />
+            <img src="/images/road-to-greece/ying.png" alt="" loading="lazy" decoding="async" />
+          </picture>
         </div>
         <div class="event__copy">
           <p class="kicker">{page.event.kicker}</p>
@@ -75,7 +68,10 @@ import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
     </section>
 
     <section class="closing" aria-label="Nafplio, nuovi orizzonti">
-      <picture><source media="(max-width: 767px)" srcset={panoramaMobile.src} /><img src={panoramaDesktop.src} alt="" loading="lazy" decoding="async" /></picture>
+      <picture>
+        <source media="(max-width: 767px)" srcset="/images/road-to-greece/panorama_mobile.png" />
+        <img src="/images/road-to-greece/panorama.png" alt="" loading="lazy" decoding="async" />
+      </picture>
       <div class="closing__shade" aria-hidden="true"></div>
       <div class="closing__copy shell"><span class="closing__script">Beyond<br />Limits</span><div class="closing__place"><b>NAFPLIO</b><small>Higher horizons</small></div></div>
     </section>

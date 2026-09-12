@@ -1,7 +1,7 @@
 {
   "seo": {
     "title": "Road to Greece | Arianna al Palamidio 2026",
-    "description": "Arianna parteciperà al 18th Palamidio Martial Arts Championship di Nafplio, in Grecia, nella competizione di Sanda del 15 novembre 2026."
+    "description": "Arianna parteciperà al 18th Palamidio Martial Arts Championship di Nafplio, in Grecia, il 15 novembre 2026."
   },
   "hero": {
     "kicker": "Next challenge",
@@ -10,19 +10,18 @@
     "title3": "2026",
     "eventLine1": "18th Palamidio",
     "eventLine2": "Martial Arts Championship",
-    "facts": ["15 nov 2026", "Sanda", "-40 kg", "Italy"]
+    "facts": ["13 — 15 nov 2026"]
   },
   "route": {
     "kicker": "La prossima sfida",
     "title1": "Da Casoria",
     "title2": "a Nafplio.",
-    "body": "Il 15 novembre 2026 Arianna parteciperà al 18th Palamidio Martial Arts Championship, in Grecia, nella competizione di Sanda, rappresentando l’Italia nella sua categoria.",
+    "body": "Il 15 novembre 2026 Arianna parteciperà al 18th Palamidio Martial Arts Championship, in Grecia, rappresentando l’Italia nella sua categoria.",
     "tagline": "Nuovi orizzonti. Stessa passione.",
     "aside": ["Più di", "una gara.", "Un’esperienza", "che fa", "crescere."]
   },
   "facts": [
     {"value": "15 novembre 2026", "label": "Data", "kind": "calendar"},
-    {"value": "Sanda", "label": "Disciplina", "kind": "sanda"},
     {"value": "-40 kg", "label": "Categoria", "kind": "weight"},
     {"value": "Nafplio, Greece", "label": "Luogo", "kind": "pin"}
   ],
@@ -35,10 +34,6 @@
     "body": "Una manifestazione internazionale che riunisce atleti e team da tutto il mondo, in un contesto di alto livello tecnico e sportivo.",
     "cta": "Sito ufficiale dell’evento",
     "url": "https://palamidio.gr/en"
-  },
-  "quote": {
-    "text": "Ogni sfida è un’opportunità per crescere.",
-    "author": "Arianna"
   },
   "visualSpec": {
     "goal": "Replica fedele del mockup approvato: stile locandina Palamidio, Arianna come focus, nessuna foto di Arianna o di Nafplio.",

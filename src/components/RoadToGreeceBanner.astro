@@ -16,7 +16,7 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
 ---
 
 <section class="road-to-greece" aria-label="Road to Greece">
-  <div class="road-to-greece__media">
+  <div class="road-to-greece__media" data-rtg-media>
     <picture>
       <source media="(max-width:767px)" srcset={mobileSrc} />
       <img
@@ -30,6 +30,8 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
       />
     </picture>
 
+    <span class="road-to-greece__reveal" aria-hidden="true"></span>
+
     <a
       class="road-to-greece__palmares-cta"
       href="/road-to-greece/"
@@ -42,7 +44,51 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
   </div>
 </section>
 
+<script>
+  const rtgMedia = document.querySelector('[data-rtg-media]');
+
+  if (rtgMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const reveal = rtgMedia.querySelector('.road-to-greece__reveal');
+
+    const startReveal = () => {
+      if (rtgMedia.classList.contains('is-discovering')) return;
+
+      rtgMedia.classList.add('is-discovering');
+      reveal?.classList.add('is-searching');
+
+      window.setTimeout(() => {
+        rtgMedia.classList.add('is-revealed');
+        reveal?.classList.remove('is-searching');
+      }, 7000);
+    };
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          startReveal();
+          obs.unobserve(entry.target);
+          break;
+        }
+      }
+    }, { threshold: .35 });
+
+    observer.observe(rtgMedia);
+  }
+</script>
+
 <style>
+  @property --spot-x {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 82%;
+  }
+
+  @property --spot-y {
+    syntax: "<percentage>";
+    inherits: false;
+    initial-value: 22%;
+  }
+
   .road-to-greece {
     width: 100%;
     margin: 0;
@@ -55,11 +101,16 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     position: relative;
     width: 100%;
     overflow: hidden;
+    isolation: isolate;
     background: #080706;
+    perspective: 900px;
   }
 
   .road-to-greece__media picture {
+    position: relative;
+    z-index: 1;
     display: block;
+    pointer-events: none;
   }
 
   .road-to-greece__image {
@@ -67,13 +118,49 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     width: 100%;
     height: auto;
     margin: 0;
+    transform-origin: 50% 50%;
+    will-change: transform;
+    pointer-events: none;
+    animation: rtg-wave 8s cubic-bezier(.45, 0, .2, 1) infinite;
+  }
+
+  .road-to-greece__reveal {
+    --spot-x: 82%;
+    --spot-y: 22%;
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0;
+    background:
+      radial-gradient(
+        ellipse 13% 54% at var(--spot-x) var(--spot-y),
+        rgba(0,0,0,.08) 0 20%,
+        rgba(0,0,0,.32) 38%,
+        rgba(0,0,0,.9) 68%,
+        rgba(0,0,0,.96) 100%
+      );
+    transition: opacity 150ms linear;
+    will-change: opacity;
+  }
+
+  .road-to-greece__media.is-discovering .road-to-greece__reveal {
+    opacity: 1;
+  }
+
+  .road-to-greece__reveal.is-searching {
+    animation: rtg-search 7s linear forwards;
+  }
+
+  .road-to-greece__media.is-revealed .road-to-greece__reveal {
+    animation: rtg-open 2.4s cubic-bezier(.25, .1, .25, 1) forwards;
   }
 
   .road-to-greece__palmares-cta {
     position: absolute;
     top: 50%;
     right: clamp(18px, 3vw, 48px);
-    z-index: 2;
+    z-index: 20;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -87,6 +174,8 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     text-decoration: none;
     font-family: var(--font-ui);
     text-transform: uppercase;
+    pointer-events: auto;
+    touch-action: manipulation;
     transition: background .22s ease, border-color .22s ease;
   }
 
@@ -128,7 +217,59 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     outline-offset: 4px;
   }
 
+  @keyframes rtg-wave {
+    0%, 80%, 100% {
+      transform: translate3d(0,0,0) scale(1) skewY(0);
+    }
+    84% {
+      transform: translate3d(0,-1.5px,0) scale(1.003,1.012) skewY(.16deg);
+    }
+    88% {
+      transform: translate3d(0,1px,0) scale(1.004,.996) skewY(-.13deg);
+    }
+    92% {
+      transform: translate3d(0,-.7px,0) scale(1.002,1.006) skewY(.07deg);
+    }
+    96% {
+      transform: translate3d(0,0,0) scale(1) skewY(0);
+    }
+  }
+
+  @keyframes rtg-search {
+    0%   { --spot-x: 88%; --spot-y: 18%; }
+    10%  { --spot-x: 78%; --spot-y: 38%; }
+    20%  { --spot-x: 68%; --spot-y: 66%; }
+    30%  { --spot-x: 54%; --spot-y: 48%; }
+    40%  { --spot-x: 48%; --spot-y: 28%; }
+    50%  { --spot-x: 34%; --spot-y: 46%; }
+    60%  { --spot-x: 25%; --spot-y: 68%; }
+    70%  { --spot-x: 42%; --spot-y: 56%; }
+    80%  { --spot-x: 61%; --spot-y: 38%; }
+    90%  { --spot-x: 73%; --spot-y: 35%; }
+    100% { --spot-x: 50%; --spot-y: 48%; }
+  }
+
+  @keyframes rtg-open {
+    0%   { opacity: 1; }
+    18%  { opacity: .96; }
+    42%  { opacity: .78; }
+    66%  { opacity: .48; }
+    84%  { opacity: .2; }
+    100% { opacity: 0; }
+  }
+
   @media (max-width: 767px) {
+    .road-to-greece__reveal {
+      background:
+        radial-gradient(
+          ellipse 20% 52% at var(--spot-x) var(--spot-y),
+          rgba(0,0,0,.08) 0 18%,
+          rgba(0,0,0,.34) 38%,
+          rgba(0,0,0,.91) 69%,
+          rgba(0,0,0,.97) 100%
+        );
+    }
+
     .road-to-greece__palmares-cta {
       top: auto;
       right: 12px;
@@ -153,6 +294,15 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .road-to-greece__image,
+    .road-to-greece__reveal {
+      animation: none !important;
+    }
+
+    .road-to-greece__reveal {
+      display: none;
+    }
+
     .road-to-greece__palmares-cta,
     .road-to-greece__palmares-arrow {
       transition: none;

@@ -46,32 +46,42 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
 <script>
   const rtgMedia = document.querySelector('[data-rtg-media]');
 
-  if (rtgMedia && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const reveal = rtgMedia.querySelector('.road-to-greece__reveal');
+  if (rtgMedia) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const startReveal = () => {
-      if (rtgMedia.classList.contains('is-discovering')) return;
+    if (reduceMotion) {
+      rtgMedia.classList.add('is-cta-ready');
+    } else {
+      const reveal = rtgMedia.querySelector('.road-to-greece__reveal');
 
-      rtgMedia.classList.add('is-discovering');
-      reveal?.classList.add('is-searching');
+      const startReveal = () => {
+        if (rtgMedia.classList.contains('is-discovering')) return;
 
-      window.setTimeout(() => {
-        rtgMedia.classList.add('is-revealed');
-        reveal?.classList.remove('is-searching');
-      }, 7000);
-    };
+        rtgMedia.classList.add('is-discovering');
+        reveal?.classList.add('is-searching');
 
-    const observer = new IntersectionObserver((entries, obs) => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          startReveal();
-          obs.unobserve(entry.target);
-          break;
+        window.setTimeout(() => {
+          rtgMedia.classList.add('is-revealed');
+          reveal?.classList.remove('is-searching');
+
+          window.setTimeout(() => {
+            rtgMedia.classList.add('is-cta-ready');
+          }, 2400);
+        }, 7000);
+      };
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            startReveal();
+            obs.unobserve(entry.target);
+            break;
+          }
         }
-      }
-    }, { threshold: .35 });
+      }, { threshold: .35 });
 
-    observer.observe(rtgMedia);
+      observer.observe(rtgMedia);
+    }
   }
 </script>
 
@@ -153,8 +163,20 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     padding: 0 clamp(20px, 2.1vw, 42px) 0 clamp(48px, 4.8vw, 90px);
     box-sizing: border-box;
     pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
     background: linear-gradient(90deg, rgba(5,7,9,0), rgba(5,7,9,.72) 34%, rgba(5,7,9,.96) 72%);
     clip-path: polygon(22% 0, 100% 0, 100% 100%, 0 100%);
+    transition: opacity .38s ease, transform .38s ease, visibility 0s linear .38s;
+  }
+
+  .road-to-greece__media.is-cta-ready .road-to-greece__cta-wrap {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+    transition: opacity .38s ease, transform .38s ease, visibility 0s;
   }
 
   .road-to-greece__cta-wrap::before {
@@ -322,6 +344,13 @@ const mobileSrc = `data:image/webp;base64,${m1}${m2}${m3}${m4}${m5}`;
     }
 
     .road-to-greece__reveal { display: none; }
+    .road-to-greece__cta-wrap {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      pointer-events: auto;
+      transition: none;
+    }
     .road-to-greece__cta,
     .road-to-greece__cta svg { transition: none; }
   }

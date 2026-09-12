@@ -22,7 +22,6 @@
   },
   "facts": [
     {"value": "15 novembre 2026", "label": "Data", "kind": "calendar"},
-    {"value": "-40 kg", "label": "Categoria", "kind": "weight"},
     {"value": "Nafplio, Grecia", "label": "Luogo", "kind": "pin"}
   ],
   "event": {

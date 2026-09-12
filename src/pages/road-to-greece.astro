@@ -4,7 +4,6 @@ import Header from "../components/Header.astro";
 import page from "../data/road-to-greece.json";
 
 import heroDesktop from "../../road-to-greece/hero.png";
-import heroMobile from "../../road-to-greece/hero_mobile4.png";
 import mapDesktop from "../../road-to-greece/map.png";
 import mapMobile from "../../road-to-greece/map_mobile.png";
 import wingDesktop from "../../road-to-greece/ying.png";
@@ -22,7 +21,7 @@ import panoramaMobile from "../../road-to-greece/panorama_mobile.png";
     <section class="rtg-hero" aria-labelledby="rtg-title">
       <h1 id="rtg-title" class="sr-only">Arianna al Palamidio 2026</h1>
       <picture>
-        <source media="(max-width: 767px)" srcset={heroMobile.src} />
+        <source media="(max-width: 767px)" srcset="/images/road-to-greece/hero_mobile5.png" />
         <img src={heroDesktop.src} width={heroDesktop.width} height={heroDesktop.height} alt="" decoding="async" fetchpriority="high" />
       </picture>
     </section>

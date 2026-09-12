@@ -1,147 +1,118 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
+import page from "../data/road-to-greece.json";
 ---
 
-<BaseLayout
-  title="Road to Greece | Arianna al Palamidio 2026"
-  description="Arianna parteciperà al 18th Palamidio Martial Arts Championship di Nafplio, in Grecia, nella competizione di Sanda del 15 novembre 2026."
->
-  <main class="rtg-page" id="main">
+<BaseLayout title={page.seo.title} description={page.seo.description}>
+  <main class="rtg" id="main">
     <Header />
 
-    <section class="rtg-hero" aria-labelledby="rtg-title">
-      <div class="rtg-hero__texture" aria-hidden="true"></div>
-      <div class="rtg-flag" aria-hidden="true"><span></span></div>
-      <div class="rtg-eighteen" aria-hidden="true">18</div>
+    <section class="hero" aria-labelledby="rtg-title">
+      <div class="hero__noise" aria-hidden="true"></div>
+      <div class="hero__flag" aria-hidden="true"></div>
+      <div class="hero__brush" aria-hidden="true"></div>
+      <div class="hero__18" aria-hidden="true">18</div>
 
-      <div class="rtg-shell rtg-hero__inner">
-        <div class="rtg-hero__copy">
-          <p class="rtg-kicker rtg-kicker--dark">Next challenge</p>
+      <div class="shell hero__inner">
+        <div class="hero__copy">
+          <p class="kicker kicker--light">{page.hero.kicker}</p>
           <h1 id="rtg-title">
-            <span>Arianna</span>
-            <em>al Palamidio</em>
-            <strong>2026</strong>
+            <span>{page.hero.title1}</span>
+            <em>{page.hero.title2}</em>
+            <strong>{page.hero.title3}</strong>
           </h1>
-          <div class="rtg-event-name">
-            <b>18th Palamidio</b>
-            <span>Martial Arts Championship</span>
+
+          <div class="hero__event">
+            <b>{page.hero.eventLine1}</b>
+            <span>{page.hero.eventLine2}</span>
           </div>
-          <div class="rtg-hero__facts" aria-label="Informazioni principali">
-            <span>15 nov 2026</span><i aria-hidden="true"></i>
-            <span>Sanda</span><i aria-hidden="true"></i>
-            <span>-40 kg</span><i aria-hidden="true"></i>
-            <span>Italy</span><span class="it-flag" aria-hidden="true"></span>
+
+          <div class="hero__facts" aria-label="Informazioni principali">
+            {page.hero.facts.map((fact, i) => <><span>{fact}</span>{i < page.hero.facts.length - 1 && <i aria-hidden="true"></i>}</>)}
+            <span class="it-flag" aria-hidden="true"></span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="rtg-route" aria-labelledby="route-title">
-      <div class="rtg-shell">
-        <div class="rtg-route__grid">
-          <div class="rtg-route__copy">
-            <p class="rtg-kicker">La prossima sfida</p>
-            <h2 id="route-title">Da Casoria<br /><em>a Nafplio.</em></h2>
-            <p>Il 15 novembre 2026 Arianna parteciperà al 18th Palamidio Martial Arts Championship, in Grecia, nella competizione di Sanda, rappresentando l’Italia nella sua categoria.</p>
-            <small>Nuovi orizzonti. Stessa passione.</small>
+    <section class="route" aria-labelledby="route-title">
+      <div class="shell">
+        <div class="route__top">
+          <div class="route__copy">
+            <p class="kicker">{page.route.kicker}</p>
+            <h2 id="route-title">{page.route.title1}<br /><em>{page.route.title2}</em></h2>
+            <p>{page.route.body}</p>
+            <small>{page.route.tagline}</small>
           </div>
 
-          <div class="rtg-map" role="img" aria-label="Percorso simbolico da Casoria, Italia, a Nafplio, Grecia">
-            <svg viewBox="0 0 760 350" aria-hidden="true">
-              <defs>
-                <linearGradient id="routeFade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c59125"/><stop offset="1" stop-color="#d5ab4d"/></linearGradient>
-              </defs>
-              <path class="map-land" d="M104 48l44 11 23 26-5 33 19 17-8 24 23 28-15 19 15 20-18 9-18-17-10 10-15-23-19-3-7-27 15-17-18-23 9-23-18-23z"/>
-              <path class="map-land" d="M603 183l23-13 18 11 8 22-10 16 19 14-9 19-24-3-15 19-22-14 4-22-18-14 13-18z"/>
-              <path class="route-line" d="M165 151 C295 133 405 165 608 226"/>
-              <circle class="route-dot" cx="165" cy="151" r="8"/>
-              <circle class="route-dot" cx="608" cy="226" r="8"/>
-              <g class="plane" transform="translate(384 164) rotate(14)"><path d="M-29 -3L-4 -3 10 -27 17 -27 8 -3 31 0 8 4 17 28 10 28-4 5-29 5-38 15-43 15-38 1-43-14-38-14z"/></g>
-              <text class="map-city" x="176" y="133">CASORIA</text>
-              <text class="map-country" x="176" y="154">ITALY</text>
-              <text class="map-city" x="623" y="211">NAFPLIO</text>
-              <text class="map-country" x="623" y="233">GREECE</text>
+          <div class="route__map" role="img" aria-label="Percorso simbolico da Casoria a Nafplio">
+            <svg viewBox="0 0 780 360" aria-hidden="true">
+              <path class="map-land italy" d="M154 35l41 11 20 27-6 26 17 21-7 22 22 25-12 21 15 24-17 11-18-16-12 9-14-19-20-2-5-28 14-16-17-23 11-22-14-25 2-25z"/>
+              <path class="map-land greece" d="M611 176l22-16 22 7 4 19 19 10-2 21 18 12-12 18-22-5-10 18-20-10-8 15-16-12 5-19-19-10 11-16z"/>
+              <path class="route-line" d="M208 157 C338 137 455 159 623 224"/>
+              <circle class="route-dot" cx="208" cy="157" r="8"/>
+              <circle class="route-dot" cx="623" cy="224" r="8"/>
+              <g class="plane" transform="translate(424 165) rotate(15)"><path d="M-28-3h24l15-25h7L9-3l23 3L9 4l9 25h-7L-4 6h-24l-10 10h-5l5-15-5-15h5z"/></g>
+              <text class="map-city" x="222" y="138">CASORIA</text>
+              <text class="map-country" x="222" y="159">ITALY</text>
+              <text class="map-city" x="640" y="210">NAFPLIO</text>
+              <text class="map-country" x="640" y="232">GREECE</text>
             </svg>
           </div>
 
-          <aside class="rtg-route__aside" aria-label="Messaggio">
-            <span>Più di</span><span>una gara.</span><span>Un’esperienza</span><span>che fa</span><span>crescere.</span>
+          <aside class="route__aside" aria-label="Messaggio">
+            {page.route.aside.map(line => <span>{line}</span>)}
           </aside>
         </div>
 
-        <div class="rtg-facts" aria-label="Dettagli della gara">
-          <div class="rtg-fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2v3M18 2v3M4 8h16M5 4h14a1 1 0 0 1 1 1v15H4V5a1 1 0 0 1 1-1Z"/></svg><strong>15 novembre 2026</strong><span>Data</span></div>
-          <div class="rtg-fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18c3-1 4-4 5-7l-2-2 2-2 2 2 3-1M12 4a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM10 11l4 3 4 5M9 14l-4 5"/></svg><strong>Sanda</strong><span>Disciplina</span></div>
-          <div class="rtg-fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 7h8l2 4v9H6v-9l2-4Zm2 0V4h4v3"/></svg><strong>-40 kg</strong><span>Categoria</span></div>
-          <div class="rtg-fact"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-7 7-13a7 7 0 1 0-14 0c0 6 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><strong>Nafplio, Greece</strong><span>Luogo</span></div>
+        <div class="facts" aria-label="Dettagli gara">
+          {page.facts.map(fact => (
+            <div class="fact">
+              <span class={`fact__icon fact__icon--${fact.kind}`} aria-hidden="true"></span>
+              <strong>{fact.value}</strong>
+              <span>{fact.label}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <section class="rtg-event" aria-labelledby="event-title">
-      <div class="rtg-shell rtg-event__grid">
-        <div class="rtg-wing" aria-hidden="true">
-          <svg viewBox="0 0 420 330">
-            <g fill="none" stroke-linecap="round">
-              <path class="wing-main" d="M26 278C111 268 169 221 221 152c58-77 106-104 174-117-45 34-77 69-104 108 37-24 72-39 111-47-42 28-75 58-102 92 33-18 62-27 94-31-36 22-69 49-98 80 26-10 50-14 76-13-42 18-81 42-116 72-61 52-134 43-230-18Z"/>
-              <path class="feather" d="M206 163c49-41 101-75 169-101"/>
-              <path class="feather" d="M190 186c53-34 109-58 184-69"/>
-              <path class="feather" d="M171 208c57-25 115-38 193-36"/>
-              <path class="feather" d="M147 230c56-15 113-17 183-6"/>
-              <path class="feather" d="M116 249c53-6 102 2 155 22"/>
-            </g>
-            <path class="wing-red" d="M43 300c62-19 120-27 171-23"/>
+    <section class="event" aria-labelledby="event-title">
+      <div class="shell event__grid">
+        <div class="wing-panel" aria-hidden="true">
+          <div class="wing-panel__label">Stessa passione.<br />Nuovi orizzonti.</div>
+          <svg viewBox="0 0 520 370">
+            <path class="wing-base" d="M30 320C110 302 182 250 235 181c61-80 132-118 245-139-69 44-113 84-149 131 43-31 91-51 145-62-49 33-92 68-127 105 43-22 88-34 133-37-50 27-95 58-136 94 36-12 73-17 109-13-51 18-101 47-144 80-77 59-161 51-286-20Z"/>
+            <path class="feather" d="M225 191c72-57 140-94 231-121"/><path class="feather" d="M205 219c78-46 155-72 249-82"/><path class="feather" d="M182 246c82-32 164-47 260-37"/><path class="feather" d="M151 272c78-20 153-19 233 2"/><path class="feather" d="M111 297c69-8 130 3 196 28"/>
+            <path class="wing-red" d="M42 338c72-21 139-29 205-23"/>
           </svg>
-          <p>Stessa passione.<br />Nuovi orizzonti.</p>
         </div>
 
-        <div class="rtg-event__copy">
-          <p class="rtg-kicker">L’evento</p>
-          <h2 id="event-title">18th Palamidio<br />Martial Arts Championship</h2>
-          <p class="rtg-event__date">13 — 15 novembre 2026<br /><span>Nafplio · Greece</span></p>
-          <p>Una manifestazione internazionale che riunisce atleti e team da tutto il mondo, in un contesto di alto livello tecnico e sportivo.</p>
-          <a class="rtg-cta" href="https://palamidio.gr/en" target="_blank" rel="noopener noreferrer" data-interactive>Sito ufficiale dell’evento <span aria-hidden="true">→</span></a>
+        <div class="event__copy">
+          <p class="kicker">{page.event.kicker}</p>
+          <h2 id="event-title">{page.event.title1}<br />{page.event.title2}</h2>
+          <p class="event__date">{page.event.date}<br /><span>{page.event.place}</span></p>
+          <p class="event__body">{page.event.body}</p>
+          <a class="cta" href={page.event.url} target="_blank" rel="noopener noreferrer" data-interactive>{page.event.cta}<span aria-hidden="true">→</span></a>
         </div>
 
-        <blockquote class="rtg-quote">
-          <span aria-hidden="true">“</span>
-          <p>Ogni sfida<br />è un’opportunità<br />per crescere.</p>
-          <footer>Arianna</footer>
+        <blockquote class="quote">
+          <span class="quote__mark" aria-hidden="true">“</span>
+          <p>{page.quote.text}</p>
+          <footer>{page.quote.author}</footer>
         </blockquote>
       </div>
     </section>
-
-    <div class="rtg-horizon" aria-hidden="true"><span></span></div>
   </main>
 </BaseLayout>
 
 <style>
-  :global(body){background:#050708;color:#f4eee1}
-  .rtg-page{--ink:#071018;--ink-2:#0b1720;--paper:#f1eadc;--paper-2:#e8dfcf;--gold:#d2a238;--gold-2:#e2bb5b;--red:#8e271f;min-height:100vh;overflow:hidden;background:var(--ink)}
-  .rtg-shell{width:min(1220px,calc(100% - 72px));margin-inline:auto}
-  .rtg-kicker{display:flex;align-items:center;gap:14px;margin:0 0 22px;color:#2f3940;font:800 .66rem/1 var(--font-ui);letter-spacing:.34em;text-transform:uppercase}
-  .rtg-kicker::before{width:38px;height:2px;background:var(--gold);content:""}.rtg-kicker--dark{color:rgba(255,255,255,.74)}
-
-  .rtg-hero{position:relative;min-height:610px;display:flex;align-items:flex-end;overflow:hidden;background:radial-gradient(circle at 68% 28%,rgba(18,42,57,.78),transparent 36%),linear-gradient(120deg,#030506 0%,#061018 56%,#08141d 100%);isolation:isolate}
-  .rtg-hero__texture{position:absolute;inset:0;z-index:-1;opacity:.72;background:repeating-linear-gradient(166deg,transparent 0 17px,rgba(255,255,255,.016) 18px 19px),radial-gradient(circle at 28% 32%,rgba(255,255,255,.035),transparent 21%),linear-gradient(152deg,transparent 0 65%,rgba(197,145,37,.1) 65.2%,transparent 66%)}
-  .rtg-flag{position:absolute;z-index:-2;right:-4%;top:-12%;width:min(660px,50vw);height:610px;opacity:.72;transform:rotate(-8deg) scale(1.08);filter:saturate(.9) contrast(1.08);background:repeating-linear-gradient(to bottom,#0d5eaf 0 44px,#f3eee5 44px 88px);clip-path:polygon(11% 0,100% 0,100% 93%,16% 100%,0 83%,9% 64%,0 41%)}
-  .rtg-flag::before{position:absolute;left:0;top:0;width:264px;height:264px;background:#0d5eaf;content:""}.rtg-flag::after{position:absolute;left:0;top:0;width:264px;height:264px;background:linear-gradient(90deg,transparent 38%,#fff 38% 58%,transparent 58%),linear-gradient(0deg,transparent 38%,#fff 38% 58%,transparent 58%);content:""}.rtg-flag span{position:absolute;inset:0;background:linear-gradient(110deg,rgba(1,5,8,.08),rgba(1,5,8,.24)),repeating-linear-gradient(17deg,transparent 0 31px,rgba(3,5,6,.12) 32px 35px)}
-  .rtg-eighteen{position:absolute;right:17%;bottom:43px;z-index:-1;color:#d5a63d;font:900 clamp(15rem,31vw,31rem)/.72 var(--font-display);letter-spacing:-.13em;transform:rotate(-8deg);opacity:.88;text-shadow:0 0 36px rgba(211,164,59,.12)}
-  .rtg-hero__inner{padding:130px 0 44px}.rtg-hero__copy{position:relative;z-index:2;width:min(610px,52vw)}
-  .rtg-hero h1{margin:0;text-transform:uppercase;line-height:.82;letter-spacing:-.045em}.rtg-hero h1 span,.rtg-hero h1 em,.rtg-hero h1 strong{display:block}.rtg-hero h1 span{color:#fff;font:900 clamp(4rem,7vw,7rem)/.82 var(--font-display)}.rtg-hero h1 em{margin-top:10px;color:var(--gold-2);font:900 clamp(3.45rem,5.6vw,5.8rem)/.84 var(--font-display);font-style:normal}.rtg-hero h1 strong{margin-top:8px;color:#fff;font:900 clamp(3.2rem,5.2vw,5.3rem)/.86 var(--font-display)}
-  .rtg-event-name{display:grid;gap:2px;margin-top:26px;text-transform:uppercase}.rtg-event-name b{font:900 1.6rem/1 var(--font-display);letter-spacing:.04em}.rtg-event-name span{font:800 1.02rem/1.2 var(--font-ui);letter-spacing:.08em}.rtg-event-name::after{width:210px;height:2px;margin-top:14px;background:var(--gold);content:""}
-  .rtg-hero__facts{display:flex;align-items:center;gap:14px;margin-top:16px;color:#fff;font:900 .86rem/1 var(--font-ui);letter-spacing:.09em;text-transform:uppercase}.rtg-hero__facts i{width:1px;height:18px;background:rgba(226,187,91,.75)}.it-flag{width:23px;height:15px;background:linear-gradient(90deg,#169b62 0 33.33%,#fff 33.33% 66.66%,#ce2b37 66.66%)}
-
-  .rtg-route{background:linear-gradient(180deg,#f6f0e6 0%,#eee6d9 100%);color:#111b23;padding:48px 0 0}.rtg-route__grid{display:grid;grid-template-columns:minmax(280px,.9fr) minmax(470px,1.45fr) 150px;gap:34px;align-items:center}.rtg-route__copy h2{margin:0 0 18px;font:500 clamp(2.7rem,4.5vw,4.8rem)/.92 Georgia,serif;letter-spacing:-.04em}.rtg-route__copy h2 em{color:#b98421;font-style:italic}.rtg-route__copy>p{max-width:390px;margin:0;color:#252d32;font:400 1rem/1.5 var(--font-body)}.rtg-route__copy small{display:block;margin-top:18px;color:#5a6267;font:800 .58rem/1 var(--font-ui);letter-spacing:.24em;text-transform:uppercase}
-  .rtg-map{min-height:290px}.rtg-map svg{display:block;width:100%;height:auto}.map-land{fill:#d6d0c5;opacity:.72}.route-line{fill:none;stroke:url(#routeFade);stroke-width:2.4;stroke-dasharray:8 7}.route-dot{fill:#fff;stroke:#c59125;stroke-width:5}.plane{fill:#c59125}.map-city{fill:#16212a;font:900 18px var(--font-ui)}.map-country{fill:#616a70;font:700 14px var(--font-ui);letter-spacing:2px}.rtg-route__aside{padding-left:18px;border-left:1px solid rgba(17,27,35,.2);color:#354047;font:800 .62rem/1.75 var(--font-ui);letter-spacing:.24em;text-transform:uppercase}.rtg-route__aside span{display:block}
-  .rtg-facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:26px;border-top:1px solid rgba(17,27,35,.12)}.rtg-fact{display:grid;justify-items:center;gap:7px;padding:24px 18px 30px;border-right:1px solid rgba(17,27,35,.14);text-align:center}.rtg-fact:last-child{border-right:0}.rtg-fact svg{width:29px;height:29px;fill:none;stroke:#c48f25;stroke-width:1.8}.rtg-fact strong{font:900 .92rem/1.1 var(--font-ui);text-transform:uppercase}.rtg-fact span{color:#5b6267;font:800 .56rem/1 var(--font-ui);letter-spacing:.24em;text-transform:uppercase}
-
-  .rtg-event{position:relative;background:#f1eadf;color:#131c23;border-top:1px solid rgba(15,28,36,.12);padding:42px 0 46px}.rtg-event__grid{display:grid;grid-template-columns:minmax(270px,.9fr) minmax(380px,1.15fr) minmax(250px,.8fr);gap:32px;align-items:stretch}.rtg-wing{position:relative;min-height:310px;overflow:hidden;border-right:1px solid rgba(15,28,36,.14)}.rtg-wing svg{position:absolute;left:-42px;bottom:-26px;width:410px;height:320px;opacity:.84}.wing-main{stroke:#3f4a50;stroke-width:13;opacity:.5}.feather{stroke:#59636a;stroke-width:6;opacity:.48}.wing-red{fill:none;stroke:#9a3328;stroke-width:5;stroke-linecap:round;opacity:.7}.rtg-wing p{position:absolute;left:0;top:12px;margin:0;color:#5c6469;font:800 .58rem/1.65 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}
-  .rtg-event__copy{padding:4px 14px}.rtg-event__copy h2{margin:0 0 16px;font:500 clamp(2rem,3.2vw,3.4rem)/.95 Georgia,serif;letter-spacing:-.035em}.rtg-event__date{margin:0 0 16px;font:900 .9rem/1.4 var(--font-ui);text-transform:uppercase}.rtg-event__date span{font-weight:500;text-transform:none}.rtg-event__copy>p:not(.rtg-kicker):not(.rtg-event__date){max-width:480px;color:#343d43;font:400 .96rem/1.52 var(--font-body)}.rtg-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:34px;min-width:290px;margin-top:14px;padding:15px 18px;background:linear-gradient(90deg,#d3a23c,#e4bd61);color:#0d151b;font:900 .66rem/1 var(--font-ui);letter-spacing:.07em;text-transform:uppercase}.rtg-cta span{font-size:1rem}.rtg-quote{margin:0;padding:10px 0 0 28px;border-left:1px solid rgba(15,28,36,.14)}.rtg-quote>span{display:block;height:38px;color:#d2a238;font:700 3.8rem/.7 Georgia,serif}.rtg-quote p{margin:8px 0 22px;font:italic 1.7rem/1.2 Georgia,serif}.rtg-quote footer{font:900 .62rem/1 var(--font-ui);letter-spacing:.28em;text-transform:uppercase}.rtg-quote footer::before{display:block;width:48px;height:2px;margin-bottom:14px;background:#c59125;content:""}
-  .rtg-horizon{height:120px;background:linear-gradient(180deg,#d9d6cf,#c4c8c8);position:relative;overflow:hidden}.rtg-horizon::before,.rtg-horizon::after{position:absolute;bottom:-48px;width:52%;height:120px;background:#9aa5a8;opacity:.36;clip-path:polygon(0 100%,14% 56%,28% 66%,43% 28%,59% 51%,73% 18%,88% 56%,100% 38%,100% 100%);content:""}.rtg-horizon::before{left:-5%}.rtg-horizon::after{right:-5%;transform:scaleX(-1);opacity:.28}.rtg-horizon span{position:absolute;inset:0;background:linear-gradient(180deg,rgba(246,240,230,.35),rgba(7,16,24,.04))}
-
-  @media(max-width:980px){.rtg-shell{width:calc(100% - 36px)}.rtg-hero{min-height:670px}.rtg-hero__copy{width:min(560px,72vw)}.rtg-flag{width:68vw;right:-18%;opacity:.52}.rtg-eighteen{right:10%;bottom:65px;font-size:clamp(14rem,39vw,24rem);opacity:.65}.rtg-route__grid{grid-template-columns:1fr 1.15fr}.rtg-route__aside{display:none}.rtg-event__grid{grid-template-columns:.78fr 1.22fr}.rtg-quote{grid-column:1/-1;border-left:0;border-top:1px solid rgba(15,28,36,.14);padding:26px 0 0}.rtg-quote p{max-width:440px}.rtg-facts{grid-template-columns:repeat(2,1fr)}.rtg-fact:nth-child(2){border-right:0}.rtg-fact:nth-child(-n+2){border-bottom:1px solid rgba(17,27,35,.14)}}
-  @media(max-width:680px){.rtg-hero{min-height:660px;align-items:flex-end}.rtg-hero__inner{padding:116px 0 34px}.rtg-hero__copy{width:100%}.rtg-kicker{margin-bottom:16px}.rtg-hero h1 span{font-size:clamp(3.6rem,17vw,5.4rem)}.rtg-hero h1 em{font-size:clamp(2.85rem,13.2vw,4.2rem)}.rtg-hero h1 strong{font-size:clamp(2.8rem,12.5vw,4rem)}.rtg-event-name b{font-size:1.3rem}.rtg-event-name span{font-size:.82rem}.rtg-hero__facts{flex-wrap:wrap;gap:9px 11px;font-size:.7rem}.rtg-flag{top:-4%;right:-47%;width:100vw;height:520px;opacity:.42}.rtg-flag::before,.rtg-flag::after{width:190px;height:190px}.rtg-eighteen{right:-4%;bottom:105px;font-size:58vw;opacity:.48}.rtg-route{padding-top:34px}.rtg-route__grid{grid-template-columns:1fr;gap:18px}.rtg-route__copy>p{font-size:.95rem}.rtg-map{min-height:0}.rtg-map svg{margin-top:-8px}.map-city{font-size:17px}.map-country{font-size:13px}.rtg-facts{margin-top:8px}.rtg-fact{padding:20px 10px 24px}.rtg-fact strong{font-size:.82rem}.rtg-event{padding:34px 0}.rtg-event__grid{grid-template-columns:1fr}.rtg-wing{min-height:230px;border-right:0;border-bottom:1px solid rgba(15,28,36,.14)}.rtg-wing svg{left:-70px;bottom:-65px;width:360px}.rtg-event__copy{padding:0}.rtg-cta{min-width:0;width:100%}.rtg-quote{grid-column:auto}.rtg-horizon{height:80px}}
-  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+:global(body){background:#050708;color:#f4eee2}.rtg{--ink:#050708;--blue:#08141d;--paper:#f4eee2;--paper2:#e9dfce;--gold:#d7a52f;--gold2:#e8c35f;--gblue:#0d5eaf;--red:#8e271f;overflow:hidden;background:var(--ink)}.shell{width:min(1240px,calc(100% - 72px));margin-inline:auto}.kicker{display:flex;align-items:center;gap:14px;margin:0 0 18px;color:#374047;font:800 .66rem/1 var(--font-ui);letter-spacing:.31em;text-transform:uppercase}.kicker::before{content:"";width:38px;height:2px;background:var(--gold)}.kicker--light{color:rgba(255,255,255,.78)}
+.hero{position:relative;min-height:660px;display:flex;align-items:flex-end;isolation:isolate;background:linear-gradient(118deg,#030506 0%,#061018 55%,#0a1922 100%)}.hero__noise{position:absolute;inset:0;z-index:-1;opacity:.65;background:repeating-linear-gradient(168deg,transparent 0 20px,rgba(255,255,255,.015) 21px 22px),radial-gradient(circle at 18% 20%,rgba(255,255,255,.04),transparent 28%)}.hero__flag{position:absolute;right:-4%;top:-12%;z-index:-3;width:min(700px,52vw);height:650px;opacity:.74;transform:rotate(-7deg);background:repeating-linear-gradient(180deg,var(--gblue) 0 48px,#f7f4ed 48px 96px);clip-path:polygon(8% 0,100% 0,100% 91%,18% 100%,0 83%,9% 67%,0 42%)}.hero__flag::before{content:"";position:absolute;left:0;top:0;width:278px;height:278px;background:var(--gblue)}.hero__flag::after{content:"";position:absolute;left:0;top:0;width:278px;height:278px;background:linear-gradient(90deg,transparent 38%,#fff 38% 58%,transparent 58%),linear-gradient(0deg,transparent 38%,#fff 38% 58%,transparent 58%)}.hero__brush{position:absolute;right:-2%;top:0;bottom:0;width:62%;z-index:-2;background:repeating-linear-gradient(155deg,transparent 0 18px,rgba(0,0,0,.2) 19px 34px),linear-gradient(105deg,transparent 3%,rgba(2,5,8,.08) 25%,rgba(2,5,8,.38) 74%,rgba(2,5,8,.08) 100%);clip-path:polygon(21% 0,100% 0,100% 100%,7% 100%,18% 76%,4% 58%,20% 38%,8% 18%)}.hero__18{position:absolute;right:14%;bottom:46px;z-index:-1;color:var(--gold);font:900 clamp(16rem,31vw,31rem)/.72 var(--font-display);letter-spacing:-.14em;transform:rotate(-8deg);text-shadow:0 0 34px rgba(215,165,47,.13)}.hero__inner{padding:145px 0 46px}.hero__copy{width:min(620px,52vw);position:relative;z-index:2}.hero h1{margin:0;text-transform:uppercase;letter-spacing:-.045em}.hero h1 span,.hero h1 em,.hero h1 strong{display:block}.hero h1 span{font:900 clamp(4.2rem,7vw,7.2rem)/.8 var(--font-display);color:#fff}.hero h1 em{margin-top:10px;font:900 clamp(3.5rem,5.7vw,5.9rem)/.82 var(--font-display);font-style:normal;color:var(--gold2)}.hero h1 strong{margin-top:9px;font:900 clamp(3rem,5vw,5rem)/.84 var(--font-display);color:#fff}.hero__event{display:grid;gap:3px;margin-top:27px;text-transform:uppercase}.hero__event b{font:900 1.62rem/1 var(--font-display);letter-spacing:.04em}.hero__event span{font:800 1rem/1.2 var(--font-ui);letter-spacing:.08em}.hero__event::after{content:"";width:215px;height:2px;margin-top:14px;background:var(--gold)}.hero__facts{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:16px;font:900 .85rem/1 var(--font-ui);letter-spacing:.09em;text-transform:uppercase}.hero__facts i{width:1px;height:18px;background:rgba(232,195,95,.7)}.it-flag{display:inline-block;width:23px;height:15px;background:linear-gradient(90deg,#169b62 0 33.33%,#fff 33.33% 66.66%,#ce2b37 66.66%)}
+.route{padding:50px 0 0;background:linear-gradient(180deg,#f7f1e7,#eee5d7);color:#111a22}.route__top{display:grid;grid-template-columns:minmax(280px,.92fr) minmax(470px,1.45fr) 145px;gap:32px;align-items:center}.route__copy h2{margin:0 0 18px;font:500 clamp(2.8rem,4.6vw,4.9rem)/.92 Georgia,serif;letter-spacing:-.04em}.route__copy h2 em{color:#b98421;font-style:italic}.route__copy>p{max-width:395px;margin:0;color:#252d32;font:400 1rem/1.5 var(--font-body)}.route__copy small{display:block;margin-top:18px;color:#5c6469;font:800 .58rem/1 var(--font-ui);letter-spacing:.19em;text-transform:uppercase}.route__map svg{display:block;width:100%;height:auto}.map-land{fill:#d7cec0;opacity:.54}.route-line{fill:none;stroke:var(--gold);stroke-width:3;stroke-dasharray:10 8}.route-dot{fill:#fff;stroke:var(--gold);stroke-width:6}.plane{fill:var(--gold)}.map-city{font:900 18px var(--font-ui);fill:#1a2228}.map-country{font:700 13px var(--font-ui);fill:#6e757a;letter-spacing:2px}.route__aside{display:grid;align-content:center;gap:8px;min-height:180px;padding-left:24px;border-left:1px solid rgba(17,26,34,.18);color:#555f66;font:800 .64rem/1.05 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}.route__aside::after{content:"";width:30px;height:2px;margin-top:10px;background:var(--gold)}.facts{display:grid;grid-template-columns:repeat(4,1fr);margin-top:34px;border-top:1px solid rgba(17,26,34,.12);border-bottom:1px solid rgba(17,26,34,.12)}.fact{position:relative;display:grid;justify-items:center;gap:7px;padding:22px 16px 25px;text-align:center}.fact:not(:last-child)::after{content:"";position:absolute;right:0;top:20%;bottom:20%;width:1px;background:rgba(17,26,34,.13)}.fact__icon{width:31px;height:31px;position:relative;color:#bf861c}.fact__icon--calendar::before{content:"";position:absolute;inset:6px 2px 2px;border:3px solid currentColor;border-radius:2px}.fact__icon--calendar::after{content:"";position:absolute;left:5px;right:5px;top:11px;height:3px;background:currentColor;box-shadow:5px -8px 0 -1px currentColor,-5px -8px 0 -1px currentColor}.fact__icon--sanda::before{content:"";position:absolute;width:10px;height:10px;border-radius:50%;background:currentColor;left:11px;top:0}.fact__icon--sanda::after{content:"";position:absolute;left:13px;top:10px;width:7px;height:19px;background:currentColor;transform:rotate(30deg);box-shadow:-8px 9px 0 -2px currentColor,8px 8px 0 -2px currentColor}.fact__icon--weight::before{content:"";position:absolute;left:5px;right:5px;bottom:1px;height:22px;border-radius:4px 4px 7px 7px;background:currentColor}.fact__icon--weight::after{content:"";position:absolute;left:10px;top:0;width:11px;height:8px;border:3px solid currentColor;border-bottom:0;border-radius:6px 6px 0 0}.fact__icon--pin::before{content:"";position:absolute;left:5px;top:0;width:22px;height:27px;background:currentColor;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}.fact__icon--pin::after{content:"";position:absolute;left:12px;top:7px;width:8px;height:8px;border-radius:50%;background:#f3ecdf}.fact strong{font:900 .95rem/1.1 var(--font-display);text-transform:uppercase}.fact>span:last-child{color:#657077;font:800 .56rem/1 var(--font-ui);letter-spacing:.22em;text-transform:uppercase}
+.event{background:linear-gradient(180deg,#f2eadf,#ebe2d3);color:#101820;padding:20px 0 36px}.event__grid{display:grid;grid-template-columns:minmax(260px,.92fr) minmax(380px,1.08fr) minmax(220px,.7fr);gap:28px;align-items:stretch}.wing-panel{position:relative;min-height:320px;overflow:hidden;border-right:1px solid rgba(16,24,32,.12)}.wing-panel__label{position:absolute;z-index:2;left:0;top:25px;color:#4f5960;font:800 .64rem/1.55 var(--font-ui);letter-spacing:.18em;text-transform:uppercase}.wing-panel svg{position:absolute;left:-42px;bottom:-30px;width:118%;height:auto}.wing-base,.feather{fill:none;stroke:#676d70;stroke-linecap:round}.wing-base{stroke-width:12;opacity:.28}.feather{stroke-width:4;opacity:.22}.wing-red{fill:none;stroke:var(--red);stroke-width:6;stroke-linecap:round;opacity:.65}.event__copy{padding:24px 10px 10px}.event__copy h2{margin:0 0 12px;font:500 clamp(2rem,3vw,3.15rem)/.95 Georgia,serif;letter-spacing:-.035em}.event__date{margin:0 0 18px;font:900 .88rem/1.45 var(--font-ui);text-transform:uppercase}.event__date span{font-weight:700;text-transform:none}.event__body{max-width:520px;color:#414a50;font:400 .98rem/1.5 var(--font-body)}.cta{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-width:290px;margin-top:8px;padding:14px 18px;background:linear-gradient(90deg,#d3a33d,#e5bd59);color:#101820;font:900 .66rem/1 var(--font-ui);letter-spacing:.08em;text-transform:uppercase}.quote{margin:0;padding:30px 0 10px 34px;border-left:1px solid rgba(16,24,32,.12);align-self:center}.quote__mark{display:block;color:var(--gold);font:700 4.5rem/.5 Georgia,serif}.quote p{margin:12px 0 24px;font:italic 1.65rem/1.18 Georgia,serif}.quote footer{font:800 .65rem/1 var(--font-ui);letter-spacing:.28em;text-transform:uppercase}
+@media(max-width:980px){.shell{width:calc(100% - 36px)}.hero{min-height:620px}.hero__flag{width:64vw;right:-14%}.hero__18{right:6%;opacity:.78}.hero__copy{width:64vw}.route__top{grid-template-columns:1fr}.route__aside{display:none}.route__map{order:2}.facts{grid-template-columns:repeat(2,1fr)}.fact:nth-child(2)::after{display:none}.event__grid{grid-template-columns:1fr 1fr}.wing-panel{grid-row:1 / span 2}.quote{border-left:0;border-top:1px solid rgba(16,24,32,.12);padding:25px 0 0}}
+@media(max-width:640px){.hero{min-height:670px;align-items:flex-end}.hero__inner{padding:118px 0 34px}.hero__copy{width:100%}.hero__flag{width:92vw;height:500px;right:-34%;top:-5%;opacity:.48}.hero__18{right:-2%;bottom:88px;font-size:15rem;opacity:.42}.hero h1 span{font-size:3.55rem}.hero h1 em{font-size:2.8rem}.hero h1 strong{font-size:2.55rem}.hero__event b{font-size:1.3rem}.hero__event span{font-size:.86rem}.hero__facts{max-width:320px;gap:10px;font-size:.72rem}.route{padding-top:34px}.route__copy h2{font-size:3rem}.route__copy>p{font-size:.95rem}.route__map{margin-top:4px}.route__map svg{transform:scale(1.08);transform-origin:center}.facts{grid-template-columns:1fr 1fr;margin-top:18px}.fact{padding:18px 10px 20px}.fact strong{font-size:.8rem}.event{padding-top:8px}.event__grid{grid-template-columns:1fr}.wing-panel{min-height:250px;border-right:0;border-bottom:1px solid rgba(16,24,32,.12)}.wing-panel svg{width:105%;left:-22px;bottom:-46px}.event__copy{padding:24px 0}.event__copy h2{font-size:2.3rem}.quote{padding:24px 0 8px}.quote p{font-size:1.45rem}.cta{min-width:0;width:100%}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style>

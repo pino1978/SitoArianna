@@ -15,7 +15,19 @@
     "highlightY": 14.8,
     "highlightZoom": 1,
     "competitionId": "xanda-prestige",
-    "editionId": "2024"
+    "editionId": "2024",
+    "width": 1920,
+    "height": 2560,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788789081881-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788789081881-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788802119",
@@ -33,7 +45,19 @@
     "highlightY": 36.1,
     "highlightZoom": 1,
     "competitionId": "one-to-one",
-    "editionId": "2025"
+    "editionId": "2025",
+    "width": 1920,
+    "height": 2560,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788802119-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788802119-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788762504",
@@ -49,7 +73,19 @@
     "isPlaceholder": false,
     "highlightX": 55.3,
     "highlightY": 28.5,
-    "highlightZoom": 1
+    "highlightZoom": 1,
+    "width": 1441,
+    "height": 2560,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788762504-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788762504-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788730329",
@@ -67,7 +103,19 @@
     "highlightY": 0,
     "highlightZoom": 1,
     "competitionId": "one-to-one",
-    "editionId": "2025"
+    "editionId": "2025",
+    "width": 1530,
+    "height": 2040,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788730329-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788730329-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788709152",
@@ -85,7 +133,15 @@
     "highlightY": 10,
     "highlightZoom": 1,
     "competitionId": "one-to-one",
-    "editionId": "2025"
+    "editionId": "2025",
+    "width": 1002,
+    "height": 749,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788709152-640.webp",
+        "width": 640
+      }
+    ]
   },
   {
     "id": "foto-1788788691239",
@@ -103,7 +159,15 @@
     "highlightY": 42.6,
     "highlightZoom": 1,
     "competitionId": "one-to-one",
-    "editionId": "2025"
+    "editionId": "2025",
+    "width": 1024,
+    "height": 1536,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788691239-640.webp",
+        "width": 640
+      }
+    ]
   },
   {
     "id": "foto-1788788657531",
@@ -121,7 +185,19 @@
     "highlightY": 52.6,
     "highlightZoom": 1,
     "competitionId": "champion-cup",
-    "editionId": "2026"
+    "editionId": "2026",
+    "width": 2560,
+    "height": 2560,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788657531-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788657531-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788636400",
@@ -139,7 +215,15 @@
     "highlightY": 8.4,
     "highlightZoom": 1,
     "competitionId": "cka-world-championship-cup",
-    "editionId": "2026-22"
+    "editionId": "2026-22",
+    "width": 1084,
+    "height": 1450,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788636400-640.webp",
+        "width": 640
+      }
+    ]
   },
   {
     "id": "foto-1788788537452",
@@ -157,7 +241,19 @@
     "editionId": "2026-22",
     "highlightX": 50,
     "highlightY": 50,
-    "highlightZoom": 1
+    "highlightZoom": 1,
+    "width": 2560,
+    "height": 1707,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788537452-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788537452-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788788519052",
@@ -175,7 +271,15 @@
     "editionId": "2026-22",
     "highlightX": 50,
     "highlightY": 50,
-    "highlightZoom": 1
+    "highlightZoom": 1,
+    "width": 796,
+    "height": 597,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788519052-640.webp",
+        "width": 640
+      }
+    ]
   },
   {
     "id": "foto-1788788402348",
@@ -193,7 +297,19 @@
     "editionId": "2025",
     "highlightX": 60.9,
     "highlightY": 35.7,
-    "highlightZoom": 1
+    "highlightZoom": 1,
+    "width": 1920,
+    "height": 2560,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788788402348-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788788402348-1280.webp",
+        "width": 1280
+      }
+    ]
   },
   {
     "id": "foto-1788526818634",
@@ -211,7 +327,10 @@
     "highlightY": 20.9,
     "highlightZoom": 1,
     "competitionId": "cka-world-championship-cup",
-    "editionId": "2026-22"
+    "editionId": "2026-22",
+    "width": 582,
+    "height": 437,
+    "varianti": []
   },
   {
     "id": "sora-2026-01",
@@ -304,7 +423,15 @@
     "editionId": "2026-22",
     "highlightX": 50,
     "highlightY": 50,
-    "highlightZoom": 1
+    "highlightZoom": 1,
+    "width": 796,
+    "height": 597,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788558268754-640.webp",
+        "width": 640
+      }
+    ]
   },
   {
     "id": "foto-1788558227280",
@@ -322,6 +449,18 @@
     "highlightY": 8,
     "highlightZoom": 1,
     "competitionId": "cka-world-championship-cup",
-    "editionId": "2026-22"
+    "editionId": "2026-22",
+    "width": 2128,
+    "height": 1596,
+    "varianti": [
+      {
+        "url": "/images/media/responsive/foto-1788558227280-640.webp",
+        "width": 640
+      },
+      {
+        "url": "/images/media/responsive/foto-1788558227280-1280.webp",
+        "width": 1280
+      }
+    ]
   }
 ]

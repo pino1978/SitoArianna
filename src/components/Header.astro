@@ -45,13 +45,6 @@ const languages = [
   <div id="google_translate_element" hidden></div>
 </header>
 
-<script is:inline>
-  window.googleTranslateElementInit = () => {
-    if (!window.google?.translate?.TranslateElement) return;
-    new window.google.translate.TranslateElement({pageLanguage:'it',includedLanguages:'it,en,el',autoDisplay:false},'google_translate_element');
-  };
-</script>
-<script is:inline src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async></script>
 <script>
   const purgeLegacyLanguageSelector=()=>{
     document.querySelectorAll('.mobile-lang-quick,[data-mobile-lang-quick]').forEach(el=>el.remove());
@@ -66,6 +59,21 @@ const languages = [
   const trigger=header?.querySelector('[data-language-trigger]');
   const options=header?.querySelector('[data-language-options]');
 
+  let translateRequested=false;
+  const ensureTranslateLoaded=()=>{
+    if(translateRequested||window.google?.translate?.TranslateElement)return;
+    translateRequested=true;
+    window.googleTranslateElementInit=()=>{
+      if(!window.google?.translate?.TranslateElement)return;
+      new window.google.translate.TranslateElement({pageLanguage:'it',includedLanguages:'it,en,el',autoDisplay:false},'google_translate_element');
+    };
+    const script=document.createElement('script');
+    script.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async=true;
+    script.onerror=()=>{translateRequested=false;script.remove();};
+    document.head.append(script);
+  };
+
   const setToggleState=(open)=>{if(!(toggle instanceof HTMLButtonElement))return;toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Chiudi menu':'Apri menu');if(toggleLabel)toggleLabel.textContent=open?'Chiudi':'Menu';toggle.classList.toggle('is-open',open);};
   const close=()=>{if(!(toggle instanceof HTMLButtonElement)||!(menu instanceof HTMLElement))return;setToggleState(false);menu.hidden=true;document.body.classList.remove('nav-open');};
   toggle?.addEventListener('click',()=>{if(!(toggle instanceof HTMLButtonElement)||!(menu instanceof HTMLElement))return;const open=toggle.getAttribute('aria-expanded')!=='true';setToggleState(open);menu.hidden=!open;document.body.classList.toggle('nav-open',open);if(open)menu.querySelector('a')?.focus();});
@@ -76,7 +84,8 @@ const languages = [
   const meta={it:{code:'IT'},en:{code:'EN'},el:{code:'EL'}};
   const setTrigger=(lang)=>{const info=meta[lang]||meta.it;const flag=header?.querySelector('[data-language-flag]');const code=header?.querySelector('[data-language-code]');if(flag)flag.className=`flag flag-${lang}`;if(code)code.textContent=info.code;};
   setTrigger(current);
-  trigger?.addEventListener('click',event=>{event.stopPropagation();if(!(trigger instanceof HTMLButtonElement)||!(options instanceof HTMLElement))return;const open=options.hidden;options.hidden=!open;trigger.setAttribute('aria-expanded',String(open));});
+  if(current!=='it')ensureTranslateLoaded();
+  trigger?.addEventListener('click',event=>{event.stopPropagation();ensureTranslateLoaded();if(!(trigger instanceof HTMLButtonElement)||!(options instanceof HTMLElement))return;const open=options.hidden;options.hidden=!open;trigger.setAttribute('aria-expanded',String(open));});
   document.addEventListener('click',event=>{if(options instanceof HTMLElement&&trigger instanceof HTMLButtonElement&&picker instanceof HTMLElement&&!picker.contains(event.target)){options.hidden=true;trigger.setAttribute('aria-expanded','false');}});
   document.addEventListener('keydown',event=>{if(event.key==='Escape'){close();if(options instanceof HTMLElement)options.hidden=true;if(trigger instanceof HTMLButtonElement)trigger.setAttribute('aria-expanded','false');}});
   header?.querySelectorAll('[data-lang]').forEach(button=>{if(button instanceof HTMLButtonElement){button.setAttribute('aria-selected',String(button.dataset.lang===current));button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();const lang=['en','el'].includes(button.dataset.lang||'')?button.dataset.lang:'it';document.cookie=`googtrans=/it/${lang};path=/;max-age=31536000;SameSite=Lax`;document.cookie=`googtrans=/it/${lang};path=/;domain=.ariannamilano.it;max-age=31536000;SameSite=Lax`;location.reload();});}});

@@ -100,35 +100,57 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 
 ### US-101 — Hero Home leggera e responsive · P1
 
-- [ ] Inventariare i tre livelli e misurare la baseline.
-- [ ] Generare AVIF/WebP desktop e mobile.
-- [ ] Escludere dal DOM mobile il titolo raster non utilizzato.
-- [ ] Verificare fedeltà visiva e LCP.
+- [x] Inventariare i tre livelli e misurare la baseline.
+- [x] Generare AVIF/WebP desktop e mobile.
+- [x] Rimuovere il titolo raster dal markup immagine e impedirne il download mobile.
+- [!] Verificare fedeltà visiva e LCP — gate statico superato; runtime su deploy preview pendente.
 
 **Accettazione:** peso complessivo hero 500–800 KB, nessuna regressione visiva.
 
 ### US-102 — Immagini principali ottimizzate · P2
 
-- [ ] Ottimizzare hero Risultati.
-- [ ] Ottimizzare le due immagini `ProfileFeature` della Home.
-- [ ] Applicare dimensioni e formati responsive.
+- [x] Ottimizzare hero Risultati.
+- [x] Ottimizzare le due immagini `ProfileFeature` della Home.
+- [x] Applicare dimensioni e formati responsive.
 
 ### US-103 — Terze parti fuori dal critical path · P2
 
-- [ ] Caricare Google Translate al primo gesto dell'utente.
-- [ ] Verificare funzionamento del selettore e impatto privacy.
+- [x] Caricare Google Translate al primo gesto dell'utente.
+- [!] Verificare funzionamento del selettore e impatto privacy — controllo runtime pendente.
 
 ### US-104 — Immagini remote stabili · P2
 
-- [ ] Aggiungere `width`/`height` o aspect ratio.
-- [ ] Aggiungere `srcset`/`sizes` e thumbnail adeguate.
-- [ ] Verificare CLS e traffico mobile.
+- [x] Aggiungere `width`/`height` reali alle 14 foto pubbliche.
+- [x] Aggiungere `srcset`/`sizes` e 21 varianti responsive, senza upscaling.
+- [!] Verificare CLS e traffico mobile — controllo runtime pendente.
 
 ### TASK-105 — Pulizia asset Road to Greece · P2
 
-- [ ] Generare inventario referenze.
-- [ ] Eliminare solo gli asset dimostrati obsoleti.
-- [ ] Verificare build e route interessate.
+- [x] Generare inventario referenze.
+- [x] Eliminare solo gli asset dimostrati obsoleti — circa 22 MB rimossi.
+- [x] Verificare build e route interessate.
+
+### Gate Sprint 1
+
+- [x] Performance e asset review indipendente.
+- [x] Visual review statica responsive indipendente.
+- [x] QA, test, build e diff review indipendenti.
+- [ ] Push su `dev`.
+- [ ] Runtime gate su deploy preview.
+
+### Evidenze Sprint 1
+
+| Controllo | Baseline | Risultato |
+|---|---:|---:|
+| Hero Home desktop | 10,86 MB | circa 214 KB AVIF |
+| Hero Home mobile | fino a 10,86 MB potenziali | circa 8 KB AVIF |
+| Hero Risultati | 2,19 MB | circa 115 KB AVIF desktop |
+| ProfileFeature | 4,80 MB | circa 99 KB AVIF desktop |
+| Foto remote | 0/14 con dimensioni | 14/14 con dimensioni reali |
+| Varianti foto | assenti | 21 WebP responsive validati |
+| Road to Greece | circa 24 MB | circa 22 MB obsoleti rimossi |
+| Test | 8 | 10/10 superati |
+| Build | 26 pagine | 26 pagine generate |
 
 ## Epic E2 — UX mobile e accessibilità · Sprint 2
 

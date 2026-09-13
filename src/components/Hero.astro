@@ -1,13 +1,20 @@
 ---
 import Header from "./Header.astro";
 import profile from "../data/profile.json";
-import heroImage from "../assets/images/hero-ary14.png";
-import heroTitleImage from "../assets/images/hero-title-liberta.png";
-import heroEagleLayerImage from "../assets/images/hero-eagle-layer-aq2.png";
+import heroImageSmall from "../assets/images/optimized/home-hero-640.webp";
+import heroImageMedium from "../assets/images/optimized/home-hero-1280.webp";
+import heroImageLarge from "../assets/images/optimized/home-hero-1774.webp";
+import heroImageSmallAvif from "../assets/images/optimized/home-hero-640.avif";
+import heroImageMediumAvif from "../assets/images/optimized/home-hero-1280.avif";
+import heroImageLargeAvif from "../assets/images/optimized/home-hero-1774.avif";
+import heroTitleImage from "../assets/images/optimized/home-title-1200.webp";
+import heroTitleImageAvif from "../assets/images/optimized/home-title-1200.avif";
+import heroEagleLayerImage from "../assets/images/optimized/home-eagle-900.webp";
+import heroEagleLayerImageAvif from "../assets/images/optimized/home-eagle-900.avif";
 
 const copy = profile.content.home.hero;
 ---
-<section class="hero hero--home" id="top" aria-labelledby="hero-title" data-home-hero-layout="compact-v3" style={`--hero-bg: url("${heroImage.src}")`}>
+<section class="hero hero--home" id="top" aria-labelledby="hero-title" data-home-hero-layout="compact-v3" style={`--hero-bg-small:image-set(url("${heroImageSmallAvif.src}") type("image/avif"),url("${heroImageSmall.src}") type("image/webp"));--hero-bg-medium:image-set(url("${heroImageMediumAvif.src}") type("image/avif"),url("${heroImageMedium.src}") type("image/webp"));--hero-bg-large:image-set(url("${heroImageLargeAvif.src}") type("image/avif"),url("${heroImageLarge.src}") type("image/webp"));--hero-title:image-set(url("${heroTitleImageAvif.src}") type("image/avif"),url("${heroTitleImage.src}") type("image/webp"));--hero-eagle:image-set(url("${heroEagleLayerImageAvif.src}") type("image/avif"),url("${heroEagleLayerImage.src}") type("image/webp"))`}>
   <div class="hero-overlay hero-overlay-left" aria-hidden="true"></div>
   <div class="hero-overlay hero-overlay-right" aria-hidden="true"></div>
   <div class="hero-overlay hero-overlay-bottom" aria-hidden="true"></div>
@@ -21,12 +28,12 @@ const copy = profile.content.home.hero;
 
   <div class="hero-copy">
     <h1 id="hero-title" class="hero-identity">Arianna Milano · Atleta di Sanda e Kung Fu</h1>
-    <img class="hero-title-image" src={heroTitleImage.src} alt="" aria-hidden="true" width={heroTitleImage.width} height={heroTitleImage.height} />
+    <span class="hero-title-image" aria-hidden="true"></span>
     <p class="hero-subcopy">{copy.subcopy}<br /><strong>{copy.subcopyStrong}</strong></p>
     <p class="hero-affiliation">ASD Kasoria Kombat &amp; Fly · CSEN</p>
   </div>
 
-  <img class="hero-eagle-layer" src={heroEagleLayerImage.src} alt="" aria-hidden="true" width={heroEagleLayerImage.width} height={heroEagleLayerImage.height} />
+  <span class="hero-eagle-layer" aria-hidden="true"></span>
 </section>
 
 <section class="hero-values" aria-label="I valori di Arianna">
@@ -38,6 +45,9 @@ const copy = profile.content.home.hero;
 <style>
   .hero-upper-signature,
   .hero-values { display: none; }
+  .hero.hero--home { background-image: var(--hero-bg-small); }
+  .hero-title-image { display: block; aspect-ratio: 1; background: center / contain no-repeat var(--hero-title); }
+  .hero-eagle-layer { display: block; aspect-ratio: 5 / 4; background: center / contain no-repeat var(--hero-eagle); }
   .hero-identity {
     margin: 0 0 14px;
     color: rgba(245, 240, 231, .82);
@@ -54,8 +64,12 @@ const copy = profile.content.home.hero;
   }
 
   @media (min-width: 1001px) {
-    .hero { min-height: clamp(610px, 78vh, 760px); padding-bottom: 56px; }
+    .hero { min-height: clamp(610px, 78vh, 760px); padding-bottom: 56px; background-image: var(--hero-bg-large); }
     .hero-subcopy { margin-top: 84px; }
+  }
+
+  @media (min-width: 641px) and (max-width: 1000px) {
+    .hero.hero--home { background-image: var(--hero-bg-medium); }
   }
 
   @media (max-width: 640px) {

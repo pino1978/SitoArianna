@@ -14,13 +14,13 @@
 # Backward-compatible target for previously cached social image URLs.
 [[redirects]]
   from = "/images/hero-home.jpg"
-  to = "/images/arianna_og.png"
+  to = "/images/arianna_og_1200x630.jpg"
   status = 301
   force = true
 
 [[redirects]]
   from = "/images/og-arianna-milano.jpg"
-  to = "/images/arianna_og.png"
+  to = "/images/arianna_og_1200x630.jpg"
   status = 301
   force = true
 

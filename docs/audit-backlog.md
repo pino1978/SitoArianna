@@ -75,7 +75,7 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 ### TASK-004 — Redirect SEO `/palmares/` · P1
 
 - [x] Aggiungere redirect Netlify forzato 301 verso `/risultati/`.
-- [ ] Verificare status e `Location` su deploy preview.
+- [x] Verificare status e `Location` su deploy preview — 301, `Location: /risultati/`.
 
 ### TASK-005 — Road to Greece nella sitemap · P1
 
@@ -86,7 +86,7 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 
 - [x] Configurare `Cache-Control: public, max-age=31536000, immutable` per `/_astro/*`.
 - [x] Verificare staticamente che HTML e Admin non ereditino la cache immutable.
-- [ ] Verificare gli header sulla deploy preview.
+- [x] Verificare gli header sulla deploy preview — `public,max-age=31536000,immutable`.
 
 ### Gate Sprint 0
 
@@ -94,7 +94,7 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 - [x] Review funzionale, SEO e configurazione indipendente.
 - [x] Build, test e diff review indipendenti.
 - [x] Configurazioni esterne annotate come completate o impedimenti espliciti.
-- [ ] Push su `dev`.
+- [x] Push su `dev` — commit remoto `2ef5df2`.
 
 ## Epic E1 — Prestazioni percepite · Sprint 1
 
@@ -209,3 +209,8 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 | TypeScript | Controllo statico indipendente | Superato |
 | Security code review | Auth e serializzazione | Superata |
 | Security live | Netlify Identity | Superata: `disable_signup:true` |
+| Deploy preview | Redirect `/palmares/` | 301 verso `/risultati/` |
+| Deploy preview | Cache `/_astro/*` | Annuale e immutable |
+| Deploy preview | Sitemap | Road to Greece presente con `lastmod` |
+| Deploy preview | Media mobile | Toggle filtri abilitato nel markup distribuito |
+| Deploy preview | Admin anonimo | 401 verificato |

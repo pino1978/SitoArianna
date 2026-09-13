@@ -103,7 +103,7 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 - [x] Inventariare i tre livelli e misurare la baseline.
 - [x] Generare AVIF/WebP desktop e mobile.
 - [x] Rimuovere il titolo raster dal markup immagine e impedirne il download mobile.
-- [!] Verificare fedeltà visiva e LCP — gate statico superato; runtime su deploy preview pendente.
+- [x] Verificare fedeltà visiva e LCP — deploy preview senza overflow; hero responsive visibile e asset AVIF/WebP attivi.
 
 **Accettazione:** peso complessivo hero 500–800 KB, nessuna regressione visiva.
 
@@ -116,13 +116,13 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 ### US-103 — Terze parti fuori dal critical path · P2
 
 - [x] Caricare Google Translate al primo gesto dell'utente.
-- [!] Verificare funzionamento del selettore e impatto privacy — controllo runtime pendente.
+- [x] Verificare funzionamento del selettore e impatto privacy — nessuna richiesta Google prima del gesto; script caricato all'apertura del selettore.
 
 ### US-104 — Immagini remote stabili · P2
 
 - [x] Aggiungere `width`/`height` reali alle 14 foto pubbliche.
 - [x] Aggiungere `srcset`/`sizes` e 21 varianti responsive, senza upscaling.
-- [!] Verificare CLS e traffico mobile — controllo runtime pendente.
+- [x] Verificare CLS e traffico mobile — dimensioni intrinseche presenti e variante locale da 640 px selezionata nel deploy preview.
 
 ### TASK-105 — Pulizia asset Road to Greece · P2
 
@@ -135,8 +135,8 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 - [x] Performance e asset review indipendente.
 - [x] Visual review statica responsive indipendente.
 - [x] QA, test, build e diff review indipendenti.
-- [ ] Push su `dev`.
-- [ ] Runtime gate su deploy preview.
+- [x] Push su `dev` — commit remoto `af544f9`.
+- [x] Runtime gate su deploy preview — PASS dell'orchestratore.
 
 ### Evidenze Sprint 1
 
@@ -151,6 +151,8 @@ Come proprietario voglio che un account Identity valido non sia sufficiente ad a
 | Road to Greece | circa 24 MB | circa 22 MB obsoleti rimossi |
 | Test | 8 | 10/10 superati |
 | Build | 26 pagine | 26 pagine generate |
+| Layout deploy preview | non verificato | Home, Risultati, Media e Road to Greece senza overflow |
+| Google Translate | script nel critical path | nessuna richiesta prima del gesto; caricamento dopo apertura |
 
 ## Epic E2 — UX mobile e accessibilità · Sprint 2
 

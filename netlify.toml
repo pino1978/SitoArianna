@@ -11,12 +11,16 @@
   status = 301
   force = true
 
-# Backward-compatible target for the social image currently referenced
-# by Open Graph/Twitter metadata. The metadata still points to the legacy
-# URL, which now resolves to the approved 1200x630 Arianna OG artwork.
+# Backward-compatible target for previously cached social image URLs.
 [[redirects]]
   from = "/images/hero-home.jpg"
-  to = "/images/og-arianna-milano.jpg"
+  to = "/images/arianna_og.png"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/images/og-arianna-milano.jpg"
+  to = "/images/arianna_og.png"
   status = 301
   force = true
 

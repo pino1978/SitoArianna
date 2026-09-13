@@ -139,7 +139,7 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
             <button type="button" data-interactive data-type-filter="foto" aria-pressed="false">Foto</button>
             <button type="button" data-interactive data-type-filter="video" aria-pressed="false">Video</button>
           </div>
-          <button class="filter-toggle" type="button" data-filter-toggle aria-expanded="false" aria-controls="media-filter-options">Filtri <span aria-hidden="true">＋</span></button>
+          <button class="filter-toggle" type="button" data-filter-toggle data-interactive aria-expanded="false" aria-controls="media-filter-options">Filtri <span aria-hidden="true">＋</span></button>
           <div class="filter-selects" id="media-filter-options" data-filter-options>
             <label><span class="filter-label">Anno</span><select data-year-filter data-interactive><option value="tutti">Tutti</option>{years.map((year) => <option value={year}>{year}</option>)}</select></label>
             <label><span class="filter-label">Tipologia</span><select data-category-filter data-interactive><option value="tutti">Tutte</option>{categories.map(([value, label]) => <option value={value}>{label}</option>)}</select></label>

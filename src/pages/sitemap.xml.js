@@ -90,6 +90,10 @@ const entries = [
     })),
     videos: visibleVideos
   },
+  {
+    loc: `${SITE}/road-to-greece/`,
+    lastmod: "2026-09-13"
+  },
   ...visiblePhotos.map((item) => ({
     loc: `${SITE}/media/foto/${item.id}/`,
     images: [{
@@ -116,7 +120,7 @@ export async function GET() {
   const body = entries.map((entry) => `
   <url>
     <loc>${xml(entry.loc)}</loc>
-    <lastmod>${lastmod}</lastmod>${(entry.images || []).map(imageNode).join("")}${(entry.videos || []).map(videoNode).join("")}
+    <lastmod>${entry.lastmod || lastmod}</lastmod>${(entry.images || []).map(imageNode).join("")}${(entry.videos || []).map(videoNode).join("")}
   </url>`).join("");
 
   return new Response(`<?xml version="1.0" encoding="UTF-8"?>

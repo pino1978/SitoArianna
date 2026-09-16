@@ -1,7 +1,13 @@
 ---
 import profile from "../data/profile.json";
-import profileImage from "../assets/images/Ying_profile.png";
-import yingImage from "../assets/images/ying-placeholder.png";
+import profileImageSmall from "../assets/images/optimized/profile-feature-arianna-640.webp";
+import profileImageLarge from "../assets/images/optimized/profile-feature-arianna-1024.webp";
+import profileImageSmallAvif from "../assets/images/optimized/profile-feature-arianna-640.avif";
+import profileImageLargeAvif from "../assets/images/optimized/profile-feature-arianna-1024.avif";
+import yingImageSmall from "../assets/images/optimized/profile-feature-ying-640.webp";
+import yingImageLarge from "../assets/images/optimized/profile-feature-ying-1200.webp";
+import yingImageSmallAvif from "../assets/images/optimized/profile-feature-ying-640.avif";
+import yingImageLargeAvif from "../assets/images/optimized/profile-feature-ying-1200.avif";
 const copy = profile.content.home;
 ---
 <section class="profile-feature" id="profilo" aria-label="Profilo di Arianna e identità Ying">
@@ -16,7 +22,7 @@ const copy = profile.content.home;
         <a class="text-arrow" href="/profilo/" data-interactive>{copy.profile.cta} <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature-visual feature-visual-arianna">
-        <img src={profileImage.src} alt="Ritratto sportivo di Arianna Milano" loading="lazy" width={profileImage.width} height={profileImage.height} />
+        <picture><source type="image/avif" srcset={`${profileImageSmallAvif.src} 640w, ${profileImageLargeAvif.src} 1024w`} sizes="(max-width: 767px) 100vw, (max-width: 1179px) 55vw, 29vw" /><img src={profileImageSmall.src} srcset={`${profileImageSmall.src} 640w, ${profileImageLarge.src} 1024w`} sizes="(max-width: 767px) 100vw, (max-width: 1179px) 55vw, 29vw" alt="Ritratto sportivo di Arianna Milano" loading="lazy" decoding="async" width={profileImageSmall.width} height={profileImageSmall.height} /></picture>
       </div>
     </article>
 
@@ -30,7 +36,7 @@ const copy = profile.content.home;
         <a class="text-arrow" href="/ying/" data-interactive>{copy.ying.cta} <span aria-hidden="true">→</span></a>
       </div>
       <div class="feature-visual feature-visual-ying">
-        <img src={yingImage.src} alt="Aquila in volo, simbolo identitario di Yīng" loading="lazy" width={yingImage.width} height={yingImage.height} />
+        <picture><source type="image/avif" srcset={`${yingImageSmallAvif.src} 640w, ${yingImageLargeAvif.src} 1200w`} sizes="(max-width: 767px) 100vw, (max-width: 1179px) 55vw, 29vw" /><img src={yingImageSmall.src} srcset={`${yingImageSmall.src} 640w, ${yingImageLarge.src} 1200w`} sizes="(max-width: 767px) 100vw, (max-width: 1179px) 55vw, 29vw" alt="Aquila in volo, simbolo identitario di Yīng" loading="lazy" decoding="async" width={yingImageSmall.width} height={yingImageSmall.height} /></picture>
       </div>
     </article>
   </div>
@@ -63,4 +69,5 @@ const copy = profile.content.home;
   .profile-quote p{margin:0;font-family:var(--font-display);font-size:clamp(.95rem,1.35vw,1.3rem);font-weight:700;letter-spacing:.16em;line-height:1.2;text-transform:uppercase}.profile-quote span{color:var(--lacquer);font-family:Georgia,serif;font-size:2.1rem;font-weight:900;line-height:1}
   @media(max-width:1179px){.feature-grid{grid-template-columns:1fr;gap:12px}.feature-grid,.profile-quote{margin-inline:clamp(24px,4vw,48px)}.feature-ying{border-left:1px solid rgba(112,76,34,.34)}}
   @media(max-width:767px){.profile-feature{padding-top:10px}.feature-grid,.profile-quote{margin-inline:0}.feature-grid{gap:10px}.feature-panel{grid-template-columns:1fr;min-height:auto;border-inline:0}.feature-copy{padding:34px 22px 28px}.feature-visual{min-height:300px}.feature-visual-arianna::after,.feature-visual-ying::after{background:linear-gradient(180deg,#ece7df 0%,transparent 24%)}.feature-ying .feature-copy{order:1}.feature-ying .feature-visual{order:2}.profile-quote{gap:9px;min-height:0;margin-top:10px;padding:16px 14px}.profile-quote p{max-width:320px;font-size:.86rem;letter-spacing:.11em}}
+  .feature-visual picture{display:block;width:100%;height:100%}
 </style>

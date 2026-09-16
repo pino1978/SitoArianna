@@ -24,6 +24,17 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/palmares/"
+  to = "/risultati/"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 # Results is actively being refined: avoid serving a stale HTML document
 # from browser/CDN caches while the layout is under adjustment.
 [[headers]]

@@ -39,8 +39,8 @@ const pressOutlets = [
     <section class="press-mentions" aria-labelledby="press-mentions-title">
       <div class="press-mentions__inner">
         <div class="press-mentions__heading">
-          <p>Rassegna stampa</p>
-          <h2 id="press-mentions-title">Parlano di Arianna</h2>
+          <p>Parlano di Arianna</p>
+          <h2 id="press-mentions-title">La stampa racconta il suo percorso</h2>
         </div>
         <div class="press-mentions__outlets" aria-label="Testate che hanno parlato di Arianna">
           {pressOutlets.map(outlet => (
@@ -50,7 +50,7 @@ const pressOutlets = [
             </div>
           ))}
         </div>
-        <a class="press-mentions__link" href="/rassegna-stampa/" data-interactive>Scopri la rassegna stampa <span aria-hidden="true">→</span></a>
+        <a class="press-mentions__link" href="/rassegna-stampa/" data-interactive>Rassegna stampa <span aria-hidden="true">→</span></a>
       </div>
     </section>
     <section class="home-stats" aria-label="Statistiche sportive">
@@ -65,37 +65,35 @@ const pressOutlets = [
   .home-page{display:block;margin:0;padding:0;background:#080706}
   .home-page>section{margin-block:0!important}
   .home-page .hero,.home-page .hero-values,.home-page .road-to-greece,.home-page .press-mentions,.home-page .home-stats,.home-page .highlights-strip,.home-page .profile-feature{margin-top:0!important;margin-bottom:0!important}
-  .home-page .home-stats{display:flex;justify-content:center;padding:26px 48px 22px;background:#080706}
-  .home-page .home-stats .stats-block{width:min(1120px,100%)}
+  .home-page .home-stats{display:flex;justify-content:center;padding:22px 48px;background:#080706}
+  .home-page .home-stats .stats-block{width:min(1180px,100%)}
 
-  .press-mentions{background:#f3ecdf;color:#171512;border-top:1px solid rgba(201,151,54,.28);border-bottom:1px solid rgba(20,18,15,.1)}
-  .press-mentions__inner{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:42px;width:min(1180px,calc(100% - 72px));margin:0 auto;padding:32px 0}
-  .press-mentions__heading p{margin:0 0 7px;color:#8a641f;font:800 .56rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}
-  .press-mentions__heading h2{margin:0;font:500 clamp(1.7rem,2.4vw,2.35rem)/1 Georgia,serif;letter-spacing:-.035em;white-space:nowrap}
-  .press-mentions__outlets{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));align-items:stretch;border-left:1px solid rgba(20,18,15,.11)}
-  .press-mentions__outlet{display:flex;min-height:64px;align-items:center;justify-content:center;gap:10px;padding:8px 16px;border-right:1px solid rgba(20,18,15,.11);text-align:center}
-  .press-mentions__outlet img{width:34px;height:34px;flex:0 0 auto;object-fit:contain;border-radius:8px}
-  .press-mentions__outlet strong{font:800 .7rem/1.2 var(--font-ui);letter-spacing:.015em}
-  .press-mentions__link{display:inline-flex;align-items:center;gap:10px;color:#80520e;font:900 .6rem/1 var(--font-ui);letter-spacing:.1em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
+  .press-mentions{position:relative;background:#f3ecdf;color:#171512;border-top:2px solid rgba(201,151,54,.72);border-bottom:1px solid rgba(20,18,15,.08)}
+  .press-mentions__inner{display:grid;grid-template-columns:minmax(250px,.95fr) minmax(0,1.65fr) auto;align-items:center;gap:34px;width:min(1180px,calc(100% - 72px));margin:0 auto;padding:20px 0 21px}
+  .press-mentions__heading p{margin:0 0 6px;color:#8a641f;font:800 .54rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}
+  .press-mentions__heading h2{max-width:330px;margin:0;font:500 clamp(1.35rem,1.8vw,1.8rem)/1.05 Georgia,serif;letter-spacing:-.03em}
+  .press-mentions__outlets{display:flex;align-items:center;justify-content:center;gap:24px;min-width:0}
+  .press-mentions__outlet{display:flex;min-width:0;align-items:center;gap:8px;padding:4px 0;text-align:left}
+  .press-mentions__outlet img{width:29px;height:29px;flex:0 0 auto;object-fit:contain;border-radius:7px}
+  .press-mentions__outlet strong{font:800 .62rem/1.15 var(--font-ui);letter-spacing:.01em}
+  .press-mentions__link{display:inline-flex;align-items:center;gap:10px;padding-left:24px;border-left:1px solid rgba(20,18,15,.12);color:#80520e;font:900 .59rem/1 var(--font-ui);letter-spacing:.11em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
   .press-mentions__link:hover{color:#b47a1b}
   .press-mentions__link:focus-visible{outline:3px solid #c99736;outline-offset:5px}
 
   @media (max-width:1000px){
-    .press-mentions__inner{grid-template-columns:1fr;gap:22px;width:calc(100% - 48px);padding:30px 0}
-    .press-mentions__heading{text-align:center}.press-mentions__heading h2{white-space:normal}
-    .press-mentions__outlets{width:100%;border-top:1px solid rgba(20,18,15,.11)}
-    .press-mentions__link{justify-self:center}
+    .press-mentions__inner{grid-template-columns:1fr auto;gap:18px 28px;width:calc(100% - 48px);padding:22px 0}
+    .press-mentions__heading{grid-column:1/-1}.press-mentions__heading h2{max-width:none}
+    .press-mentions__outlets{justify-content:flex-start;flex-wrap:wrap;gap:14px 22px}
+    .press-mentions__link{align-self:stretch}
   }
 
   @media (max-width:640px){
     .home-page .home-stats{padding:0 18px;background:#080706}
     .home-page .home-stats .stats-block{width:100%}
-    .press-mentions__inner{width:calc(100% - 32px);gap:18px;padding:26px 0 28px}
-    .press-mentions__heading p{margin-bottom:6px}.press-mentions__heading h2{font-size:2rem}
-    .press-mentions__outlets{grid-template-columns:repeat(2,minmax(0,1fr));border-left:1px solid rgba(20,18,15,.11)}
-    .press-mentions__outlet{min-height:72px;padding:10px 8px;border-bottom:1px solid rgba(20,18,15,.11)}
-    .press-mentions__outlet:nth-child(3),.press-mentions__outlet:nth-child(4){border-bottom:0}
-    .press-mentions__outlet img{width:30px;height:30px}.press-mentions__outlet strong{font-size:.63rem}
-    .press-mentions__link{font-size:.58rem}
+    .press-mentions__inner{grid-template-columns:1fr;width:calc(100% - 32px);gap:16px;padding:22px 0 23px}
+    .press-mentions__heading{grid-column:auto}.press-mentions__heading p{margin-bottom:6px}.press-mentions__heading h2{font-size:1.65rem;line-height:1.03}
+    .press-mentions__outlets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;width:100%}
+    .press-mentions__outlet{padding:0}.press-mentions__outlet img{width:27px;height:27px}.press-mentions__outlet strong{font-size:.6rem}
+    .press-mentions__link{justify-self:start;padding:12px 0 0;border-left:0;border-top:1px solid rgba(20,18,15,.12);font-size:.58rem}
   }
 </style>

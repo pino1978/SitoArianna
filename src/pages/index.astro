@@ -7,112 +7,38 @@ import HighlightsStrip from "../components/HighlightsStrip.astro";
 import ProfileFeature from "../components/ProfileFeature.astro";
 import results from "../data/results.json";
 
-const pressOutlets = [
-  { name: "NanoTV", domain: "nanotv.it" },
-  { name: "Redazione Prospettive", domain: "redazioneprospettive.it" },
-  { name: "Frattamaggiore News", domain: "frattamaggiorenews.com" },
-  { name: "CasaNapoli.net", domain: "casanapoli.net" }
+const pressArticles = [
+  { outlet:"NanoTV", date:"16 set 2026", title:"Arianna ha 12 anni ed è di Casoria. Pratica Sanda, disciplina di combattimento del Wushu Kung Fu", url:"https://www.nanotv.it/2026/09/16/arianna-ha-12-anni-ed-e-di-casoria-pratica-sanda-disciplina-di-combattimento-del-wushu-kung-fu-dal-2021-presso-lasd-kasoria-kombat-fly-dove-e-seguita-dal-maestro-eduardo-mazzara/" },
+  { outlet:"Redazione Prospettive", date:"14 set 2026", title:"Da Casoria alla Grecia: Arianna Milano vola al 18° Palamidio Martial Arts Championship", url:"https://www.redazioneprospettive.it/da-casoria-alla-grecia-arianna-milano-vola-al-18-palamidio-martial-arts-championship-aperta-una-raccolta-fondi-per-sostenere-la-giovane-campionessa-di-sanda/" },
+  { outlet:"CasaNapoli.net", date:"14 set 2026", title:"Arianna Milano, 12 anni di Casoria e 14 ori nel Sanda: sogna la Nazionale, aiutiamola ad arrivare in Grecia", url:"https://www.casanapoli.net/2026/09/14/arianna-milano-12-anni-di-casoria-e-14-ori-nel-sanda-sogna-la-nazionale-aiutiamola-ad-arrivare-in-grecia/" }
 ];
 ---
-<BaseLayout
-  title="Arianna Milano | Atleta Sanda e Kung Fu"
-  description="Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda e Kung Fu. Scopri profilo sportivo, risultati, competizioni, foto e video."
->
-  <script is:inline>
-    (() => {
-      const hash = window.location.hash || "";
-      const isIdentityCallback =
-        hash.startsWith("#recovery_token=") ||
-        hash.startsWith("#invite_token=") ||
-        hash.startsWith("#confirmation_token=") ||
-        hash.startsWith("#access_token=") ||
-        hash.startsWith("#error=");
-
-      if (isIdentityCallback) {
-        window.location.replace(`/admin/${hash}`);
-      }
-    })();
-  </script>
-  <main id="main" class="home-page">
-    <Hero />
-    <RoadToGreeceBanner />
-    <section class="press-mentions" aria-labelledby="press-mentions-title">
-      <div class="press-mentions__inner">
-        <div class="press-mentions__heading">
-          <p>Rassegna stampa</p>
-          <h2 id="press-mentions-title">Parlano di Arianna</h2>
-        </div>
-        <div class="press-mentions__outlets" aria-label="Testate che hanno parlato di Arianna">
-          {pressOutlets.map(outlet => (
-            <div class="press-mentions__outlet">
-              <img src={`https://www.google.com/s2/favicons?domain=${outlet.domain}&sz=128`} alt="" width="42" height="42" loading="lazy" decoding="async" />
-              <strong>{outlet.name}</strong>
-            </div>
-          ))}
-        </div>
-        <a class="press-mentions__link" href="/rassegna-stampa/" data-interactive>
-          <span>Scopri la rassegna stampa</span><b aria-hidden="true">→</b>
-        </a>
-      </div>
-    </section>
-    <section class="home-stats" aria-label="Statistiche sportive">
-      <StatsStrip stats={results.heroStats} />
-    </section>
-    <HighlightsStrip />
-    <ProfileFeature />
-  </main>
+<BaseLayout title="Arianna Milano | Atleta Sanda e Kung Fu" description="Sito ufficiale di Arianna Milano, giovane atleta agonista di Sanda e Kung Fu. Scopri profilo sportivo, risultati, competizioni, foto e video.">
+<script is:inline>(()=>{const hash=window.location.hash||"";const isIdentityCallback=hash.startsWith("#recovery_token=")||hash.startsWith("#invite_token=")||hash.startsWith("#confirmation_token=")||hash.startsWith("#access_token=")||hash.startsWith("#error=");if(isIdentityCallback)window.location.replace(`/admin/${hash}`)})();</script>
+<main id="main" class="home-page">
+<Hero/><RoadToGreeceBanner/>
+<section class="press-mentions" aria-labelledby="press-mentions-title">
+  <div class="press-mentions__inner">
+    <header class="press-mentions__heading"><p>Rassegna stampa</p><h2 id="press-mentions-title">Parlano di Arianna</h2></header>
+    <div class="press-mentions__stories">
+      {pressArticles.map(article=><a class="press-story" href={article.url} target="_blank" rel="noopener noreferrer" data-interactive><span class="press-story__meta"><strong>{article.outlet}</strong><time>{article.date}</time></span><span class="press-story__title">{article.title}</span><span class="press-story__arrow" aria-hidden="true">↗</span></a>)}
+    </div>
+    <a class="press-mentions__link" href="/rassegna-stampa/" data-interactive><span>Tutta la rassegna</span><b aria-hidden="true">→</b></a>
+  </div>
+</section>
+<section class="home-stats" aria-label="Statistiche sportive"><StatsStrip stats={results.heroStats}/></section>
+<HighlightsStrip/><ProfileFeature/>
+</main>
 </BaseLayout>
-
 <style is:global>
-  .home-page{display:block;margin:0;padding:0;background:#080706}
-  .home-page>section{margin-block:0!important}
-  .home-page .hero,.home-page .hero-values,.home-page .road-to-greece,.home-page .press-mentions,.home-page .home-stats,.home-page .highlights-strip,.home-page .profile-feature{margin-top:0!important;margin-bottom:0!important}
-  .home-page .home-stats{display:flex;justify-content:center;padding:22px 48px;background:#080706}
-  .home-page .home-stats .stats-block{width:min(1180px,100%)}
-
-  /* Press is deliberately a distinct editorial interlude between the event campaign and sport stats. */
-  .press-mentions{position:relative;background:#f4eee3;color:#151310;border-top:1px solid #c99736;border-bottom:1px solid rgba(201,151,54,.55)}
-  .press-mentions__inner{display:grid;grid-template-columns:minmax(205px,.72fr) minmax(0,1.7fr) auto;align-items:center;gap:38px;width:min(1290px,calc(100% - 96px));margin:0 auto;padding:15px 0 16px}
-  .press-mentions__heading{display:flex;align-items:baseline;gap:16px;white-space:nowrap}
-  .press-mentions__heading p{margin:0;color:#8a641f;font:900 .52rem/1 var(--font-ui);letter-spacing:.2em;text-transform:uppercase}
-  .press-mentions__heading h2{margin:0;font:500 clamp(1.25rem,1.55vw,1.62rem)/1 Georgia,serif;letter-spacing:-.035em}
-  .press-mentions__outlets{display:flex;align-items:center;justify-content:center;gap:clamp(16px,2vw,30px);min-width:0}
-  .press-mentions__outlet{display:flex;min-width:0;align-items:center;gap:7px;white-space:nowrap}
-  .press-mentions__outlet img{width:25px;height:25px;flex:0 0 auto;object-fit:contain;border-radius:6px}
-  .press-mentions__outlet strong{font:800 .57rem/1.1 var(--font-ui);letter-spacing:.005em}
-  .press-mentions__link{display:inline-flex;align-items:center;gap:13px;color:#80520e;font:900 .56rem/1 var(--font-ui);letter-spacing:.115em;text-decoration:none;text-transform:uppercase;white-space:nowrap}
-  .press-mentions__link b{font-size:.95rem;font-weight:500;transition:transform .2s ease}
-  .press-mentions__link:hover{color:#b47a1b}.press-mentions__link:hover b{transform:translateX(3px)}
-  .press-mentions__link:focus-visible{outline:3px solid #c99736;outline-offset:5px}
-
-  @media (max-width:1100px){
-    .press-mentions__inner{grid-template-columns:auto 1fr auto;gap:24px;width:calc(100% - 48px)}
-    .press-mentions__heading{display:block}.press-mentions__heading p{margin-bottom:5px}
-    .press-mentions__outlets{justify-content:flex-start;flex-wrap:wrap;gap:10px 18px}
-    .press-mentions__link span{max-width:110px;white-space:normal;line-height:1.3}
-  }
-
-  @media (max-width:760px){
-    .press-mentions__inner{grid-template-columns:1fr auto;gap:14px 18px;width:calc(100% - 32px);padding:18px 0 19px}
-    .press-mentions__heading{grid-column:1/-1;display:flex;align-items:baseline;gap:12px}
-    .press-mentions__heading p{margin:0}.press-mentions__heading h2{font-size:1.4rem}
-    .press-mentions__outlets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
-    .press-mentions__outlet{white-space:normal}.press-mentions__outlet img{width:24px;height:24px}.press-mentions__outlet strong{font-size:.55rem}
-    .press-mentions__link{align-self:stretch;padding-left:16px;border-left:1px solid rgba(128,82,14,.2)}
-    .press-mentions__link span{max-width:90px}
-  }
-
-  @media (max-width:640px){
-    .home-page .home-stats{padding:0 18px;background:#080706}
-    .home-page .home-stats .stats-block{width:100%}
-  }
-
-  @media (max-width:480px){
-    .press-mentions__inner{grid-template-columns:1fr;gap:15px}
-    .press-mentions__heading{display:block}.press-mentions__heading p{margin-bottom:6px}.press-mentions__heading h2{font-size:1.55rem}
-    .press-mentions__link{justify-self:start;padding:10px 0 0;border-left:0;border-top:1px solid rgba(128,82,14,.18)}
-    .press-mentions__link span{max-width:none;white-space:nowrap}
-  }
-
-  @media (prefers-reduced-motion:reduce){.press-mentions__link b{transition:none}}
+.home-page{display:block;margin:0;padding:0;background:#080706}.home-page>section{margin-block:0!important}.home-page .hero,.home-page .hero-values,.home-page .road-to-greece,.home-page .press-mentions,.home-page .home-stats,.home-page .highlights-strip,.home-page .profile-feature{margin-top:0!important;margin-bottom:0!important}.home-page .home-stats{display:flex;justify-content:center;padding:22px 48px;background:#080706}.home-page .home-stats .stats-block{width:min(1180px,100%)}
+.press-mentions{background:#f4eee3;color:#151310;border-top:1px solid #c99736;border-bottom:1px solid rgba(201,151,54,.55)}
+.press-mentions__inner{display:grid;grid-template-columns:minmax(230px,.68fr) minmax(0,2fr) auto;align-items:stretch;gap:38px;width:min(1290px,calc(100% - 96px));margin:auto;padding:24px 0 25px}
+.press-mentions__heading{display:flex;flex-direction:column;justify-content:center}.press-mentions__heading p{margin:0 0 7px;color:#8a641f;font:900 .55rem/1 var(--font-ui);letter-spacing:.21em;text-transform:uppercase}.press-mentions__heading h2{max-width:270px;margin:0;font:500 clamp(2rem,2.55vw,2.85rem)/.92 Georgia,serif;letter-spacing:-.045em}
+.press-mentions__stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-left:1px solid rgba(28,23,16,.13)}.press-story{position:relative;display:flex;min-width:0;flex-direction:column;padding:4px 24px 3px;border-right:1px solid rgba(28,23,16,.13);color:inherit;text-decoration:none}.press-story__meta{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}.press-story__meta strong{overflow:hidden;color:#80520e;font:900 .54rem/1 var(--font-ui);letter-spacing:.08em;text-overflow:ellipsis;text-transform:uppercase;white-space:nowrap}.press-story__meta time{flex:0 0 auto;color:#82796e;font:700 .48rem/1 var(--font-ui);letter-spacing:.04em;text-transform:uppercase}.press-story__title{display:-webkit-box;overflow:hidden;font:600 .83rem/1.25 Georgia,serif;letter-spacing:-.015em;-webkit-box-orient:vertical;-webkit-line-clamp:3}.press-story__arrow{align-self:flex-end;margin-top:auto;padding-top:10px;color:#9b6b19;font-size:.9rem;transition:transform .2s ease}.press-story:hover .press-story__arrow{transform:translate(2px,-2px)}.press-story:hover .press-story__title{color:#80520e}
+.press-mentions__link{display:flex;align-items:center;align-self:center;gap:12px;color:#80520e;font:900 .56rem/1.25 var(--font-ui);letter-spacing:.12em;text-decoration:none;text-transform:uppercase;white-space:nowrap}.press-mentions__link b{font-size:1rem;font-weight:500;transition:transform .2s ease}.press-mentions__link:hover b{transform:translateX(3px)}.press-story:focus-visible,.press-mentions__link:focus-visible{outline:3px solid #c99736;outline-offset:4px}
+@media(max-width:1100px){.press-mentions__inner{grid-template-columns:210px 1fr;gap:26px;width:calc(100% - 48px)}.press-mentions__link{grid-column:2;justify-self:end}.press-mentions__stories{grid-column:2;grid-row:1}.press-mentions__heading{grid-row:1/3}.press-story{padding-inline:16px}.press-story__meta time{display:none}}
+@media(max-width:760px){.press-mentions__inner{display:block;width:calc(100% - 32px);padding:24px 0}.press-mentions__heading{margin-bottom:19px}.press-mentions__heading h2{max-width:none;font-size:2.25rem}.press-mentions__stories{display:block;border-left:0;border-top:1px solid rgba(28,23,16,.13)}.press-story{padding:14px 2px;border-right:0;border-bottom:1px solid rgba(28,23,16,.13)}.press-story:nth-child(3){display:none}.press-story__meta{justify-content:flex-start}.press-story__meta time{display:block}.press-story__title{-webkit-line-clamp:2;font-size:.86rem}.press-story__arrow{position:absolute;right:2px;bottom:14px}.press-mentions__link{display:inline-flex;margin-top:17px}}
+@media(max-width:640px){.home-page .home-stats{padding:0 18px}.home-page .home-stats .stats-block{width:100%}}
+@media(prefers-reduced-motion:reduce){.press-story__arrow,.press-mentions__link b{transition:none}}
 </style>

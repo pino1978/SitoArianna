@@ -10,6 +10,11 @@ export function getStaticPaths() {
 }
 
 const { item } = Astro.props;
+const photoSrcset = [...(item.varianti || []), { url: item.url, width: item.width }]
+  .filter((entry) => entry.url && entry.width)
+  .sort((a, b) => a.width - b.width)
+  .map((entry) => `${entry.url} ${entry.width}w`)
+  .join(", ");
 const title = `${item.titolo} | Foto Arianna Milano Sanda`;
 const description = item.testoAlternativo || [item.titolo, item.dettaglio, "Foto del percorso agonistico di Arianna Milano nel Sanda e Kung Fu."].filter(Boolean).join(" · ");
 const canonical = `https://www.ariannamilano.it/media/foto/${item.id}/`;
@@ -37,7 +42,7 @@ const imageSchema = {
       <h1>{item.titolo}</h1>
       {item.dettaglio && <p class="photo-detail">{item.dettaglio}</p>}
       <figure>
-        <img src={item.url} alt={item.testoAlternativo || item.titolo} loading="eager" decoding="async" />
+        <img src={item.url} srcset={photoSrcset} sizes="(max-width: 1020px) calc(100vw - 40px), 980px" alt={item.testoAlternativo || item.titolo} loading="eager" decoding="async" width={item.width} height={item.height} fetchpriority="high" />
         <figcaption>{description}</figcaption>
       </figure>
       <a class="back-link" href="/media/" data-interactive>← Torna a foto e video</a>

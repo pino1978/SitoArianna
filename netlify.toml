@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && node scripts/inject-cloudflare-analytics.mjs"
   publish = "dist"
   functions = "netlify/functions"
 
@@ -24,16 +24,22 @@
   status = 301
   force = true
 
-# Results is actively being refined: avoid serving a stale HTML document
-# from browser/CDN caches while the layout is under adjustment.
+[[redirects]]
+  from = "/palmares/"
+  to = "/risultati/"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
 [[headers]]
   for = "/risultati/*"
   [headers.values]
     Cache-Control = "no-store, max-age=0, must-revalidate"
 
-# Admin console must always load the current HTML. Astro emits hashed JS/CSS
-# assets, so once the latest HTML is fetched the browser automatically requests
-# the correct versioned assets for that deploy.
 [[headers]]
   for = "/admin"
   [headers.values]

@@ -16,10 +16,15 @@ function photoUrl(item) {
   const image = localImage(item.immagine);
   return image?.src ?? "";
 }
+function photoSrcset(item) {
+  const candidates = [...(item.varianti || []), ...(item.url && item.width ? [{ url: item.url, width: item.width }] : [])];
+  return candidates.sort((a, b) => a.width - b.width).map((entry) => `${entry.url} ${entry.width}w`).join(", ") || undefined;
+}
 function youtubeId(url = "") {
   const match = url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/);
   return match?.[1] ?? "";
 }
+const youtubeThumb = (id, quality = "hqdefault") => `https://i.ytimg.com/vi/${id}/${quality}.jpg`;
 function itemYear(item) {
   return String(item.anno || item.data?.slice(0, 4) || "");
 }
@@ -109,7 +114,7 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
           {primaryVideo && (() => {
             const id = youtubeId(primaryVideo.urlYouTube);
             return <button class="featured-main media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={primaryVideo.titolo} data-detail={primaryVideo.dettaglio || ""} data-date={primaryVideo.data || ""}>
-              <img src={`https://i.ytimg.com/vi/${id}/maxresdefault.jpg`} alt="" loading="eager" decoding="async" />
+              <img src={youtubeThumb(id, "mqdefault")} srcset={`${youtubeThumb(id, "mqdefault")} 320w, ${youtubeThumb(id, "maxresdefault")} 1280w`} sizes="(max-width: 760px) 100vw, 68vw" alt="" loading="eager" decoding="async" width="1280" height="720" fetchpriority="high" />
               <span class="shade"></span><span class="play" aria-hidden="true">▶</span>
               <span class="featured-copy"><small>{primaryVideo.anno || ""} · Video</small><strong>{primaryVideo.titolo}</strong>{primaryVideo.dettaglio && <span>{primaryVideo.dettaglio}</span>}</span>
             </button>;
@@ -120,7 +125,9 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
               const id = isVideo ? youtubeId(item.urlYouTube) : "";
               const src = isVideo ? `https://i.ytimg.com/vi/${id}/hqdefault.jpg` : photoUrl(item);
               return <button class="featured-small media-trigger" type="button" data-interactive data-media-type={isVideo ? "video" : "foto"} data-youtube-id={id || undefined} data-image={!isVideo ? src : undefined} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""}>
-                <img src={src} alt={isVideo ? "" : (item.testoAlternativo || item.titolo)} loading="lazy" decoding="async" />
+                {isVideo
+                  ? <img src={youtubeThumb(id, "mqdefault")} srcset={`${youtubeThumb(id, "mqdefault")} 320w, ${youtubeThumb(id, "maxresdefault")} 1280w`} sizes="(max-width: 760px) 100vw, 32vw" alt="" loading="lazy" decoding="async" width="1280" height="720" />
+                  : <img src={src} srcset={photoSrcset(item)} sizes="(max-width: 760px) 100vw, 32vw" alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" width={item.width} height={item.height} />}
                 <span class="shade"></span>{isVideo && <span class="play play--small" aria-hidden="true">▶</span>}
                 <span class="featured-copy featured-copy--small"><small>{item.anno || ""} · {isVideo ? "Video" : "Foto"}</small><strong>{item.titolo}</strong></span>
               </button>;
@@ -139,7 +146,7 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
             <button type="button" data-interactive data-type-filter="foto" aria-pressed="false">Foto</button>
             <button type="button" data-interactive data-type-filter="video" aria-pressed="false">Video</button>
           </div>
-          <button class="filter-toggle" type="button" data-filter-toggle aria-expanded="false" aria-controls="media-filter-options">Filtri <span aria-hidden="true">＋</span></button>
+          <button class="filter-toggle" type="button" data-filter-toggle data-interactive aria-expanded="false" aria-controls="media-filter-options">Filtri <span aria-hidden="true">＋</span></button>
           <div class="filter-selects" id="media-filter-options" data-filter-options>
             <label><span class="filter-label">Anno</span><select data-year-filter data-interactive><option value="tutti">Tutti</option>{years.map((year) => <option value={year}>{year}</option>)}</select></label>
             <label><span class="filter-label">Tipologia</span><select data-category-filter data-interactive><option value="tutti">Tutte</option>{categories.map(([value, label]) => <option value={value}>{label}</option>)}</select></label>
@@ -155,10 +162,10 @@ const secondaryItems = [videos[1], photos[0]].filter(Boolean);
             const competition = competitionName(item.filterCompetitionId);
             return <article class:list={["media-card", index % 7 === 0 && "media-card--wide", !isVideo && index % 5 === 0 && "media-card--portrait"]} data-media-type={item.mediaType} data-year={itemYear(item)} data-category={item.filterCategory} data-competition={item.filterCompetitionId} data-moment={item.filterMoment}>
               {isVideo ? <button class="media-card__button media-trigger" type="button" data-interactive data-media-type="video" data-youtube-id={id} data-title={item.titolo} data-detail={item.dettaglio || ""} data-date={item.data || ""} aria-label={`Apri video: ${item.titolo}`}>
-                <span class="media-card__visual media-card__visual--video"><img src={item.thumb} alt="" loading="lazy" decoding="async" /><span class="shade"></span><span class="play" aria-hidden="true">▶</span></span>
+                <span class="media-card__visual media-card__visual--video"><img src={youtubeThumb(id, "mqdefault")} srcset={`${youtubeThumb(id, "mqdefault")} 320w, ${youtubeThumb(id, "maxresdefault")} 1280w`} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 34vw" alt="" loading="lazy" decoding="async" width="1280" height="720" /><span class="shade"></span><span class="play" aria-hidden="true">▶</span></span>
                 <span class="media-card__copy"><small>{itemYear(item)} · Video</small><strong>{item.titolo}</strong><span>{competition || place}</span></span>
               </button> : <a class="media-card__button" href={item.mediaUrl} target="_blank" rel="noopener" data-interactive>
-                <span class="media-card__visual"><img src={item.thumb} alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" /><span class="shade"></span></span>
+                <span class="media-card__visual"><img src={item.thumb} srcset={photoSrcset(item)} sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 34vw" alt={item.testoAlternativo || item.titolo} loading="lazy" decoding="async" width={item.width} height={item.height} /><span class="shade"></span></span>
                 <span class="media-card__copy"><small>{itemYear(item)} · Foto</small><strong>{item.titolo}</strong><span>{competition || place}</span></span>
               </a>}
             </article>;

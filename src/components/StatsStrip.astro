@@ -9,7 +9,7 @@ function iconFor(fileName) {
   return iconModule?.default?.src ?? iconModule?.default ?? iconModule?.src ?? "";
 }
 ---
-<div class="stats-block">
+<div class:list={["stats-block", { "stats-block--with-cta": showPalmaresCta }]}>
   <ul class="stats-strip" aria-label="Statistiche sportive sintetiche">
     {stats.map((stat) => (
       <li>
@@ -22,7 +22,6 @@ function iconFor(fileName) {
 
   {showPalmaresCta && (
     <a class="stats-palmares" href="/risultati/" data-interactive aria-label="Esplora il palmarès e tutti i risultati di Arianna Milano">
-      <span class="stats-palmares__meta">Risultati · Gare · Podi · Il percorso continua.</span>
       <span class="stats-palmares__button">
         <span class="stats-palmares__label">Esplora il palmarès</span>
         <b class="stats-palmares__arrow" aria-hidden="true">→</b>
@@ -37,15 +36,23 @@ function iconFor(fileName) {
     max-width: none;
   }
 
+  .stats-block--with-cta {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .stats-block--with-cta .stats-strip {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+  }
+
   .stats-palmares {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 24px;
-    width: calc(100% - 42px);
-    margin-top: 10px;
-    padding: 12px 0 13px;
-    border-bottom: 1px solid rgba(201, 155, 76, .34);
+    margin: 0;
     color: var(--gold-bright);
     text-decoration: none;
     font-family: var(--font-ui);
@@ -56,8 +63,8 @@ function iconFor(fileName) {
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
-    gap: 18px;
-    min-width: 228px;
+    gap: 16px;
+    min-width: 220px;
     padding: 5px 5px 5px 14px;
     border: 1px solid rgba(217, 168, 63, .68);
     transition: background .22s ease, border-color .22s ease;
@@ -65,9 +72,9 @@ function iconFor(fileName) {
 
   .stats-palmares__label {
     flex: 0 0 auto;
-    font-size: .68rem;
+    font-size: .66rem;
     font-weight: 800;
-    letter-spacing: .14em;
+    letter-spacing: .13em;
     white-space: nowrap;
   }
 
@@ -85,16 +92,6 @@ function iconFor(fileName) {
     transition: transform .22s ease;
   }
 
-  .stats-palmares__meta {
-    flex: 0 0 auto;
-    color: rgba(243, 237, 226, .5);
-    font-size: .54rem;
-    font-weight: 700;
-    letter-spacing: .1em;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
   .stats-palmares:hover .stats-palmares__button,
   .stats-palmares:focus-visible .stats-palmares__button {
     border-color: var(--gold-bright);
@@ -109,8 +106,9 @@ function iconFor(fileName) {
     outline-offset: 4px;
   }
 
-  @media (max-width: 760px) and (min-width: 641px) {
-    .stats-palmares__meta { display: none; }
+  @media (max-width: 900px) and (min-width: 641px) {
+    .stats-block--with-cta { grid-template-columns: 1fr; gap: 14px; }
+    .stats-palmares { justify-self: end; }
   }
 
   @media (max-width: 640px) {
@@ -121,6 +119,10 @@ function iconFor(fileName) {
       top: 548px;
       left: 0;
       width: calc(100vw - 36px);
+    }
+
+    .stats-block--with-cta {
+      display: block;
     }
 
     .stats-strip,
@@ -210,27 +212,9 @@ function iconFor(fileName) {
       background: rgba(5, 5, 5, .9);
     }
 
-    .stats-palmares__button {
-      display: contents;
-    }
-
-    .stats-palmares__label {
-      font-size: .66rem;
-      letter-spacing: .14em;
-    }
-
-    .stats-palmares__arrow {
-      display: inline-block;
-      width: auto;
-      height: auto;
-      margin-left: 0;
-      border-radius: 0;
-      background: transparent;
-      color: var(--gold-bright);
-      font-size: 1.15rem;
-    }
-
-    .stats-palmares__meta { display: none; }
+    .stats-palmares__button { display: contents; }
+    .stats-palmares__label { font-size: .66rem; letter-spacing: .14em; }
+    .stats-palmares__arrow { display:inline-block;width:auto;height:auto;margin-left:0;border-radius:0;background:transparent;color:var(--gold-bright);font-size:1.15rem; }
   }
 
   @media (max-width: 390px) {

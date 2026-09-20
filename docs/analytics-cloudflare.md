@@ -5,7 +5,7 @@ Cloudflare Web Analytics è il sistema analytics ufficiale del sito. Non viene a
 
 ## Configurazione
 - Provider: Cloudflare Web Analytics
-- Site token: `345b0816f47f418489ac7846829acca6`
+- Site token: configurato nel build injector
 - Beacon: `https://static.cloudflareinsights.com/beacon.min.js`
 - Hosting pubblico: Netlify
 - DNS/hosting non devono essere migrati a Cloudflare.
@@ -17,11 +17,8 @@ La directory `/admin` è esclusa dal tracking: l'uso della console editoriale no
 
 L'injector è idempotente: se il beacon è già presente non viene duplicato.
 
-## Dati attesi
-Cloudflare Web Analytics fornisce statistiche aggregate di traffico, pagine/percorsi, referrer, paese, dispositivo, browser, sistema operativo e Real User Monitoring/Core Web Vitals secondo le capacità del servizio.
-
 ## Privacy
-La configurazione è intenzionalmente minimale: nessun GA4, nessun advertising/remarketing e nessun event tracking aggiuntivo in questa fase. La privacy policy del sito deve descrivere correttamente l'uso di Cloudflare Web Analytics.
+Configurazione minimale: nessun GA4, advertising, remarketing o event tracking aggiuntivo in questa fase. La privacy policy del sito deve descrivere correttamente l'uso di Cloudflare Web Analytics.
 
 ## Verifica post-deploy
 1. Verificare che la build Netlify termini con `Cloudflare Web Analytics injected into public HTML pages.`

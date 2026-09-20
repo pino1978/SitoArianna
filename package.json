@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1 --port 4321",
     "dev:docker": "astro dev --host 0.0.0.0 --port 4321",
-    "build": "astro build && node scripts/inject-cloudflare-analytics.mjs",
+    "build": "astro build",
     "test": "node --test test/*.test.mjs",
     "preview": "astro preview --host 127.0.0.1 --port 4321",
     "preview:docker": "astro preview --host 0.0.0.0 --port 4321"

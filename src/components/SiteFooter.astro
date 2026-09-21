@@ -12,82 +12,21 @@ const pageMeta = {
   "/ying/": { type: "WebPage", name: "Yīng 鹰 | Il nome sportivo di Arianna Milano", description: "Yīng 鹰 significa aquila: il significato del nome sportivo scelto da Arianna Milano e i valori che porta con sé sul tatami." }
 };
 const currentMeta = pageMeta[pathname];
-const pageSchema = currentMeta ? {
-  "@context": "https://schema.org",
-  "@type": currentMeta.type,
-  "@id": `${SITE}${pathname === "/" ? "/" : pathname}#webpage`,
-  url: `${SITE}${pathname === "/" ? "/" : pathname}`,
-  name: currentMeta.name,
-  description: currentMeta.description,
-  inLanguage: "it-IT",
-  isPartOf: { "@id": `${SITE}/#website` },
-  about: { "@id": `${SITE}/#arianna-milano` },
-  breadcrumb: pathname === "/" ? undefined : { "@id": `${SITE}${pathname}#breadcrumb` }
-} : null;
-
+const pageSchema = currentMeta ? {"@context":"https://schema.org","@type":currentMeta.type,"@id":`${SITE}${pathname === "/" ? "/" : pathname}#webpage`,url:`${SITE}${pathname === "/" ? "/" : pathname}`,name:currentMeta.name,description:currentMeta.description,inLanguage:"it-IT",isPartOf:{"@id":`${SITE}/#website`},about:{"@id":`${SITE}/#arianna-milano`},breadcrumb:pathname === "/" ? undefined : {"@id":`${SITE}${pathname}#breadcrumb`}} : null;
 const youtubeId = (url = "") => url.match(/(?:shorts\/|youtu\.be\/|[?&]v=)([A-Za-z0-9_-]{11})/)?.[1] || "";
-const videoSchemas = pathname === "/media/" ? media
-  .filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube))
-  .map((item) => {
-    const id = youtubeId(item.urlYouTube);
-    return {
-      "@context": "https://schema.org",
-      "@type": "VideoObject",
-      "@id": `${SITE}/media/#video-${id}`,
-      name: item.titolo || "Video Sanda di Arianna Milano",
-      description: [item.titolo, item.dettaglio, "Video del percorso agonistico di Arianna Milano nel Sanda."].filter(Boolean).join(" · "),
-      thumbnailUrl: [`https://i.ytimg.com/vi/${id}/hqdefault.jpg`],
-      uploadDate: item.data ? `${item.data}T12:00:00+02:00` : undefined,
-      embedUrl: `https://www.youtube-nocookie.com/embed/${id}`,
-      contentUrl: item.urlYouTube,
-      inLanguage: "it-IT",
-      isFamilyFriendly: true,
-      about: { "@id": `${SITE}/#arianna-milano` },
-      isPartOf: { "@id": `${SITE}/media/#webpage` }
-    };
-  }) : [];
+const videoSchemas = pathname === "/media/" ? media.filter((item) => item.tipo === "video" && item.visibile && youtubeId(item.urlYouTube)).map((item) => { const id=youtubeId(item.urlYouTube); return {"@context":"https://schema.org","@type":"VideoObject","@id":`${SITE}/media/#video-${id}`,name:item.titolo||"Video Sanda di Arianna Milano",description:[item.titolo,item.dettaglio,"Video del percorso agonistico di Arianna Milano nel Sanda."].filter(Boolean).join(" · "),thumbnailUrl:[`https://i.ytimg.com/vi/${id}/hqdefault.jpg`],uploadDate:item.data?`${item.data}T12:00:00+02:00`:undefined,embedUrl:`https://www.youtube-nocookie.com/embed/${id}`,contentUrl:item.urlYouTube,inLanguage:"it-IT",isFamilyFriendly:true,about:{"@id":`${SITE}/#arianna-milano`},isPartOf:{"@id":`${SITE}/media/#webpage`}}; }) : [];
 ---
 <footer class="site-footer" id="footer" aria-label="Piè di pagina">
   <div class="site-footer__inner">
-    <a class="site-footer__brand" href="/" data-interactive aria-label="Arianna Milano, torna alla home">
-      <img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} />
-    </a>
-    <div class="site-footer__contact">
-      <span>Contatti</span>
-      <a href="mailto:giuseppe.milano@gmail.com" data-interactive>giuseppe.milano@gmail.com</a>
-    </div>
+    <a class="site-footer__brand" href="/" data-interactive aria-label="Arianna Milano, torna alla home"><img src={logo.src} alt="Arianna Milano" width={logo.width} height={logo.height} /></a>
+    <div class="site-footer__contact"><span>Contatti</span><a href="mailto:giuseppe.milano@gmail.com" data-interactive>giuseppe.milano@gmail.com</a></div>
     <p class="site-footer__legal">© 2026 Arianna Milano <span>— Tutti i diritti riservati</span></p>
   </div>
 </footer>
 {pageSchema && <script type="application/ld+json" set:html={JSON.stringify(pageSchema)}></script>}
 {videoSchemas.map((schema) => <script type="application/ld+json" set:html={JSON.stringify(schema)}></script>)}
-
 <style>
-  .site-footer{position:relative;isolation:isolate;overflow:hidden;padding:0 clamp(22px,4vw,64px);border-top:1px solid rgba(196,154,84,.34);background:#020202;color:#f4f0e8}
-  .site-footer:before{position:absolute;inset:0;background:linear-gradient(100deg,rgba(131,20,16,.18),transparent 18%,transparent 82%,rgba(131,20,16,.16));content:"";pointer-events:none}
-  .site-footer__inner{position:relative;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:clamp(24px,4vw,58px);width:min(1460px,100%);min-height:88px;margin:auto}
-  .site-footer__brand{display:block;width:118px;color:#f4f0e8;text-decoration:none}
-  .site-footer__brand img{display:block;width:118px;height:auto;opacity:.92}
-  .site-footer__contact{display:flex;align-items:center;gap:14px;white-space:nowrap}.site-footer__contact span{color:rgba(244,240,232,.42);font:800 .54rem/1 var(--font-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase}.site-footer__contact a{color:rgba(244,240,232,.82);font:600 .68rem/1.4 var(--font-ui,sans-serif);letter-spacing:.025em;text-decoration:none}.site-footer__contact a:hover{color:#d6aa54}.site-footer__contact a:focus-visible{outline:3px solid #d6aa54;outline-offset:4px}
-  .site-footer__legal{margin:0;color:rgba(244,240,232,.52);font:600 .61rem/1.5 var(--font-ui,sans-serif);letter-spacing:.05em;text-align:right;white-space:nowrap}
-  .site-footer__legal span{color:rgba(244,240,232,.34)}
-  @media(max-width:760px){
-    .site-footer{padding:24px 20px 22px}
-    .site-footer__inner{display:flex;min-height:0;flex-direction:column;align-items:center;gap:10px;text-align:center}
-    .site-footer__brand{width:94px;margin-bottom:3px}
-    .site-footer__brand img{width:94px}
-    .site-footer__contact{display:block;max-width:100%;white-space:normal}
-    .site-footer__contact span{display:none}
-    .site-footer__contact a{display:inline-block;max-width:100%;font-size:.64rem;line-height:1.45;letter-spacing:.01em;overflow-wrap:anywhere}
-    .site-footer__legal{font-size:.54rem;line-height:1.45;letter-spacing:.025em;text-align:center;white-space:normal}
-    .site-footer__legal span{display:none}
-    .site-footer:before{background:linear-gradient(90deg,rgba(131,20,16,.12),transparent 44%)}
-  }
-  @media(max-width:390px){
-    .site-footer{padding:22px 16px 20px}
-    .site-footer__inner{gap:9px}
-    .site-footer__brand,.site-footer__brand img{width:88px}
-    .site-footer__contact a{font-size:.61rem}
-    .site-footer__legal{font-size:.52rem}
-  }
+.site-footer{position:relative;isolation:isolate;overflow:hidden;padding:0 clamp(22px,4vw,64px);border-top:1px solid rgba(196,154,84,.34);background:#020202;color:#f4f0e8}.site-footer:before{position:absolute;inset:0;background:linear-gradient(100deg,rgba(131,20,16,.18),transparent 18%,transparent 82%,rgba(131,20,16,.16));content:"";pointer-events:none}.site-footer__inner{position:relative;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:clamp(24px,4vw,58px);width:min(1460px,100%);min-height:88px;margin:auto}.site-footer__brand{display:block;width:118px;color:#f4f0e8;text-decoration:none}.site-footer__brand img{display:block;width:118px;height:auto;opacity:.92}.site-footer__contact{display:flex;align-items:center;gap:14px;white-space:nowrap}.site-footer__contact span{color:rgba(244,240,232,.42);font:800 .54rem/1 var(--font-ui,sans-serif);letter-spacing:.14em;text-transform:uppercase}.site-footer__contact a{color:rgba(244,240,232,.82);font:600 .68rem/1.4 var(--font-ui,sans-serif);letter-spacing:.025em;text-decoration:none}.site-footer__contact a:hover{color:#d6aa54}.site-footer__contact a:focus-visible{outline:3px solid #d6aa54;outline-offset:4px}.site-footer__legal{margin:0;color:rgba(244,240,232,.52);font:600 .61rem/1.5 var(--font-ui,sans-serif);letter-spacing:.05em;text-align:right;white-space:nowrap}.site-footer__legal span{color:rgba(244,240,232,.34)}
+@media(max-width:760px){.site-footer{padding:0 18px}.site-footer__inner{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;column-gap:18px;row-gap:3px;min-height:76px;text-align:left}.site-footer__brand{grid-row:1/3;align-self:center;width:82px}.site-footer__brand img{width:82px}.site-footer__contact{align-self:end;min-width:0;white-space:normal}.site-footer__contact span{display:none}.site-footer__contact a{display:block;max-width:100%;font-size:.58rem;line-height:1.2;letter-spacing:0;overflow-wrap:anywhere}.site-footer__legal{align-self:start;font-size:.49rem;line-height:1.2;letter-spacing:.01em;text-align:left;white-space:normal}.site-footer__legal span{display:none}.site-footer:before{background:linear-gradient(90deg,rgba(131,20,16,.12),transparent 44%)}}
+@media(max-width:390px){.site-footer{padding-inline:14px}.site-footer__inner{column-gap:13px;min-height:70px}.site-footer__brand,.site-footer__brand img{width:74px}.site-footer__contact a{font-size:.55rem}.site-footer__legal{font-size:.47rem}}
 </style>

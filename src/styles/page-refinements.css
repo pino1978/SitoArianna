@@ -122,3 +122,13 @@ body.site-locked #video-viewer .video-viewer__meta{position:relative!important;z
     font-size:1rem!important;
   }
 }
+
+/* MOBILE GLOBAL — prevent horizontal collisions on the home and editorial pages */
+@media(max-width:767px){
+  html,body{max-width:100%;overflow-x:clip}
+  main,main section{max-width:100%}
+  img,video,iframe{max-width:100%}
+  .journalist__inner>div:last-child{min-width:0!important}
+  .journalist__email,.journalist__back{display:flex!important;width:max-content!important;max-width:100%!important;margin-right:0!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+  .journalist__back{margin-top:18px!important}
+}

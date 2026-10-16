@@ -30,6 +30,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/road-to-greece/*"
+  to = "/profilo/"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/_astro/*"
   [headers.values]

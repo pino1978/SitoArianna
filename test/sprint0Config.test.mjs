@@ -9,9 +9,11 @@ test("configura redirect palmares e cache immutable senza applicarla ad HTML", a
   assert.doesNotMatch(config, /for = "\/\*"[\s\S]*?immutable/);
 });
 
-test("include Road to Greece una sola volta nella sitemap", async () => {
+test("Road to Greece non è più nella sitemap e viene reindirizzata", async () => {
   const sitemap = await readFile(new URL("../src/pages/sitemap.xml.js", import.meta.url), "utf8");
-  const matches = sitemap.match(/loc: `\$\{SITE\}\/road-to-greece\/`/g) || [];
-  assert.equal(matches.length, 1);
-  assert.match(sitemap, /lastmod: "2026-09-13"/);
+  const config = await readFile(new URL("../netlify.toml", import.meta.url), "utf8");
+  const home = await readFile(new URL("../src/pages/index.astro", import.meta.url), "utf8");
+  assert.doesNotMatch(sitemap, /road-to-greece/);
+  assert.doesNotMatch(home, /RoadToGreeceBanner/);
+  assert.match(config, /from = "\/road-to-greece\/\*"[^]*?to = "\/profilo\/"[^]*?status = 301/);
 });

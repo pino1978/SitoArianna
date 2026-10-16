@@ -90,10 +90,6 @@ const entries = [
     })),
     videos: visibleVideos
   },
-  {
-    loc: `${SITE}/road-to-greece/`,
-    lastmod: "2026-09-13"
-  },
   ...visiblePhotos.map((item) => ({
     loc: `${SITE}/media/foto/${item.id}/`,
     images: [{
